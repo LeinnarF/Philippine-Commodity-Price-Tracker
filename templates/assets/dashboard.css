@@ -109,26 +109,30 @@ body {
   user-select: none;
   z-index: 50;
   transition: transform 0.2s ease;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
-.dashboard-sidebar::-webkit-scrollbar,
+.dashboard-sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
+}
+
 .main-workspace::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-.dashboard-sidebar::-webkit-scrollbar-track,
 .main-workspace::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.dashboard-sidebar::-webkit-scrollbar-thumb,
 .main-workspace::-webkit-scrollbar-thumb {
   background: #d2d6da;
   border-radius: 3px;
 }
 
-.dashboard-sidebar::-webkit-scrollbar-thumb:hover,
 .main-workspace::-webkit-scrollbar-thumb:hover {
   background: #a0aec0;
 }
@@ -170,8 +174,9 @@ body {
   font-size: 15px;
   font-weight: 700;
   color: var(--text-heading);
-  letter-spacing: -0.01em;
-  white-space: nowrap;
+  letter-spacing: -0.015em;
+  white-space: normal;
+  line-height: 1.25;
 }
 
 .brand-sub {
@@ -1276,19 +1281,19 @@ body {
 }
 
 .formal-table-movers .col-mover-name {
-  width: 34%;
+  width: 29%;
 }
 
 .formal-table-movers .col-mover-cat {
-  width: 20%;
+  width: 17%;
 }
 
 .formal-table-movers .col-mover-price {
-  width: 18%;
+  width: 16%;
 }
 
 .formal-table-movers .col-mover-delta {
-  width: 14%;
+  width: 19%;
 }
 
 .formal-table-movers td.commodity-cell {
