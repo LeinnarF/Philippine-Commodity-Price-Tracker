@@ -158,6 +158,17 @@ def test_fetch_commodity_timeseries(duckdb_con):
     assert "price" in first_group_items[0]
     assert "dod_pct" in first_group_items[0]
 
+    # Verify basic price statistics in metadata
+    assert "mean_price" in meta[default_comm]
+    assert "median_price" in meta[default_comm]
+    assert "min_price" in meta[default_comm]
+    assert "min_date" in meta[default_comm]
+    assert "max_price" in meta[default_comm]
+    assert "max_date" in meta[default_comm]
+    assert meta[default_comm]["min_price"] <= meta[default_comm]["mean_price"] <= meta[default_comm]["max_price"]
+    assert meta[default_comm]["min_date"] is not None
+    assert meta[default_comm]["max_date"] is not None
+
     sample_comm = default_comm
     assert len(ts[sample_comm]["dates"]) == 451
     assert len(ts[sample_comm]["prices"]) == 451

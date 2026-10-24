@@ -180,6 +180,29 @@
     const boxVol = document.getElementById("box-vol");
     const boxCv = document.getElementById("box-cv");
 
+    // Basic Price Statistics elements
+    const boxStatMean = document.getElementById("box-stat-mean");
+    const boxStatMedian = document.getElementById("box-stat-median");
+    const boxStatMin = document.getElementById("box-stat-min");
+    const boxStatMinSub = document.getElementById("box-stat-min-sub");
+    const boxStatMax = document.getElementById("box-stat-max");
+    const boxStatMaxSub = document.getElementById("box-stat-max-sub");
+
+    if (boxStatMean) boxStatMean.textContent = meta.mean_price !== null && meta.mean_price !== undefined ? `₱${Number(meta.mean_price).toFixed(2)}` : "—";
+    if (boxStatMedian) boxStatMedian.textContent = meta.median_price !== null && meta.median_price !== undefined ? `₱${Number(meta.median_price).toFixed(2)}` : "—";
+    if (boxStatMin) boxStatMin.textContent = meta.min_price !== null && meta.min_price !== undefined ? `₱${Number(meta.min_price).toFixed(2)}` : "—";
+    if (boxStatMinSub) {
+      boxStatMinSub.innerHTML = meta.min_date
+        ? `<span class="kpi-context">Recorded on</span> <span class="kpi-highlight font-mono">${formatDisplayDate(meta.min_date)}</span>`
+        : `<span class="kpi-context">Lowest recorded retail price</span>`;
+    }
+    if (boxStatMax) boxStatMax.textContent = meta.max_price !== null && meta.max_price !== undefined ? `₱${Number(meta.max_price).toFixed(2)}` : "—";
+    if (boxStatMaxSub) {
+      boxStatMaxSub.innerHTML = meta.max_date
+        ? `<span class="kpi-context">Recorded on</span> <span class="kpi-highlight font-mono">${formatDisplayDate(meta.max_date)}</span>`
+        : `<span class="kpi-context">Highest recorded retail price</span>`;
+    }
+
     if (boxPrice) boxPrice.textContent = meta.price !== null ? `₱${meta.price.toFixed(2)}` : "—";
     if (boxUnit) {
       boxUnit.innerHTML = `<span class="kpi-context">Retailing per</span> <span class="kpi-highlight">${meta.unit}</span>`;

@@ -310,22 +310,40 @@ def fetch_commodity_timeseries(
 
     snapshot_records = con.execute("""
         SELECT
-            commodity,
-            commodity_group,
-            unit,
-            ROUND(price_prevailing, 2) AS price,
-            ROUND(dod_abs, 2) AS dod_abs,
-            ROUND(dod_pct, 2) AS dod_pct,
-            ROUND(wow_abs, 2) AS wow_abs,
-            ROUND(wow_pct, 2) AS wow_pct,
-            ROUND(mom_abs, 2) AS mom_abs,
-            ROUND(mom_pct, 2) AS mom_pct,
-            ROUND(sma_7d, 2) AS sma_7d,
-            ROUND(sma_30d, 2) AS sma_30d,
-            ROUND(volatility_30d, 2) AS volatility_30d,
-            ROUND(cv_30d, 4) AS cv_30d
-        FROM v_latest_snapshot
-        ORDER BY commodity_group, commodity;
+            s.commodity,
+            s.commodity_group,
+            s.unit,
+            ROUND(s.price_prevailing, 2) AS price,
+            ROUND(s.dod_abs, 2) AS dod_abs,
+            ROUND(s.dod_pct, 2) AS dod_pct,
+            ROUND(s.wow_abs, 2) AS wow_abs,
+            ROUND(s.wow_pct, 2) AS wow_pct,
+            ROUND(s.mom_abs, 2) AS mom_abs,
+            ROUND(s.mom_pct, 2) AS mom_pct,
+            ROUND(s.sma_7d, 2) AS sma_7d,
+            ROUND(s.sma_30d, 2) AS sma_30d,
+            ROUND(s.volatility_30d, 2) AS volatility_30d,
+            ROUND(s.cv_30d, 4) AS cv_30d,
+            ROUND(st.mean_price, 2) AS mean_price,
+            ROUND(st.median_price, 2) AS median_price,
+            ROUND(st.min_price, 2) AS min_price,
+            st.min_date AS min_date,
+            ROUND(st.max_price, 2) AS max_price,
+            st.max_date AS max_date
+        FROM v_latest_snapshot s
+        LEFT JOIN (
+            SELECT
+                commodity,
+                AVG(price_prevailing) AS mean_price,
+                MEDIAN(price_prevailing) AS median_price,
+                MIN(price_prevailing) AS min_price,
+                ARG_MIN(date, price_prevailing)::VARCHAR AS min_date,
+                MAX(price_prevailing) AS max_price,
+                ARG_MAX(date, price_prevailing)::VARCHAR AS max_date
+            FROM commodity_prices
+            GROUP BY commodity
+        ) st ON s.commodity = st.commodity
+        ORDER BY s.commodity_group, s.commodity;
     """).df().to_dict(orient="records")
 
     meta_dict: dict[str, dict[str, Any]] = {}

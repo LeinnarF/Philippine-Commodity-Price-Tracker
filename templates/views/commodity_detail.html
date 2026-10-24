@@ -78,6 +78,73 @@
   </div>
 </div>
 
+<!-- Basic Price Statistics Card (Mean, Median, Min, Max) -->
+<div class="card commodity-stats-card">
+  <div class="card-header">
+    <div class="card-title-group">
+      <h2 class="card-title" id="commodity-stats-title">Basic price statistics</h2>
+    </div>
+    <div id="commodity-stats-window" style="font-size: 12px; font-weight: 600; color: var(--text-muted); font-family: var(--font-mono);">
+      {{ kpis.total_dates }} Bulletins Monitored
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="kpi-grid kpi-grid-4 commodity-stats-grid">
+      <div class="kpi-card kpi-card-compact">
+        <div class="kpi-card-body">
+          <div class="kpi-card-info">
+            <span class="kpi-label">Mean (Average) Price</span>
+            <div class="kpi-value kpi-value-compact" id="box-stat-mean">—</div>
+          </div>
+          <hr class="kpi-card-divider">
+          <div class="kpi-detail">
+            <span class="kpi-context">Arithmetic average price</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-card-compact">
+        <div class="kpi-card-body">
+          <div class="kpi-card-info">
+            <span class="kpi-label">Median Price</span>
+            <div class="kpi-value kpi-value-compact" id="box-stat-median">—</div>
+          </div>
+          <hr class="kpi-card-divider">
+          <div class="kpi-detail">
+            <span class="kpi-context">Median recorded price</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-card-compact">
+        <div class="kpi-card-body">
+          <div class="kpi-card-info">
+            <span class="kpi-label">Minimum Observed Price</span>
+            <div class="kpi-value kpi-value-compact" id="box-stat-min">—</div>
+          </div>
+          <hr class="kpi-card-divider">
+          <div class="kpi-detail" id="box-stat-min-sub">
+            <span class="kpi-context">Lowest recorded retail price</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-card-compact">
+        <div class="kpi-card-body">
+          <div class="kpi-card-info">
+            <span class="kpi-label">Maximum Observed Price</span>
+            <div class="kpi-value kpi-value-compact" id="box-stat-max">—</div>
+          </div>
+          <hr class="kpi-card-divider">
+          <div class="kpi-detail" id="box-stat-max-sub">
+            <span class="kpi-context">Highest recorded retail price</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Interactive Price & Moving Average Chart Card -->
 <div class="card">
   <div class="card-header">
