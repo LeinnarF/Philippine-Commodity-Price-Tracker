@@ -9,18 +9,18 @@
         <span class="card-tag">Daily Price Inflation</span>
         <h2 class="card-title">Top 5 Price Increases (Day-over-Day)</h2>
       </div>
-      <span class="badge badge-increase">▲ Price Advances</span>
+      <span class="status-pill status-pill-increase">▲ Price Advances</span>
     </div>
     <div class="card-body" style="padding: 0;">
-      <div class="table-container" style="border: none;">
-        <table class="formal-table">
+      <div class="table-container" style="border: none; border-radius: 0;">
+        <table class="formal-table formal-table-movers">
           <thead>
             <tr>
-              <th>Commodity</th>
-              <th>Category</th>
-              <th class="text-right">Price</th>
-              <th class="text-right">1-Day Change</th>
-              <th class="text-right">7-Day Change</th>
+              <th class="col-mover-name">Commodity</th>
+              <th class="col-mover-cat">Category</th>
+              <th class="text-right col-mover-price">Price</th>
+              <th class="text-right col-mover-delta">1-Day Change</th>
+              <th class="text-right col-mover-delta">7-Day Change</th>
             </tr>
           </thead>
           <tbody>
@@ -34,7 +34,7 @@
               <td><span class="category-pill">{{ item.commodity_group }}</span></td>
               <td class="text-right font-mono">
                 {{ item.price_prevailing | currency }}
-                <span style="font-size: 11px; color: var(--text-muted);">/{{ item.unit }}</span>
+                <span class="unit-suffix">/{{ item.unit }}</span>
               </td>
               <td class="text-right">{{ item.dod_pct | badge }}</td>
               <td class="text-right">{{ item.wow_pct | badge }}</td>
@@ -53,18 +53,18 @@
         <span class="card-tag">Daily Price Deflation</span>
         <h2 class="card-title">Top 5 Price Decreases (Day-over-Day)</h2>
       </div>
-      <span class="badge badge-decrease">▼ Price Reductions</span>
+      <span class="status-pill status-pill-decrease">▼ Price Reductions</span>
     </div>
     <div class="card-body" style="padding: 0;">
-      <div class="table-container" style="border: none;">
-        <table class="formal-table">
+      <div class="table-container" style="border: none; border-radius: 0;">
+        <table class="formal-table formal-table-movers">
           <thead>
             <tr>
-              <th>Commodity</th>
-              <th>Category</th>
-              <th class="text-right">Price</th>
-              <th class="text-right">1-Day Change</th>
-              <th class="text-right">7-Day Change</th>
+              <th class="col-mover-name">Commodity</th>
+              <th class="col-mover-cat">Category</th>
+              <th class="text-right col-mover-price">Price</th>
+              <th class="text-right col-mover-delta">1-Day Change</th>
+              <th class="text-right col-mover-delta">7-Day Change</th>
             </tr>
           </thead>
           <tbody>
@@ -78,7 +78,7 @@
               <td><span class="category-pill">{{ item.commodity_group }}</span></td>
               <td class="text-right font-mono">
                 {{ item.price_prevailing | currency }}
-                <span style="font-size: 11px; color: var(--text-muted);">/{{ item.unit }}</span>
+                <span class="unit-suffix">/{{ item.unit }}</span>
               </td>
               <td class="text-right">{{ item.dod_pct | badge }}</td>
               <td class="text-right">{{ item.wow_pct | badge }}</td>

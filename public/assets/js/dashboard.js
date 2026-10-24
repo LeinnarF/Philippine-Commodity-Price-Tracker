@@ -48,6 +48,30 @@
     }
   }
 
+  function formatKpiHeadlineChange(val) {
+    if (val === null || val === undefined || isNaN(val)) {
+      return '<span class="text-flat">—</span>';
+    }
+    const num = Number(val);
+    if (num > 0.0001) {
+      return `<span class="text-gain"><span class="kpi-arrow">▲</span> +${num.toFixed(2)}%</span>`;
+    } else if (num < -0.0001) {
+      return `<span class="text-drop"><span class="kpi-arrow">▼</span> ${num.toFixed(2)}%</span>`;
+    } else {
+      return `<span class="text-flat">0.00%</span>`;
+    }
+  }
+
+  function formatKpiDeltaSub(absVal, label) {
+    if (absVal === null || absVal === undefined || isNaN(absVal)) {
+      return `<span class="kpi-context">${label}</span>`;
+    }
+    const num = Number(absVal);
+    const sign = num > 0.0001 ? "+" : num < -0.0001 ? "-" : "";
+    const formatted = `${sign}₱${Math.abs(num).toFixed(2)}`;
+    return `<span class="kpi-highlight font-mono">${formatted}</span> <span class="kpi-context">${label}</span>`;
+  }
+
   // ========================================================================
   // 2. Category Indices Plotly Chart
   // ========================================================================
@@ -60,7 +84,7 @@
         container,
         categoryChartPayload.data,
         categoryChartPayload.layout,
-        { responsive: true, displayModeBar: true, displaylogo: false }
+        { responsive: true, displayModeBar: "hover", displaylogo: false }
       );
       categoryChartInitialized = true;
     } else {
@@ -99,20 +123,22 @@
 
     activeCommodity = commName;
 
-    // Header & Breadcrumb updates
-    const titleEl = document.getElementById("detail-commodity-title");
-    const groupPillEl = document.getElementById("detail-commodity-group");
-    const unitBadgeEl = document.getElementById("detail-commodity-unit");
+    // Unified Header & Chart Card Header updates
+    const navTitleEl = document.getElementById("navbar-view-title");
     const bcGroupEl = document.getElementById("breadcrumb-group");
     const bcCommEl = document.getElementById("breadcrumb-commodity");
+    const chartTitleEl = document.getElementById("commodity-chart-title");
 
-    if (titleEl) titleEl.textContent = commName;
-    if (groupPillEl) groupPillEl.textContent = meta.commodity_group;
-    if (unitBadgeEl) unitBadgeEl.textContent = `Unit: ${meta.unit}`;
+    if (activeView === "commodity") {
+      if (navTitleEl) navTitleEl.textContent = commName;
+    }
     if (bcGroupEl) bcGroupEl.textContent = meta.commodity_group;
     if (bcCommEl) bcCommEl.textContent = commName;
+    if (chartTitleEl) {
+      chartTitleEl.textContent = `Daily Prevailing Retail Price, 7-Day SMA & 30-Day SMA — ${commName} (₱ / ${meta.unit})`;
+    }
 
-    // Update 7 Summary KPI Strip boxes
+    // Update 7 Unified KPI Strip cards
     const boxPrice = document.getElementById("box-price");
     const boxUnit = document.getElementById("box-unit");
     const boxDod = document.getElementById("box-dod");
@@ -127,38 +153,30 @@
     const boxCv = document.getElementById("box-cv");
 
     if (boxPrice) boxPrice.textContent = meta.price !== null ? `₱${meta.price.toFixed(2)}` : "—";
-    if (boxUnit) boxUnit.textContent = `per ${meta.unit}`;
-
-    if (boxDod) boxDod.innerHTML = formatBadgeHtml(meta.dod_pct, true);
-    if (boxDodSub) {
-      boxDodSub.textContent =
-        meta.dod_abs !== null
-          ? `${meta.dod_abs >= 0 ? "+" : ""}₱${meta.dod_abs.toFixed(2)} vs yesterday`
-          : "vs yesterday";
+    if (boxUnit) {
+      boxUnit.innerHTML = `<span class="kpi-context">Retailing per</span> <span class="kpi-highlight">${meta.unit}</span>`;
     }
 
-    if (boxWow) boxWow.innerHTML = formatBadgeHtml(meta.wow_pct, true);
-    if (boxWowSub) {
-      boxWowSub.textContent =
-        meta.wow_abs !== null
-          ? `${meta.wow_abs >= 0 ? "+" : ""}₱${meta.wow_abs.toFixed(2)} vs 7d ago`
-          : "vs 7d ago";
-    }
+    if (boxDod) boxDod.innerHTML = formatKpiHeadlineChange(meta.dod_pct);
+    if (boxDodSub) boxDodSub.innerHTML = formatKpiDeltaSub(meta.dod_abs, "vs yesterday");
 
-    if (boxMom) boxMom.innerHTML = formatBadgeHtml(meta.mom_pct, true);
-    if (boxMomSub) {
-      boxMomSub.textContent =
-        meta.mom_abs !== null
-          ? `${meta.mom_abs >= 0 ? "+" : ""}₱${meta.mom_abs.toFixed(2)} vs 30d ago`
-          : "vs 30d ago";
-    }
+    if (boxWow) boxWow.innerHTML = formatKpiHeadlineChange(meta.wow_pct);
+    if (boxWowSub) boxWowSub.innerHTML = formatKpiDeltaSub(meta.wow_abs, "vs 7d ago");
+
+    if (boxMom) boxMom.innerHTML = formatKpiHeadlineChange(meta.mom_pct);
+    if (boxMomSub) boxMomSub.innerHTML = formatKpiDeltaSub(meta.mom_abs, "vs 30d ago");
 
     if (boxSma7) boxSma7.textContent = meta.sma_7d !== null ? `₱${meta.sma_7d.toFixed(2)}` : "—";
     if (boxSma30) boxSma30.textContent = meta.sma_30d !== null ? `₱${meta.sma_30d.toFixed(2)}` : "—";
     if (boxVol) boxVol.textContent = meta.volatility_30d !== null ? `₱${meta.volatility_30d.toFixed(2)}` : "—";
-    if (boxCv) boxCv.textContent = meta.cv_30d !== null ? `CV: ${(meta.cv_30d * 100).toFixed(2)}%` : "CV: —";
+    if (boxCv) {
+      boxCv.innerHTML =
+        meta.cv_30d !== null
+          ? `<span class="kpi-context">CV:</span> <span class="kpi-highlight font-mono">${(meta.cv_30d * 100).toFixed(2)}%</span>`
+          : `<span class="kpi-context">CV: —</span>`;
+    }
 
-    // Also synchronize hidden/fallback select if present
+    // Synchronize Quick Switch dropdown
     const picker = document.getElementById("commodity-picker");
     if (picker && picker.value !== commName) {
       picker.value = commName;
@@ -210,19 +228,9 @@
     ];
 
     const layout = {
-      title: {
-        text: `Retail Price History & Moving Averages: ${commName} (₱ / ${meta.unit})`,
-        font: {
-          size: 15,
-          family: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
-          color: "#064e3b",
-        },
-        x: 0,
-        y: 0.98,
-      },
       template: "plotly_white",
       hovermode: "x unified",
-      margin: { l: 60, r: 25, t: 50, b: 40 },
+      margin: { l: 55, r: 20, t: 30, b: 40 },
       xaxis: {
         title: "",
         showgrid: true,
@@ -248,7 +256,7 @@
 
     Plotly.react(container, traces, layout, {
       responsive: true,
-      displayModeBar: true,
+      displayModeBar: "hover",
       displaylogo: false,
     });
   }
@@ -299,32 +307,27 @@
       sidebar.classList.remove("mobile-open");
     }
 
-    // 5. Update Navbar breadcrumb and titles
-    const crumbEl = document.getElementById("navbar-view-crumb");
+    // 5. Update Unified Navbar heading and controls
+    const tagEl = document.getElementById("navbar-view-tag");
+    const crumbTrailEl = document.getElementById("navbar-commodity-breadcrumb");
+    const commControlsEl = document.getElementById("navbar-commodity-controls");
     const titleEl = document.getElementById("navbar-view-title");
-    const subtitleEl = document.getElementById("navbar-view-subtitle");
 
-    if (crumbEl && titleEl) {
+    const isCommodityView = viewName === "commodity";
+    if (tagEl) tagEl.style.display = isCommodityView ? "none" : "";
+    if (crumbTrailEl) crumbTrailEl.style.display = isCommodityView ? "flex" : "none";
+    if (commControlsEl) commControlsEl.style.display = isCommodityView ? "flex" : "none";
+
+    if (titleEl) {
       if (viewName === "overview") {
-        crumbEl.textContent = "Market Overview";
-        titleEl.textContent = "Dashboard";
-        if (subtitleEl) subtitleEl.textContent = "Bantay Presyo · Daily Retail Food Price Monitoring & Analytics · NCR Wet Markets";
+        if (tagEl) tagEl.textContent = "Executive Summary";
+        titleEl.textContent = "Market Overview";
       } else if (viewName === "census") {
-        crumbEl.textContent = "Full Price Census";
+        if (tagEl) tagEl.textContent = "Cross-Sectional Price Register";
         titleEl.textContent = "Full Price Census";
-        if (subtitleEl) subtitleEl.textContent = "Comprehensive Daily Master Price Register · Cross-Sectional Analysis";
       } else if (viewName === "governance") {
-        crumbEl.textContent = "Data Governance";
-        titleEl.textContent = "Data Governance & Architecture";
-        if (subtitleEl) subtitleEl.textContent = "Data Integrity Framework · Quality SLAs · Audit Trail & Provenance";
-      } else if (viewName === "commodity") {
-        const targetComm = commName && commodityMetadata[commName] ? commName : activeCommodity;
-        crumbEl.textContent = targetComm;
-        titleEl.textContent = `${targetComm}`;
-        if (subtitleEl) {
-          const m = commodityMetadata[targetComm];
-          subtitleEl.textContent = m ? `${m.group} · Monitored in ₱ per ${m.unit} · Real-time Technical Moving Averages` : "Commodity Price Deep Dive";
-        }
+        if (tagEl) tagEl.textContent = "Transparency & Provenance";
+        titleEl.textContent = "Data Governance & Methodology";
       }
     }
 

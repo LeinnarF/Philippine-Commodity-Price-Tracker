@@ -10,7 +10,7 @@
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 
   <!-- Modular Formal Stylesheet -->
-  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792828861">
+  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792831215">
 </head>
 <body>
   <div class="app-shell">
@@ -1125,14 +1125,262 @@
       </button>
 
       <div class="navbar-heading-group">
-        <h1 class="navbar-title" id="navbar-view-title">Dashboard</h1>
-        <p class="navbar-subtitle" id="navbar-view-subtitle">
-          Bantay Presyo · Daily Retail Food Price Monitoring & Analytics · NCR Wet Markets
-        </p>
+        <!-- Standard View Kicker Tag (Overview / Census / Governance) -->
+        <span class="navbar-kicker" id="navbar-view-tag">Executive Summary</span>
+
+        <!-- Commodity Breadcrumb Trail (Shown only on Commodity Detail view) -->
+        <nav class="navbar-breadcrumb-trail" id="navbar-commodity-breadcrumb" aria-label="Breadcrumb" style="display: none;">
+          <button type="button" class="breadcrumb-link" data-nav-view="overview">Market Overview</button>
+          <span class="breadcrumb-sep">/</span>
+          <span id="breadcrumb-group">Rice</span>
+          <span class="breadcrumb-sep">/</span>
+          <strong id="breadcrumb-commodity">Regular Milled Rice</strong>
+        </nav>
+
+        <div class="navbar-title-row">
+          <h1 class="navbar-title" id="navbar-view-title">Market Overview</h1>
+        </div>
       </div>
     </div>
 
     <div class="navbar-right">
+      <!-- Commodity Navigation Controls (Shown only on Commodity Detail view) -->
+      <div class="navbar-commodity-controls" id="navbar-commodity-controls" style="display: none;">
+        <div class="commodity-stepper-group" role="group" aria-label="Step through commodities">
+          <button type="button" id="btn-prev-commodity" class="btn-step-commodity" title="Previous commodity">
+            ← Prev
+          </button>
+          <span class="stepper-divider" aria-hidden="true"></span>
+          <button type="button" id="btn-next-commodity" class="btn-step-commodity" title="Next commodity">
+            Next →
+          </button>
+        </div>
+
+        <select id="commodity-picker" class="navbar-commodity-select" aria-label="Quick switch commodity">
+          
+          <optgroup label="Basic Goods">
+            
+            <option value="Brown Sugar" >
+              Brown Sugar (kg)
+            </option>
+            
+            <option value="Chicken Egg (Medium White)" >
+              Chicken Egg (Medium White) (piece)
+            </option>
+            
+            <option value="Cooking Oil (Coconut)" >
+              Cooking Oil (Coconut) (bottle (1L))
+            </option>
+            
+            <option value="Cooking Oil (Palm)" >
+              Cooking Oil (Palm) (bottle (1L))
+            </option>
+            
+            <option value="Refined Sugar" >
+              Refined Sugar (kg)
+            </option>
+            
+            <option value="Washed Sugar" >
+              Washed Sugar (kg)
+            </option>
+            
+          </optgroup>
+          
+          <optgroup label="Fish">
+            
+            <option value="Bangus (Large)" >
+              Bangus (Large) (kg)
+            </option>
+            
+            <option value="Bangus (Medium)" >
+              Bangus (Medium) (kg)
+            </option>
+            
+            <option value="Galunggong (Local)" >
+              Galunggong (Local) (kg)
+            </option>
+            
+            <option value="Sardines (Tamban)" >
+              Sardines (Tamban) (kg)
+            </option>
+            
+            <option value="Tilapia" >
+              Tilapia (kg)
+            </option>
+            
+          </optgroup>
+          
+          <optgroup label="Fruits">
+            
+            <option value="Avocado" >
+              Avocado (kg)
+            </option>
+            
+            <option value="Banana (Lakatan)" >
+              Banana (Lakatan) (kg)
+            </option>
+            
+            <option value="Banana (Latundan)" >
+              Banana (Latundan) (kg)
+            </option>
+            
+            <option value="Banana (Saba)" >
+              Banana (Saba) (kg)
+            </option>
+            
+            <option value="Mango (Carabao)" >
+              Mango (Carabao) (kg)
+            </option>
+            
+            <option value="Melon" >
+              Melon (kg)
+            </option>
+            
+            <option value="Papaya" >
+              Papaya (kg)
+            </option>
+            
+            <option value="Pomelo" >
+              Pomelo (kg)
+            </option>
+            
+            <option value="Watermelon" >
+              Watermelon (kg)
+            </option>
+            
+          </optgroup>
+          
+          <optgroup label="Meat and Poultry">
+            
+            <option value="Beef Brisket" >
+              Beef Brisket (kg)
+            </option>
+            
+            <option value="Beef Rump" >
+              Beef Rump (kg)
+            </option>
+            
+            <option value="Pork Belly (Liempo)" >
+              Pork Belly (Liempo) (kg)
+            </option>
+            
+            <option value="Pork Kasim (Picnic Shoulder)" >
+              Pork Kasim (Picnic Shoulder) (kg)
+            </option>
+            
+            <option value="Pork Pigue (Hind Leg / Ham)" >
+              Pork Pigue (Hind Leg / Ham) (kg)
+            </option>
+            
+            <option value="Whole Chicken" >
+              Whole Chicken (kg)
+            </option>
+            
+          </optgroup>
+          
+          <optgroup label="Rice">
+            
+            <option value="Premium Rice" >
+              Premium Rice (kg)
+            </option>
+            
+            <option value="Regular Milled Rice" selected>
+              Regular Milled Rice (kg)
+            </option>
+            
+            <option value="Well Milled Rice" >
+              Well Milled Rice (kg)
+            </option>
+            
+          </optgroup>
+          
+          <optgroup label="Spices and Condiments">
+            
+            <option value="Calamansi" >
+              Calamansi (kg)
+            </option>
+            
+            <option value="Garlic (Imported)" >
+              Garlic (Imported) (kg)
+            </option>
+            
+            <option value="Garlic (Native)" >
+              Garlic (Native) (kg)
+            </option>
+            
+            <option value="Ginger" >
+              Ginger (kg)
+            </option>
+            
+            <option value="Red Onion" >
+              Red Onion (kg)
+            </option>
+            
+          </optgroup>
+          
+          <optgroup label="Vegetables">
+            
+            <option value="Ampalaya (Bitter Gourd)" >
+              Ampalaya (Bitter Gourd) (kg)
+            </option>
+            
+            <option value="Bell Pepper (Green)" >
+              Bell Pepper (Green) (kg)
+            </option>
+            
+            <option value="Bell Pepper (Red)" >
+              Bell Pepper (Red) (kg)
+            </option>
+            
+            <option value="Cabbage (Rare Ball)" >
+              Cabbage (Rare Ball) (kg)
+            </option>
+            
+            <option value="Cabbage (Scorpio)" >
+              Cabbage (Scorpio) (kg)
+            </option>
+            
+            <option value="Cabbage (Wonder Ball)" >
+              Cabbage (Wonder Ball) (kg)
+            </option>
+            
+            <option value="Carrots" >
+              Carrots (kg)
+            </option>
+            
+            <option value="Eggplant" >
+              Eggplant (kg)
+            </option>
+            
+            <option value="Native Pechay" >
+              Native Pechay (bundle)
+            </option>
+            
+            <option value="Squash" >
+              Squash (kg)
+            </option>
+            
+            <option value="Tomato" >
+              Tomato (kg)
+            </option>
+            
+            <option value="White Corn" >
+              White Corn (kg)
+            </option>
+            
+            <option value="White Potato" >
+              White Potato (kg)
+            </option>
+            
+            <option value="Yellow Corn" >
+              Yellow Corn (kg)
+            </option>
+            
+          </optgroup>
+          
+        </select>
+      </div>
+
       <div class="navbar-date-badge">
         <span class="date-lbl">Latest:</span>
         <strong class="date-val">Oct 20, 2026</strong>
@@ -1300,18 +1548,18 @@
         <span class="card-tag">Daily Price Inflation</span>
         <h2 class="card-title">Top 5 Price Increases (Day-over-Day)</h2>
       </div>
-      <span class="badge badge-increase">▲ Price Advances</span>
+      <span class="status-pill status-pill-increase">▲ Price Advances</span>
     </div>
     <div class="card-body" style="padding: 0;">
-      <div class="table-container" style="border: none;">
-        <table class="formal-table">
+      <div class="table-container" style="border: none; border-radius: 0;">
+        <table class="formal-table formal-table-movers">
           <thead>
             <tr>
-              <th>Commodity</th>
-              <th>Category</th>
-              <th class="text-right">Price</th>
-              <th class="text-right">1-Day Change</th>
-              <th class="text-right">7-Day Change</th>
+              <th class="col-mover-name">Commodity</th>
+              <th class="col-mover-cat">Category</th>
+              <th class="text-right col-mover-price">Price</th>
+              <th class="text-right col-mover-delta">1-Day Change</th>
+              <th class="text-right col-mover-delta">7-Day Change</th>
             </tr>
           </thead>
           <tbody>
@@ -1325,7 +1573,7 @@
               <td><span class="category-pill">Fish</span></td>
               <td class="text-right font-mono">
                 ₱203.16
-                <span style="font-size: 11px; color: var(--text-muted);">/kg</span>
+                <span class="unit-suffix">/kg</span>
               </td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +14.53%</span></td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -0.20%</span></td>
@@ -1340,7 +1588,7 @@
               <td><span class="category-pill">Basic Goods</span></td>
               <td class="text-right font-mono">
                 ₱8.81
-                <span style="font-size: 11px; color: var(--text-muted);">/piece</span>
+                <span class="unit-suffix">/piece</span>
               </td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +7.18%</span></td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +6.92%</span></td>
@@ -1355,7 +1603,7 @@
               <td><span class="category-pill">Vegetables</span></td>
               <td class="text-right font-mono">
                 ₱152.12
-                <span style="font-size: 11px; color: var(--text-muted);">/kg</span>
+                <span class="unit-suffix">/kg</span>
               </td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +6.33%</span></td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +6.33%</span></td>
@@ -1370,7 +1618,7 @@
               <td><span class="category-pill">Vegetables</span></td>
               <td class="text-right font-mono">
                 ₱315.75
-                <span style="font-size: 11px; color: var(--text-muted);">/kg</span>
+                <span class="unit-suffix">/kg</span>
               </td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +6.32%</span></td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -8.84%</span></td>
@@ -1385,7 +1633,7 @@
               <td><span class="category-pill">Vegetables</span></td>
               <td class="text-right font-mono">
                 ₱155.41
-                <span style="font-size: 11px; color: var(--text-muted);">/kg</span>
+                <span class="unit-suffix">/kg</span>
               </td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +5.01%</span></td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +0.95%</span></td>
@@ -1404,18 +1652,18 @@
         <span class="card-tag">Daily Price Deflation</span>
         <h2 class="card-title">Top 5 Price Decreases (Day-over-Day)</h2>
       </div>
-      <span class="badge badge-decrease">▼ Price Reductions</span>
+      <span class="status-pill status-pill-decrease">▼ Price Reductions</span>
     </div>
     <div class="card-body" style="padding: 0;">
-      <div class="table-container" style="border: none;">
-        <table class="formal-table">
+      <div class="table-container" style="border: none; border-radius: 0;">
+        <table class="formal-table formal-table-movers">
           <thead>
             <tr>
-              <th>Commodity</th>
-              <th>Category</th>
-              <th class="text-right">Price</th>
-              <th class="text-right">1-Day Change</th>
-              <th class="text-right">7-Day Change</th>
+              <th class="col-mover-name">Commodity</th>
+              <th class="col-mover-cat">Category</th>
+              <th class="text-right col-mover-price">Price</th>
+              <th class="text-right col-mover-delta">1-Day Change</th>
+              <th class="text-right col-mover-delta">7-Day Change</th>
             </tr>
           </thead>
           <tbody>
@@ -1429,7 +1677,7 @@
               <td><span class="category-pill">Vegetables</span></td>
               <td class="text-right font-mono">
                 ₱108.26
-                <span style="font-size: 11px; color: var(--text-muted);">/kg</span>
+                <span class="unit-suffix">/kg</span>
               </td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -4.83%</span></td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -9.31%</span></td>
@@ -1444,7 +1692,7 @@
               <td><span class="category-pill">Vegetables</span></td>
               <td class="text-right font-mono">
                 ₱103.95
-                <span style="font-size: 11px; color: var(--text-muted);">/bundle</span>
+                <span class="unit-suffix">/bundle</span>
               </td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -3.80%</span></td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -12.68%</span></td>
@@ -1459,7 +1707,7 @@
               <td><span class="category-pill">Fruits</span></td>
               <td class="text-right font-mono">
                 ₱81.59
-                <span style="font-size: 11px; color: var(--text-muted);">/kg</span>
+                <span class="unit-suffix">/kg</span>
               </td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -3.17%</span></td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -0.32%</span></td>
@@ -1474,7 +1722,7 @@
               <td><span class="category-pill">Vegetables</span></td>
               <td class="text-right font-mono">
                 ₱92.15
-                <span style="font-size: 11px; color: var(--text-muted);">/kg</span>
+                <span class="unit-suffix">/kg</span>
               </td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -1.97%</span></td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +3.08%</span></td>
@@ -1489,7 +1737,7 @@
               <td><span class="category-pill">Fruits</span></td>
               <td class="text-right font-mono">
                 ₱260.00
-                <span style="font-size: 11px; color: var(--text-muted);">/kg</span>
+                <span class="unit-suffix">/kg</span>
               </td>
               <td class="text-right"><span class="badge badge-decrease"><span class="badge-arrow">▼</span> -1.76%</span></td>
               <td class="text-right"><span class="badge badge-increase"><span class="badge-arrow">▲</span> +0.93%</span></td>
@@ -1623,305 +1871,83 @@
 
 <!-- View 2: Individual Commodity Detail View -->
 <section id="view-commodity" class="view-panel" aria-label="Commodity Detail">
-  <!-- Breadcrumb & Commodity Stepper Bar -->
-<div class="view-topbar">
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <button type="button" class="breadcrumb-link" data-nav-view="overview">Market Overview</button>
-    <span class="breadcrumb-sep">/</span>
-    <span id="breadcrumb-group">Rice</span>
-    <span class="breadcrumb-sep">/</span>
-    <strong id="breadcrumb-commodity" style="color: var(--navy-900);">Regular Milled Rice</strong>
-  </nav>
-
-  <div class="commodity-nav-buttons">
-    <button type="button" id="btn-prev-commodity" class="btn-step-commodity" title="Previous commodity">
-      ← Previous Item
-    </button>
-    <button type="button" id="btn-next-commodity" class="btn-step-commodity" title="Next commodity">
-      Next Item →
-    </button>
-  </div>
-</div>
-
-<!-- Commodity Header Banner -->
-<div class="detail-header-banner">
-  <div class="detail-title-block">
-    <h2 id="detail-commodity-title">Regular Milled Rice</h2>
-    <div class="detail-meta-tags">
-      <span class="category-pill" id="detail-commodity-group">Rice</span>
-      <span class="badge badge-neutral" id="detail-commodity-unit">Unit: kg</span>
-      <span style="font-size: 12px; color: var(--text-muted);">
-        NCR Wet Markets · As of Oct 20, 2026
-      </span>
+  <!-- Unified Summary KPI Strip (7 Metric Cards matching Overview KPI anatomy) -->
+<div class="kpi-grid kpi-grid-7" id="commodity-metrics-strip">
+  <div class="kpi-card kpi-card-compact">
+    <div class="kpi-card-body">
+      <div class="kpi-card-info">
+        <span class="kpi-label">Prevailing Price</span>
+        <div class="kpi-value kpi-value-compact" id="box-price">—</div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail" id="box-unit">Retailing per unit</div>
     </div>
   </div>
 
-  <div>
-    <label for="commodity-picker" style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 4px;">
-      Quick Switch Commodity
-    </label>
-    <select id="commodity-picker" class="search-input" style="min-width: 240px; font-weight: 600;">
-      
-      <optgroup label="Basic Goods">
-        
-        <option value="Brown Sugar" >
-          Brown Sugar (kg)
-        </option>
-        
-        <option value="Chicken Egg (Medium White)" >
-          Chicken Egg (Medium White) (piece)
-        </option>
-        
-        <option value="Cooking Oil (Coconut)" >
-          Cooking Oil (Coconut) (bottle (1L))
-        </option>
-        
-        <option value="Cooking Oil (Palm)" >
-          Cooking Oil (Palm) (bottle (1L))
-        </option>
-        
-        <option value="Refined Sugar" >
-          Refined Sugar (kg)
-        </option>
-        
-        <option value="Washed Sugar" >
-          Washed Sugar (kg)
-        </option>
-        
-      </optgroup>
-      
-      <optgroup label="Fish">
-        
-        <option value="Bangus (Large)" >
-          Bangus (Large) (kg)
-        </option>
-        
-        <option value="Bangus (Medium)" >
-          Bangus (Medium) (kg)
-        </option>
-        
-        <option value="Galunggong (Local)" >
-          Galunggong (Local) (kg)
-        </option>
-        
-        <option value="Sardines (Tamban)" >
-          Sardines (Tamban) (kg)
-        </option>
-        
-        <option value="Tilapia" >
-          Tilapia (kg)
-        </option>
-        
-      </optgroup>
-      
-      <optgroup label="Fruits">
-        
-        <option value="Avocado" >
-          Avocado (kg)
-        </option>
-        
-        <option value="Banana (Lakatan)" >
-          Banana (Lakatan) (kg)
-        </option>
-        
-        <option value="Banana (Latundan)" >
-          Banana (Latundan) (kg)
-        </option>
-        
-        <option value="Banana (Saba)" >
-          Banana (Saba) (kg)
-        </option>
-        
-        <option value="Mango (Carabao)" >
-          Mango (Carabao) (kg)
-        </option>
-        
-        <option value="Melon" >
-          Melon (kg)
-        </option>
-        
-        <option value="Papaya" >
-          Papaya (kg)
-        </option>
-        
-        <option value="Pomelo" >
-          Pomelo (kg)
-        </option>
-        
-        <option value="Watermelon" >
-          Watermelon (kg)
-        </option>
-        
-      </optgroup>
-      
-      <optgroup label="Meat and Poultry">
-        
-        <option value="Beef Brisket" >
-          Beef Brisket (kg)
-        </option>
-        
-        <option value="Beef Rump" >
-          Beef Rump (kg)
-        </option>
-        
-        <option value="Pork Belly (Liempo)" >
-          Pork Belly (Liempo) (kg)
-        </option>
-        
-        <option value="Pork Kasim (Picnic Shoulder)" >
-          Pork Kasim (Picnic Shoulder) (kg)
-        </option>
-        
-        <option value="Pork Pigue (Hind Leg / Ham)" >
-          Pork Pigue (Hind Leg / Ham) (kg)
-        </option>
-        
-        <option value="Whole Chicken" >
-          Whole Chicken (kg)
-        </option>
-        
-      </optgroup>
-      
-      <optgroup label="Rice">
-        
-        <option value="Premium Rice" >
-          Premium Rice (kg)
-        </option>
-        
-        <option value="Regular Milled Rice" selected>
-          Regular Milled Rice (kg)
-        </option>
-        
-        <option value="Well Milled Rice" >
-          Well Milled Rice (kg)
-        </option>
-        
-      </optgroup>
-      
-      <optgroup label="Spices and Condiments">
-        
-        <option value="Calamansi" >
-          Calamansi (kg)
-        </option>
-        
-        <option value="Garlic (Imported)" >
-          Garlic (Imported) (kg)
-        </option>
-        
-        <option value="Garlic (Native)" >
-          Garlic (Native) (kg)
-        </option>
-        
-        <option value="Ginger" >
-          Ginger (kg)
-        </option>
-        
-        <option value="Red Onion" >
-          Red Onion (kg)
-        </option>
-        
-      </optgroup>
-      
-      <optgroup label="Vegetables">
-        
-        <option value="Ampalaya (Bitter Gourd)" >
-          Ampalaya (Bitter Gourd) (kg)
-        </option>
-        
-        <option value="Bell Pepper (Green)" >
-          Bell Pepper (Green) (kg)
-        </option>
-        
-        <option value="Bell Pepper (Red)" >
-          Bell Pepper (Red) (kg)
-        </option>
-        
-        <option value="Cabbage (Rare Ball)" >
-          Cabbage (Rare Ball) (kg)
-        </option>
-        
-        <option value="Cabbage (Scorpio)" >
-          Cabbage (Scorpio) (kg)
-        </option>
-        
-        <option value="Cabbage (Wonder Ball)" >
-          Cabbage (Wonder Ball) (kg)
-        </option>
-        
-        <option value="Carrots" >
-          Carrots (kg)
-        </option>
-        
-        <option value="Eggplant" >
-          Eggplant (kg)
-        </option>
-        
-        <option value="Native Pechay" >
-          Native Pechay (bundle)
-        </option>
-        
-        <option value="Squash" >
-          Squash (kg)
-        </option>
-        
-        <option value="Tomato" >
-          Tomato (kg)
-        </option>
-        
-        <option value="White Corn" >
-          White Corn (kg)
-        </option>
-        
-        <option value="White Potato" >
-          White Potato (kg)
-        </option>
-        
-        <option value="Yellow Corn" >
-          Yellow Corn (kg)
-        </option>
-        
-      </optgroup>
-      
-    </select>
+  <div class="kpi-card kpi-card-compact">
+    <div class="kpi-card-body">
+      <div class="kpi-card-info">
+        <span class="kpi-label">1-Day Change (DoD)</span>
+        <div class="kpi-value kpi-value-compact" id="box-dod">—</div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail" id="box-dod-sub">vs yesterday</div>
+    </div>
   </div>
-</div>
 
-<!-- Summary KPI Strip (7 Metric Boxes) -->
-<div class="commodity-metrics-bar" id="commodity-metrics-strip">
-  <div class="metric-box">
-    <div class="label">Prevailing Price</div>
-    <div class="value" id="box-price">—</div>
-    <div class="sub" id="box-unit">—</div>
+  <div class="kpi-card kpi-card-compact">
+    <div class="kpi-card-body">
+      <div class="kpi-card-info">
+        <span class="kpi-label">7-Day Change (WoW)</span>
+        <div class="kpi-value kpi-value-compact" id="box-wow">—</div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail" id="box-wow-sub">vs 7d ago</div>
+    </div>
   </div>
-  <div class="metric-box">
-    <div class="label">1-Day Change (DoD)</div>
-    <div class="value" id="box-dod">—</div>
-    <div class="sub" id="box-dod-sub">vs yesterday</div>
+
+  <div class="kpi-card kpi-card-compact">
+    <div class="kpi-card-body">
+      <div class="kpi-card-info">
+        <span class="kpi-label">30-Day Change (MoM)</span>
+        <div class="kpi-value kpi-value-compact" id="box-mom">—</div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail" id="box-mom-sub">vs 30d ago</div>
+    </div>
   </div>
-  <div class="metric-box">
-    <div class="label">7-Day Change (WoW)</div>
-    <div class="value" id="box-wow">—</div>
-    <div class="sub" id="box-wow-sub">vs 7d ago</div>
+
+  <div class="kpi-card kpi-card-compact">
+    <div class="kpi-card-body">
+      <div class="kpi-card-info">
+        <span class="kpi-label">7-Day SMA</span>
+        <div class="kpi-value kpi-value-compact" id="box-sma7">—</div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail"><span class="kpi-context">Short-term trend</span></div>
+    </div>
   </div>
-  <div class="metric-box">
-    <div class="label">30-Day Change (MoM)</div>
-    <div class="value" id="box-mom">—</div>
-    <div class="sub" id="box-mom-sub">vs 30d ago</div>
+
+  <div class="kpi-card kpi-card-compact">
+    <div class="kpi-card-body">
+      <div class="kpi-card-info">
+        <span class="kpi-label">30-Day SMA</span>
+        <div class="kpi-value kpi-value-compact" id="box-sma30">—</div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail"><span class="kpi-context">Medium-term trend</span></div>
+    </div>
   </div>
-  <div class="metric-box">
-    <div class="label">7-Day SMA</div>
-    <div class="value" id="box-sma7">—</div>
-    <div class="sub">Short-term trend</div>
-  </div>
-  <div class="metric-box">
-    <div class="label">30-Day SMA</div>
-    <div class="value" id="box-sma30">—</div>
-    <div class="sub">Medium-term trend</div>
-  </div>
-  <div class="metric-box">
-    <div class="label">30-Day Volatility</div>
-    <div class="value" id="box-vol">—</div>
-    <div class="sub" id="box-cv">CV: —</div>
+
+  <div class="kpi-card kpi-card-compact">
+    <div class="kpi-card-body">
+      <div class="kpi-card-info">
+        <span class="kpi-label">30-Day Volatility</span>
+        <div class="kpi-value kpi-value-compact" id="box-vol">—</div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail" id="box-cv">CV: —</div>
+    </div>
   </div>
 </div>
 
@@ -1929,9 +1955,9 @@
 <div class="card">
   <div class="card-header">
     <div class="card-title-group">
-      <span class="card-tag">Historical Price Velocity & Smoothing</span>
-      <h3 class="card-title">Daily Prevailing Retail Price, 7-Day SMA & 30-Day SMA</h3>
-      <span class="card-subtitle">Official DA AMAS survey observations across NCR wet markets</span>
+      <span class="card-tag">Historical Price Velocity &amp; Smoothing</span>
+      <h2 class="card-title" id="commodity-chart-title">Daily Prevailing Retail Price, 7-Day SMA &amp; 30-Day SMA</h2>
+      <span class="card-subtitle">Official DA-AMAS survey observations across NCR wet markets</span>
     </div>
     <div class="timeframe-pills" role="group" aria-label="Chart Timeframe">
       <button type="button" class="btn-timeframe" data-timeframe="1M">1M</button>
@@ -1942,23 +1968,14 @@
     </div>
   </div>
   <div class="card-body">
-    <div id="commodity-trend-plot" style="width: 100%; height: 480px;"></div>
+    <div id="commodity-trend-plot" style="width: 100%; height: 460px;"></div>
   </div>
 </div>
 </section>
 
 <!-- View 3: Full Price Census View -->
 <section id="view-census" class="view-panel" aria-label="Full Price Census">
-  <!-- Breadcrumb Bar -->
-<div class="view-topbar">
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <button type="button" class="breadcrumb-link" data-nav-view="overview">Market Overview</button>
-    <span class="breadcrumb-sep">/</span>
-    <strong style="color: var(--navy-900);">Full Price Census</strong>
-  </nav>
-</div>
-
-<!-- Master Retail Price Monitoring Table -->
+  <!-- Master Retail Price Monitoring Table -->
 <div class="card">
   <div class="card-header">
     <div class="card-title-group">
@@ -3763,26 +3780,112 @@
 
 <!-- View 4: Data Governance & Methodology View -->
 <section id="view-governance" class="view-panel" aria-label="Data Governance">
-  <!-- Breadcrumb Bar -->
-<div class="view-topbar">
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <button type="button" class="breadcrumb-link" data-nav-view="overview">Market Overview</button>
-    <span class="breadcrumb-sep">/</span>
-    <strong style="color: var(--navy-900);">Data Governance, Audit & Methodology</strong>
-  </nav>
+  <!-- Unified Governance KPI Strip (Matches Overview & Commodity Detail KPI Cards) -->
+<div class="kpi-grid kpi-grid-4">
+  <div class="kpi-card">
+    <div class="kpi-card-body">
+      <div class="kpi-card-header">
+        <div class="kpi-card-info">
+          <span class="kpi-label">Total Warehouse Rows</span>
+          <div class="kpi-value">21,648</div>
+        </div>
+        <div class="kpi-icon-box" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+          </svg>
+        </div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail">
+        <span class="kpi-highlight">451 dates &times; 48 items</span>
+        <span class="kpi-context">complete rectangular grid</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-card-body">
+      <div class="kpi-card-header">
+        <div class="kpi-card-info">
+          <span class="kpi-label">Source Daily Bulletins</span>
+          <div class="kpi-value">
+            451
+            <span class="kpi-unit">PDFs</span>
+          </div>
+        </div>
+        <div class="kpi-icon-box" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+        </div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail">
+        <span class="kpi-highlight">Official DA-AMAS</span>
+        <span class="kpi-context">Daily Price Index releases</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-card-body">
+      <div class="kpi-card-header">
+        <div class="kpi-card-info">
+          <span class="kpi-label">Market Jurisdiction</span>
+          <div class="kpi-value kpi-value-text">NCR Wet Markets</div>
+        </div>
+        <div class="kpi-icon-box" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+        </div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail">
+        <span class="kpi-highlight">Metro Manila</span>
+        <span class="kpi-context">prevailing retail wet markets</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-card-body">
+      <div class="kpi-card-header">
+        <div class="kpi-card-info">
+          <span class="kpi-label">Synthetic Data Count</span>
+          <div class="kpi-value text-drop">0 (0.00%)</div>
+        </div>
+        <div class="kpi-icon-box kpi-icon-drop" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </div>
+      </div>
+      <hr class="kpi-card-divider">
+      <div class="kpi-detail">
+        <span class="kpi-highlight">100% Verified</span>
+        <span class="kpi-context">zero fabricated observations</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Data Integrity & Methodology Audit Box -->
 <div class="card">
   <div class="card-header">
     <div class="card-title-group">
-      <span class="card-tag">Transparency & Provenance</span>
-      <h2 class="card-title">Data Governance, Verification & Methodology Disclosure</h2>
+      <span class="card-tag">Transparency &amp; Provenance</span>
+      <h2 class="card-title">Data Governance, Verification &amp; Methodology Disclosure</h2>
       <span class="card-subtitle">
         Audited data lineage from raw Department of Agriculture AMAS PDF bulletins to DuckDB analytical views
       </span>
     </div>
-    <span class="badge badge-decrease">
+    <span class="status-pill status-pill-decrease">
       <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: -1px; margin-right: 4px;" aria-hidden="true">
         <polyline points="20 6 9 17 4 12"></polyline>
       </svg>
@@ -3790,26 +3893,6 @@
     </span>
   </div>
   <div class="card-body">
-    <!-- Summary Stats Grid -->
-    <div class="audit-grid">
-      <div class="audit-stat">
-        <div class="lbl">Total Warehouse Rows</div>
-        <div class="val">21,648</div>
-      </div>
-      <div class="audit-stat">
-        <div class="lbl">Source Daily Bulletins</div>
-        <div class="val">451 PDFs</div>
-      </div>
-      <div class="audit-stat">
-        <div class="lbl">Market Jurisdiction</div>
-        <div class="val">NCR Wet Markets</div>
-      </div>
-      <div class="audit-stat">
-        <div class="lbl">Synthetic Data Count</div>
-        <div class="val" style="color: #15803d;">0 (0.00%)</div>
-      </div>
-    </div>
-
     <div class="methodology-text">
       <p>
         <strong>Data Lineage & Collection:</strong> All price observations in this dashboard originate from official
@@ -3855,8 +3938,8 @@
   </div>
 
   <!-- Modular Precomputed Data Payload & Interactive Controller -->
-  <script src="assets/data/commodities.js?v=1792828861"></script>
-  <script src="assets/js/dashboard.js?v=1792828861"></script>
+  <script src="assets/data/commodities.js?v=1792831215"></script>
+  <script src="assets/js/dashboard.js?v=1792831215"></script>
 
   
 

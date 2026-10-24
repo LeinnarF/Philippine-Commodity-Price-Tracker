@@ -16,14 +16,50 @@
       </button>
 
       <div class="navbar-heading-group">
-        <h1 class="navbar-title" id="navbar-view-title">Dashboard</h1>
-        <p class="navbar-subtitle" id="navbar-view-subtitle">
-          Bantay Presyo · Daily Retail Food Price Monitoring & Analytics · NCR Wet Markets
-        </p>
+        <!-- Standard View Kicker Tag (Overview / Census / Governance) -->
+        <span class="navbar-kicker" id="navbar-view-tag">Executive Summary</span>
+
+        <!-- Commodity Breadcrumb Trail (Shown only on Commodity Detail view) -->
+        <nav class="navbar-breadcrumb-trail" id="navbar-commodity-breadcrumb" aria-label="Breadcrumb" style="display: none;">
+          <button type="button" class="breadcrumb-link" data-nav-view="overview">Market Overview</button>
+          <span class="breadcrumb-sep">/</span>
+          <span id="breadcrumb-group">Rice</span>
+          <span class="breadcrumb-sep">/</span>
+          <strong id="breadcrumb-commodity">{{ default_commodity }}</strong>
+        </nav>
+
+        <div class="navbar-title-row">
+          <h1 class="navbar-title" id="navbar-view-title">Market Overview</h1>
+        </div>
       </div>
     </div>
 
     <div class="navbar-right">
+      <!-- Commodity Navigation Controls (Shown only on Commodity Detail view) -->
+      <div class="navbar-commodity-controls" id="navbar-commodity-controls" style="display: none;">
+        <div class="commodity-stepper-group" role="group" aria-label="Step through commodities">
+          <button type="button" id="btn-prev-commodity" class="btn-step-commodity" title="Previous commodity">
+            ← Prev
+          </button>
+          <span class="stepper-divider" aria-hidden="true"></span>
+          <button type="button" id="btn-next-commodity" class="btn-step-commodity" title="Next commodity">
+            Next →
+          </button>
+        </div>
+
+        <select id="commodity-picker" class="navbar-commodity-select" aria-label="Quick switch commodity">
+          {% for grp, items in commodities_by_group.items() %}
+          <optgroup label="{{ grp }}">
+            {% for item in items %}
+            <option value="{{ item.commodity }}" {% if item.commodity == default_commodity %}selected{% endif %}>
+              {{ item.commodity }} ({{ item.unit }})
+            </option>
+            {% endfor %}
+          </optgroup>
+          {% endfor %}
+        </select>
+      </div>
+
       <div class="navbar-date-badge">
         <span class="date-lbl">Latest:</span>
         <strong class="date-val">{{ kpis.latest_date_short }}</strong>
