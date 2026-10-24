@@ -11,9 +11,9 @@ The project bridges three core disciplines:
 
 ---
 
-## Raw-to-Clean CSV Pipeline (4-Stage Architecture)
+## End-to-End Data Pipeline (5-Stage Architecture)
 
-The data pipeline decouples network downloading, PDF table extraction, commodity panel standardization, and final clean CSV generation:
+The data pipeline decouples network downloading, PDF table extraction, commodity panel standardization, clean CSV generation, and embedded DuckDB data warehousing:
 
 ```mermaid
 flowchart LR
@@ -21,6 +21,8 @@ flowchart LR
     PDFs -->|Stage 2: Offline Multiprocessing| RAW["data/raw_da_amas_prices.csv<br/>(Consolidated Raw Dataset)"]
     RAW -->|Stage 3: Commodity Selection & Panel Grid| SEL["data/selected_da_amas_prices.csv<br/>(Selected 48 Commodities Panel)"]
     SEL -->|Stage 4: Metadata Strip & Export| CLEAN["data/clean_da_amas_prices.csv<br/>(Production Clean Dataset)"]
+    SEL -->|Stage 5: Load Audit| DDB[("data/commodities.duckdb<br/>Silver Tables + Gold Views")]
+    CLEAN -->|Stage 5: Load Core| DDB
 ```
 
 ### Stage 1: Parallel PDF Downloader (`pipeline/download_pdfs.py`)
@@ -64,6 +66,19 @@ flowchart LR
   python -m pipeline.clean_dataset
   ```
 
+### Stage 5: DuckDB Analytical Warehouse Loader (`pipeline/load_duckdb.py`)
+- Ingests `data/clean_da_amas_prices.csv` into `commodity_prices` and `data/selected_da_amas_prices.csv` into `audit_prices`.
+- Enforces relational typing, composite primary keys `(date, commodity)`, and domain integrity constraints (`price_prevailing > 0`, `is_synthetic = FALSE`, `raw_count >= 0`).
+- Removes legacy pre-refactor tables (`fetch_log`).
+- Creates 3 high-performance Gold layer SQL analytical views:
+  - `v_commodity_analytics`: Rolling moving averages (`sma_7d`, `sma_30d`), rolling sample volatility (`volatility_30d`), coefficient of variation (`cv_30d`), lagged prices, day-over-day (`dod_abs`, `dod_pct`), week-over-week (`wow_abs`, `wow_pct`), and month-over-month (`mom_abs`, `mom_pct`) price velocity.
+  - `v_latest_snapshot`: Filters `v_commodity_analytics` to the latest observation date (`WHERE date = (SELECT MAX(date) FROM commodity_prices)`), ranked by `dod_pct DESC` for immediate use in KPI cards and Top Gainers / Decliners.
+  - `v_category_indices`: Daily equal-weighted base-100 price indices for each of the 7 commodity groups, smoothly accommodating Pork Pigue's initial observation date.
+- Command:
+  ```bash
+  python -m pipeline.load_duckdb
+  ```
+
 ---
 
 ## Quick Start & Exploration
@@ -90,17 +105,42 @@ jupyter notebook notebooks/01_explore_data.ipynb
 
 ---
 
-## Data Schema Reference (`commodity_prices`)
+## Data Warehouse Schema Reference (`data/commodities.duckdb`)
 
-| Column | Type | Description |
-|---|---|---|
-| `date` | `DATE` | Observation date (YYYY-MM-DD) |
-| `commodity_group` | `VARCHAR` | Rice, Fish, Meat & Poultry, Lowland/Highland Vegetables, Spices, Fruits, Other |
-| `commodity` | `VARCHAR` | Commodity name (e.g., 'Well Milled Rice', 'Pork Kasim', 'Bangus') |
-| `variety` | `VARCHAR` | Variety or specification ('Local', 'Imported', 'Fresh', 'Medium') |
-| `market_scope` | `VARCHAR` | Market jurisdiction (default: 'NCR Wet Markets') |
-| `unit` | `VARCHAR` | Unit of measure ('kg', 'piece', 'bottle (1L)') |
-| `price_prevailing` | `DOUBLE` | Prevailing retail price (₱ PHP) |
-| `price_low` | `DOUBLE` | Lowest price observed in surveyed wet markets |
-| `price_high` | `DOUBLE` | Highest price observed in surveyed wet markets |
-| `created_at` | `TIMESTAMP` | Record ingestion timestamp |
+### 1. Silver Layer: `commodity_prices` (5 Columns)
+The primary normalized business table representing the complete rectangular panel grid ($451\text{ dates} \times 48\text{ commodities} = 21,648\text{ rows}$).
+
+| Column | Type | Constraints | Description |
+|---|---|---|---|
+| `date` | `DATE` | `NOT NULL` | Survey observation date (YYYY-MM-DD) |
+| `commodity_group` | `VARCHAR` | `NOT NULL` | Standardized category (e.g., 'Rice', 'Fish', 'Meat and Poultry') |
+| `commodity` | `VARCHAR` | `NOT NULL` | Standardized commodity name |
+| `unit` | `VARCHAR` | `NOT NULL` | Standard measurement unit ('kg', 'piece', 'bottle (1L)') |
+| `price_prevailing` | `DOUBLE` | `CHECK (price_prevailing IS NULL OR price_prevailing > 0)` | Prevailing retail price (₱ PHP); 42 leading unmonitored Pork Pigue dates are `NULL` |
+
+*Primary Key*: `(date, commodity)`
+
+### 2. Silver Layer: `audit_prices` (11 Columns)
+Full provenance and audit table preserving source bulletin filenames, URLs, and survey sample frequencies.
+
+| Column | Type | Constraints | Description |
+|---|---|---|---|
+| `date` | `DATE` | `NOT NULL` | Survey observation date (YYYY-MM-DD) |
+| `commodity_group` | `VARCHAR` | `NOT NULL` | Standardized commodity category |
+| `commodity` | `VARCHAR` | `NOT NULL` | Standardized commodity name |
+| `unit` | `VARCHAR` | `NOT NULL` | Standard measurement unit |
+| `price_prevailing` | `DOUBLE` | `CHECK (price_prevailing IS NULL OR price_prevailing > 0)` | Prevailing retail price (₱ PHP) |
+| `market_scope` | `VARCHAR` | `NOT NULL` | Market jurisdiction ('NCR Wet Markets') |
+| `source` | `VARCHAR` | `NOT NULL` | Origin agency ('da_amas') |
+| `is_synthetic` | `BOOLEAN` | `CHECK (is_synthetic = FALSE)` | Provenance assertion ensuring real government data |
+| `raw_count` | `INTEGER` | `CHECK (raw_count >= 0)` | Number of raw survey records matched for this commodity |
+| `raw_file` | `VARCHAR` | `NOT NULL` | Source PDF bulletin filename |
+| `source_url` | `VARCHAR` | `NOT NULL` | Official DA bulletin download URL |
+
+*Primary Key*: `(date, commodity)`
+
+### 3. Gold Layer Views
+
+- **`v_commodity_analytics`**: Precomputes rolling moving averages (`sma_7d`, `sma_30d`), rolling sample standard deviation (`volatility_30d`), coefficient of variation (`cv_30d`), lagged prices (`price_prev_1d`, `price_prev_7d`, `price_prev_30d`), and multi-horizon rate-of-change indicators (`dod_abs`, `dod_pct`, `wow_abs`, `wow_pct`, `mom_abs`, `mom_pct`).
+- **`v_latest_snapshot`**: Filters `v_commodity_analytics` to the latest market date in the warehouse, ranked by `dod_pct DESC` for KPI cards and Top Gainers / Decliners.
+- **`v_category_indices`**: Computes daily equal-weighted base-100 food basket indices across all 7 commodity groups ($I_{g,t} = \frac{1}{M_g} \sum \frac{P_{j,t}}{P_{j,0}} \times 100$).
