@@ -1022,6 +1022,126 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Inline SMA Callouts in Chart Header */
+.chart-sma-inline {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.sma-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.sma-pill strong {
+  color: var(--text-heading);
+  font-weight: 700;
+}
+
+.sma-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.sma-dot-7d {
+  background-color: #d97706;
+}
+
+.sma-dot-30d {
+  background-color: #64748b;
+}
+
+/* Flat Integrated Statistics Strip inside Chart Card */
+.commodity-stats-strip {
+  border-top: 1px solid var(--border-color);
+  background-color: #fafbfc;
+}
+
+.commodity-stats-strip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 22px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #f8fafc;
+}
+
+.commodity-stats-strip-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.commodity-stats-strip-meta {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.commodity-stats-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-strip-cell {
+  padding: 14px 22px;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-strip-cell:last-child {
+  border-right: none;
+}
+
+.stat-strip-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-heading);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.25;
+}
+
+@media (max-width: 960px) {
+  .commodity-stats-strip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat-strip-cell:nth-child(2) {
+    border-right: none;
+  }
+  .stat-strip-cell:nth-child(1),
+  .stat-strip-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-color);
+  }
+}
+
+@media (max-width: 560px) {
+  .commodity-stats-strip-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat-strip-cell {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .stat-strip-cell:last-child {
+    border-bottom: none;
+  }
+}
+
 /* ==========================================================================
    Badges (Numeric Cells) vs. Pills (Metadata & Section Headers)
    ========================================================================== */

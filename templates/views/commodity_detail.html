@@ -1,5 +1,5 @@
-<!-- Unified Summary KPI Strip (7 Metric Cards matching Overview KPI anatomy) -->
-<div class="kpi-grid kpi-grid-7" id="commodity-metrics-strip">
+<!-- Unified Summary KPI Strip (5 Core Metric Cards matching Overview KPI rhythm) -->
+<div class="kpi-grid" id="commodity-metrics-strip">
   <div class="kpi-card kpi-card-compact">
     <div class="kpi-card-body">
       <div class="kpi-card-info">
@@ -47,28 +47,6 @@
   <div class="kpi-card kpi-card-compact">
     <div class="kpi-card-body">
       <div class="kpi-card-info">
-        <span class="kpi-label">7-Day SMA</span>
-        <div class="kpi-value kpi-value-compact" id="box-sma7">—</div>
-      </div>
-      <hr class="kpi-card-divider">
-      <div class="kpi-detail"><span class="kpi-context">Short-term trend</span></div>
-    </div>
-  </div>
-
-  <div class="kpi-card kpi-card-compact">
-    <div class="kpi-card-body">
-      <div class="kpi-card-info">
-        <span class="kpi-label">30-Day SMA</span>
-        <div class="kpi-value kpi-value-compact" id="box-sma30">—</div>
-      </div>
-      <hr class="kpi-card-divider">
-      <div class="kpi-detail"><span class="kpi-context">Medium-term trend</span></div>
-    </div>
-  </div>
-
-  <div class="kpi-card kpi-card-compact">
-    <div class="kpi-card-body">
-      <div class="kpi-card-info">
         <span class="kpi-label">30-Day Volatility</span>
         <div class="kpi-value kpi-value-compact" id="box-vol">—</div>
       </div>
@@ -78,78 +56,21 @@
   </div>
 </div>
 
-<!-- Basic Price Statistics Card (Mean, Median, Min, Max) -->
-<div class="card commodity-stats-card">
-  <div class="card-header">
-    <div class="card-title-group">
-      <h2 class="card-title" id="commodity-stats-title">Basic price statistics</h2>
-    </div>
-    <div id="commodity-stats-window" style="font-size: 12px; font-weight: 600; color: var(--text-muted); font-family: var(--font-mono);">
-      {{ kpis.total_dates }} Bulletins Monitored
-    </div>
-  </div>
-  <div class="card-body">
-    <div class="kpi-grid kpi-grid-4 commodity-stats-grid">
-      <div class="kpi-card kpi-card-compact">
-        <div class="kpi-card-body">
-          <div class="kpi-card-info">
-            <span class="kpi-label">Mean (Average) Price</span>
-            <div class="kpi-value kpi-value-compact" id="box-stat-mean">—</div>
-          </div>
-          <hr class="kpi-card-divider">
-          <div class="kpi-detail">
-            <span class="kpi-context">Arithmetic average price</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="kpi-card kpi-card-compact">
-        <div class="kpi-card-body">
-          <div class="kpi-card-info">
-            <span class="kpi-label">Median Price</span>
-            <div class="kpi-value kpi-value-compact" id="box-stat-median">—</div>
-          </div>
-          <hr class="kpi-card-divider">
-          <div class="kpi-detail">
-            <span class="kpi-context">Median recorded price</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="kpi-card kpi-card-compact">
-        <div class="kpi-card-body">
-          <div class="kpi-card-info">
-            <span class="kpi-label">Minimum Observed Price</span>
-            <div class="kpi-value kpi-value-compact" id="box-stat-min">—</div>
-          </div>
-          <hr class="kpi-card-divider">
-          <div class="kpi-detail" id="box-stat-min-sub">
-            <span class="kpi-context">Lowest recorded retail price</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="kpi-card kpi-card-compact">
-        <div class="kpi-card-body">
-          <div class="kpi-card-info">
-            <span class="kpi-label">Maximum Observed Price</span>
-            <div class="kpi-value kpi-value-compact" id="box-stat-max">—</div>
-          </div>
-          <hr class="kpi-card-divider">
-          <div class="kpi-detail" id="box-stat-max-sub">
-            <span class="kpi-context">Highest recorded retail price</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Interactive Price & Moving Average Chart Card -->
+<!-- Interactive Price & Moving Average Chart Card (with integrated SMA callouts & flat stats footer) -->
 <div class="card">
   <div class="card-header">
     <div class="card-title-group">
       <h2 class="card-title" id="commodity-chart-title">Daily Prevailing Retail Price, 7-Day SMA &amp; 30-Day SMA</h2>
+      <div class="chart-sma-inline">
+        <span class="sma-pill">
+          <span class="sma-dot sma-dot-7d"></span>
+          7-Day SMA: <strong class="font-mono" id="box-sma7">—</strong>
+        </span>
+        <span class="sma-pill">
+          <span class="sma-dot sma-dot-30d"></span>
+          30-Day SMA: <strong class="font-mono" id="box-sma30">—</strong>
+        </span>
+      </div>
     </div>
     <div class="timeframe-pills" role="group" aria-label="Chart Timeframe">
       <button type="button" class="btn-timeframe" data-timeframe="1M">1M</button>
@@ -162,6 +83,38 @@
   <div class="card-body">
     <div id="commodity-trend-plot" style="width: 100%; height: 460px;"></div>
   </div>
+
+  <!-- Flat Historical Price Statistics Strip (Integrated footer — no card-in-card nesting) -->
+  <div class="commodity-stats-strip">
+    <div class="commodity-stats-strip-header">
+      <span class="commodity-stats-strip-title" id="commodity-stats-title">Basic Price Statistics</span>
+    </div>
+    <div class="commodity-stats-strip-grid">
+      <div class="stat-strip-cell">
+        <span class="kpi-label">Mean (Average) Price</span>
+        <div class="stat-strip-value" id="box-stat-mean">—</div>
+        <div class="kpi-detail"><span class="kpi-context">Arithmetic average</span></div>
+      </div>
+
+      <div class="stat-strip-cell">
+        <span class="kpi-label">Median Price</span>
+        <div class="stat-strip-value" id="box-stat-median">—</div>
+        <div class="kpi-detail"><span class="kpi-context">50th percentile price</span></div>
+      </div>
+
+      <div class="stat-strip-cell">
+        <span class="kpi-label">Minimum Observed Price</span>
+        <div class="stat-strip-value" id="box-stat-min">—</div>
+        <div class="kpi-detail" id="box-stat-min-sub"><span class="kpi-context">Lowest recorded price</span></div>
+      </div>
+
+      <div class="stat-strip-cell">
+        <span class="kpi-label">Maximum Observed Price</span>
+        <div class="stat-strip-value" id="box-stat-max">—</div>
+        <div class="kpi-detail" id="box-stat-max-sub"><span class="kpi-context">Highest recorded price</span></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Historical Retail Price & Rate of Change Table -->
@@ -169,12 +122,6 @@
   <div class="card-header">
     <div class="card-title-group">
       <h2 class="card-title" id="commodity-history-table-title">Historical Price &amp; Price Change Register</h2>
-    </div>
-    <div
-      id="commodity-history-counter"
-      style="font-size: 12px; font-weight: 600; color: var(--text-muted); font-family: var(--font-mono);"
-    >
-      Showing 10 records
     </div>
   </div>
   <div class="card-body">
