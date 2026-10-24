@@ -163,6 +163,9 @@ def test_fetch_commodity_timeseries(duckdb_con):
     assert len(ts[sample_comm]["prices"]) == 451
     assert len(ts[sample_comm]["sma_7d"]) == 451
     assert len(ts[sample_comm]["sma_30d"]) == 451
+    assert len(ts[sample_comm]["dod_pct"]) == 451
+    assert len(ts[sample_comm]["wow_pct"]) == 451
+    assert len(ts[sample_comm]["mom_pct"]) == 451
 
 
 def test_fetch_latest_snapshot(duckdb_con):
@@ -261,6 +264,8 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     assert "census-date-select" in html_content
     assert "btn-census-date-prev" in html_content
     assert "btn-census-date-next" in html_content
+    assert "commodity-history-table" in html_content
+    assert "commodity-history-pagination" in html_content
 
 
 def test_build_dashboard_missing_db(tmp_path):

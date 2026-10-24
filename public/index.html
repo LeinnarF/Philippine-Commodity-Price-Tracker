@@ -10,7 +10,7 @@
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 
   <!-- Modular Formal Stylesheet -->
-  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792835765">
+  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792836526">
 </head>
 <body>
   <div class="app-shell">
@@ -1969,6 +1969,42 @@
   </div>
   <div class="card-body">
     <div id="commodity-trend-plot" style="width: 100%; height: 460px;"></div>
+  </div>
+</div>
+
+<!-- Historical Retail Price & Rate of Change Table -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title-group">
+      <h2 class="card-title" id="commodity-history-table-title">Historical Price &amp; Price Change Register</h2>
+    </div>
+    <div
+      id="commodity-history-counter"
+      style="font-size: 12px; font-weight: 600; color: var(--text-muted); font-family: var(--font-mono);"
+    >
+      Showing 10 records
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="table-container">
+      <table class="formal-table" id="commodity-history-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">1-Day Change</th>
+            <th class="text-right">7-Day Change</th>
+            <th class="text-right">30-Day Change</th>
+          </tr>
+        </thead>
+        <tbody id="commodity-history-tbody">
+          <!-- Populated dynamically by dashboard.js -->
+        </tbody>
+      </table>
+    </div>
+    <div class="table-pagination" id="commodity-history-pagination">
+      <!-- Numbered pagination controls populated dynamically by dashboard.js -->
+    </div>
   </div>
 </div>
 </section>
@@ -4908,8 +4944,8 @@
   </div>
 
   <!-- Modular Precomputed Data Payload & Interactive Controller -->
-  <script src="assets/data/commodities.js?v=1792835765"></script>
-  <script src="assets/js/dashboard.js?v=1792835765"></script>
+  <script src="assets/data/commodities.js?v=1792836526"></script>
+  <script src="assets/js/dashboard.js?v=1792836526"></script>
 
   
 

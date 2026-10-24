@@ -1420,6 +1420,67 @@ body {
   border-radius: 6px;
 }
 
+/* Numbered Table Pagination */
+.table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  user-select: none;
+}
+
+.pagination-btn:hover:not(:disabled):not(.active) {
+  background-color: #f1f5f9;
+  border-color: var(--border-dark);
+  color: var(--text-main);
+}
+
+.pagination-btn.active {
+  background-color: var(--da-green-800);
+  color: #ffffff;
+  border-color: var(--da-green-800);
+  box-shadow: 0 2px 4px rgba(20, 83, 45, 0.2);
+  cursor: default;
+}
+
+.pagination-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background-color: #f8fafc;
+}
+
+.pagination-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 32px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: var(--font-mono);
+  user-select: none;
+}
+
 /* Methodology / Audit Section */
 .audit-grid {
   display: grid;

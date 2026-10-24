@@ -28,6 +28,8 @@
   let activeCommodity = defaultCommodity;
   let activeTimeframe = "ALL";
   let categoryChartInitialized = false;
+  let commodityTablePage = 1;
+  const COMMODITY_TABLE_PAGE_SIZE = 10;
 
   // ========================================================================
   // 1. Formatting Helpers
@@ -200,6 +202,116 @@
     }
 
     renderCommodityChart(commName);
+    renderCommodityHistoryTable(commName);
+  }
+
+  function renderCommodityHistoryTable(commName) {
+    const tbody = document.getElementById("commodity-history-tbody");
+    const pagination = document.getElementById("commodity-history-pagination");
+    const counter = document.getElementById("commodity-history-counter");
+    if (!tbody || !pagination) return;
+
+    const ts = timeseriesData[commName];
+    if (!ts || !ts.dates || ts.dates.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="text-center" style="padding: 24px; color: var(--text-muted);">No historical records available.</td></tr>';
+      pagination.innerHTML = "";
+      if (counter) counter.textContent = "Showing 0 records";
+      return;
+    }
+
+    const totalRecords = ts.dates.length;
+    const totalPages = Math.ceil(totalRecords / COMMODITY_TABLE_PAGE_SIZE) || 1;
+    if (commodityTablePage > totalPages) {
+      commodityTablePage = totalPages;
+    }
+    if (commodityTablePage < 1) {
+      commodityTablePage = 1;
+    }
+
+    // Records ordered newest date first (ts.dates is chronologically ascending)
+    const startIndex = (commodityTablePage - 1) * COMMODITY_TABLE_PAGE_SIZE;
+    const endIndex = Math.min(startIndex + COMMODITY_TABLE_PAGE_SIZE, totalRecords);
+
+    let html = "";
+    for (let i = startIndex; i < endIndex; i++) {
+      const revIdx = totalRecords - 1 - i;
+      const dateVal = ts.dates[revIdx];
+      const priceVal = ts.prices ? ts.prices[revIdx] : null;
+      const dodVal = ts.dod_pct ? ts.dod_pct[revIdx] : null;
+      const wowVal = ts.wow_pct ? ts.wow_pct[revIdx] : null;
+      const momVal = ts.mom_pct ? ts.mom_pct[revIdx] : null;
+
+      html += "<tr>";
+      html += `<td class="font-mono">${formatDisplayDate(dateVal)}</td>`;
+      html += `<td class="text-right font-mono" style="font-weight: 700;">${formatCurrency(priceVal)}</td>`;
+      html += `<td class="text-right">${formatBadgeHtml(dodVal, true)}</td>`;
+      html += `<td class="text-right">${formatBadgeHtml(wowVal, true)}</td>`;
+      html += `<td class="text-right">${formatBadgeHtml(momVal, true)}</td>`;
+      html += "</tr>";
+    }
+    tbody.innerHTML = html;
+
+    if (counter) {
+      counter.textContent = `Showing ${startIndex + 1}–${endIndex} of ${totalRecords} observation dates (Page ${commodityTablePage} of ${totalPages})`;
+    }
+
+    renderTablePagination(commodityTablePage, totalPages, (newPage) => {
+      commodityTablePage = newPage;
+      renderCommodityHistoryTable(commName);
+    });
+  }
+
+  function renderTablePagination(currentPage, totalPages, onPageChange) {
+    const container = document.getElementById("commodity-history-pagination");
+    if (!container) return;
+
+    if (totalPages <= 1) {
+      container.innerHTML = "";
+      return;
+    }
+
+    let pages = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      if (currentPage <= 4) {
+        pages = [1, 2, 3, 4, 5, "...", totalPages];
+      } else if (currentPage >= totalPages - 3) {
+        pages = [1, "...", totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+      } else {
+        pages = [1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages];
+      }
+    }
+
+    let html = "";
+    // Previous button
+    const prevDisabled = currentPage === 1 ? " disabled" : "";
+    html += `<button type="button" class="pagination-btn" data-page="${currentPage - 1}"${prevDisabled} aria-label="Previous page">◀</button>`;
+
+    // Page number buttons
+    pages.forEach((p) => {
+      if (p === "...") {
+        html += `<span class="pagination-ellipsis">…</span>`;
+      } else {
+        const isActive = p === currentPage ? " active" : "";
+        html += `<button type="button" class="pagination-btn${isActive}" data-page="${p}" aria-label="Page ${p}">${p}</button>`;
+      }
+    });
+
+    // Next button
+    const nextDisabled = currentPage === totalPages ? " disabled" : "";
+    html += `<button type="button" class="pagination-btn" data-page="${currentPage + 1}"${nextDisabled} aria-label="Next page">▶</button>`;
+
+    container.innerHTML = html;
+
+    container.querySelectorAll(".pagination-btn:not(:disabled):not(.active)").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const p = parseInt(btn.getAttribute("data-page"), 10);
+        if (!isNaN(p) && p >= 1 && p <= totalPages) {
+          onPageChange(p);
+        }
+      });
+    });
   }
 
   function renderCommodityChart(commName) {
@@ -356,6 +468,9 @@
       }
     } else if (viewName === "commodity") {
       const targetComm = commName && commodityMetadata[commName] ? commName : activeCommodity;
+      if (commName && commName !== activeCommodity) {
+        commodityTablePage = 1;
+      }
       updateCommodityDetail(targetComm);
       const slug = commodityMetadata[targetComm]?.slug || "";
       if (updateHash && slug) {

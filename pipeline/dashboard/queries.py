@@ -242,19 +242,33 @@ def fetch_commodity_timeseries(
             date::VARCHAR AS date_str,
             ROUND(price_prevailing, 2) AS price,
             ROUND(sma_7d, 2) AS sma_7d,
-            ROUND(sma_30d, 2) AS sma_30d
+            ROUND(sma_30d, 2) AS sma_30d,
+            ROUND(dod_pct, 2) AS dod_pct,
+            ROUND(wow_pct, 2) AS wow_pct,
+            ROUND(mom_pct, 2) AS mom_pct
         FROM v_commodity_analytics
         ORDER BY commodity, date;
     """).fetchall()
 
     ts_dict: dict[str, dict[str, list[Any]]] = {}
-    for comm, dt, pr, s7, s30 in rows:
+    for comm, dt, pr, s7, s30, dod, wow, mom in rows:
         if comm not in ts_dict:
-            ts_dict[comm] = {"dates": [], "prices": [], "sma_7d": [], "sma_30d": []}
+            ts_dict[comm] = {
+                "dates": [],
+                "prices": [],
+                "sma_7d": [],
+                "sma_30d": [],
+                "dod_pct": [],
+                "wow_pct": [],
+                "mom_pct": [],
+            }
         ts_dict[comm]["dates"].append(dt)
         ts_dict[comm]["prices"].append(pr)
         ts_dict[comm]["sma_7d"].append(s7)
         ts_dict[comm]["sma_30d"].append(s30)
+        ts_dict[comm]["dod_pct"].append(dod)
+        ts_dict[comm]["wow_pct"].append(wow)
+        ts_dict[comm]["mom_pct"].append(mom)
 
     snapshot_records = con.execute("""
         SELECT
