@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Solid Green Background -->
+  <rect width="512" height="512" fill="#15803d"/>
+
+  <!-- Centered Flat White Crop (Rice Stalk / Sprout) -->
+  <g transform="translate(256, 260) scale(1.18)">
+    <!-- Central Stem -->
+    <path d="M 0,140 Q 6,10 -15,-100 Q -25,-140 -40,-165" 
+          fill="none" 
+          stroke="#ffffff" 
+          stroke-width="12" 
+          stroke-linecap="round"/>
+
+    <!-- Apex Grain -->
+    <path d="M -40,-165 C -46,-192 -36,-208 -32,-214 C -24,-202 -18,-185 -30,-165 Z" 
+          fill="#ffffff"/>
+
+    <!-- Left Grains -->
+    <path d="M -30,-140 C -62,-158 -78,-148 -84,-136 C -73,-124 -51,-127 -27,-135 Z" 
+          fill="#ffffff"/>
+    <path d="M -23,-100 C -64,-118 -84,-102 -89,-91 C -75,-79 -52,-84 -18,-95 Z" 
+          fill="#ffffff"/>
+    <path d="M -16,-60 C -62,-72 -84,-52 -87,-41 C -73,-32 -50,-39 -12,-55 Z" 
+          fill="#ffffff"/>
+    <path d="M -9,-20 C -59,-27 -79,-7 -80,4 C -65,13 -44,3 -5,-15 Z" 
+          fill="#ffffff"/>
+    <path d="M -3,20 C -52,19 -70,39 -70,52 C -54,57 -34,45 0,25 Z" 
+          fill="#ffffff"/>
+
+    <!-- Right Grains -->
+    <path d="M -35,-150 C -14,-177 2,-177 10,-171 C 6,-158 -7,-149 -25,-145 Z" 
+          fill="#ffffff"/>
+    <path d="M -25,-115 C 2,-137 23,-132 31,-123 C 24,-110 6,-104 -18,-110 Z" 
+          fill="#ffffff"/>
+    <path d="M -18,-75 C 13,-92 36,-83 44,-72 C 35,-59 17,-57 -10,-70 Z" 
+          fill="#ffffff"/>
+    <path d="M -11,-35 C 24,-47 47,-33 53,-20 C 42,-9 22,-11 -5,-30 Z" 
+          fill="#ffffff"/>
+    <path d="M -5,5 C 32,0 53,16 57,30 C 44,38 24,31 0,10 Z" 
+          fill="#ffffff"/>
+    <path d="M 0,45 C 36,44 53,65 55,79 C 42,84 22,73 3,50 Z" 
+          fill="#ffffff"/>
+
+    <!-- Base Leaves / Sprout Foliage -->
+    <!-- Left Leaf -->
+    <path d="M -3,115 C -48,93 -90,113 -112,146 C -80,146 -37,136 2,122 Z" 
+          fill="#ffffff"/>
+    <!-- Right Leaf -->
+    <path d="M 2,90 C 48,68 90,83 112,110 C 83,116 42,111 -2,98 Z" 
+          fill="#ffffff"/>
+  </g>
+</svg>

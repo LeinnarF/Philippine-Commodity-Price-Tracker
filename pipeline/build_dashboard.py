@@ -136,7 +136,21 @@ def write_modular_assets(
     if src_js.exists():
         shutil.copyfile(src_js, dest_js)
 
-    # 3. Emit precomputed data payload (window.DASHBOARD_DATA)
+    # 3. Copy image assets and favicon if present
+    src_img = template_dir / "assets" / "img"
+    dest_img = public_dir / "assets" / "img"
+    if src_img.exists():
+        dest_img.mkdir(parents=True, exist_ok=True)
+        for img_file in src_img.glob("*"):
+            if img_file.is_file():
+                shutil.copyfile(img_file, dest_img / img_file.name)
+
+    src_favicon = template_dir / "favicon.ico"
+    dest_favicon = public_dir / "favicon.ico"
+    if src_favicon.exists():
+        shutil.copyfile(src_favicon, dest_favicon)
+
+    # 4. Emit precomputed data payload (window.DASHBOARD_DATA)
     # Deduplicate shared dates array across all 48 commodities to save ~300 KB
     raw_ts = json.loads(data_ctx["timeseries_json"])
     shared_dates: list[str] = []
