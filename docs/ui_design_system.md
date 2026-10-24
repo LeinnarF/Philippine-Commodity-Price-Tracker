@@ -30,7 +30,7 @@ All UI source files live in `templates/` and are compiled into `public/` via `pi
 | `templates/base.html` | Root HTML5 document shell, `.app-shell` split layout, footer, asset links, and live-reload watcher script. |
 | `templates/dashboard.html` | Extends `base.html`; defines the 4 top-level `<section class="view-panel">` containers. |
 | `templates/components/sidebar.html` | Left navigation drawer (`.dashboard-sidebar`), brand header, primary view pills, search box, and collapsible commodity tree. |
-| `templates/components/header.html` | Top workspace navbar card (`.dashboard-navbar`), dynamic view kicker/breadcrumbs, commodity stepper/picker, latest bulletin badge, and print button. |
+| `templates/components/header.html` | Top workspace navbar card (`.dashboard-navbar`), dynamic view kicker/breadcrumbs, commodity stepper/picker, and latest bulletin badge. |
 | `templates/components/kpi_strip.html` | 5-card executive summary KPI strip included at the top of the Market Overview view. |
 | `templates/views/overview.html` | `#view-overview`: Executive KPI strip, 2-column Top 5 Movers tables, and Macro Category Price Indices chart + summary table. |
 | `templates/views/commodity_detail.html` | `#view-commodity`: 7-card compact KPI strip (`#commodity-metrics-strip`) and interactive commodity price + SMA Plotly chart card. |
@@ -330,7 +330,6 @@ When plotting multi-category comparisons (`#category-index-plot`, height `430px`
   - `.kpi-icon-box svg`: `20px`×`20px` (inside `42px`×`42px` box)
   - `.brand-badge .brand-icon`: `20px`×`20px` (inside `36px`×`36px` box)
   - `.sidebar-nav-btn .nav-icon`: `18px`×`18px`
-  - `.navbar-date-badge .bulletin-icon`: `17px`×`17px`
   - `.group-chevron`: `14px`×`14px` (`stroke-width="2.5"`, rotates `90deg` when parent `.sidebar-group` has `.expanded`)
 
 ---
@@ -343,7 +342,7 @@ When plotting multi-category comparisons (`#category-index-plot`, height `430px`
    - `.grid-2col` collapses to a single column (`1fr`).
    - Calling `activateView()` **must** always close the mobile drawer (`sidebar.classList.remove("mobile-open")`).
 2. **Print / PDF Bulletin Mode (`@media print`)**:
-   - Triggered via the top-right print button (`window.print()`).
+   - Triggered via browser print (e.g., Ctrl+P / Cmd+P).
    - Automatically hides interactive navigation chrome: `.dashboard-sidebar`, `.btn-navbar-action`, `.btn-sidebar-toggle`, `.navbar-commodity-controls`, and `.table-toolbar`.
    - Expands `.app-shell` and `.main-workspace` to natural document flow (`height: auto !important; overflow: visible !important;`) and removes shadows for clean monochrome/archival PDF output.
 
