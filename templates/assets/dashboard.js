@@ -102,12 +102,13 @@
   }
 
   // ========================================================================
-  // 2. Category Indices Plotly Chart
+  // 2. Category Performance Matrix & Sparkline Horizon Controller
   // ========================================================================
 
   function initCategoryChart() {
     const container = document.getElementById("category-index-plot");
-    if (!container || typeof Plotly === "undefined") return;
+    if (!container || container.querySelector("#category-performance-table")) return;
+    if (typeof Plotly === "undefined") return;
     if (!categoryChartInitialized) {
       Plotly.newPlot(
         container,
@@ -119,6 +120,65 @@
     } else {
       Plotly.Plots.resize(container);
     }
+  }
+
+  function updateCategoryHorizon(horizonKey) {
+    const labelMap = {
+      "30D": "30-Day",
+      "90D": "90-Day",
+      "1Y": "1-Year",
+      "ALL": "All-Time",
+    };
+    const windowLabel = document.getElementById("cat-range-window-label");
+    if (windowLabel) {
+      windowLabel.textContent = labelMap[horizonKey] || "All-Time";
+    }
+
+    document.querySelectorAll("#category-performance-table tbody tr.category-perf-row").forEach((row) => {
+      const rawHorizons = row.getAttribute("data-horizons");
+      if (!rawHorizons) return;
+      let horizons;
+      try {
+        horizons = JSON.parse(rawHorizons);
+      } catch (e) {
+        return;
+      }
+      const h = horizons[horizonKey] || horizons["ALL"];
+      if (!h) return;
+
+      const linePoly = row.querySelector(".spark-line-poly");
+      const areaPoly = row.querySelector(".spark-area-poly");
+      const endDot = row.querySelector(".spark-end-dot");
+      const baseLine = row.querySelector(".spark-base-line");
+
+      if (linePoly) linePoly.setAttribute("points", h.points);
+      if (areaPoly) areaPoly.setAttribute("points", h.area);
+      if (endDot) {
+        endDot.setAttribute("cx", h.last_x);
+        endDot.setAttribute("cy", h.last_y);
+      }
+      if (baseLine) {
+        if (h.base100_y !== null && h.base100_y !== undefined) {
+          baseLine.setAttribute("y1", h.base100_y);
+          baseLine.setAttribute("y2", h.base100_y);
+          baseLine.style.display = "";
+        } else {
+          baseLine.style.display = "none";
+        }
+      }
+
+      const minEl = row.querySelector(".cat-range-min");
+      const maxEl = row.querySelector(".cat-range-max");
+      const pctEl = row.querySelector(".cat-range-pct");
+      const fillEl = row.querySelector(".cat-range-fill");
+      const thumbEl = row.querySelector(".cat-range-thumb");
+
+      if (minEl) minEl.textContent = Number(h.min_val).toFixed(2);
+      if (maxEl) maxEl.textContent = Number(h.max_val).toFixed(2);
+      if (pctEl) pctEl.textContent = `${Math.round(Number(h.range_pct))}% of range`;
+      if (fillEl) fillEl.style.width = `${h.range_pct}%`;
+      if (thumbEl) thumbEl.style.left = `${h.range_pct}%`;
+    });
   }
 
   // ========================================================================
@@ -849,6 +909,16 @@
       });
     });
 
+    // Category Performance Matrix Horizon Buttons (30D / 90D / 1Y / ALL)
+    document.querySelectorAll(".btn-cat-timeframe").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".btn-cat-timeframe").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const horizon = btn.getAttribute("data-cat-timeframe") || "ALL";
+        updateCategoryHorizon(horizon);
+      });
+    });
+
     // Previous / Next Commodity Stepper Buttons
     const prevBtn = document.getElementById("btn-prev-commodity");
     const nextBtn = document.getElementById("btn-next-commodity");
@@ -943,6 +1013,21 @@
         btn.classList.add("active");
         activeCategory = btn.getAttribute("data-category") || "ALL";
         filterTable();
+      });
+    });
+
+    // Clickable category rows in Overview Category Performance Matrix -> jump to Census filtered by basket
+    document.querySelectorAll("tr[data-target-category]").forEach((row) => {
+      row.addEventListener("click", () => {
+        const cat = row.getAttribute("data-target-category");
+        if (!cat) return;
+        activateView("census", null, true);
+        const targetBtn = document.querySelector(
+          `#category-filter-buttons .btn-filter[data-category="${cat}"]`
+        );
+        if (targetBtn) {
+          targetBtn.click();
+        }
       });
     });
 

@@ -135,9 +135,74 @@ def fetch_top_movers(con: duckdb.DuckDBPyConnection, limit: int = 5) -> dict[str
     }
 
 
+def _build_sparkline_horizon(values: list[float]) -> dict[str, Any]:
+    """
+    Computes SVG sparkline polyline/area coordinates and min/max range metrics
+    for a given slice of category index values.
+    """
+    if not values:
+        return {
+            "min_val": 100.0,
+            "max_val": 100.0,
+            "range_pct": 50.0,
+            "points": "4.0,18.0 132.0,18.0",
+            "area": "4.0,31.0 4.0,18.0 132.0,18.0 132.0,31.0",
+            "last_x": 132.0,
+            "last_y": 18.0,
+            "base100_y": 18.0,
+        }
+
+    min_val = float(min(values))
+    max_val = float(max(values))
+    cur_val = float(values[-1])
+    span = max_val - min_val
+    range_pct = round(((cur_val - min_val) / span) * 100.0, 1) if span > 1e-6 else 50.0
+    range_pct = max(0.0, min(100.0, range_pct))
+
+    # Downsample to at most 48 points while preserving start and end
+    n = len(values)
+    max_pts = 48
+    if n <= max_pts:
+        sampled = values
+    else:
+        idxs = [round(i * (n - 1) / (max_pts - 1)) for i in range(max_pts)]
+        sampled = [values[idx] for idx in idxs]
+
+    pad_x = 4.0
+    pad_y = 5.0
+    w = 128.0
+    h = 26.0
+    m = len(sampled)
+
+    pts: list[tuple[float, float]] = []
+    for i, val in enumerate(sampled):
+        x = pad_x + (i / (m - 1)) * w if m > 1 else pad_x + w
+        y = pad_y + h - ((val - min_val) / span) * h if span > 1e-6 else pad_y + h / 2.0
+        pts.append((round(x, 1), round(y, 1)))
+
+    points_str = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+    area_str = f"{pts[0][0]:.1f},{pad_y + h:.1f} {points_str} {pts[-1][0]:.1f},{pad_y + h:.1f}"
+
+    base100_y: float | None = None
+    if span > 1e-6 and min_val <= 100.0 <= max_val:
+        base100_y = round(pad_y + h - ((100.0 - min_val) / span) * h, 1)
+
+    return {
+        "min_val": round(min_val, 2),
+        "max_val": round(max_val, 2),
+        "range_pct": range_pct,
+        "points": points_str,
+        "area": area_str,
+        "last_x": pts[-1][0],
+        "last_y": pts[-1][1],
+        "base100_y": base100_y,
+    }
+
+
 def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[str, Any]], str]:
     """
-    Fetches category summary metrics and serializes the interactive Plotly time-series chart.
+    Fetches category summary metrics (including inline sparkline geometry, historical
+    range positioning, and daily breadth) and serializes the category chart payload.
     """
     sql_summary = """
     WITH lagged AS (
@@ -154,6 +219,9 @@ def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[st
         SELECT
             commodity_group,
             COUNT(*) AS total_commodities,
+            SUM(CASE WHEN dod_pct > 0.0001 THEN 1 ELSE 0 END) AS count_up,
+            SUM(CASE WHEN dod_pct < -0.0001 THEN 1 ELSE 0 END) AS count_down,
+            SUM(CASE WHEN dod_pct IS NULL OR ABS(dod_pct) <= 0.0001 THEN 1 ELSE 0 END) AS count_flat,
             ROUND(AVG(volatility_30d), 2) AS avg_vol_30d,
             ROUND(AVG(cv_30d) * 100, 2) AS avg_cv_30d
         FROM v_latest_snapshot
@@ -162,7 +230,11 @@ def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[st
     SELECT
         l.commodity_group,
         v.total_commodities,
+        v.count_up,
+        v.count_flat,
+        v.count_down,
         ROUND(l.index_base100, 2) AS index_val,
+        ROUND(l.index_base100 - 100.0, 2) AS base_diff_pts,
         ROUND(l.index_base100 - l.idx_prev_1d, 2) AS dod_pts,
         ROUND(((l.index_base100 - l.idx_prev_1d) / l.idx_prev_1d) * 100, 2) AS dod_pct,
         ROUND(l.index_base100 - l.idx_prev_7d, 2) AS wow_pts,
@@ -186,6 +258,43 @@ def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[st
         FROM v_category_indices
         ORDER BY date, commodity_group;
     """).df()
+
+    # Enrich each category summary row with palette color, breadth percentages,
+    # and multi-horizon sparkline + range metrics (30D, 90D, 1Y, ALL)
+    for row in summary_rows:
+        grp = row["commodity_group"]
+        total = max(int(row["total_commodities"]), 1)
+        up = int(row.get("count_up") or 0)
+        flat = int(row.get("count_flat") or 0)
+        down = int(row.get("count_down") or 0)
+        row["count_up"] = up
+        row["count_flat"] = flat
+        row["count_down"] = down
+        row["pct_up"] = round((up / total) * 100.0, 1)
+        row["pct_flat"] = round((flat / total) * 100.0, 1)
+        row["pct_down"] = round((down / total) * 100.0, 1)
+        row["color"] = CATEGORY_PALETTE.get(grp, "#15803d")
+        row["slug"] = slugify_filter(grp)
+
+        grp_vals = ts_df[ts_df["commodity_group"] == grp]["index_base100"].tolist()
+        horizons = {
+            "30D": _build_sparkline_horizon(grp_vals[-30:]),
+            "90D": _build_sparkline_horizon(grp_vals[-90:]),
+            "1Y": _build_sparkline_horizon(grp_vals[-365:]),
+            "ALL": _build_sparkline_horizon(grp_vals),
+        }
+        row["horizons"] = horizons
+        row["horizons_json"] = json.dumps(horizons, separators=(",", ":"))
+        # Default display horizon: ALL (full baseline trajectory since March 1, 2025)
+        default_h = horizons["ALL"]
+        row["min_index"] = default_h["min_val"]
+        row["max_index"] = default_h["max_val"]
+        row["range_pct"] = default_h["range_pct"]
+        row["spark_points"] = default_h["points"]
+        row["spark_area"] = default_h["area"]
+        row["spark_last_x"] = default_h["last_x"]
+        row["spark_last_y"] = default_h["last_y"]
+        row["spark_base100_y"] = default_h["base100_y"]
 
     groups = sorted(ts_df["commodity_group"].unique())
     n_groups = len(groups)

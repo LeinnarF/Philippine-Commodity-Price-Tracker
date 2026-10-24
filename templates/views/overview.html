@@ -87,53 +87,148 @@
   </div>
 </div>
 
-<!-- Macro Category Price Indices -->
-<div class="card">
+<!-- Integrated Category Performance Matrix -->
+<div class="card" id="category-index-plot">
   <div class="card-header">
     <div class="card-title-group">
-      <h2 class="card-title">Category Retail Price Indices (Base 100 = March 1, 2025)</h2>
-      <p class="card-subtitle">Small-multiple trajectories tracking normalized price index relative to March 1, 2025 baseline across categories</p>
+      <h2 class="card-title">Category Performance</h2>
+    </div>
+    <div class="chart-header-controls">
+      <div class="timeframe-pills" id="category-timeframe-pills" role="group" aria-label="Category Horizon">
+        <button type="button" class="btn-cat-timeframe" data-cat-timeframe="30D">30D</button>
+        <button type="button" class="btn-cat-timeframe" data-cat-timeframe="90D">90D</button>
+        <button type="button" class="btn-cat-timeframe" data-cat-timeframe="1Y">1Y</button>
+        <button type="button" class="btn-cat-timeframe active" data-cat-timeframe="ALL">All</button>
+      </div>
     </div>
   </div>
-  <div class="card-body">
-    <div id="category-index-plot" style="width: 100%; min-height: 480px;"></div>
-
-    <div style="margin-top: 24px;">
-      <h3
-        style="font-size: 13px; font-weight: 700; color: var(--navy-900); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em;"
-      >
-        Category Basket Performance Summary
-      </h3>
-      <div class="table-container">
-        <table class="formal-table">
-          <thead>
-            <tr>
-              <th>Commodity Group</th>
-              <th class="text-center">Items</th>
-              <th class="text-right">Latest Index (Base 100)</th>
-              <th class="text-right">1-Day Change</th>
-              <th class="text-right">7-Day Change</th>
-              <th class="text-right">30-Day Change</th>
-              <th class="text-right">30-Day Avg Volatility</th>
-              <th class="text-right">30-Day Avg CV</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for cat in category_summary %}
-            <tr>
-              <td class="commodity-cell">{{ cat.commodity_group }}</td>
-              <td class="text-center font-mono">{{ cat.total_commodities }}</td>
-              <td class="text-right font-mono" style="font-weight: 700;">{{ "%.2f"|format(cat.index_val) }}</td>
-              <td class="text-right">{{ cat.dod_pct | badge }}</td>
-              <td class="text-right">{{ cat.wow_pct | badge }}</td>
-              <td class="text-right">{{ cat.mom_pct | badge }}</td>
-              <td class="text-right font-mono">₱{{ "%.2f"|format(cat.avg_vol_30d) }}</td>
-              <td class="text-right font-mono">{{ "%.2f"|format(cat.avg_cv_30d) }}%</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+  <div class="card-body" style="padding: 0;">
+    <div class="table-container" style="border: none; border-radius: 0;">
+      <table class="formal-table formal-table-categories" id="category-performance-table">
+        <thead>
+          <tr>
+            <th>Commodity Basket</th>
+            <th class="text-center">1-Day Breadth</th>
+            <th class="text-right">Latest Index</th>
+            <th class="text-center">Index Trajectory</th>
+            <th class="col-cat-range">Index Range (<span id="cat-range-window-label">All-Time</span> Low – High)</th>
+            <th class="text-right">1-Day Change</th>
+            <th class="text-right">7-Day Change</th>
+            <th class="text-right">30-Day Change</th>
+            <th class="text-right">30d Volatility &amp; CV</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cat in category_summary %}
+          <tr
+            class="clickable-row category-perf-row"
+            data-target-category="{{ cat.commodity_group }}"
+            data-horizons="{{ cat.horizons_json }}"
+            title="Click to inspect all {{ cat.total_commodities }} commodities in {{ cat.commodity_group }}"
+          >
+            <td class="commodity-cell">
+              <span class="cat-basket-name">{{ cat.commodity_group }}</span>
+            </td>
+            <td class="text-center">
+              <div class="cat-breadth-cell" title="{{ cat.count_up }} advancing, {{ cat.count_flat }} unchanged, {{ cat.count_down }} declining today">
+                <div class="cat-breadth-bar">
+                  {% if cat.pct_up > 0 %}
+                  <span class="cat-breadth-seg seg-up" style="width: {{ cat.pct_up }}%;"></span>
+                  {% endif %}
+                  {% if cat.pct_flat > 0 %}
+                  <span class="cat-breadth-seg seg-flat" style="width: {{ cat.pct_flat }}%;"></span>
+                  {% endif %}
+                  {% if cat.pct_down > 0 %}
+                  <span class="cat-breadth-seg seg-down" style="width: {{ cat.pct_down }}%;"></span>
+                  {% endif %}
+                </div>
+                <div class="cat-breadth-counts font-mono">
+                  <span class="b-up">{{ cat.count_up }}▲</span>
+                  <span class="b-sep">·</span>
+                  <span class="b-flat">{{ cat.count_flat }}—</span>
+                  <span class="b-sep">·</span>
+                  <span class="b-down">{{ cat.count_down }}▼</span>
+                </div>
+              </div>
+            </td>
+            <td class="text-right font-mono">
+              <div class="cat-index-cell">
+                <span class="cat-index-val">{{ "%.2f"|format(cat.index_val) }}</span>
+                <span class="cat-index-sub {% if cat.base_diff_pts > 0.001 %}text-gain{% elif cat.base_diff_pts < -0.001 %}text-drop{% else %}text-flat{% endif %}">
+                  {{ "%+.2f"|format(cat.base_diff_pts) }} vs Base
+                </span>
+              </div>
+            </td>
+            <td class="text-center">
+              <div class="cat-sparkline-wrap">
+                <svg class="cat-sparkline-svg" width="136" height="36" viewBox="0 0 136 36" aria-label="{{ cat.commodity_group }} index sparkline">
+                  <defs>
+                    <linearGradient id="spark-grad-{{ cat.slug }}" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="{{ cat.color }}" stop-opacity="0.22"></stop>
+                      <stop offset="100%" stop-color="{{ cat.color }}" stop-opacity="0.01"></stop>
+                    </linearGradient>
+                  </defs>
+                  <line
+                    class="spark-base-line"
+                    x1="4"
+                    x2="132"
+                    y1="{{ cat.spark_base100_y if cat.spark_base100_y is not none else 18 }}"
+                    y2="{{ cat.spark_base100_y if cat.spark_base100_y is not none else 18 }}"
+                    stroke="#cbd5e1"
+                    stroke-width="1"
+                    stroke-dasharray="2,2"
+                    style="{% if cat.spark_base100_y is none %}display: none;{% endif %}"
+                  ></line>
+                  <polygon
+                    class="spark-area-poly"
+                    points="{{ cat.spark_area }}"
+                    fill="url(#spark-grad-{{ cat.slug }})"
+                  ></polygon>
+                  <polyline
+                    class="spark-line-poly"
+                    points="{{ cat.spark_points }}"
+                    fill="none"
+                    stroke="{{ cat.color }}"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></polyline>
+                  <circle
+                    class="spark-end-dot"
+                    cx="{{ cat.spark_last_x }}"
+                    cy="{{ cat.spark_last_y }}"
+                    r="2.6"
+                    fill="{{ cat.color }}"
+                  ></circle>
+                </svg>
+              </div>
+            </td>
+            <td>
+              <div class="cat-range-cell">
+                <div class="cat-range-labels font-mono">
+                  <span class="cat-range-min">{{ "%.2f"|format(cat.min_index) }}</span>
+                  <span class="cat-range-pct">{{ "%.0f"|format(cat.range_pct) }}% of range</span>
+                  <span class="cat-range-max">{{ "%.2f"|format(cat.max_index) }}</span>
+                </div>
+                <div class="cat-range-track">
+                  <div class="cat-range-fill" style="width: {{ cat.range_pct }}%; background-color: {{ cat.color }};"></div>
+                  <span class="cat-range-thumb" style="left: {{ cat.range_pct }}%; border-color: {{ cat.color }};"></span>
+                </div>
+              </div>
+            </td>
+            <td class="text-right">{{ cat.dod_pct | badge }}</td>
+            <td class="text-right">{{ cat.wow_pct | badge }}</td>
+            <td class="text-right">{{ cat.mom_pct | badge }}</td>
+            <td class="text-right font-mono">
+              <div class="cat-vol-cell">
+                <span class="cat-vol-val">₱{{ "%.2f"|format(cat.avg_vol_30d) }}</span>
+                <span class="cat-cv-sub">{{ "%.2f"|format(cat.avg_cv_30d) }}% CV</span>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

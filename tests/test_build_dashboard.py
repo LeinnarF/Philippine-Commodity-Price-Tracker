@@ -134,6 +134,13 @@ def test_fetch_category_indices(duckdb_con):
         assert "commodity_group" in row
         assert "index_val" in row
         assert row["total_commodities"] > 0
+        assert "count_up" in row and "count_flat" in row and "count_down" in row
+        assert row["count_up"] + row["count_flat"] + row["count_down"] == row["total_commodities"]
+        assert "spark_points" in row and "spark_area" in row
+        assert "min_index" in row and "max_index" in row and "range_pct" in row
+        assert row["min_index"] <= row["index_val"] <= row["max_index"]
+        assert 0.0 <= row["range_pct"] <= 100.0
+        assert "horizons" in row and set(row["horizons"].keys()) == {"30D", "90D", "1Y", "ALL"}
 
     chart_data = json.loads(chart_json)
     assert "data" in chart_data
