@@ -1220,17 +1220,29 @@ body {
 /* Table Toolbar */
 .table-toolbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 4px;
+}
+
+.table-toolbar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.table-toolbar::-webkit-scrollbar-thumb {
+  background-color: var(--border-dark);
+  border-radius: 4px;
 }
 
 .filter-pills {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  flex-wrap: nowrap;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .btn-filter {
@@ -1243,6 +1255,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.12s ease;
+  flex-shrink: 0;
 }
 
 .btn-filter:hover {
@@ -1259,25 +1272,152 @@ body {
 
 .search-input-wrapper {
   position: relative;
-  min-width: 240px;
+  min-width: 200px;
+  max-width: 260px;
+  flex-shrink: 1;
 }
 
 .search-input {
   width: 100%;
-  padding: 8px 14px;
+  padding: 6px 12px;
   border: 1px solid var(--border-dark);
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 12px;
   font-family: var(--font-sans);
   color: var(--text-main);
   background-color: #ffffff;
   outline: none;
   transition: border-color 0.12s ease;
+  height: 32px;
+  box-sizing: border-box;
 }
 
 .search-input:focus {
   border-color: var(--accent-blue);
   box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+}
+
+/* Census Header Metadata & Date Filter */
+.census-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.census-date-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--da-green-50);
+  border: 1px solid var(--border-color);
+  color: var(--da-green-900);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+}
+
+.table-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.date-filter-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ffffff;
+  padding: 2px 4px 2px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  flex-shrink: 0;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+.date-filter-wrapper .filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.date-input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.census-date-select {
+  border: 1px solid var(--border-color);
+  background-color: #f8fafc;
+  color: var(--text-main);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  height: 26px;
+  box-sizing: border-box;
+  max-width: 175px;
+}
+
+.census-date-select:focus {
+  border-color: var(--accent-blue);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.15);
+}
+
+.btn-date-step {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  user-select: none;
+  padding: 0;
+}
+
+.btn-date-step:hover:not(:disabled) {
+  background-color: #f1f5f9;
+  border-color: var(--border-dark);
+  color: var(--text-main);
+}
+
+.btn-date-step:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background-color: #f8fafc;
+}
+
+.btn-date-latest {
+  padding: 2px 8px;
+  font-size: 11px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  border-radius: 6px;
 }
 
 /* Methodology / Audit Section */

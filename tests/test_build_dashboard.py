@@ -19,6 +19,7 @@ from pipeline.build_dashboard import (
     currency_filter,
     fetch_audit_info,
     fetch_category_indices,
+    fetch_census_history,
     fetch_commodity_timeseries,
     fetch_kpi_summary,
     fetch_latest_snapshot,
@@ -173,6 +174,21 @@ def test_fetch_latest_snapshot(duckdb_con):
     assert counts["Rice"] == 3
 
 
+def test_fetch_census_history(duckdb_con):
+    census_by_date_json, dates = fetch_census_history(duckdb_con)
+    by_date = json.loads(census_by_date_json)
+
+    assert len(dates) == 451
+    assert len(by_date) == 451
+    assert dates[0] == "2026-10-20"
+    assert dates[-1] == "2025-03-01"
+
+    # Each date entry must have all 48 commodity rows with 8 metrics each
+    latest_rows = by_date[dates[0]]
+    assert len(latest_rows) == 48
+    assert len(latest_rows[0]) == 8  # [price, dod, wow, mom, s7, s30, vol, cv]
+
+
 def test_fetch_audit_info(duckdb_con):
     audit = fetch_audit_info(duckdb_con)
     assert audit["total_rows"] == 21648
@@ -236,7 +252,15 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     assert css_file.exists() and css_file.stat().st_size > 5_000
     assert js_file.exists() and js_file.stat().st_size > 5_000
     assert data_file.exists() and data_file.stat().st_size > 500_000
-    assert "window.DASHBOARD_DATA =" in data_file.read_text(encoding="utf-8")
+    data_content = data_file.read_text(encoding="utf-8")
+    assert "window.DASHBOARD_DATA =" in data_content
+    assert "censusByDate:" in data_content
+    assert "censusDates:" in data_content
+
+    html_content = out_file.read_text(encoding="utf-8")
+    assert "census-date-select" in html_content
+    assert "btn-census-date-prev" in html_content
+    assert "btn-census-date-next" in html_content
 
 
 def test_build_dashboard_missing_db(tmp_path):

@@ -36,6 +36,7 @@ from pipeline.dashboard.queries import (
     CATEGORY_PALETTE,
     fetch_audit_info,
     fetch_category_indices,
+    fetch_census_history,
     fetch_commodity_timeseries,
     fetch_kpi_summary,
     fetch_latest_snapshot,
@@ -143,7 +144,9 @@ def write_modular_assets(
         f"  categoryChart: {data_ctx['category_indices_chart_json']},\n"
         f"  timeseries: {data_ctx['timeseries_json']},\n"
         f"  commodityMeta: {data_ctx['commodity_meta_json']},\n"
-        f"  defaultCommodity: {json.dumps(data_ctx['default_commodity'])}\n"
+        f"  defaultCommodity: {json.dumps(data_ctx['default_commodity'])},\n"
+        f"  censusByDate: {data_ctx['census_by_date_json']},\n"
+        f"  censusDates: {json.dumps(data_ctx['census_dates'])}\n"
         "};\n"
     )
     dest_data.write_text(data_js_content, encoding="utf-8")

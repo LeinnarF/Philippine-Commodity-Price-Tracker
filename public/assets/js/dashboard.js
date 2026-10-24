@@ -11,6 +11,8 @@
   const timeseriesData = payload.timeseries || {};
   const commodityMetadata = payload.commodityMeta || {};
   const defaultCommodity = payload.defaultCommodity || Object.keys(commodityMetadata)[0] || "";
+  const censusByDate = payload.censusByDate || {};
+  const censusDates = payload.censusDates || [];
 
   // Build slug <-> commodity lookup maps and ordered commodity list
   const slugToCommodity = {};
@@ -32,7 +34,7 @@
   // ========================================================================
 
   function formatBadgeHtml(val, isPct = true) {
-    if (val === null || val === undefined || isNaN(val)) {
+    if (val === null || val === undefined || isNaN(val) || val <= -9999) {
       return '<span class="badge badge-neutral">—</span>';
     }
     const num = Number(val);
@@ -46,6 +48,21 @@
       const formatted = isPct ? `0.00%` : `₱0.00`;
       return `<span class="badge badge-neutral"><span class="badge-arrow">—</span> ${formatted}</span>`;
     }
+  }
+
+  function formatCurrency(val) {
+    if (val === null || val === undefined || isNaN(val) || val <= 0 || val <= -9999) {
+      return "—";
+    }
+    return `₱${Number(val).toFixed(2)}`;
+  }
+
+  function formatDisplayDate(dateStr) {
+    if (!dateStr) return "—";
+    const parts = dateStr.split("-");
+    if (parts.length !== 3) return dateStr;
+    const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
   }
 
   function formatKpiHeadlineChange(val) {
@@ -535,6 +552,22 @@
     const rowCounter = document.getElementById("table-row-counter");
     let activeCategory = "ALL";
 
+    // Date Filter Controls for Full Price Census
+    const dateSelect = document.getElementById("census-date-select");
+    const btnDatePrev = document.getElementById("btn-census-date-prev");
+    const btnDateNext = document.getElementById("btn-census-date-next");
+    const dateDisplay = document.getElementById("census-date-display");
+
+    // Index rows by data-commodity-idx (or natural DOM order)
+    const rowMap = new Map();
+    tableRows.forEach((row, idx) => {
+      const idxAttr = row.getAttribute("data-commodity-idx");
+      const rIdx = idxAttr !== null ? parseInt(idxAttr, 10) : idx;
+      rowMap.set(rIdx, row);
+    });
+
+    let currentCensusDate = dateSelect ? dateSelect.value : (censusDates[0] || "");
+
     function filterTable() {
       const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
       let visibleCount = 0;
@@ -577,6 +610,35 @@
     let sortColumn = null;
     let sortAsc = true;
 
+    function applyCurrentSort() {
+      if (!sortColumn) return;
+      const th = document.querySelector(`#master-price-table th.sortable[data-sort="${sortColumn}"]`);
+      if (!th) return;
+      const tbody = document.querySelector("#master-price-table tbody");
+      const rowsArray = Array.from(document.querySelectorAll("#master-price-table tbody tr"));
+
+      rowsArray.sort((a, b) => {
+        if (sortColumn === "commodity") {
+          const valA = a.querySelector(".commodity-cell").textContent.trim();
+          const valB = b.querySelector(".commodity-cell").textContent.trim();
+          return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        } else if (sortColumn === "group") {
+          const valA = a.getAttribute("data-group") || "";
+          const valB = b.getAttribute("data-group") || "";
+          return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        } else {
+          const colIndex = Array.from(th.parentNode.children).indexOf(th);
+          const tdA = a.children[colIndex];
+          const tdB = b.children[colIndex];
+          const valA = parseFloat(tdA ? tdA.getAttribute("data-val") || "-999999" : "-999999");
+          const valB = parseFloat(tdB ? tdB.getAttribute("data-val") || "-999999" : "-999999");
+          return sortAsc ? valA - valB : valB - valA;
+        }
+      });
+
+      rowsArray.forEach((r) => tbody.appendChild(r));
+    }
+
     tableHeaders.forEach((th) => {
       th.addEventListener("click", () => {
         const colKey = th.getAttribute("data-sort");
@@ -596,31 +658,125 @@
           }
         });
 
-        const tbody = document.querySelector("#master-price-table tbody");
-        const rowsArray = Array.from(tableRows);
-
-        rowsArray.sort((a, b) => {
-          if (colKey === "commodity") {
-            const valA = a.querySelector(".commodity-cell").textContent.trim();
-            const valB = b.querySelector(".commodity-cell").textContent.trim();
-            return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
-          } else if (colKey === "group") {
-            const valA = a.getAttribute("data-group") || "";
-            const valB = b.getAttribute("data-group") || "";
-            return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
-          } else {
-            const colIndex = Array.from(th.parentNode.children).indexOf(th);
-            const tdA = a.children[colIndex];
-            const tdB = b.children[colIndex];
-            const valA = parseFloat(tdA.getAttribute("data-val") || "0");
-            const valB = parseFloat(tdB.getAttribute("data-val") || "0");
-            return sortAsc ? valA - valB : valB - valA;
-          }
-        });
-
-        rowsArray.forEach((r) => tbody.appendChild(r));
+        applyCurrentSort();
       });
     });
+
+    function setCensusDate(targetDate) {
+      if (!censusDates || censusDates.length === 0) return;
+
+      // Snap to nearest date if targetDate is not in available bulletins
+      let resolvedDate = targetDate;
+      if (!censusByDate[resolvedDate]) {
+        let best = censusDates[0];
+        let minDiff = Infinity;
+        const targetMs = new Date(targetDate).getTime();
+        for (const d of censusDates) {
+          const diff = Math.abs(new Date(d).getTime() - targetMs);
+          if (diff < minDiff) {
+            minDiff = diff;
+            best = d;
+          }
+        }
+        resolvedDate = best;
+      }
+
+      currentCensusDate = resolvedDate;
+      if (dateSelect) dateSelect.value = resolvedDate;
+      if (dateDisplay) dateDisplay.textContent = formatDisplayDate(resolvedDate);
+
+      const curIdx = censusDates.indexOf(resolvedDate);
+      if (btnDatePrev) btnDatePrev.disabled = curIdx < 0 || curIdx >= censusDates.length - 1;
+      if (btnDateNext) btnDateNext.disabled = curIdx <= 0;
+
+      const dateRecords = censusByDate[resolvedDate];
+      if (dateRecords) {
+        for (let i = 0; i < dateRecords.length; i++) {
+          const row = rowMap.get(i);
+          if (!row) continue;
+          const [price, dod, wow, mom, s7, s30, vol, cv] = dateRecords[i];
+          const cells = row.children;
+
+          // Price cell (index 3)
+          if (cells[3]) {
+            const hasPrice = price !== null && price > 0;
+            cells[3].setAttribute("data-val", hasPrice ? price : -999999);
+            cells[3].textContent = formatCurrency(price);
+          }
+
+          // 1-Day DoD cell (index 4)
+          if (cells[4]) {
+            cells[4].setAttribute("data-val", dod !== null ? dod : -999999);
+            cells[4].innerHTML = formatBadgeHtml(dod, true);
+          }
+
+          // 7-Day WoW cell (index 5)
+          if (cells[5]) {
+            cells[5].setAttribute("data-val", wow !== null ? wow : -999999);
+            cells[5].innerHTML = formatBadgeHtml(wow, true);
+          }
+
+          // 30-Day MoM cell (index 6)
+          if (cells[6]) {
+            cells[6].setAttribute("data-val", mom !== null ? mom : -999999);
+            cells[6].innerHTML = formatBadgeHtml(mom, true);
+          }
+
+          // 7d SMA cell (index 7)
+          if (cells[7]) {
+            const hasSma7 = s7 !== null && s7 > 0;
+            cells[7].setAttribute("data-val", hasSma7 ? s7 : -999999);
+            cells[7].textContent = formatCurrency(s7);
+          }
+
+          // 30d SMA cell (index 8)
+          if (cells[8]) {
+            const hasSma30 = s30 !== null && s30 > 0;
+            cells[8].setAttribute("data-val", hasSma30 ? s30 : -999999);
+            cells[8].textContent = formatCurrency(s30);
+          }
+
+          // 30d Volatility cell (index 9)
+          if (cells[9]) {
+            cells[9].setAttribute("data-val", vol !== null ? vol : -999999);
+            cells[9].textContent = vol !== null ? `₱${Number(vol).toFixed(2)}` : "—";
+          }
+
+          // 30d CV cell (index 10)
+          if (cells[10]) {
+            cells[10].setAttribute("data-val", cv !== null ? cv : -999999);
+            cells[10].textContent = cv !== null ? `${Number(cv).toFixed(2)}%` : "—";
+          }
+        }
+      }
+
+      applyCurrentSort();
+      filterTable();
+    }
+
+    if (dateSelect) {
+      dateSelect.addEventListener("change", (e) => {
+        setCensusDate(e.target.value);
+      });
+    }
+
+    if (btnDatePrev) {
+      btnDatePrev.addEventListener("click", () => {
+        const curIdx = censusDates.indexOf(currentCensusDate);
+        if (curIdx >= 0 && curIdx < censusDates.length - 1) {
+          setCensusDate(censusDates[curIdx + 1]);
+        }
+      });
+    }
+
+    if (btnDateNext) {
+      btnDateNext.addEventListener("click", () => {
+        const curIdx = censusDates.indexOf(currentCensusDate);
+        if (curIdx > 0) {
+          setCensusDate(censusDates[curIdx - 1]);
+        }
+      });
+    }
 
     window.addEventListener("hashchange", handleHashRoute);
   }

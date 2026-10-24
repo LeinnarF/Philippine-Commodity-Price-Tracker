@@ -340,6 +340,38 @@ def fetch_latest_snapshot(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[str
     return rows, counts
 
 
+def fetch_census_history(con: duckdb.DuckDBPyConnection) -> tuple[str, list[str]]:
+    """
+    Fetches full panel history across all 48 commodities and all observation dates
+    for client-side dynamic date filtering of the census table.
+    Returns:
+        (census_by_date_json, sorted_census_dates_list)
+    """
+    rows = con.execute("""
+        SELECT
+            date::VARCHAR AS date,
+            ROUND(price_prevailing, 2) AS price,
+            ROUND(dod_pct, 2) AS dod_pct,
+            ROUND(wow_pct, 2) AS wow_pct,
+            ROUND(mom_pct, 2) AS mom_pct,
+            ROUND(sma_7d, 2) AS sma_7d,
+            ROUND(sma_30d, 2) AS sma_30d,
+            ROUND(volatility_30d, 2) AS vol,
+            ROUND(cv_30d * 100, 2) AS cv
+        FROM v_commodity_analytics
+        ORDER BY date DESC, commodity_group, commodity;
+    """).fetchall()
+
+    by_date: dict[str, list[list[Any]]] = {}
+    for dt, pr, dod, wow, mom, s7, s30, vol, cv in rows:
+        if dt not in by_date:
+            by_date[dt] = []
+        by_date[dt].append([pr, dod, wow, mom, s7, s30, vol, cv])
+
+    dates = sorted(by_date.keys(), reverse=True)
+    return json.dumps(by_date), dates
+
+
 def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
     """
     Extracts warehouse provenance metrics and verification assertions.
@@ -381,6 +413,7 @@ def load_all_dashboard_data(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         default_commodity,
     ) = fetch_commodity_timeseries(con)
     snapshot_rows, group_counts = fetch_latest_snapshot(con)
+    census_by_date_json, census_dates = fetch_census_history(con)
     audit_info = fetch_audit_info(con)
 
     return {
@@ -394,5 +427,7 @@ def load_all_dashboard_data(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "default_commodity": default_commodity,
         "snapshot_rows": snapshot_rows,
         "group_counts": group_counts,
+        "census_by_date_json": census_by_date_json,
+        "census_dates": census_dates,
         "audit_info": audit_info,
     }

@@ -10,7 +10,7 @@
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 
   <!-- Modular Formal Stylesheet -->
-  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792833417">
+  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792835765">
 </head>
 <body>
   <div class="app-shell">
@@ -1989,33 +1989,964 @@
     </div>
   </div>
   <div class="card-body">
-    <!-- Toolbar: Search and Category Pills -->
+    <!-- Toolbar: Search, Date Filter, and Category Pills -->
     <div class="table-toolbar">
       <div class="filter-pills" id="category-filter-buttons">
-        <button type="button" class="btn-filter active" data-category="ALL">All (48)</button>
+        <button type="button" class="btn-filter active" data-category="ALL">All</button>
         
-        <button type="button" class="btn-filter" data-category="Basic Goods">Basic Goods (6)</button>
+        <button type="button" class="btn-filter" data-category="Basic Goods">Basic Goods</button>
         
-        <button type="button" class="btn-filter" data-category="Fish">Fish (5)</button>
+        <button type="button" class="btn-filter" data-category="Fish">Fish</button>
         
-        <button type="button" class="btn-filter" data-category="Fruits">Fruits (9)</button>
+        <button type="button" class="btn-filter" data-category="Fruits">Fruits</button>
         
-        <button type="button" class="btn-filter" data-category="Meat and Poultry">Meat and Poultry (6)</button>
+        <button type="button" class="btn-filter" data-category="Meat and Poultry">Meat and Poultry</button>
         
-        <button type="button" class="btn-filter" data-category="Rice">Rice (3)</button>
+        <button type="button" class="btn-filter" data-category="Rice">Rice</button>
         
-        <button type="button" class="btn-filter" data-category="Spices and Condiments">Spices and Condiments (5)</button>
+        <button type="button" class="btn-filter" data-category="Spices and Condiments">Spices and Condiments</button>
         
-        <button type="button" class="btn-filter" data-category="Vegetables">Vegetables (14)</button>
+        <button type="button" class="btn-filter" data-category="Vegetables">Vegetables</button>
         
       </div>
-      <div class="search-input-wrapper">
-        <input
-          type="search"
-          id="table-search-input"
-          class="search-input"
-          placeholder="Search commodity or category..."
-        >
+      <div class="table-toolbar-actions">
+        <div class="date-filter-wrapper" title="Filter census prices by observation bulletin date">
+          <label for="census-date-select" class="filter-label">Bulletin Date:</label>
+          <div class="date-input-group">
+            <button
+              type="button"
+              class="btn-date-step"
+              id="btn-census-date-prev"
+              title="Previous available bulletin date"
+              aria-label="Previous date"
+            >◀</button>
+            <select
+              id="census-date-select"
+              class="census-date-select"
+              title="Select bulletin date to filter census table"
+            >
+              
+              <option value="2026-10-20" selected>October 20, 2026</option>
+              
+              <option value="2026-10-19" >October 19, 2026</option>
+              
+              <option value="2026-10-18" >October 18, 2026</option>
+              
+              <option value="2026-10-17" >October 17, 2026</option>
+              
+              <option value="2026-10-16" >October 16, 2026</option>
+              
+              <option value="2026-10-15" >October 15, 2026</option>
+              
+              <option value="2026-10-14" >October 14, 2026</option>
+              
+              <option value="2026-10-13" >October 13, 2026</option>
+              
+              <option value="2026-10-12" >October 12, 2026</option>
+              
+              <option value="2026-10-10" >October 10, 2026</option>
+              
+              <option value="2026-10-09" >October 09, 2026</option>
+              
+              <option value="2026-10-08" >October 08, 2026</option>
+              
+              <option value="2026-10-07" >October 07, 2026</option>
+              
+              <option value="2026-10-06" >October 06, 2026</option>
+              
+              <option value="2026-10-05" >October 05, 2026</option>
+              
+              <option value="2026-10-04" >October 04, 2026</option>
+              
+              <option value="2026-10-03" >October 03, 2026</option>
+              
+              <option value="2026-10-02" >October 02, 2026</option>
+              
+              <option value="2026-10-01" >October 01, 2026</option>
+              
+              <option value="2026-09-30" >September 30, 2026</option>
+              
+              <option value="2026-09-29" >September 29, 2026</option>
+              
+              <option value="2026-09-28" >September 28, 2026</option>
+              
+              <option value="2026-09-27" >September 27, 2026</option>
+              
+              <option value="2026-09-26" >September 26, 2026</option>
+              
+              <option value="2026-09-25" >September 25, 2026</option>
+              
+              <option value="2026-09-24" >September 24, 2026</option>
+              
+              <option value="2026-09-23" >September 23, 2026</option>
+              
+              <option value="2026-09-22" >September 22, 2026</option>
+              
+              <option value="2026-09-21" >September 21, 2026</option>
+              
+              <option value="2026-09-19" >September 19, 2026</option>
+              
+              <option value="2026-09-17" >September 17, 2026</option>
+              
+              <option value="2026-09-16" >September 16, 2026</option>
+              
+              <option value="2026-09-15" >September 15, 2026</option>
+              
+              <option value="2026-09-14" >September 14, 2026</option>
+              
+              <option value="2026-09-12" >September 12, 2026</option>
+              
+              <option value="2026-09-11" >September 11, 2026</option>
+              
+              <option value="2026-09-10" >September 10, 2026</option>
+              
+              <option value="2026-09-09" >September 09, 2026</option>
+              
+              <option value="2026-09-08" >September 08, 2026</option>
+              
+              <option value="2026-09-07" >September 07, 2026</option>
+              
+              <option value="2026-09-05" >September 05, 2026</option>
+              
+              <option value="2026-09-04" >September 04, 2026</option>
+              
+              <option value="2026-09-03" >September 03, 2026</option>
+              
+              <option value="2026-09-02" >September 02, 2026</option>
+              
+              <option value="2026-09-01" >September 01, 2026</option>
+              
+              <option value="2026-08-31" >August 31, 2026</option>
+              
+              <option value="2026-08-29" >August 29, 2026</option>
+              
+              <option value="2026-08-28" >August 28, 2026</option>
+              
+              <option value="2026-08-27" >August 27, 2026</option>
+              
+              <option value="2026-08-26" >August 26, 2026</option>
+              
+              <option value="2026-08-25" >August 25, 2026</option>
+              
+              <option value="2026-08-24" >August 24, 2026</option>
+              
+              <option value="2026-08-22" >August 22, 2026</option>
+              
+              <option value="2026-08-21" >August 21, 2026</option>
+              
+              <option value="2026-08-20" >August 20, 2026</option>
+              
+              <option value="2026-08-19" >August 19, 2026</option>
+              
+              <option value="2026-08-18" >August 18, 2026</option>
+              
+              <option value="2026-08-17" >August 17, 2026</option>
+              
+              <option value="2026-08-15" >August 15, 2026</option>
+              
+              <option value="2026-08-14" >August 14, 2026</option>
+              
+              <option value="2026-08-13" >August 13, 2026</option>
+              
+              <option value="2026-08-12" >August 12, 2026</option>
+              
+              <option value="2026-08-11" >August 11, 2026</option>
+              
+              <option value="2026-08-10" >August 10, 2026</option>
+              
+              <option value="2026-08-08" >August 08, 2026</option>
+              
+              <option value="2026-08-07" >August 07, 2026</option>
+              
+              <option value="2026-08-06" >August 06, 2026</option>
+              
+              <option value="2026-08-05" >August 05, 2026</option>
+              
+              <option value="2026-08-04" >August 04, 2026</option>
+              
+              <option value="2026-08-03" >August 03, 2026</option>
+              
+              <option value="2026-08-01" >August 01, 2026</option>
+              
+              <option value="2026-07-31" >July 31, 2026</option>
+              
+              <option value="2026-07-30" >July 30, 2026</option>
+              
+              <option value="2026-07-28" >July 28, 2026</option>
+              
+              <option value="2026-07-27" >July 27, 2026</option>
+              
+              <option value="2026-07-25" >July 25, 2026</option>
+              
+              <option value="2026-07-24" >July 24, 2026</option>
+              
+              <option value="2026-07-23" >July 23, 2026</option>
+              
+              <option value="2026-07-22" >July 22, 2026</option>
+              
+              <option value="2026-07-21" >July 21, 2026</option>
+              
+              <option value="2026-07-20" >July 20, 2026</option>
+              
+              <option value="2026-07-18" >July 18, 2026</option>
+              
+              <option value="2026-07-17" >July 17, 2026</option>
+              
+              <option value="2026-07-16" >July 16, 2026</option>
+              
+              <option value="2026-07-15" >July 15, 2026</option>
+              
+              <option value="2026-07-14" >July 14, 2026</option>
+              
+              <option value="2026-07-13" >July 13, 2026</option>
+              
+              <option value="2026-07-10" >July 10, 2026</option>
+              
+              <option value="2026-07-08" >July 08, 2026</option>
+              
+              <option value="2026-07-07" >July 07, 2026</option>
+              
+              <option value="2026-07-06" >July 06, 2026</option>
+              
+              <option value="2026-07-04" >July 04, 2026</option>
+              
+              <option value="2026-07-03" >July 03, 2026</option>
+              
+              <option value="2026-07-02" >July 02, 2026</option>
+              
+              <option value="2026-07-01" >July 01, 2026</option>
+              
+              <option value="2026-06-30" >June 30, 2026</option>
+              
+              <option value="2026-06-29" >June 29, 2026</option>
+              
+              <option value="2026-06-27" >June 27, 2026</option>
+              
+              <option value="2026-06-26" >June 26, 2026</option>
+              
+              <option value="2026-06-25" >June 25, 2026</option>
+              
+              <option value="2026-06-24" >June 24, 2026</option>
+              
+              <option value="2026-06-23" >June 23, 2026</option>
+              
+              <option value="2026-06-22" >June 22, 2026</option>
+              
+              <option value="2026-06-20" >June 20, 2026</option>
+              
+              <option value="2026-06-19" >June 19, 2026</option>
+              
+              <option value="2026-06-18" >June 18, 2026</option>
+              
+              <option value="2026-06-15" >June 15, 2026</option>
+              
+              <option value="2026-06-12" >June 12, 2026</option>
+              
+              <option value="2026-06-10" >June 10, 2026</option>
+              
+              <option value="2026-06-09" >June 09, 2026</option>
+              
+              <option value="2026-06-08" >June 08, 2026</option>
+              
+              <option value="2026-06-06" >June 06, 2026</option>
+              
+              <option value="2026-06-05" >June 05, 2026</option>
+              
+              <option value="2026-06-04" >June 04, 2026</option>
+              
+              <option value="2026-06-03" >June 03, 2026</option>
+              
+              <option value="2026-06-02" >June 02, 2026</option>
+              
+              <option value="2026-05-30" >May 30, 2026</option>
+              
+              <option value="2026-05-29" >May 29, 2026</option>
+              
+              <option value="2026-05-28" >May 28, 2026</option>
+              
+              <option value="2026-05-27" >May 27, 2026</option>
+              
+              <option value="2026-05-26" >May 26, 2026</option>
+              
+              <option value="2026-05-25" >May 25, 2026</option>
+              
+              <option value="2026-05-22" >May 22, 2026</option>
+              
+              <option value="2026-05-21" >May 21, 2026</option>
+              
+              <option value="2026-05-20" >May 20, 2026</option>
+              
+              <option value="2026-05-19" >May 19, 2026</option>
+              
+              <option value="2026-05-18" >May 18, 2026</option>
+              
+              <option value="2026-05-16" >May 16, 2026</option>
+              
+              <option value="2026-05-14" >May 14, 2026</option>
+              
+              <option value="2026-05-13" >May 13, 2026</option>
+              
+              <option value="2026-05-12" >May 12, 2026</option>
+              
+              <option value="2026-05-11" >May 11, 2026</option>
+              
+              <option value="2026-05-08" >May 08, 2026</option>
+              
+              <option value="2026-05-06" >May 06, 2026</option>
+              
+              <option value="2026-05-04" >May 04, 2026</option>
+              
+              <option value="2026-05-02" >May 02, 2026</option>
+              
+              <option value="2026-05-01" >May 01, 2026</option>
+              
+              <option value="2026-04-30" >April 30, 2026</option>
+              
+              <option value="2026-04-29" >April 29, 2026</option>
+              
+              <option value="2026-04-28" >April 28, 2026</option>
+              
+              <option value="2026-04-27" >April 27, 2026</option>
+              
+              <option value="2026-04-25" >April 25, 2026</option>
+              
+              <option value="2026-04-24" >April 24, 2026</option>
+              
+              <option value="2026-04-22" >April 22, 2026</option>
+              
+              <option value="2026-04-21" >April 21, 2026</option>
+              
+              <option value="2026-04-20" >April 20, 2026</option>
+              
+              <option value="2026-04-18" >April 18, 2026</option>
+              
+              <option value="2026-04-17" >April 17, 2026</option>
+              
+              <option value="2026-04-16" >April 16, 2026</option>
+              
+              <option value="2026-04-15" >April 15, 2026</option>
+              
+              <option value="2026-04-14" >April 14, 2026</option>
+              
+              <option value="2026-04-13" >April 13, 2026</option>
+              
+              <option value="2026-04-11" >April 11, 2026</option>
+              
+              <option value="2026-04-10" >April 10, 2026</option>
+              
+              <option value="2026-04-09" >April 09, 2026</option>
+              
+              <option value="2026-04-08" >April 08, 2026</option>
+              
+              <option value="2026-04-07" >April 07, 2026</option>
+              
+              <option value="2026-04-06" >April 06, 2026</option>
+              
+              <option value="2026-04-04" >April 04, 2026</option>
+              
+              <option value="2026-04-03" >April 03, 2026</option>
+              
+              <option value="2026-04-02" >April 02, 2026</option>
+              
+              <option value="2026-03-30" >March 30, 2026</option>
+              
+              <option value="2026-03-24" >March 24, 2026</option>
+              
+              <option value="2026-03-23" >March 23, 2026</option>
+              
+              <option value="2026-03-21" >March 21, 2026</option>
+              
+              <option value="2026-03-20" >March 20, 2026</option>
+              
+              <option value="2026-03-19" >March 19, 2026</option>
+              
+              <option value="2026-03-18" >March 18, 2026</option>
+              
+              <option value="2026-03-17" >March 17, 2026</option>
+              
+              <option value="2026-03-14" >March 14, 2026</option>
+              
+              <option value="2026-03-13" >March 13, 2026</option>
+              
+              <option value="2026-03-12" >March 12, 2026</option>
+              
+              <option value="2026-03-11" >March 11, 2026</option>
+              
+              <option value="2026-03-09" >March 09, 2026</option>
+              
+              <option value="2026-03-06" >March 06, 2026</option>
+              
+              <option value="2026-03-05" >March 05, 2026</option>
+              
+              <option value="2026-03-04" >March 04, 2026</option>
+              
+              <option value="2026-03-03" >March 03, 2026</option>
+              
+              <option value="2026-02-28" >February 28, 2026</option>
+              
+              <option value="2026-02-26" >February 26, 2026</option>
+              
+              <option value="2026-02-24" >February 24, 2026</option>
+              
+              <option value="2026-02-21" >February 21, 2026</option>
+              
+              <option value="2026-02-20" >February 20, 2026</option>
+              
+              <option value="2026-02-19" >February 19, 2026</option>
+              
+              <option value="2026-02-18" >February 18, 2026</option>
+              
+              <option value="2026-02-17" >February 17, 2026</option>
+              
+              <option value="2026-02-16" >February 16, 2026</option>
+              
+              <option value="2026-02-14" >February 14, 2026</option>
+              
+              <option value="2026-02-13" >February 13, 2026</option>
+              
+              <option value="2026-02-11" >February 11, 2026</option>
+              
+              <option value="2026-02-10" >February 10, 2026</option>
+              
+              <option value="2026-02-09" >February 09, 2026</option>
+              
+              <option value="2026-02-07" >February 07, 2026</option>
+              
+              <option value="2026-02-04" >February 04, 2026</option>
+              
+              <option value="2026-02-03" >February 03, 2026</option>
+              
+              <option value="2026-01-30" >January 30, 2026</option>
+              
+              <option value="2026-01-29" >January 29, 2026</option>
+              
+              <option value="2026-01-28" >January 28, 2026</option>
+              
+              <option value="2026-01-27" >January 27, 2026</option>
+              
+              <option value="2026-01-26" >January 26, 2026</option>
+              
+              <option value="2026-01-24" >January 24, 2026</option>
+              
+              <option value="2026-01-23" >January 23, 2026</option>
+              
+              <option value="2026-01-22" >January 22, 2026</option>
+              
+              <option value="2026-01-21" >January 21, 2026</option>
+              
+              <option value="2026-01-20" >January 20, 2026</option>
+              
+              <option value="2026-01-19" >January 19, 2026</option>
+              
+              <option value="2026-01-17" >January 17, 2026</option>
+              
+              <option value="2026-01-16" >January 16, 2026</option>
+              
+              <option value="2026-01-15" >January 15, 2026</option>
+              
+              <option value="2026-01-14" >January 14, 2026</option>
+              
+              <option value="2026-01-13" >January 13, 2026</option>
+              
+              <option value="2026-01-12" >January 12, 2026</option>
+              
+              <option value="2026-01-10" >January 10, 2026</option>
+              
+              <option value="2026-01-09" >January 09, 2026</option>
+              
+              <option value="2026-01-08" >January 08, 2026</option>
+              
+              <option value="2026-01-07" >January 07, 2026</option>
+              
+              <option value="2026-01-06" >January 06, 2026</option>
+              
+              <option value="2026-01-05" >January 05, 2026</option>
+              
+              <option value="2026-01-03" >January 03, 2026</option>
+              
+              <option value="2026-01-01" >January 01, 2026</option>
+              
+              <option value="2025-12-31" >December 31, 2025</option>
+              
+              <option value="2025-12-30" >December 30, 2025</option>
+              
+              <option value="2025-12-29" >December 29, 2025</option>
+              
+              <option value="2025-12-27" >December 27, 2025</option>
+              
+              <option value="2025-12-26" >December 26, 2025</option>
+              
+              <option value="2025-12-25" >December 25, 2025</option>
+              
+              <option value="2025-12-24" >December 24, 2025</option>
+              
+              <option value="2025-12-23" >December 23, 2025</option>
+              
+              <option value="2025-12-20" >December 20, 2025</option>
+              
+              <option value="2025-12-19" >December 19, 2025</option>
+              
+              <option value="2025-12-18" >December 18, 2025</option>
+              
+              <option value="2025-12-17" >December 17, 2025</option>
+              
+              <option value="2025-12-16" >December 16, 2025</option>
+              
+              <option value="2025-12-15" >December 15, 2025</option>
+              
+              <option value="2025-12-13" >December 13, 2025</option>
+              
+              <option value="2025-12-12" >December 12, 2025</option>
+              
+              <option value="2025-12-11" >December 11, 2025</option>
+              
+              <option value="2025-12-10" >December 10, 2025</option>
+              
+              <option value="2025-12-09" >December 09, 2025</option>
+              
+              <option value="2025-12-08" >December 08, 2025</option>
+              
+              <option value="2025-12-06" >December 06, 2025</option>
+              
+              <option value="2025-12-05" >December 05, 2025</option>
+              
+              <option value="2025-12-04" >December 04, 2025</option>
+              
+              <option value="2025-12-03" >December 03, 2025</option>
+              
+              <option value="2025-12-02" >December 02, 2025</option>
+              
+              <option value="2025-12-01" >December 01, 2025</option>
+              
+              <option value="2025-11-29" >November 29, 2025</option>
+              
+              <option value="2025-11-28" >November 28, 2025</option>
+              
+              <option value="2025-11-27" >November 27, 2025</option>
+              
+              <option value="2025-11-26" >November 26, 2025</option>
+              
+              <option value="2025-11-25" >November 25, 2025</option>
+              
+              <option value="2025-11-24" >November 24, 2025</option>
+              
+              <option value="2025-11-22" >November 22, 2025</option>
+              
+              <option value="2025-11-21" >November 21, 2025</option>
+              
+              <option value="2025-11-20" >November 20, 2025</option>
+              
+              <option value="2025-11-19" >November 19, 2025</option>
+              
+              <option value="2025-11-18" >November 18, 2025</option>
+              
+              <option value="2025-11-17" >November 17, 2025</option>
+              
+              <option value="2025-11-15" >November 15, 2025</option>
+              
+              <option value="2025-11-14" >November 14, 2025</option>
+              
+              <option value="2025-11-13" >November 13, 2025</option>
+              
+              <option value="2025-11-12" >November 12, 2025</option>
+              
+              <option value="2025-11-11" >November 11, 2025</option>
+              
+              <option value="2025-11-10" >November 10, 2025</option>
+              
+              <option value="2025-11-08" >November 08, 2025</option>
+              
+              <option value="2025-11-07" >November 07, 2025</option>
+              
+              <option value="2025-11-06" >November 06, 2025</option>
+              
+              <option value="2025-11-05" >November 05, 2025</option>
+              
+              <option value="2025-11-04" >November 04, 2025</option>
+              
+              <option value="2025-11-03" >November 03, 2025</option>
+              
+              <option value="2025-11-01" >November 01, 2025</option>
+              
+              <option value="2025-10-31" >October 31, 2025</option>
+              
+              <option value="2025-10-30" >October 30, 2025</option>
+              
+              <option value="2025-10-29" >October 29, 2025</option>
+              
+              <option value="2025-10-28" >October 28, 2025</option>
+              
+              <option value="2025-10-27" >October 27, 2025</option>
+              
+              <option value="2025-10-25" >October 25, 2025</option>
+              
+              <option value="2025-10-24" >October 24, 2025</option>
+              
+              <option value="2025-10-23" >October 23, 2025</option>
+              
+              <option value="2025-10-22" >October 22, 2025</option>
+              
+              <option value="2025-10-21" >October 21, 2025</option>
+              
+              <option value="2025-10-20" >October 20, 2025</option>
+              
+              <option value="2025-10-18" >October 18, 2025</option>
+              
+              <option value="2025-10-17" >October 17, 2025</option>
+              
+              <option value="2025-10-16" >October 16, 2025</option>
+              
+              <option value="2025-10-15" >October 15, 2025</option>
+              
+              <option value="2025-10-14" >October 14, 2025</option>
+              
+              <option value="2025-10-13" >October 13, 2025</option>
+              
+              <option value="2025-10-11" >October 11, 2025</option>
+              
+              <option value="2025-10-10" >October 10, 2025</option>
+              
+              <option value="2025-10-09" >October 09, 2025</option>
+              
+              <option value="2025-10-08" >October 08, 2025</option>
+              
+              <option value="2025-10-07" >October 07, 2025</option>
+              
+              <option value="2025-10-06" >October 06, 2025</option>
+              
+              <option value="2025-10-04" >October 04, 2025</option>
+              
+              <option value="2025-10-03" >October 03, 2025</option>
+              
+              <option value="2025-10-02" >October 02, 2025</option>
+              
+              <option value="2025-10-01" >October 01, 2025</option>
+              
+              <option value="2025-09-30" >September 30, 2025</option>
+              
+              <option value="2025-09-29" >September 29, 2025</option>
+              
+              <option value="2025-09-27" >September 27, 2025</option>
+              
+              <option value="2025-09-26" >September 26, 2025</option>
+              
+              <option value="2025-09-25" >September 25, 2025</option>
+              
+              <option value="2025-09-24" >September 24, 2025</option>
+              
+              <option value="2025-09-23" >September 23, 2025</option>
+              
+              <option value="2025-09-22" >September 22, 2025</option>
+              
+              <option value="2025-09-19" >September 19, 2025</option>
+              
+              <option value="2025-09-18" >September 18, 2025</option>
+              
+              <option value="2025-09-17" >September 17, 2025</option>
+              
+              <option value="2025-09-16" >September 16, 2025</option>
+              
+              <option value="2025-09-15" >September 15, 2025</option>
+              
+              <option value="2025-09-13" >September 13, 2025</option>
+              
+              <option value="2025-09-12" >September 12, 2025</option>
+              
+              <option value="2025-09-11" >September 11, 2025</option>
+              
+              <option value="2025-09-10" >September 10, 2025</option>
+              
+              <option value="2025-09-09" >September 09, 2025</option>
+              
+              <option value="2025-09-06" >September 06, 2025</option>
+              
+              <option value="2025-09-04" >September 04, 2025</option>
+              
+              <option value="2025-09-03" >September 03, 2025</option>
+              
+              <option value="2025-09-02" >September 02, 2025</option>
+              
+              <option value="2025-09-01" >September 01, 2025</option>
+              
+              <option value="2025-08-30" >August 30, 2025</option>
+              
+              <option value="2025-08-29" >August 29, 2025</option>
+              
+              <option value="2025-08-28" >August 28, 2025</option>
+              
+              <option value="2025-08-27" >August 27, 2025</option>
+              
+              <option value="2025-08-26" >August 26, 2025</option>
+              
+              <option value="2025-08-25" >August 25, 2025</option>
+              
+              <option value="2025-08-23" >August 23, 2025</option>
+              
+              <option value="2025-08-22" >August 22, 2025</option>
+              
+              <option value="2025-08-21" >August 21, 2025</option>
+              
+              <option value="2025-08-20" >August 20, 2025</option>
+              
+              <option value="2025-08-19" >August 19, 2025</option>
+              
+              <option value="2025-08-18" >August 18, 2025</option>
+              
+              <option value="2025-08-15" >August 15, 2025</option>
+              
+              <option value="2025-08-13" >August 13, 2025</option>
+              
+              <option value="2025-08-12" >August 12, 2025</option>
+              
+              <option value="2025-08-09" >August 09, 2025</option>
+              
+              <option value="2025-08-08" >August 08, 2025</option>
+              
+              <option value="2025-08-06" >August 06, 2025</option>
+              
+              <option value="2025-08-05" >August 05, 2025</option>
+              
+              <option value="2025-08-04" >August 04, 2025</option>
+              
+              <option value="2025-08-02" >August 02, 2025</option>
+              
+              <option value="2025-08-01" >August 01, 2025</option>
+              
+              <option value="2025-07-31" >July 31, 2025</option>
+              
+              <option value="2025-07-30" >July 30, 2025</option>
+              
+              <option value="2025-07-29" >July 29, 2025</option>
+              
+              <option value="2025-07-28" >July 28, 2025</option>
+              
+              <option value="2025-07-26" >July 26, 2025</option>
+              
+              <option value="2025-07-25" >July 25, 2025</option>
+              
+              <option value="2025-07-24" >July 24, 2025</option>
+              
+              <option value="2025-07-23" >July 23, 2025</option>
+              
+              <option value="2025-07-22" >July 22, 2025</option>
+              
+              <option value="2025-07-21" >July 21, 2025</option>
+              
+              <option value="2025-07-19" >July 19, 2025</option>
+              
+              <option value="2025-07-18" >July 18, 2025</option>
+              
+              <option value="2025-07-17" >July 17, 2025</option>
+              
+              <option value="2025-07-16" >July 16, 2025</option>
+              
+              <option value="2025-07-15" >July 15, 2025</option>
+              
+              <option value="2025-07-14" >July 14, 2025</option>
+              
+              <option value="2025-07-12" >July 12, 2025</option>
+              
+              <option value="2025-07-11" >July 11, 2025</option>
+              
+              <option value="2025-07-10" >July 10, 2025</option>
+              
+              <option value="2025-07-08" >July 08, 2025</option>
+              
+              <option value="2025-07-07" >July 07, 2025</option>
+              
+              <option value="2025-07-04" >July 04, 2025</option>
+              
+              <option value="2025-07-03" >July 03, 2025</option>
+              
+              <option value="2025-07-02" >July 02, 2025</option>
+              
+              <option value="2025-07-01" >July 01, 2025</option>
+              
+              <option value="2025-06-30" >June 30, 2025</option>
+              
+              <option value="2025-06-28" >June 28, 2025</option>
+              
+              <option value="2025-06-27" >June 27, 2025</option>
+              
+              <option value="2025-06-25" >June 25, 2025</option>
+              
+              <option value="2025-06-24" >June 24, 2025</option>
+              
+              <option value="2025-06-23" >June 23, 2025</option>
+              
+              <option value="2025-06-19" >June 19, 2025</option>
+              
+              <option value="2025-06-17" >June 17, 2025</option>
+              
+              <option value="2025-06-16" >June 16, 2025</option>
+              
+              <option value="2025-06-14" >June 14, 2025</option>
+              
+              <option value="2025-06-13" >June 13, 2025</option>
+              
+              <option value="2025-06-12" >June 12, 2025</option>
+              
+              <option value="2025-06-11" >June 11, 2025</option>
+              
+              <option value="2025-06-09" >June 09, 2025</option>
+              
+              <option value="2025-06-07" >June 07, 2025</option>
+              
+              <option value="2025-06-05" >June 05, 2025</option>
+              
+              <option value="2025-06-04" >June 04, 2025</option>
+              
+              <option value="2025-06-03" >June 03, 2025</option>
+              
+              <option value="2025-06-02" >June 02, 2025</option>
+              
+              <option value="2025-05-31" >May 31, 2025</option>
+              
+              <option value="2025-05-30" >May 30, 2025</option>
+              
+              <option value="2025-05-28" >May 28, 2025</option>
+              
+              <option value="2025-05-24" >May 24, 2025</option>
+              
+              <option value="2025-05-23" >May 23, 2025</option>
+              
+              <option value="2025-05-22" >May 22, 2025</option>
+              
+              <option value="2025-05-21" >May 21, 2025</option>
+              
+              <option value="2025-05-20" >May 20, 2025</option>
+              
+              <option value="2025-05-19" >May 19, 2025</option>
+              
+              <option value="2025-05-17" >May 17, 2025</option>
+              
+              <option value="2025-05-16" >May 16, 2025</option>
+              
+              <option value="2025-05-15" >May 15, 2025</option>
+              
+              <option value="2025-05-14" >May 14, 2025</option>
+              
+              <option value="2025-05-13" >May 13, 2025</option>
+              
+              <option value="2025-05-12" >May 12, 2025</option>
+              
+              <option value="2025-05-10" >May 10, 2025</option>
+              
+              <option value="2025-05-09" >May 09, 2025</option>
+              
+              <option value="2025-05-08" >May 08, 2025</option>
+              
+              <option value="2025-05-07" >May 07, 2025</option>
+              
+              <option value="2025-05-06" >May 06, 2025</option>
+              
+              <option value="2025-05-05" >May 05, 2025</option>
+              
+              <option value="2025-05-03" >May 03, 2025</option>
+              
+              <option value="2025-05-02" >May 02, 2025</option>
+              
+              <option value="2025-05-01" >May 01, 2025</option>
+              
+              <option value="2025-04-30" >April 30, 2025</option>
+              
+              <option value="2025-04-29" >April 29, 2025</option>
+              
+              <option value="2025-04-28" >April 28, 2025</option>
+              
+              <option value="2025-04-26" >April 26, 2025</option>
+              
+              <option value="2025-04-25" >April 25, 2025</option>
+              
+              <option value="2025-04-24" >April 24, 2025</option>
+              
+              <option value="2025-04-23" >April 23, 2025</option>
+              
+              <option value="2025-04-22" >April 22, 2025</option>
+              
+              <option value="2025-04-21" >April 21, 2025</option>
+              
+              <option value="2025-04-16" >April 16, 2025</option>
+              
+              <option value="2025-04-15" >April 15, 2025</option>
+              
+              <option value="2025-04-14" >April 14, 2025</option>
+              
+              <option value="2025-04-12" >April 12, 2025</option>
+              
+              <option value="2025-04-11" >April 11, 2025</option>
+              
+              <option value="2025-04-10" >April 10, 2025</option>
+              
+              <option value="2025-04-09" >April 09, 2025</option>
+              
+              <option value="2025-04-08" >April 08, 2025</option>
+              
+              <option value="2025-04-07" >April 07, 2025</option>
+              
+              <option value="2025-04-05" >April 05, 2025</option>
+              
+              <option value="2025-04-03" >April 03, 2025</option>
+              
+              <option value="2025-04-02" >April 02, 2025</option>
+              
+              <option value="2025-04-01" >April 01, 2025</option>
+              
+              <option value="2025-03-27" >March 27, 2025</option>
+              
+              <option value="2025-03-26" >March 26, 2025</option>
+              
+              <option value="2025-03-25" >March 25, 2025</option>
+              
+              <option value="2025-03-22" >March 22, 2025</option>
+              
+              <option value="2025-03-21" >March 21, 2025</option>
+              
+              <option value="2025-03-20" >March 20, 2025</option>
+              
+              <option value="2025-03-19" >March 19, 2025</option>
+              
+              <option value="2025-03-15" >March 15, 2025</option>
+              
+              <option value="2025-03-14" >March 14, 2025</option>
+              
+              <option value="2025-03-13" >March 13, 2025</option>
+              
+              <option value="2025-03-11" >March 11, 2025</option>
+              
+              <option value="2025-03-10" >March 10, 2025</option>
+              
+              <option value="2025-03-08" >March 08, 2025</option>
+              
+              <option value="2025-03-07" >March 07, 2025</option>
+              
+              <option value="2025-03-06" >March 06, 2025</option>
+              
+              <option value="2025-03-05" >March 05, 2025</option>
+              
+              <option value="2025-03-04" >March 04, 2025</option>
+              
+              <option value="2025-03-01" >March 01, 2025</option>
+              
+            </select>
+            <button
+              type="button"
+              class="btn-date-step"
+              id="btn-census-date-next"
+              title="Next available bulletin date"
+              aria-label="Next date"
+              disabled
+            >▶</button>
+          </div>
+        </div>
+        <div class="search-input-wrapper">
+          <input
+            type="search"
+            id="table-search-input"
+            class="search-input"
+            placeholder="Search commodity or category..."
+          >
+        </div>
       </div>
     </div>
 
@@ -2041,6 +2972,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="0"
             data-commodity="brown sugar"
             data-group="Basic Goods"
             data-target-commodity="Brown Sugar"
@@ -2077,6 +3009,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="1"
             data-commodity="chicken egg (medium white)"
             data-group="Basic Goods"
             data-target-commodity="Chicken Egg (Medium White)"
@@ -2113,6 +3046,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="2"
             data-commodity="cooking oil (coconut)"
             data-group="Basic Goods"
             data-target-commodity="Cooking Oil (Coconut)"
@@ -2149,6 +3083,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="3"
             data-commodity="cooking oil (palm)"
             data-group="Basic Goods"
             data-target-commodity="Cooking Oil (Palm)"
@@ -2185,6 +3120,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="4"
             data-commodity="refined sugar"
             data-group="Basic Goods"
             data-target-commodity="Refined Sugar"
@@ -2221,6 +3157,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="5"
             data-commodity="washed sugar"
             data-group="Basic Goods"
             data-target-commodity="Washed Sugar"
@@ -2257,6 +3194,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="6"
             data-commodity="bangus (large)"
             data-group="Fish"
             data-target-commodity="Bangus (Large)"
@@ -2293,6 +3231,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="7"
             data-commodity="bangus (medium)"
             data-group="Fish"
             data-target-commodity="Bangus (Medium)"
@@ -2329,6 +3268,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="8"
             data-commodity="galunggong (local)"
             data-group="Fish"
             data-target-commodity="Galunggong (Local)"
@@ -2365,6 +3305,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="9"
             data-commodity="sardines (tamban)"
             data-group="Fish"
             data-target-commodity="Sardines (Tamban)"
@@ -2401,6 +3342,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="10"
             data-commodity="tilapia"
             data-group="Fish"
             data-target-commodity="Tilapia"
@@ -2437,6 +3379,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="11"
             data-commodity="avocado"
             data-group="Fruits"
             data-target-commodity="Avocado"
@@ -2473,6 +3416,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="12"
             data-commodity="banana (lakatan)"
             data-group="Fruits"
             data-target-commodity="Banana (Lakatan)"
@@ -2509,6 +3453,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="13"
             data-commodity="banana (latundan)"
             data-group="Fruits"
             data-target-commodity="Banana (Latundan)"
@@ -2545,6 +3490,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="14"
             data-commodity="banana (saba)"
             data-group="Fruits"
             data-target-commodity="Banana (Saba)"
@@ -2581,6 +3527,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="15"
             data-commodity="mango (carabao)"
             data-group="Fruits"
             data-target-commodity="Mango (Carabao)"
@@ -2617,6 +3564,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="16"
             data-commodity="melon"
             data-group="Fruits"
             data-target-commodity="Melon"
@@ -2653,6 +3601,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="17"
             data-commodity="papaya"
             data-group="Fruits"
             data-target-commodity="Papaya"
@@ -2689,6 +3638,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="18"
             data-commodity="pomelo"
             data-group="Fruits"
             data-target-commodity="Pomelo"
@@ -2725,6 +3675,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="19"
             data-commodity="watermelon"
             data-group="Fruits"
             data-target-commodity="Watermelon"
@@ -2761,6 +3712,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="20"
             data-commodity="beef brisket"
             data-group="Meat and Poultry"
             data-target-commodity="Beef Brisket"
@@ -2797,6 +3749,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="21"
             data-commodity="beef rump"
             data-group="Meat and Poultry"
             data-target-commodity="Beef Rump"
@@ -2833,6 +3786,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="22"
             data-commodity="pork belly (liempo)"
             data-group="Meat and Poultry"
             data-target-commodity="Pork Belly (Liempo)"
@@ -2869,6 +3823,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="23"
             data-commodity="pork kasim (picnic shoulder)"
             data-group="Meat and Poultry"
             data-target-commodity="Pork Kasim (Picnic Shoulder)"
@@ -2905,6 +3860,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="24"
             data-commodity="pork pigue (hind leg / ham)"
             data-group="Meat and Poultry"
             data-target-commodity="Pork Pigue (Hind Leg / Ham)"
@@ -2941,6 +3897,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="25"
             data-commodity="whole chicken"
             data-group="Meat and Poultry"
             data-target-commodity="Whole Chicken"
@@ -2977,6 +3934,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="26"
             data-commodity="premium rice"
             data-group="Rice"
             data-target-commodity="Premium Rice"
@@ -3013,6 +3971,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="27"
             data-commodity="regular milled rice"
             data-group="Rice"
             data-target-commodity="Regular Milled Rice"
@@ -3049,6 +4008,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="28"
             data-commodity="well milled rice"
             data-group="Rice"
             data-target-commodity="Well Milled Rice"
@@ -3085,6 +4045,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="29"
             data-commodity="calamansi"
             data-group="Spices and Condiments"
             data-target-commodity="Calamansi"
@@ -3121,6 +4082,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="30"
             data-commodity="garlic (imported)"
             data-group="Spices and Condiments"
             data-target-commodity="Garlic (Imported)"
@@ -3157,6 +4119,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="31"
             data-commodity="garlic (native)"
             data-group="Spices and Condiments"
             data-target-commodity="Garlic (Native)"
@@ -3193,6 +4156,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="32"
             data-commodity="ginger"
             data-group="Spices and Condiments"
             data-target-commodity="Ginger"
@@ -3229,6 +4193,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="33"
             data-commodity="red onion"
             data-group="Spices and Condiments"
             data-target-commodity="Red Onion"
@@ -3265,6 +4230,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="34"
             data-commodity="ampalaya (bitter gourd)"
             data-group="Vegetables"
             data-target-commodity="Ampalaya (Bitter Gourd)"
@@ -3301,6 +4267,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="35"
             data-commodity="bell pepper (green)"
             data-group="Vegetables"
             data-target-commodity="Bell Pepper (Green)"
@@ -3337,6 +4304,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="36"
             data-commodity="bell pepper (red)"
             data-group="Vegetables"
             data-target-commodity="Bell Pepper (Red)"
@@ -3373,6 +4341,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="37"
             data-commodity="cabbage (rare ball)"
             data-group="Vegetables"
             data-target-commodity="Cabbage (Rare Ball)"
@@ -3409,6 +4378,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="38"
             data-commodity="cabbage (scorpio)"
             data-group="Vegetables"
             data-target-commodity="Cabbage (Scorpio)"
@@ -3445,6 +4415,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="39"
             data-commodity="cabbage (wonder ball)"
             data-group="Vegetables"
             data-target-commodity="Cabbage (Wonder Ball)"
@@ -3481,6 +4452,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="40"
             data-commodity="carrots"
             data-group="Vegetables"
             data-target-commodity="Carrots"
@@ -3517,6 +4489,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="41"
             data-commodity="eggplant"
             data-group="Vegetables"
             data-target-commodity="Eggplant"
@@ -3553,6 +4526,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="42"
             data-commodity="native pechay"
             data-group="Vegetables"
             data-target-commodity="Native Pechay"
@@ -3589,6 +4563,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="43"
             data-commodity="squash"
             data-group="Vegetables"
             data-target-commodity="Squash"
@@ -3625,6 +4600,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="44"
             data-commodity="tomato"
             data-group="Vegetables"
             data-target-commodity="Tomato"
@@ -3661,6 +4637,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="45"
             data-commodity="white corn"
             data-group="Vegetables"
             data-target-commodity="White Corn"
@@ -3697,6 +4674,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="46"
             data-commodity="white potato"
             data-group="Vegetables"
             data-target-commodity="White Potato"
@@ -3733,6 +4711,7 @@
           
           <tr
             class="clickable-row"
+            data-commodity-idx="47"
             data-commodity="yellow corn"
             data-group="Vegetables"
             data-target-commodity="Yellow Corn"
@@ -3929,8 +4908,8 @@
   </div>
 
   <!-- Modular Precomputed Data Payload & Interactive Controller -->
-  <script src="assets/data/commodities.js?v=1792833417"></script>
-  <script src="assets/js/dashboard.js?v=1792833417"></script>
+  <script src="assets/data/commodities.js?v=1792835765"></script>
+  <script src="assets/js/dashboard.js?v=1792835765"></script>
 
   
 

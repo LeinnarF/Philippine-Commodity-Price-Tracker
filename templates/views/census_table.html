@@ -12,21 +12,52 @@
     </div>
   </div>
   <div class="card-body">
-    <!-- Toolbar: Search and Category Pills -->
+    <!-- Toolbar: Search, Date Filter, and Category Pills -->
     <div class="table-toolbar">
       <div class="filter-pills" id="category-filter-buttons">
-        <button type="button" class="btn-filter active" data-category="ALL">All (48)</button>
-        {% for grp, count in group_counts.items() %}
-        <button type="button" class="btn-filter" data-category="{{ grp }}">{{ grp }} ({{ count }})</button>
+        <button type="button" class="btn-filter active" data-category="ALL">All</button>
+        {% for grp in group_counts.keys() %}
+        <button type="button" class="btn-filter" data-category="{{ grp }}">{{ grp }}</button>
         {% endfor %}
       </div>
-      <div class="search-input-wrapper">
-        <input
-          type="search"
-          id="table-search-input"
-          class="search-input"
-          placeholder="Search commodity or category..."
-        >
+      <div class="table-toolbar-actions">
+        <div class="date-filter-wrapper" title="Filter census prices by observation bulletin date">
+          <label for="census-date-select" class="filter-label">Bulletin Date:</label>
+          <div class="date-input-group">
+            <button
+              type="button"
+              class="btn-date-step"
+              id="btn-census-date-prev"
+              title="Previous available bulletin date"
+              aria-label="Previous date"
+            >◀</button>
+            <select
+              id="census-date-select"
+              class="census-date-select"
+              title="Select bulletin date to filter census table"
+            >
+              {% for d in census_dates %}
+              <option value="{{ d }}" {% if d == kpis.latest_date %}selected{% endif %}>{{ d | format_date }}</option>
+              {% endfor %}
+            </select>
+            <button
+              type="button"
+              class="btn-date-step"
+              id="btn-census-date-next"
+              title="Next available bulletin date"
+              aria-label="Next date"
+              disabled
+            >▶</button>
+          </div>
+        </div>
+        <div class="search-input-wrapper">
+          <input
+            type="search"
+            id="table-search-input"
+            class="search-input"
+            placeholder="Search commodity or category..."
+          >
+        </div>
       </div>
     </div>
 
@@ -52,6 +83,7 @@
           {% for row in snapshot_rows %}
           <tr
             class="clickable-row"
+            data-commodity-idx="{{ loop.index0 }}"
             data-commodity="{{ row.commodity | lower }}"
             data-group="{{ row.commodity_group }}"
             data-target-commodity="{{ row.commodity }}"
