@@ -462,12 +462,12 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-page);
-  padding: 20px 28px 32px;
+  padding: 20px 18px 32px;
 }
 
 /* Unified Top Header Card */
 .dashboard-navbar {
-  max-width: 1400px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto 20px auto;
   background-color: var(--bg-surface);
@@ -700,7 +700,7 @@ body {
 
 /* Workspace Inner Content */
 .workspace-content {
-  max-width: 1400px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
   padding: 0;
