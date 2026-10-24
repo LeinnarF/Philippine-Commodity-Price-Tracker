@@ -1673,7 +1673,7 @@ body {
 
 /* Footer */
 .dashboard-footer {
-  max-width: 1400px;
+  max-width: 100%;
   width: 100%;
   margin: 40px auto 0;
   padding: 24px 0 10px;
