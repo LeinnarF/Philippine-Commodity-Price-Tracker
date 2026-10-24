@@ -1340,11 +1340,11 @@ body {
 /* Table Toolbar */
 .table-toolbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 16px;
-  overflow-x: auto;
-  white-space: nowrap;
   padding-bottom: 4px;
 }
 
@@ -1360,7 +1360,7 @@ body {
 .filter-pills {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 6px;
   flex-shrink: 0;
 }
@@ -1742,5 +1742,11 @@ body {
   }
   .grid-2col {
     grid-template-columns: 1fr;
+  }
+  .table-toolbar-actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
   }
 }
