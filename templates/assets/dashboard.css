@@ -610,22 +610,45 @@ body {
 }
 
 .navbar-date-badge {
-  background-color: #f8fafc;
-  border: 1px solid var(--border-color);
-  padding: 6px 12px;
+  background-color: #f0fdf4;
+  border: none;
+  padding: 6px 14px;
   border-radius: 8px;
-  font-size: 12px;
-  color: var(--text-secondary);
+  font-size: 14px;
+  color: var(--da-green-800);
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   white-space: nowrap;
+  box-shadow: none;
+  transition: all 0.15s ease;
+}
+
+.navbar-date-badge:hover {
+  background-color: #ecfdf5;
+}
+
+.navbar-date-badge .bulletin-icon {
+  color: var(--da-green-700);
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+}
+
+.navbar-date-badge .date-lbl {
+  font-weight: 600;
+  color: var(--da-green-800);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-size: 12.5px;
 }
 
 .navbar-date-badge .date-val {
-  color: var(--text-heading);
+  color: var(--da-green-950);
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 14.5px;
 }
 
 .btn-navbar-action {
