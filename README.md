@@ -23,6 +23,7 @@ flowchart LR
     SEL -->|Stage 4: Metadata Strip & Export| CLEAN["data/clean_da_amas_prices.csv<br/>(Production Clean Dataset)"]
     SEL -->|Stage 5: Load Audit| DDB[("data/commodities.duckdb<br/>Silver Tables + Gold Views")]
     CLEAN -->|Stage 5: Load Core| DDB
+    DDB -->|Stage 6: Static Site Generation| DASH["public/index.html<br/>(Formal Interactive Dashboard)"]
 ```
 
 ### Stage 1: Parallel PDF Downloader (`pipeline/download_pdfs.py`)
@@ -77,6 +78,22 @@ flowchart LR
 - Command:
   ```bash
   python -m pipeline.load_duckdb
+  ```
+
+### Stage 6: Modular Static Dashboard Generator & Live Dev Server (`pipeline/build_dashboard.py`)
+- Extracts data from DuckDB (`data/commodities.duckdb`) via modular query extractors (`pipeline/dashboard/queries.py`) and Jinja2 filters (`pipeline/dashboard/filters.py`).
+- Compiles modular Jinja2 components (`templates/components/`, `templates/views/`) and static assets into `public/` (`public/index.html`, `public/assets/css/dashboard.css`, `public/assets/js/dashboard.js`, and `public/assets/data/commodities.js`).
+- Features an **App-Shell Sidebar Architecture**:
+  - **Expandable Commodity Tree Sidebar**: Quick search filter, primary system views (*Market Overview*, *Full Price Census*, *Data Governance*), and collapsible category groups listing all 48 commodities with live prices and 1-day direction indicators.
+  - **Dedicated Commodity Detail View**: 7-card summary KPI strip (Prevailing Price, 1d/7d/30d changes, 7d/30d SMA, 30d Volatility & CV), timeframe quick-filters (`1M`, `3M`, `6M`, `1Y`, `All`), and interactive Plotly price & moving average charts.
+  - **Live Development Watcher (`--watch`)**: Monitors templates, CSS/JS assets, and DuckDB changes, rebuilding in milliseconds and auto-reloading connected browser tabs via `/__dev_poll__`.
+- Commands:
+  ```bash
+  # Build static production assets into public/
+  python -m pipeline.build_dashboard
+
+  # Launch Live Development Watcher & Local HTTP Server (http://127.0.0.1:8000)
+  python -m pipeline.build_dashboard --watch --port 8000
   ```
 
 ---

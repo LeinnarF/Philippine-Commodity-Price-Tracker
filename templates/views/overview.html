@@ -1,0 +1,144 @@
+{% include "components/kpi_strip.html" %}
+
+<!-- Top Market Movers (2 Columns) -->
+<div class="grid-2col">
+  <!-- Top Gainers -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title-group">
+        <span class="card-tag">Daily Price Inflation</span>
+        <h2 class="card-title">Top 5 Price Increases (Day-over-Day)</h2>
+      </div>
+      <span class="badge badge-increase">▲ Price Advances</span>
+    </div>
+    <div class="card-body" style="padding: 0;">
+      <div class="table-container" style="border: none;">
+        <table class="formal-table">
+          <thead>
+            <tr>
+              <th>Commodity</th>
+              <th>Category</th>
+              <th class="text-right">Price</th>
+              <th class="text-right">1-Day Change</th>
+              <th class="text-right">7-Day Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in top_movers.gainers %}
+            <tr
+              class="clickable-row"
+              data-target-commodity="{{ item.commodity }}"
+              title="Click to inspect {{ item.commodity }} price history"
+            >
+              <td class="commodity-cell">{{ item.commodity }}</td>
+              <td><span class="category-pill">{{ item.commodity_group }}</span></td>
+              <td class="text-right font-mono">
+                {{ item.price_prevailing | currency }}
+                <span style="font-size: 11px; color: var(--text-muted);">/{{ item.unit }}</span>
+              </td>
+              <td class="text-right">{{ item.dod_pct | badge }}</td>
+              <td class="text-right">{{ item.wow_pct | badge }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Decliners -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title-group">
+        <span class="card-tag">Daily Price Deflation</span>
+        <h2 class="card-title">Top 5 Price Decreases (Day-over-Day)</h2>
+      </div>
+      <span class="badge badge-decrease">▼ Price Reductions</span>
+    </div>
+    <div class="card-body" style="padding: 0;">
+      <div class="table-container" style="border: none;">
+        <table class="formal-table">
+          <thead>
+            <tr>
+              <th>Commodity</th>
+              <th>Category</th>
+              <th class="text-right">Price</th>
+              <th class="text-right">1-Day Change</th>
+              <th class="text-right">7-Day Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in top_movers.decliners %}
+            <tr
+              class="clickable-row"
+              data-target-commodity="{{ item.commodity }}"
+              title="Click to inspect {{ item.commodity }} price history"
+            >
+              <td class="commodity-cell">{{ item.commodity }}</td>
+              <td><span class="category-pill">{{ item.commodity_group }}</span></td>
+              <td class="text-right font-mono">
+                {{ item.price_prevailing | currency }}
+                <span style="font-size: 11px; color: var(--text-muted);">/{{ item.unit }}</span>
+              </td>
+              <td class="text-right">{{ item.dod_pct | badge }}</td>
+              <td class="text-right">{{ item.wow_pct | badge }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Macro Category Price Indices -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title-group">
+      <span class="card-tag">Macro Basket Analysis</span>
+      <h2 class="card-title">Category Retail Price Indices (Base 100 = March 1, 2025)</h2>
+      <span class="card-subtitle">Equal-weighted aggregated daily index across 7 standardized food categories</span>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id="category-index-plot" style="width: 100%; height: 430px;"></div>
+
+    <div style="margin-top: 24px;">
+      <h3
+        style="font-size: 13px; font-weight: 700; color: var(--navy-900); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em;"
+      >
+        Category Basket Performance Summary
+      </h3>
+      <div class="table-container">
+        <table class="formal-table">
+          <thead>
+            <tr>
+              <th>Commodity Group</th>
+              <th class="text-center">Items</th>
+              <th class="text-right">Latest Index (Base 100)</th>
+              <th class="text-right">1-Day Change</th>
+              <th class="text-right">7-Day Change</th>
+              <th class="text-right">30-Day Change</th>
+              <th class="text-right">30-Day Avg Volatility</th>
+              <th class="text-right">30-Day Avg CV</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for cat in category_summary %}
+            <tr>
+              <td class="commodity-cell">{{ cat.commodity_group }}</td>
+              <td class="text-center font-mono">{{ cat.total_commodities }}</td>
+              <td class="text-right font-mono" style="font-weight: 700;">{{ "%.2f"|format(cat.index_val) }}</td>
+              <td class="text-right">{{ cat.dod_pct | badge }}</td>
+              <td class="text-right">{{ cat.wow_pct | badge }}</td>
+              <td class="text-right">{{ cat.mom_pct | badge }}</td>
+              <td class="text-right font-mono">₱{{ "%.2f"|format(cat.avg_vol_30d) }}</td>
+              <td class="text-right font-mono">{{ "%.2f"|format(cat.avg_cv_30d) }}%</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

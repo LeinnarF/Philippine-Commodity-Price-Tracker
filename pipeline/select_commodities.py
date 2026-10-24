@@ -38,6 +38,15 @@ logger = logging.getLogger("select_commodities")
 DEFAULT_RAW_CSV = Path(__file__).resolve().parent.parent / "data" / "raw_da_amas_prices.csv"
 DEFAULT_SELECTED_CSV = Path(__file__).resolve().parent.parent / "data" / "selected_da_amas_prices.csv"
 
+# Verified typographical/clerical anomalies in official government bulletins and their corrections.
+# Format: (date, commodity): (corrected_price, rationale)
+DATA_ANOMALY_CORRECTIONS: dict[tuple[str, str], tuple[float, str]] = {
+    ("2026-09-10", "Chicken Egg (Medium White)"): (
+        8.13,
+        "Human entry error in official DA AMAS bulletin (printed 200.00/pc instead of prevailing 8.13/pc; aligned with 2026-09-09 and 2026-09-11 prices).",
+    ),
+}
+
 
 def get_commodity_definitions(
     egg_category: str = "Basic Goods",
@@ -671,6 +680,20 @@ def select_commodities(
         selected_df.loc[missing_mask, "source_url"] = meta["source_url"]
 
     selected_df["raw_count"] = selected_df["raw_count"].fillna(0).astype(int)
+
+    # Apply verified data anomaly corrections
+    for (d, comm), (corrected_price, rationale) in DATA_ANOMALY_CORRECTIONS.items():
+        mask = (selected_df["date"] == d) & (selected_df["commodity"] == comm)
+        if mask.any():
+            old_price = selected_df.loc[mask, "price_prevailing"].iloc[0]
+            if pd.notna(old_price) and old_price != corrected_price:
+                selected_df.loc[mask, "price_prevailing"] = corrected_price
+                logger.info(
+                    "Applied anomaly correction for '%s' on %s: ₱%.2f -> ₱%.2f (%s)",
+                    comm, d, old_price, corrected_price, rationale,
+                )
+            elif pd.isna(old_price):
+                selected_df.loc[mask, "price_prevailing"] = corrected_price
 
     # Apply forward fill for sporadic gaps while leaving leading day gap blank
     if ffill_sporadic:

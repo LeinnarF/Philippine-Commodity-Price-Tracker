@@ -1,0 +1,141 @@
+<aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="Dashboard Navigation">
+  <!-- Brand Logo & Title (Creative Tim Style) -->
+  <div class="sidebar-brand">
+    <div class="brand-badge" aria-hidden="true">
+      <svg class="brand-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 20A7 7 0 0 1 4 13C4 8.5 7.5 4 13 3c4.5 0 8 3.5 8 8 0 5.5-4.5 9-10 9z"></path>
+        <path d="M11 20v-9"></path>
+        <path d="M11 15h4"></path>
+      </svg>
+    </div>
+    <div class="brand-meta">
+      <span class="brand-title">Bantay Presyo</span>
+      <span class="brand-sub">Philippine Commodity Price Tracker</span>
+    </div>
+  </div>
+
+  <hr class="sidebar-divider">
+
+  <!-- Primary System Views -->
+  <div class="sidebar-section">
+    <div class="sidebar-section-header">
+      <span class="sidebar-section-title">Primary Views</span>
+    </div>
+    <ul class="sidebar-nav-list">
+      <li>
+        <button
+          type="button"
+          class="sidebar-nav-btn active"
+          data-view="overview"
+          data-nav-view="overview"
+        >
+          <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span class="nav-label">Market Overview</span>
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="sidebar-nav-btn"
+          data-view="census"
+          data-nav-view="census"
+        >
+          <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="8" y1="13" x2="16" y2="13"></line>
+            <line x1="8" y1="17" x2="16" y2="17"></line>
+            <line x1="10" y1="9" x2="8" y2="9"></line>
+          </svg>
+          <span class="nav-label">Full Price Census</span>
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+          class="sidebar-nav-btn"
+          data-view="governance"
+          data-nav-view="governance"
+        >
+          <svg class="nav-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+          <span class="nav-label">Data Governance</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <hr class="sidebar-divider">
+
+  <!-- Quick Filter Input -->
+  <div class="sidebar-search-box">
+    <input
+      type="search"
+      id="sidebar-commodity-search"
+      class="sidebar-search-input"
+      placeholder="Type here to filter..."
+      aria-label="Filter commodities in sidebar"
+    >
+  </div>
+
+  <!-- Collapsible Commodity Groups Tree -->
+  <div class="sidebar-section">
+    <div class="sidebar-section-header">
+      <span class="sidebar-section-title">Commodities</span>
+      <button type="button" id="btn-expand-all-groups" class="btn-expand-all">
+        Expand All
+      </button>
+    </div>
+  </div>
+
+  <div class="sidebar-tree" id="sidebar-commodity-tree">
+    {% for grp, items in commodities_by_group.items() %}
+    <div
+      class="sidebar-group {% if loop.first %}expanded{% endif %}"
+      data-group-name="{{ grp }}"
+    >
+      <button type="button" class="sidebar-group-toggle">
+        <span class="sidebar-group-left">
+          <svg class="group-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+          <span>{{ grp }}</span>
+        </span>
+        <span class="sidebar-group-count">{{ items | length }}</span>
+      </button>
+      <ul class="sidebar-group-items">
+        {% for item in items %}
+        <li>
+          <button
+            type="button"
+            class="sidebar-commodity-btn"
+            data-commodity="{{ item.commodity }}"
+            data-slug="{{ item.slug }}"
+            title="{{ item.commodity }} ({{ item.unit }})"
+          >
+            <span class="sidebar-item-name">{{ item.commodity }}</span>
+            <span class="sidebar-item-meta">
+              <span class="sidebar-item-price">{{ item.price | currency }}</span>
+              {% if item.dod_pct is not none and item.dod_pct > 0.0001 %}
+              <span class="dir-up" title="+{{ '%.2f'|format(item.dod_pct) }}% DoD">▲</span>
+              {% elif item.dod_pct is not none and item.dod_pct < -0.0001 %}
+              <span class="dir-down" title="{{ '%.2f'|format(item.dod_pct) }}% DoD">▼</span>
+              {% else %}
+              <span class="dir-flat" title="0.00% DoD">—</span>
+              {% endif %}
+            </span>
+          </button>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</aside>

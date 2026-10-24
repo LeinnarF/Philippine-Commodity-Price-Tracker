@@ -88,5 +88,13 @@ def test_select_commodities_execution(tmp_path):
     assert egg_row["commodity_group"] == "Basic Goods"
     assert egg_row["unit"] == "piece"
 
+    # Verify anomaly correction: Chicken Egg on 2026-09-10 should be 8.13, not the bulletin typo 200.00
+    egg_sept10 = selected_df[
+        (selected_df["date"] == "2026-09-10")
+        & (selected_df["commodity"] == "Chicken Egg (Medium White)")
+    ]
+    assert len(egg_sept10) == 1
+    assert egg_sept10.iloc[0]["price_prevailing"] == 8.13
+
     corn_row = selected_df[selected_df["commodity"] == "Yellow Corn"].iloc[0]
     assert corn_row["commodity_group"] == "Vegetables"

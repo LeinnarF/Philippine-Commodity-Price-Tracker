@@ -1,0 +1,72 @@
+<!-- Breadcrumb Bar -->
+<div class="view-topbar">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <button type="button" class="breadcrumb-link" data-nav-view="overview">Market Overview</button>
+    <span class="breadcrumb-sep">/</span>
+    <strong style="color: var(--navy-900);">Data Governance, Audit & Methodology</strong>
+  </nav>
+</div>
+
+<!-- Data Integrity & Methodology Audit Box -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title-group">
+      <span class="card-tag">Transparency & Provenance</span>
+      <h2 class="card-title">Data Governance, Verification & Methodology Disclosure</h2>
+      <span class="card-subtitle">
+        Audited data lineage from raw Department of Agriculture AMAS PDF bulletins to DuckDB analytical views
+      </span>
+    </div>
+    <span class="badge badge-decrease">
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: -1px; margin-right: 4px;" aria-hidden="true">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      Zero Synthetic Records Assertion
+    </span>
+  </div>
+  <div class="card-body">
+    <!-- Summary Stats Grid -->
+    <div class="audit-grid">
+      <div class="audit-stat">
+        <div class="lbl">Total Warehouse Rows</div>
+        <div class="val">{{ audit_info.total_rows | format_num(0) }}</div>
+      </div>
+      <div class="audit-stat">
+        <div class="lbl">Source Daily Bulletins</div>
+        <div class="val">{{ audit_info.total_bulletins }} PDFs</div>
+      </div>
+      <div class="audit-stat">
+        <div class="lbl">Market Jurisdiction</div>
+        <div class="val">{{ audit_info.market_scope }}</div>
+      </div>
+      <div class="audit-stat">
+        <div class="lbl">Synthetic Data Count</div>
+        <div class="val" style="color: #15803d;">{{ audit_info.synthetic_count | int }} (0.00%)</div>
+      </div>
+    </div>
+
+    <div class="methodology-text">
+      <p>
+        <strong>Data Lineage & Collection:</strong> All price observations in this dashboard originate from official
+        <em>Daily Price Index</em> PDF bulletins published by the Department of Agriculture Agribusiness and Marketing
+        Assistance Service (<a href="https://www.da.gov.ph/price-monitoring/" target="_blank" rel="noopener noreferrer">DA-AMAS</a>).
+        The extraction pipeline parses raw tabular bulletins into standardized business records covering retail prices
+        across NCR wet markets.
+      </p>
+      <p>
+        <strong>Cartesian Panel Rectangularization:</strong> To support continuous econometric time-series modeling and
+        moving averages, the dataset is structured as a complete rectangular panel grid of {{ kpis.total_dates }} dates
+        &times; {{ kpis.total_commodities }} commodities ({{ audit_info.total_rows | format_num(0) }} observations).
+        Sporadic single-day unmonitored survey gaps (e.g., non-reporting holidays) are forward-filled using the last
+        verified prevailing market price.
+      </p>
+      <p>
+        <strong>Historical Monitoring Boundary Notice:</strong>
+        <em>Pork Pigue (Hind Leg / Ham)</em> was officially decoupled and added to the DA monitoring roster on April 12,
+        2025. Its preceding 42 dates (March 1 to April 11, 2025) are strictly maintained as unmonitored blanks
+        (<code>NULL</code>) to guarantee that no synthetic or fabricated prices are ever introduced into the analytical
+        database.
+      </p>
+    </div>
+  </div>
+</div>

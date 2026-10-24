@@ -1,0 +1,110 @@
+<!-- Breadcrumb & Commodity Stepper Bar -->
+<div class="view-topbar">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <button type="button" class="breadcrumb-link" data-nav-view="overview">Market Overview</button>
+    <span class="breadcrumb-sep">/</span>
+    <span id="breadcrumb-group">Rice</span>
+    <span class="breadcrumb-sep">/</span>
+    <strong id="breadcrumb-commodity" style="color: var(--navy-900);">{{ default_commodity }}</strong>
+  </nav>
+
+  <div class="commodity-nav-buttons">
+    <button type="button" id="btn-prev-commodity" class="btn-step-commodity" title="Previous commodity">
+      ← Previous Item
+    </button>
+    <button type="button" id="btn-next-commodity" class="btn-step-commodity" title="Next commodity">
+      Next Item →
+    </button>
+  </div>
+</div>
+
+<!-- Commodity Header Banner -->
+<div class="detail-header-banner">
+  <div class="detail-title-block">
+    <h2 id="detail-commodity-title">{{ default_commodity }}</h2>
+    <div class="detail-meta-tags">
+      <span class="category-pill" id="detail-commodity-group">Rice</span>
+      <span class="badge badge-neutral" id="detail-commodity-unit">Unit: kg</span>
+      <span style="font-size: 12px; color: var(--text-muted);">
+        NCR Wet Markets · As of {{ kpis.latest_date_short }}
+      </span>
+    </div>
+  </div>
+
+  <div>
+    <label for="commodity-picker" style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 4px;">
+      Quick Switch Commodity
+    </label>
+    <select id="commodity-picker" class="search-input" style="min-width: 240px; font-weight: 600;">
+      {% for grp, items in commodities_by_group.items() %}
+      <optgroup label="{{ grp }}">
+        {% for item in items %}
+        <option value="{{ item.commodity }}" {% if item.commodity == default_commodity %}selected{% endif %}>
+          {{ item.commodity }} ({{ item.unit }})
+        </option>
+        {% endfor %}
+      </optgroup>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+
+<!-- Summary KPI Strip (7 Metric Boxes) -->
+<div class="commodity-metrics-bar" id="commodity-metrics-strip">
+  <div class="metric-box">
+    <div class="label">Prevailing Price</div>
+    <div class="value" id="box-price">—</div>
+    <div class="sub" id="box-unit">—</div>
+  </div>
+  <div class="metric-box">
+    <div class="label">1-Day Change (DoD)</div>
+    <div class="value" id="box-dod">—</div>
+    <div class="sub" id="box-dod-sub">vs yesterday</div>
+  </div>
+  <div class="metric-box">
+    <div class="label">7-Day Change (WoW)</div>
+    <div class="value" id="box-wow">—</div>
+    <div class="sub" id="box-wow-sub">vs 7d ago</div>
+  </div>
+  <div class="metric-box">
+    <div class="label">30-Day Change (MoM)</div>
+    <div class="value" id="box-mom">—</div>
+    <div class="sub" id="box-mom-sub">vs 30d ago</div>
+  </div>
+  <div class="metric-box">
+    <div class="label">7-Day SMA</div>
+    <div class="value" id="box-sma7">—</div>
+    <div class="sub">Short-term trend</div>
+  </div>
+  <div class="metric-box">
+    <div class="label">30-Day SMA</div>
+    <div class="value" id="box-sma30">—</div>
+    <div class="sub">Medium-term trend</div>
+  </div>
+  <div class="metric-box">
+    <div class="label">30-Day Volatility</div>
+    <div class="value" id="box-vol">—</div>
+    <div class="sub" id="box-cv">CV: —</div>
+  </div>
+</div>
+
+<!-- Interactive Price & Moving Average Chart Card -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title-group">
+      <span class="card-tag">Historical Price Velocity & Smoothing</span>
+      <h3 class="card-title">Daily Prevailing Retail Price, 7-Day SMA & 30-Day SMA</h3>
+      <span class="card-subtitle">Official DA AMAS survey observations across NCR wet markets</span>
+    </div>
+    <div class="timeframe-pills" role="group" aria-label="Chart Timeframe">
+      <button type="button" class="btn-timeframe" data-timeframe="1M">1M</button>
+      <button type="button" class="btn-timeframe" data-timeframe="3M">3M</button>
+      <button type="button" class="btn-timeframe" data-timeframe="6M">6M</button>
+      <button type="button" class="btn-timeframe" data-timeframe="1Y">1Y</button>
+      <button type="button" class="btn-timeframe active" data-timeframe="ALL">All ({{ kpis.total_dates }}d)</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div id="commodity-trend-plot" style="width: 100%; height: 480px;"></div>
+  </div>
+</div>

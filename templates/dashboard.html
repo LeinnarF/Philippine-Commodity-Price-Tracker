@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- View 1: Market Overview (Default Landing View) -->
+<section id="view-overview" class="view-panel active" aria-label="Market Overview">
+  {% include "views/overview.html" %}
+</section>
+
+<!-- View 2: Individual Commodity Detail View -->
+<section id="view-commodity" class="view-panel" aria-label="Commodity Detail">
+  {% include "views/commodity_detail.html" %}
+</section>
+
+<!-- View 3: Full Price Census View -->
+<section id="view-census" class="view-panel" aria-label="Full Price Census">
+  {% include "views/census_table.html" %}
+</section>
+
+<!-- View 4: Data Governance & Methodology View -->
+<section id="view-governance" class="view-panel" aria-label="Data Governance">
+  {% include "views/governance.html" %}
+</section>
+{% endblock %}

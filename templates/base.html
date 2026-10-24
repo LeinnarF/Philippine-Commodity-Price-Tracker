@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}Philippine Commodity Price Tracker | Bantay Presyo{% endblock %}</title>
+
+  <!-- Plotly.js CDN -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+
+  <!-- Modular Formal Stylesheet -->
+  <link rel="stylesheet" href="assets/css/dashboard.css?v={{ build_id }}">
+</head>
+<body>
+  <div class="app-shell">
+    {% include "components/sidebar.html" %}
+
+    <div class="main-workspace">
+      {% include "components/header.html" %}
+
+      <main class="workspace-content">
+        {% block content %}{% endblock %}
+      </main>
+
+      <footer class="dashboard-footer">
+        <div class="footer-inner">
+          <div>
+            <strong>Philippine Commodity Price Tracker (Bantay Presyo)</strong> · Automated Public Research Architecture.<br>
+            Data sourced directly from official Department of Agriculture AMAS Daily Price Index bulletins.
+          </div>
+          <div>
+            Engine: <strong>DuckDB Embedded Columnar OLAP</strong> + <strong>Jinja2 SSG</strong> + <strong>Plotly.js</strong><br>
+            Archival Observation Span: {{ kpis.earliest_date_formatted }} to {{ kpis.latest_date_formatted }} ({{ kpis.total_dates }} daily bulletins).
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Modular Precomputed Data Payload & Interactive Controller -->
+  <script src="assets/data/commodities.js?v={{ build_id }}"></script>
+  <script src="assets/js/dashboard.js?v={{ build_id }}"></script>
+
+  {% if dev_mode %}
+  <!-- Live Development Watcher Auto-Reload Client -->
+  <script>
+    (function () {
+      const currentBuildId = "{{ build_id }}";
+      setInterval(async () => {
+        try {
+          const resp = await fetch("/__dev_poll__", { cache: "no-store" });
+          if (!resp.ok) return;
+          const data = await resp.json();
+          if (data.build_id && data.build_id !== currentBuildId) {
+            console.info("[LiveWatcher] Change detected (build " + data.build_id + "), reloading...");
+            window.location.reload();
+          }
+        } catch (err) {
+          // Server restarting or temporarily unavailable
+        }
+      }, 800);
+    })();
+  </script>
+  {% endif %}
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

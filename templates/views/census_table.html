@@ -1,0 +1,106 @@
+<!-- Breadcrumb Bar -->
+<div class="view-topbar">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <button type="button" class="breadcrumb-link" data-nav-view="overview">Market Overview</button>
+    <span class="breadcrumb-sep">/</span>
+    <strong style="color: var(--navy-900);">Full Price Census</strong>
+  </nav>
+</div>
+
+<!-- Master Retail Price Monitoring Table -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title-group">
+      <span class="card-tag">Full Price Census</span>
+      <h2 class="card-title">Comprehensive Retail Price Monitoring Panel</h2>
+      <span class="card-subtitle">
+        Active observation grid for all 48 monitored commodities in NCR wet markets · Click any row to open item detail
+      </span>
+    </div>
+    <div
+      id="table-row-counter"
+      style="font-size: 12px; font-weight: 600; color: var(--text-muted); font-family: var(--font-mono);"
+    >
+      Showing 48 of 48 commodities
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- Toolbar: Search and Category Pills -->
+    <div class="table-toolbar">
+      <div class="filter-pills" id="category-filter-buttons">
+        <button type="button" class="btn-filter active" data-category="ALL">All (48)</button>
+        {% for grp, count in group_counts.items() %}
+        <button type="button" class="btn-filter" data-category="{{ grp }}">{{ grp }} ({{ count }})</button>
+        {% endfor %}
+      </div>
+      <div class="search-input-wrapper">
+        <input
+          type="search"
+          id="table-search-input"
+          class="search-input"
+          placeholder="Search commodity or category..."
+        >
+      </div>
+    </div>
+
+    <!-- Master Price Table -->
+    <div class="table-container">
+      <table class="formal-table" id="master-price-table">
+        <thead>
+          <tr>
+            <th class="sortable" data-sort="commodity">Commodity ⇅</th>
+            <th class="sortable" data-sort="group">Category ⇅</th>
+            <th class="text-center">Unit</th>
+            <th class="text-right sortable" data-sort="price">Prevailing Price ⇅</th>
+            <th class="text-right sortable" data-sort="dod">1-Day (DoD) ⇅</th>
+            <th class="text-right sortable" data-sort="wow">7-Day (WoW) ⇅</th>
+            <th class="text-right sortable" data-sort="mom">30-Day (MoM) ⇅</th>
+            <th class="text-right sortable" data-sort="sma7">7d SMA ⇅</th>
+            <th class="text-right sortable" data-sort="sma30">30d SMA ⇅</th>
+            <th class="text-right sortable" data-sort="vol">30d Volatility ⇅</th>
+            <th class="text-right sortable" data-sort="cv">30d CV ⇅</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in snapshot_rows %}
+          <tr
+            class="clickable-row"
+            data-commodity="{{ row.commodity | lower }}"
+            data-group="{{ row.commodity_group }}"
+            data-target-commodity="{{ row.commodity }}"
+            title="Click to open {{ row.commodity }} trend view"
+          >
+            <td class="commodity-cell">{{ row.commodity }}</td>
+            <td><span class="category-pill">{{ row.commodity_group }}</span></td>
+            <td class="text-center font-mono" style="color: var(--text-muted);">{{ row.unit }}</td>
+            <td class="text-right font-mono" data-val="{{ row.price_prevailing or -999999 }}" style="font-weight: 700;">
+              {{ row.price_prevailing | currency }}
+            </td>
+            <td class="text-right" data-val="{{ row.dod_pct or -999999 }}">
+              {{ row.dod_pct | badge }}
+            </td>
+            <td class="text-right" data-val="{{ row.wow_pct or -999999 }}">
+              {{ row.wow_pct | badge }}
+            </td>
+            <td class="text-right" data-val="{{ row.mom_pct or -999999 }}">
+              {{ row.mom_pct | badge }}
+            </td>
+            <td class="text-right font-mono" data-val="{{ row.sma_7d or -999999 }}">
+              {{ row.sma_7d | currency }}
+            </td>
+            <td class="text-right font-mono" data-val="{{ row.sma_30d or -999999 }}">
+              {{ row.sma_30d | currency }}
+            </td>
+            <td class="text-right font-mono" data-val="{{ row.volatility_30d or -999999 }}">
+              ₱{{ "%.2f"|format(row.volatility_30d) if row.volatility_30d is not none else "—" }}
+            </td>
+            <td class="text-right font-mono" data-val="{{ row.cv_30d or -999999 }}">
+              {{ "%.2f"|format(row.cv_30d * 100) if row.cv_30d is not none else "—" }}%
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

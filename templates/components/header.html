@@ -1,0 +1,47 @@
+<header class="dashboard-navbar">
+  <div class="navbar-container">
+    <div class="navbar-left">
+      <button
+        type="button"
+        id="btn-sidebar-toggle"
+        class="btn-sidebar-toggle"
+        title="Toggle navigation sidebar"
+        aria-label="Toggle Sidebar"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="navbar-heading-group">
+        <h1 class="navbar-title" id="navbar-view-title">Dashboard</h1>
+        <p class="navbar-subtitle" id="navbar-view-subtitle">
+          Bantay Presyo · Daily Retail Food Price Monitoring & Analytics · NCR Wet Markets
+        </p>
+      </div>
+    </div>
+
+    <div class="navbar-right">
+      <div class="navbar-date-badge">
+        <span class="date-lbl">Latest:</span>
+        <strong class="date-val">{{ kpis.latest_date_short }}</strong>
+      </div>
+
+      <button
+        type="button"
+        class="btn-navbar-action btn-print btn-icon-only"
+        onclick="window.print()"
+        title="Print Bulletin (Save as PDF)"
+        aria-label="Print Bulletin"
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
