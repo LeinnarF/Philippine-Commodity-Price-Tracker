@@ -32,7 +32,7 @@ def test_clean_dataset_execution(tmp_path):
     and leaves the input selected_da_amas_prices.csv completely intact.
     """
     if not DEFAULT_SELECTED_CSV.exists():
-        pytest.skip("Selected DA AMAS prices CSV not found")
+        pytest.skip("Selected Department of Agriculture price monitoring prices CSV not found")
 
     # Record hash of input file before running
     input_hash_before = _file_hash(DEFAULT_SELECTED_CSV)
@@ -93,7 +93,7 @@ def test_production_clean_csv_integrity():
     Validate that data/clean_da_amas_prices.csv on disk meets all final requirements.
     """
     if not DEFAULT_CLEAN_CSV.exists():
-        pytest.skip("Production clean DA AMAS prices CSV not found")
+        pytest.skip("Production clean Department of Agriculture price monitoring prices CSV not found")
 
     df = pd.read_csv(DEFAULT_CLEAN_CSV)
     assert list(df.columns) == CLEAN_COLUMNS

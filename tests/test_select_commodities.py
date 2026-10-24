@@ -35,7 +35,7 @@ def test_commodity_definitions_structure():
 def test_select_commodities_execution(tmp_path):
     """Verify that select_commodities runs on raw CSV and outputs a complete panel dataset."""
     if not DEFAULT_RAW_CSV.exists():
-        pytest.skip("Raw DA AMAS prices CSV not found")
+        pytest.skip("Raw Department of Agriculture price monitoring prices CSV not found")
 
     output_csv = tmp_path / "selected_sample.csv"
     selected_df = select_commodities(

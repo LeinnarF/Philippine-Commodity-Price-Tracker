@@ -7,23 +7,23 @@ This document defines the origin, structure, and integrity guarantees for data u
 ## 1. Data Integrity & Provenance Policy
 
 **100% Official Government Data Guarantee**:
-- All records in `data/commodities.duckdb` are parsed directly from official Department of Agriculture (DA AMAS) Daily Price Index bulletins.
+- All records in `data/commodities.duckdb` are parsed directly from official Department of Agriculture price monitoring Daily Price Index bulletins.
 - Zero synthetic data is used in the database.
 - Every observation links directly to its source bulletin URL (`source_url`) and raw PDF archive (`raw_file_path`).
 
 | Field | Production Value | Description |
 |---|---|---|
-| **`source`** | `"da_amas"` | Philippine Department of Agriculture – Agribusiness and Marketing Assistance Service |
+| **`source`** | `"da_amas"` | Philippine Department of Agriculture price monitoring |
 | **`is_synthetic`** | `FALSE` | Explicit boolean flag confirming authentic government observation |
 | **`source_url`** | `https://www.da.gov.ph/wp-content/uploads/...` | Permanent URL to the published PDF bulletin |
 | **`market_scope`** | `"NCR Wet Markets"` | Survey coverage across major public wet markets in Metro Manila |
 
 ---
 
-## 2. Official Data Source: DA AMAS Price Monitoring
+## 2. Official Data Source: Department of Agriculture Price Monitoring
 
 ### Overview
-- **Publishing Agency**: Department of Agriculture (DA) – Agribusiness and Marketing Assistance Service (AMAS).
+- **Publishing Agency**: Department of Agriculture (DA) price monitoring.
 - **Portal**: [DA Price Monitoring Updates](https://www.da.gov.ph/price-monitoring/) / [Bantay Presyo](https://bantaypresyo.da.gov.ph/).
 - **Bulletin Format**: "Daily Price Index" 8-page PDF document published every government workday (Monday through Saturday, excluding Sundays and Philippine regular holidays).
 - **Survey Scope**: Prevailing retail prices collected across surveyed major wet markets in Metro Manila (NCR), including Commonwealth Market, Mega Q-Mart, Quinta Market, and Muñoz Market.

@@ -10,7 +10,7 @@
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 
   <!-- Modular Formal Stylesheet -->
-  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792831215">
+  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792832247">
 </head>
 <body>
   <div class="app-shell">
@@ -1957,7 +1957,7 @@
     <div class="card-title-group">
       <span class="card-tag">Historical Price Velocity &amp; Smoothing</span>
       <h2 class="card-title" id="commodity-chart-title">Daily Prevailing Retail Price, 7-Day SMA &amp; 30-Day SMA</h2>
-      <span class="card-subtitle">Official DA-AMAS survey observations across NCR wet markets</span>
+      <span class="card-subtitle">Official Department of Agriculture price monitoring survey observations across NCR wet markets</span>
     </div>
     <div class="timeframe-pills" role="group" aria-label="Chart Timeframe">
       <button type="button" class="btn-timeframe" data-timeframe="1M">1M</button>
@@ -3824,7 +3824,7 @@
       </div>
       <hr class="kpi-card-divider">
       <div class="kpi-detail">
-        <span class="kpi-highlight">Official DA-AMAS</span>
+        <span class="kpi-highlight">Department of Agriculture price monitoring</span>
         <span class="kpi-context">Daily Price Index releases</span>
       </div>
     </div>
@@ -3882,7 +3882,7 @@
       <span class="card-tag">Transparency &amp; Provenance</span>
       <h2 class="card-title">Data Governance, Verification &amp; Methodology Disclosure</h2>
       <span class="card-subtitle">
-        Audited data lineage from raw Department of Agriculture AMAS PDF bulletins to DuckDB analytical views
+        Audited data lineage from raw Department of Agriculture price monitoring PDF bulletins to DuckDB analytical views
       </span>
     </div>
     <span class="status-pill status-pill-decrease">
@@ -3896,8 +3896,7 @@
     <div class="methodology-text">
       <p>
         <strong>Data Lineage & Collection:</strong> All price observations in this dashboard originate from official
-        <em>Daily Price Index</em> PDF bulletins published by the Department of Agriculture Agribusiness and Marketing
-        Assistance Service (<a href="https://www.da.gov.ph/price-monitoring/" target="_blank" rel="noopener noreferrer">DA-AMAS</a>).
+        <em>Daily Price Index</em> PDF bulletins published by the <a href="https://www.da.gov.ph/price-monitoring/" target="_blank" rel="noopener noreferrer">Department of Agriculture price monitoring</a> portal.
         The extraction pipeline parses raw tabular bulletins into standardized business records covering retail prices
         across NCR wet markets.
       </p>
@@ -3926,7 +3925,7 @@
         <div class="footer-inner">
           <div>
             <strong>Philippine Commodity Price Tracker (Bantay Presyo)</strong> · Automated Public Research Architecture.<br>
-            Data sourced directly from official Department of Agriculture AMAS Daily Price Index bulletins.
+            Data sourced directly from official Department of Agriculture price monitoring Daily Price Index bulletins.
           </div>
           <div>
             Engine: <strong>DuckDB Embedded Columnar OLAP</strong> + <strong>Jinja2 SSG</strong> + <strong>Plotly.js</strong><br>
@@ -3938,8 +3937,8 @@
   </div>
 
   <!-- Modular Precomputed Data Payload & Interactive Controller -->
-  <script src="assets/data/commodities.js?v=1792831215"></script>
-  <script src="assets/js/dashboard.js?v=1792831215"></script>
+  <script src="assets/data/commodities.js?v=1792832247"></script>
+  <script src="assets/js/dashboard.js?v=1792832247"></script>
 
   
 

@@ -4,7 +4,7 @@
 An automated daily tracker and forecasting platform for retail prices of basic agri-fishery commodities in the Philippines (e.g., rice, pork, chicken, fish, vegetables, spices).
 
 The project bridges three core disciplines:
-1. **Data Engineering**: Resilient scraping from DA AMAS & Bantay Presyo, DuckDB embedded persistence tracked directly in Git (Git-as-a-Database), automated deduplication, and GitHub Actions scheduled orchestration.
+1. **Data Engineering**: Resilient scraping from Department of Agriculture price monitoring & Bantay Presyo, DuckDB embedded persistence tracked directly in Git (Git-as-a-Database), automated deduplication, and GitHub Actions scheduled orchestration.
 2. **Data Analytics**: Historical price trends, 7-day and 30-day rolling moving averages, day-over-day price velocity ($\Delta_{1d}$), volatility metrics, and top gainers/decliners ranking.
 3. **Data Science**: Time-series price forecasting using `statsmodels` (Exponential Smoothing / ARIMA) with 80% and 95% confidence intervals, backtested on holdout data.
 4. **Presentation**: A formal, zero-overhead static dashboard (`public/index.html`) rendered via Jinja2 with interactive Plotly charts, deployed to GitHub Pages.
@@ -17,7 +17,7 @@ The data pipeline decouples network downloading, PDF table extraction, commodity
 
 ```mermaid
 flowchart LR
-    DA["Official DA AMAS Portal<br/>(da.gov.ph)"] -->|Stage 1: Parallel Download| PDFs[("data/raw/da_amas/*.pdf<br/>(451 Daily Bulletins)")]
+    DA["Department of Agriculture Price Monitoring Portal<br/>(da.gov.ph/price-monitoring/)"] -->|Stage 1: Parallel Download| PDFs[("data/raw/da_amas/*.pdf<br/>(451 Daily Bulletins)")]
     PDFs -->|Stage 2: Offline Multiprocessing| RAW["data/raw_da_amas_prices.csv<br/>(Consolidated Raw Dataset)"]
     RAW -->|Stage 3: Commodity Selection & Panel Grid| SEL["data/selected_da_amas_prices.csv<br/>(Selected 48 Commodities Panel)"]
     SEL -->|Stage 4: Metadata Strip & Export| CLEAN["data/clean_da_amas_prices.csv<br/>(Production Clean Dataset)"]
@@ -148,7 +148,7 @@ Full provenance and audit table preserving source bulletin filenames, URLs, and 
 | `unit` | `VARCHAR` | `NOT NULL` | Standard measurement unit |
 | `price_prevailing` | `DOUBLE` | `CHECK (price_prevailing IS NULL OR price_prevailing > 0)` | Prevailing retail price (₱ PHP) |
 | `market_scope` | `VARCHAR` | `NOT NULL` | Market jurisdiction ('NCR Wet Markets') |
-| `source` | `VARCHAR` | `NOT NULL` | Origin agency ('da_amas') |
+| `source` | `VARCHAR` | `NOT NULL` | Origin agency (Department of Agriculture price monitoring, 'da_amas') |
 | `is_synthetic` | `BOOLEAN` | `CHECK (is_synthetic = FALSE)` | Provenance assertion ensuring real government data |
 | `raw_count` | `INTEGER` | `CHECK (raw_count >= 0)` | Number of raw survey records matched for this commodity |
 | `raw_file` | `VARCHAR` | `NOT NULL` | Source PDF bulletin filename |

@@ -1,6 +1,6 @@
 """
 Batch PDF-to-CSV Extractor for Philippine Commodity Price Tracker (Stage 2).
-Parses all locally downloaded DA AMAS Daily Price Index PDFs into a consolidated raw CSV file.
+Parses all locally downloaded Department of Agriculture price monitoring Daily Price Index PDFs into a consolidated raw CSV file.
 Runs 100% offline at CPU speed using multi-process parallelism.
 """
 
@@ -85,7 +85,7 @@ def run_batch_extraction(
         workers = min(cpu_count, 8)
 
     logger.info("==================================================")
-    logger.info("DA AMAS Batch PDF-to-CSV Extractor (Stage 2)")
+    logger.info("Department of Agriculture Price Monitoring Batch PDF-to-CSV Extractor (Stage 2)")
     logger.info("Input PDF Directory : %s (%d files)", input_dir, len(pdf_files))
     logger.info("Output CSV File     : %s", output_path)
     logger.info("Parallel Workers    : %d CPU processes", workers)

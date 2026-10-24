@@ -1,5 +1,5 @@
 """
-Unit tests for the DA AMAS PDF bulletin parser (pipeline.pdf_parser).
+Unit tests for the Department of Agriculture price monitoring PDF bulletin parser (pipeline.pdf_parser).
 """
 
 from pathlib import Path
@@ -34,7 +34,7 @@ def test_infer_unit():
 
 
 def test_real_pdf_parser_on_fixture():
-    """Verify DA AMAS PDF parser extracts genuine records from archived bulletin."""
+    """Verify Department of Agriculture price monitoring PDF parser extracts genuine records from archived bulletin."""
     fixture_path = Path("data/raw/da_amas/2026-10-20.pdf")
     if not fixture_path.exists():
         pytest.skip("Local test fixture PDF not present")

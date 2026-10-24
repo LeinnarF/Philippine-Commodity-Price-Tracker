@@ -1,7 +1,7 @@
 """
-Universal DA AMAS PDF Bulletin Parser for Philippine Commodity Price Tracker.
+Universal Department of Agriculture Price Monitoring PDF Bulletin Parser for Philippine Commodity Price Tracker.
 Extracts daily retail commodity price records from official Department of Agriculture
-Agribusiness and Marketing Assistance Service (DA AMAS) "Daily Price Index" PDF bulletins.
+price monitoring "Daily Price Index" PDF bulletins.
 Handles structural layout variations across 2025 and 2026 bulletins.
 """
 
@@ -64,7 +64,7 @@ def parse_da_amas_pdf(
     source_url: str | None = None,
 ) -> pd.DataFrame:
     """
-    Parses an official DA AMAS "Daily Price Index" PDF bulletin across all pages.
+    Parses an official Department of Agriculture price monitoring "Daily Price Index" PDF bulletin across all pages.
     Handles both 2025 (4-column with UNIT) and 2026 (3-column) layout variations.
     Includes commodities with valid numeric prices as well as rows with missing/unreported
     prices (e.g. 'n/a', '-', or blank).
@@ -205,7 +205,7 @@ def parse_da_amas_pdf(
 
     df = pd.DataFrame(records)
     logger.info(
-        "Parsed %d commodity records from DA AMAS PDF for date %s",
+        "Parsed %d commodity records from Department of Agriculture price monitoring PDF for date %s",
         len(df),
         target_date,
     )

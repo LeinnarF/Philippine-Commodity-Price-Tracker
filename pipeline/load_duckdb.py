@@ -1,7 +1,7 @@
 """
 Stage 5: DuckDB Analytical Warehouse Loader for Philippine Commodity Price Tracker.
 
-Loads clean and selected DA AMAS price CSV datasets into an embedded DuckDB database
+Loads clean and selected Department of Agriculture price monitoring CSV datasets into an embedded DuckDB database
 (data/commodities.duckdb). Replaces legacy tables (e.g., fetch_log), builds strictly-typed
 Silver layer tables (commodity_prices, audit_prices), and creates Gold layer analytical SQL views
 (v_commodity_analytics, v_latest_snapshot, v_category_indices) for instant dashboard queries

@@ -1,7 +1,7 @@
 """
 Selected Commodity Data Pipeline for Philippine Commodity Price Tracker.
 Filters, standardizes, and structures the selected 48 dashboard commodities from
-raw DA AMAS retail price records (data/raw_da_amas_prices.csv) into a unified panel
+raw Department of Agriculture price monitoring retail price records (data/raw_da_amas_prices.csv) into a unified panel
 dataset (data/selected_da_amas_prices.csv).
 
 Features:
@@ -43,7 +43,7 @@ DEFAULT_SELECTED_CSV = Path(__file__).resolve().parent.parent / "data" / "select
 DATA_ANOMALY_CORRECTIONS: dict[tuple[str, str], tuple[float, str]] = {
     ("2026-09-10", "Chicken Egg (Medium White)"): (
         8.13,
-        "Human entry error in official DA AMAS bulletin (printed 200.00/pc instead of prevailing 8.13/pc; aligned with 2026-09-09 and 2026-09-11 prices).",
+        "Human entry error in official Department of Agriculture price monitoring bulletin (printed 200.00/pc instead of prevailing 8.13/pc; aligned with 2026-09-09 and 2026-09-11 prices).",
     ),
 }
 

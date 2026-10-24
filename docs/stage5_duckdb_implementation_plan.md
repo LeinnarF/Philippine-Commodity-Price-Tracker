@@ -47,7 +47,7 @@ Because GitHub Actions runners are stateless virtual machines that are wiped cle
 ```mermaid
 sequenceDiagram
     participant Cron as GitHub Actions (Daily Schedule)
-    participant DA as DA AMAS Website (da.gov.ph)
+    participant DA as Department of Agriculture Price Monitoring Website (da.gov.ph)
     participant Repo as GitHub Repository (main branch)
     participant DDB as DuckDB (In-Runner Build)
     participant Pages as GitHub Pages (Static Host)
@@ -74,7 +74,7 @@ The GitHub Actions workflow uses `permissions: contents: write` to automatically
     git config user.name "github-actions[bot]"
     git config user.email "github-actions[bot]@users.noreply.github.com"
     git add data/clean_da_amas_prices.csv data/selected_da_amas_prices.csv data/raw_da_amas_prices.csv
-    git diff --staged --quiet || (git commit -m "chore(data): update daily DA AMAS prices" && git push)
+    git diff --staged --quiet || (git commit -m "chore(data): update daily Department of Agriculture price monitoring prices" && git push)
 ```
 
 ---
@@ -85,7 +85,7 @@ The GitHub Actions workflow uses `permissions: contents: write` to automatically
 
 ```mermaid
 flowchart LR
-    DA["Official DA AMAS Portal<br/>(da.gov.ph)"] -->|Stage 1: Incremental Fetch| PDFs[("data/raw/da_amas/*.pdf")]
+    DA["Department of Agriculture Price Monitoring Portal<br/>(da.gov.ph)"] -->|Stage 1: Incremental Fetch| PDFs[("data/raw/da_amas/*.pdf")]
     PDFs -->|Stage 2: Multiprocess Parse| RAW["data/raw_da_amas_prices.csv<br/>(Bronze Layer)"]
     RAW -->|Stage 3: 48-Item Panel Grid| SEL["data/selected_da_amas_prices.csv<br/>(11-Col Provenance CSV)"]
     SEL -->|Stage 4: Metadata Strip| CLEAN["data/clean_da_amas_prices.csv<br/>(5-Col Clean CSV)"]

@@ -1,6 +1,6 @@
 """
 Parallel Raw PDF Downloader for Philippine Commodity Price Tracker.
-Crawls and downloads up to 2 years of official Department of Agriculture (DA AMAS)
+Crawls and downloads up to 2 years of official Department of Agriculture price monitoring
 Daily Price Index bulletins in parallel into data/raw/da_amas/.
 
 NOTE: This script ONLY downloads and archives raw PDF files. No parsing or extraction is performed.
@@ -111,7 +111,7 @@ def crawl_da_catalog(use_cache: bool = True) -> dict[str, str]:
                         except ValueError:
                             continue
 
-            logger.info("Found %d official daily PDF bulletins in DA AMAS portal.", len(date_to_url))
+            logger.info("Found %d official daily PDF bulletins in Department of Agriculture price monitoring portal.", len(date_to_url))
 
             # Save catalog to disk
             with open(CATALOG_CACHE_FILE, "w") as f:
@@ -201,7 +201,7 @@ def run_parallel_downloader(
     refresh_catalog: bool = False,
 ) -> dict[str, int]:
     """
-    Coordinates multi-threaded downloading of DA AMAS PDF bulletins.
+    Coordinates multi-threaded downloading of Department of Agriculture price monitoring PDF bulletins.
     """
     RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -367,7 +367,7 @@ def run_parallel_downloader(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Parallel Downloader for Official DA AMAS PDF Bulletins (Downloads ONLY, no extraction)"
+        description="Parallel Downloader for Official Department of Agriculture Price Monitoring PDF Bulletins (Downloads ONLY, no extraction)"
     )
     parser.add_argument(
         "--workers",

@@ -29,7 +29,7 @@ The pipeline follows the industry-standard **Medallion Architecture** (Bronze $\
 ```mermaid
 flowchart TD
     subgraph S1["Raw Ingestion (External)"]
-        DA["DA AMAS Price Bulletins<br/>(da.gov.ph)"]
+        DA["Department of Agriculture Price Monitoring Bulletins<br/>(da.gov.ph)"]
     end
 
     subgraph Bronze["Bronze Layer (Raw Archive)"]
