@@ -10,6 +10,7 @@ from typing import Any
 
 import duckdb
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 from pipeline.dashboard.filters import slugify_filter
 
@@ -186,43 +187,74 @@ def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[st
         ORDER BY date, commodity_group;
     """).df()
 
-    fig = go.Figure()
-    for grp in sorted(ts_df["commodity_group"].unique()):
+    groups = sorted(ts_df["commodity_group"].unique())
+    n_groups = len(groups)
+    cols = 4
+    rows = (n_groups + cols - 1) // cols
+
+    # Subplot titles with clean typography
+    subplot_titles = [f"<b>{grp}</b>" for grp in groups]
+
+    fig = make_subplots(
+        rows=rows,
+        cols=cols,
+        subplot_titles=subplot_titles,
+        horizontal_spacing=0.045,
+        vertical_spacing=0.18,
+    )
+
+    for i, grp in enumerate(groups):
+        r = (i // cols) + 1
+        c = (i % cols) + 1
         sub = ts_df[ts_df["commodity_group"] == grp]
-        fig.add_trace(go.Scatter(
-            x=sub["date_str"],
-            y=sub["index_base100"],
-            mode="lines",
-            name=grp,
-            line=dict(width=2.2, color=CATEGORY_PALETTE.get(grp, "#064e3b")),
-            hovertemplate="%{x|%b %d, %Y}<br><b>" + grp + "</b>: %{y:.2f}<extra></extra>",
-        ))
+        color = CATEGORY_PALETTE.get(grp, "#064e3b")
+
+        # Subtle Base 100 baseline reference
+        fig.add_hline(
+            y=100,
+            line_dash="dot",
+            line_width=1,
+            line_color="#cbd5e1",
+            row=r,
+            col=c,
+        )
+
+        fig.add_trace(
+            go.Scatter(
+                x=sub["date_str"],
+                y=sub["index_base100"],
+                mode="lines",
+                name=grp,
+                line=dict(width=2.0, color=color),
+                showlegend=False,
+                hovertemplate="%{x|%b %d, %Y}<br>" + grp + ": <b>%{y:.2f}</b><extra></extra>",
+            ),
+            row=r,
+            col=c,
+        )
+
+    # Style subplot titles
+    for annotation in fig["layout"]["annotations"]:
+        annotation["font"] = dict(size=12, color="#0f172a", family="Inter, system-ui, sans-serif")
 
     fig.update_layout(
         template="plotly_white",
-        hovermode="x unified",
-        margin=dict(l=55, r=20, t=30, b=40),
-        xaxis=dict(
-            title="",
-            showgrid=True,
-            gridcolor="#f1f5f9",
-            zeroline=False,
-        ),
-        yaxis=dict(
-            title="Price Index (Base 100)",
-            showgrid=True,
-            gridcolor="#f1f5f9",
-            zeroline=True,
-            zerolinecolor="#cbd5e1",
-        ),
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="right",
-            x=1,
-            font=dict(size=11),
-        ),
+        margin=dict(l=35, r=20, t=35, b=30),
+        height=480,
+    )
+    fig.update_xaxes(
+        showgrid=True,
+        gridcolor="#f8fafc",
+        tickfont=dict(size=9, color="#94a3b8"),
+        showticklabels=True,
+        nticks=4,
+    )
+    fig.update_yaxes(
+        showgrid=True,
+        gridcolor="#f1f5f9",
+        tickfont=dict(size=9, color="#64748b"),
+        zeroline=False,
+        nticks=4,
     )
 
     chart_json = json.dumps(json.loads(fig.to_json()), separators=(",", ":"))
