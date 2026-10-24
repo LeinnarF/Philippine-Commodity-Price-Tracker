@@ -46,3 +46,7 @@ htmlcov/
 # Database files
 *.duckdb
 *.duckdb.wal
+
+# Generated static dashboard
+public/
+
