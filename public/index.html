@@ -10,7 +10,7 @@
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 
   <!-- Modular Formal Stylesheet -->
-  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792832247">
+  <link rel="stylesheet" href="assets/css/dashboard.css?v=1792832885">
 </head>
 <body>
   <div class="app-shell">
@@ -1545,7 +1545,6 @@
   <div class="card">
     <div class="card-header">
       <div class="card-title-group">
-        <span class="card-tag">Daily Price Inflation</span>
         <h2 class="card-title">Top 5 Price Increases (Day-over-Day)</h2>
       </div>
       <span class="status-pill status-pill-increase">▲ Price Advances</span>
@@ -1649,7 +1648,6 @@
   <div class="card">
     <div class="card-header">
       <div class="card-title-group">
-        <span class="card-tag">Daily Price Deflation</span>
         <h2 class="card-title">Top 5 Price Decreases (Day-over-Day)</h2>
       </div>
       <span class="status-pill status-pill-decrease">▼ Price Reductions</span>
@@ -1754,9 +1752,7 @@
 <div class="card">
   <div class="card-header">
     <div class="card-title-group">
-      <span class="card-tag">Macro Basket Analysis</span>
       <h2 class="card-title">Category Retail Price Indices (Base 100 = March 1, 2025)</h2>
-      <span class="card-subtitle">Equal-weighted aggregated daily index across 7 standardized food categories</span>
     </div>
   </div>
   <div class="card-body">
@@ -1955,9 +1951,7 @@
 <div class="card">
   <div class="card-header">
     <div class="card-title-group">
-      <span class="card-tag">Historical Price Velocity &amp; Smoothing</span>
       <h2 class="card-title" id="commodity-chart-title">Daily Prevailing Retail Price, 7-Day SMA &amp; 30-Day SMA</h2>
-      <span class="card-subtitle">Official Department of Agriculture price monitoring survey observations across NCR wet markets</span>
     </div>
     <div class="timeframe-pills" role="group" aria-label="Chart Timeframe">
       <button type="button" class="btn-timeframe" data-timeframe="1M">1M</button>
@@ -1979,11 +1973,7 @@
 <div class="card">
   <div class="card-header">
     <div class="card-title-group">
-      <span class="card-tag">Full Price Census</span>
       <h2 class="card-title">Comprehensive Retail Price Monitoring Panel</h2>
-      <span class="card-subtitle">
-        Active observation grid for all 48 monitored commodities in NCR wet markets · Click any row to open item detail
-      </span>
     </div>
     <div
       id="table-row-counter"
@@ -3879,11 +3869,7 @@
 <div class="card">
   <div class="card-header">
     <div class="card-title-group">
-      <span class="card-tag">Transparency &amp; Provenance</span>
       <h2 class="card-title">Data Governance, Verification &amp; Methodology Disclosure</h2>
-      <span class="card-subtitle">
-        Audited data lineage from raw Department of Agriculture price monitoring PDF bulletins to DuckDB analytical views
-      </span>
     </div>
     <span class="status-pill status-pill-decrease">
       <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: -1px; margin-right: 4px;" aria-hidden="true">
@@ -3937,8 +3923,8 @@
   </div>
 
   <!-- Modular Precomputed Data Payload & Interactive Controller -->
-  <script src="assets/data/commodities.js?v=1792832247"></script>
-  <script src="assets/js/dashboard.js?v=1792832247"></script>
+  <script src="assets/data/commodities.js?v=1792832885"></script>
+  <script src="assets/js/dashboard.js?v=1792832885"></script>
 
   
 
