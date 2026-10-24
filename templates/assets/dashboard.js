@@ -8,11 +8,17 @@
 
   const payload = window.DASHBOARD_DATA || {};
   const categoryChartPayload = payload.categoryChart || { data: [], layout: {} };
+  const sharedDates = payload.dates || [];
   const timeseriesData = payload.timeseries || {};
   const commodityMetadata = payload.commodityMeta || {};
   const defaultCommodity = payload.defaultCommodity || Object.keys(commodityMetadata)[0] || "";
-  const censusByDate = payload.censusByDate || {};
   const censusDates = payload.censusDates || [];
+
+  // Rehydrate shared dates reference onto each commodity series & index dates for O(1) lookup
+  const dateIndexMap = {};
+  sharedDates.forEach((d, idx) => {
+    dateIndexMap[d] = idx;
+  });
 
   // Build slug <-> commodity lookup maps and ordered commodity list
   const slugToCommodity = {};
@@ -21,6 +27,9 @@
     const meta = commodityMetadata[comm];
     if (meta && meta.slug) {
       slugToCommodity[meta.slug] = comm;
+    }
+    if (timeseriesData[comm] && !timeseriesData[comm].dates) {
+      timeseriesData[comm].dates = sharedDates;
     }
   });
 
@@ -782,7 +791,7 @@
 
       // Snap to nearest date if targetDate is not in available bulletins
       let resolvedDate = targetDate;
-      if (!censusByDate[resolvedDate]) {
+      if (dateIndexMap[resolvedDate] === undefined) {
         let best = censusDates[0];
         let minDiff = Infinity;
         const targetMs = new Date(targetDate).getTime();
@@ -804,12 +813,23 @@
       if (btnDatePrev) btnDatePrev.disabled = curIdx < 0 || curIdx >= censusDates.length - 1;
       if (btnDateNext) btnDateNext.disabled = curIdx <= 0;
 
-      const dateRecords = censusByDate[resolvedDate];
-      if (dateRecords) {
-        for (let i = 0; i < dateRecords.length; i++) {
+      const dIdx = dateIndexMap[resolvedDate];
+      if (dIdx !== undefined) {
+        for (let i = 0; i < commodityList.length; i++) {
           const row = rowMap.get(i);
           if (!row) continue;
-          const [price, dod, wow, mom, s7, s30, vol, cv] = dateRecords[i];
+          const commName = row.getAttribute("data-target-commodity") || commodityList[i];
+          const ts = timeseriesData[commName];
+          if (!ts) continue;
+
+          const price = ts.prices ? ts.prices[dIdx] : null;
+          const dod = ts.dod_pct ? ts.dod_pct[dIdx] : null;
+          const wow = ts.wow_pct ? ts.wow_pct[dIdx] : null;
+          const mom = ts.mom_pct ? ts.mom_pct[dIdx] : null;
+          const s7 = ts.sma_7d ? ts.sma_7d[dIdx] : null;
+          const s30 = ts.sma_30d ? ts.sma_30d[dIdx] : null;
+          const vol = ts.vol ? ts.vol[dIdx] : null;
+          const cv = ts.cv ? ts.cv[dIdx] : null;
           const cells = row.children;
 
           // Price cell (index 3)

@@ -225,7 +225,7 @@ def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[st
         ),
     )
 
-    chart_json = fig.to_json()
+    chart_json = json.dumps(json.loads(fig.to_json()), separators=(",", ":"))
     return summary_rows, chart_json
 
 
@@ -245,13 +245,15 @@ def fetch_commodity_timeseries(
             ROUND(sma_30d, 2) AS sma_30d,
             ROUND(dod_pct, 2) AS dod_pct,
             ROUND(wow_pct, 2) AS wow_pct,
-            ROUND(mom_pct, 2) AS mom_pct
+            ROUND(mom_pct, 2) AS mom_pct,
+            ROUND(volatility_30d, 2) AS vol,
+            ROUND(cv_30d * 100, 2) AS cv
         FROM v_commodity_analytics
-        ORDER BY commodity, date;
+        ORDER BY commodity_group, commodity, date;
     """).fetchall()
 
     ts_dict: dict[str, dict[str, list[Any]]] = {}
-    for comm, dt, pr, s7, s30, dod, wow, mom in rows:
+    for comm, dt, pr, s7, s30, dod, wow, mom, vol, cv in rows:
         if comm not in ts_dict:
             ts_dict[comm] = {
                 "dates": [],
@@ -261,6 +263,8 @@ def fetch_commodity_timeseries(
                 "dod_pct": [],
                 "wow_pct": [],
                 "mom_pct": [],
+                "vol": [],
+                "cv": [],
             }
         ts_dict[comm]["dates"].append(dt)
         ts_dict[comm]["prices"].append(pr)
@@ -269,6 +273,8 @@ def fetch_commodity_timeseries(
         ts_dict[comm]["dod_pct"].append(dod)
         ts_dict[comm]["wow_pct"].append(wow)
         ts_dict[comm]["mom_pct"].append(mom)
+        ts_dict[comm]["vol"].append(vol)
+        ts_dict[comm]["cv"].append(cv)
 
     snapshot_records = con.execute("""
         SELECT
@@ -314,8 +320,8 @@ def fetch_commodity_timeseries(
         default_commodity = next(iter(ts_dict.keys()))
 
     return (
-        json.dumps(ts_dict),
-        json.dumps(meta_dict),
+        json.dumps(ts_dict, separators=(",", ":")),
+        json.dumps(meta_dict, separators=(",", ":")),
         commodities_by_group,
         default_commodity,
     )
@@ -383,7 +389,7 @@ def fetch_census_history(con: duckdb.DuckDBPyConnection) -> tuple[str, list[str]
         by_date[dt].append([pr, dod, wow, mom, s7, s30, vol, cv])
 
     dates = sorted(by_date.keys(), reverse=True)
-    return json.dumps(by_date), dates
+    return json.dumps(by_date, separators=(",", ":")), dates
 
 
 def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
@@ -427,7 +433,12 @@ def load_all_dashboard_data(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         default_commodity,
     ) = fetch_commodity_timeseries(con)
     snapshot_rows, group_counts = fetch_latest_snapshot(con)
-    census_by_date_json, census_dates = fetch_census_history(con)
+    census_dates = [
+        r[0]
+        for r in con.execute(
+            "SELECT DISTINCT date::VARCHAR AS d FROM commodity_prices ORDER BY d DESC;"
+        ).fetchall()
+    ]
     audit_info = fetch_audit_info(con)
 
     return {
@@ -441,7 +452,6 @@ def load_all_dashboard_data(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "default_commodity": default_commodity,
         "snapshot_rows": snapshot_rows,
         "group_counts": group_counts,
-        "census_by_date_json": census_by_date_json,
         "census_dates": census_dates,
         "audit_info": audit_info,
     }

@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{% block title %}Philippine Commodity Price Tracker | Bantay Presyo{% endblock %}</title>
 
-  <!-- Plotly.js CDN -->
-  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+  <!-- Plotly.js Basic Bundle (2D Cartesian Charts — 70% smaller than full bundle) -->
+  <script defer src="https://cdn.plot.ly/plotly-basic-2.35.2.min.js" charset="utf-8"></script>
 
   <!-- Modular Formal Stylesheet -->
   <link rel="stylesheet" href="assets/css/dashboard.css?v={{ build_id }}">
@@ -39,8 +39,8 @@
   </div>
 
   <!-- Modular Precomputed Data Payload & Interactive Controller -->
-  <script src="assets/data/commodities.js?v={{ build_id }}"></script>
-  <script src="assets/js/dashboard.js?v={{ build_id }}"></script>
+  <script defer src="assets/data/commodities.js?v={{ build_id }}"></script>
+  <script defer src="assets/js/dashboard.js?v={{ build_id }}"></script>
 
   {% if dev_mode %}
   <!-- Live Development Watcher Auto-Reload Client -->

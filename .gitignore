@@ -38,15 +38,19 @@ htmlcov/
 # IDEs & OS
 .vscode/
 .idea/
+.codegraph/
 *.swp
 *.swo
 *~
 .DS_Store
 
-# Database files
+# Raw downloaded PDF bulletins (CSV datasets in data/*.csv are tracked)
+data/raw/
+
+# Ephemeral analytical warehouse (rebuilt from tracked CSVs via pipeline.load_duckdb)
 *.duckdb
 *.duckdb.wal
 
-# Generated static dashboard
+# Generated static dashboard (rebuilt via pipeline.build_dashboard)
 public/
 

@@ -257,7 +257,8 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     assert data_file.exists() and data_file.stat().st_size > 500_000
     data_content = data_file.read_text(encoding="utf-8")
     assert "window.DASHBOARD_DATA =" in data_content
-    assert "censusByDate:" in data_content
+    assert "dates:" in data_content
+    assert "timeseries:" in data_content
     assert "censusDates:" in data_content
 
     html_content = out_file.read_text(encoding="utf-8")

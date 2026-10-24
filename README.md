@@ -3,11 +3,26 @@
 
 An automated daily tracker and forecasting platform for retail prices of basic agri-fishery commodities in the Philippines (e.g., rice, pork, chicken, fish, vegetables, spices).
 
-The project bridges three core disciplines:
-1. **Data Engineering**: Resilient scraping from Department of Agriculture price monitoring & Bantay Presyo, DuckDB embedded persistence tracked directly in Git (Git-as-a-Database), automated deduplication, and GitHub Actions scheduled orchestration.
+The project bridges four core disciplines:
+1. **Data Engineering**: Resilient scraping from Department of Agriculture price monitoring & Bantay Presyo, plain-text CSV panel datasets tracked directly in Git (Git-as-a-Database) with deterministic DuckDB OLAP warehouse builds, automated deduplication, and GitHub Actions scheduled orchestration.
 2. **Data Analytics**: Historical price trends, 7-day and 30-day rolling moving averages, day-over-day price velocity ($\Delta_{1d}$), volatility metrics, and top gainers/decliners ranking.
 3. **Data Science**: Time-series price forecasting using `statsmodels` (Exponential Smoothing / ARIMA) with 80% and 95% confidence intervals, backtested on holdout data.
 4. **Presentation**: A formal, zero-overhead static dashboard (`public/index.html`) rendered via Jinja2 with interactive Plotly charts, deployed to GitHub Pages.
+
+---
+
+## Repository Version Control & Build Artifacts
+
+To keep Git history fast, diff-friendly, and free of binary bloat, the repository separates **tracked plain-text datasets** from **deterministic build artifacts**:
+
+- **Tracked in Git (Source of Truth)**:
+  - `data/raw_da_amas_prices.csv` — Consolidated raw PDF extraction dataset.
+  - `data/selected_da_amas_prices.csv` — 48-commodity rectangular panel grid with full provenance/audit metadata.
+  - `data/clean_da_amas_prices.csv` — Production 5-column clean dataset.
+- **Ignored in `.gitignore` (Rebuilt in `< 0.5s` or Cached Locally)**:
+  - `data/raw/da_amas/*.pdf` — Raw source PDF bulletins (~168 MB).
+  - `data/commodities.duckdb` — Embedded DuckDB analytical warehouse (rebuilt deterministically from the tracked CSVs in ~0.15s via `python -m pipeline.load_duckdb`).
+  - `public/` — Static HTML/CSS/JS dashboard bundle (rebuilt in ~0.35s via `python -m pipeline.build_dashboard` and deployed directly via GitHub Actions).
 
 ---
 
