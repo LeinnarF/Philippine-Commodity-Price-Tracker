@@ -36,6 +36,7 @@
   let activeView = "overview";
   let activeCommodity = defaultCommodity;
   let activeTimeframe = "ALL";
+  let activeChartMode = "trend";
   let categoryChartInitialized = false;
   let commodityTablePage = 1;
   const COMMODITY_TABLE_PAGE_SIZE = 10;
@@ -162,9 +163,7 @@
     }
     if (bcGroupEl) bcGroupEl.textContent = meta.commodity_group;
     if (bcCommEl) bcCommEl.textContent = commName;
-    if (chartTitleEl) {
-      chartTitleEl.textContent = `Daily Prevailing Retail Price, 7-Day SMA & 30-Day SMA — ${commName} (₱ / ${meta.unit})`;
-    }
+    updateCommodityChartHeader(commName);
 
     // Update 7 Unified KPI Strip cards
     const boxPrice = document.getElementById("box-price");
@@ -346,6 +345,29 @@
     });
   }
 
+  function calculateCurrencyBinSize(range) {
+    if (range <= 6) return 0.5;
+    if (range <= 16) return 1.0;
+    if (range <= 35) return 2.0;
+    if (range <= 75) return 5.0;
+    if (range <= 160) return 10.0;
+    const rawStep = range / 15;
+    return Math.max(10, Math.round(rawStep / 5) * 5);
+  }
+
+  function updateCommodityChartHeader(commName) {
+    const meta = commodityMetadata[commName];
+    if (!meta) return;
+    const chartTitleEl = document.getElementById("commodity-chart-title");
+
+    if (chartTitleEl) {
+      chartTitleEl.textContent =
+        activeChartMode === "distribution"
+          ? "Retail Price Distribution"
+          : "Retail Price Trend";
+    }
+  }
+
   function renderCommodityChart(commName) {
     const container = document.getElementById("commodity-trend-plot");
     if (!container || typeof Plotly === "undefined") return;
@@ -354,7 +376,169 @@
     const ts = timeseriesData[commName];
     if (!meta || !ts) return;
 
+    updateCommodityChartHeader(commName);
+
     const sliceCount = getTimeframeCount(activeTimeframe);
+
+    if (activeChartMode === "distribution") {
+      const prices = sliceTimeframe(ts.prices, sliceCount);
+      const validPrices = prices.filter(
+        (p) => p !== null && p !== undefined && !isNaN(p) && p > 0
+      );
+
+      if (validPrices.length === 0) {
+        Plotly.purge(container);
+        container.innerHTML =
+          '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:13px;">No price observations recorded for this timeframe.</div>';
+        return;
+      }
+
+      const minP = Math.min(...validPrices);
+      const maxP = Math.max(...validPrices);
+      const range = Math.max(1, maxP - minP);
+      const binSize = calculateCurrencyBinSize(range);
+      const binStart = Math.floor(minP / binSize) * binSize;
+      const binEnd = Math.ceil(maxP / binSize) * binSize + binSize;
+      const numBins = Math.max(1, Math.round((binEnd - binStart) / binSize));
+
+      const binCenters = [];
+      const binLabels = [];
+      const binCounts = new Array(numBins).fill(0);
+
+      for (let i = 0; i < numBins; i++) {
+        const bStart = binStart + i * binSize;
+        const bEnd = bStart + binSize;
+        binCenters.push(Number((bStart + binSize / 2).toFixed(2)));
+        binLabels.push(`₱${bStart.toFixed(2)} – ₱${bEnd.toFixed(2)}`);
+      }
+
+      validPrices.forEach((p) => {
+        let idx = Math.floor((p - binStart) / binSize);
+        if (idx < 0) idx = 0;
+        if (idx >= numBins) idx = numBins - 1;
+        binCounts[idx]++;
+      });
+
+      // Calculate sample statistics for current filtered slice
+      const sum = validPrices.reduce((acc, v) => acc + v, 0);
+      const meanVal = sum / validPrices.length;
+      const sorted = [...validPrices].sort((a, b) => a - b);
+      const medianVal =
+        sorted.length % 2 === 0
+          ? (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2
+          : sorted[Math.floor(sorted.length / 2)];
+
+      const traces = [
+        {
+          x: binCenters,
+          y: binCounts,
+          type: "bar",
+          name: "Bulletins",
+          marker: {
+            color: "#166534",
+            line: {
+              color: "#ffffff",
+              width: 1,
+            },
+          },
+          customdata: binLabels,
+          hovertemplate:
+            "Price Range: <b>%{customdata}</b><br>" +
+            "Frequency: <b>%{y} bulletins</b><extra></extra>",
+        },
+      ];
+
+      const shapes = [
+        {
+          type: "line",
+          x0: meanVal,
+          x1: meanVal,
+          y0: 0,
+          y1: 1,
+          yref: "paper",
+          line: {
+            color: "#d97706",
+            width: 2,
+            dash: "dash",
+          },
+        },
+        {
+          type: "line",
+          x0: medianVal,
+          x1: medianVal,
+          y0: 0,
+          y1: 1,
+          yref: "paper",
+          line: {
+            color: "#15803d",
+            width: 2,
+            dash: "dot",
+          },
+        },
+      ];
+
+      const annotations = [
+        {
+          x: meanVal,
+          y: 1,
+          yref: "paper",
+          text: `Mean: ₱${meanVal.toFixed(2)}`,
+          showarrow: false,
+          xanchor: "left",
+          yanchor: "top",
+          font: { size: 11, color: "#d97706", family: "ui-monospace, monospace" },
+          bgcolor: "rgba(255, 255, 255, 0.9)",
+          bordercolor: "#d97706",
+          borderwidth: 1,
+          borderpad: 3,
+        },
+        {
+          x: medianVal,
+          y: 0.88,
+          yref: "paper",
+          text: `Median: ₱${medianVal.toFixed(2)}`,
+          showarrow: false,
+          xanchor: "right",
+          yanchor: "top",
+          font: { size: 11, color: "#15803d", family: "ui-monospace, monospace" },
+          bgcolor: "rgba(255, 255, 255, 0.9)",
+          bordercolor: "#15803d",
+          borderwidth: 1,
+          borderpad: 3,
+        },
+      ];
+
+      const layout = {
+        template: "plotly_white",
+        margin: { l: 55, r: 25, t: 30, b: 40 },
+        xaxis: {
+          title: `Price (₱ / ${meta.unit})`,
+          showgrid: true,
+          gridcolor: "#f1f5f9",
+          tickprefix: "₱",
+          zeroline: false,
+        },
+        yaxis: {
+          title: "Recorded Bulletins (Days)",
+          showgrid: true,
+          gridcolor: "#f1f5f9",
+          zeroline: false,
+        },
+        bargap: 0.08,
+        shapes: shapes,
+        annotations: annotations,
+        showlegend: false,
+      };
+
+      Plotly.react(container, traces, layout, {
+        responsive: true,
+        displayModeBar: "hover",
+        displaylogo: false,
+      });
+      return;
+    }
+
+    // Default: Trend mode
     const dates = sliceTimeframe(ts.dates, sliceCount);
     const prices = sliceTimeframe(ts.prices, sliceCount);
     const sma7 = sliceTimeframe(ts.sma_7d, sliceCount);
@@ -646,6 +830,16 @@
         }
       });
     }
+    // Chart View Mode Switching (Price Trend vs. Price Distribution)
+    document.querySelectorAll(".btn-chart-mode").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".btn-chart-mode").forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeChartMode = btn.getAttribute("data-chart-mode") || "trend";
+        renderCommodityChart(activeCommodity);
+      });
+    });
+
     document.querySelectorAll(".btn-timeframe").forEach((btn) => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".btn-timeframe").forEach((b) => b.classList.remove("active"));

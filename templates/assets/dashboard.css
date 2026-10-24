@@ -1022,6 +1022,36 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+.chart-header-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-chart-mode {
+  background: transparent;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.btn-chart-mode:hover {
+  color: var(--text-heading);
+}
+
+.btn-chart-mode.active {
+  background-color: #ffffff;
+  color: var(--da-green-800);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
 /* Inline SMA Callouts in Chart Header */
 .chart-sma-inline {
   display: flex;
