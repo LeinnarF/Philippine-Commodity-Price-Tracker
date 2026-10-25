@@ -1,2 +1,3 @@
 run_id,executed_at,trigger,status,latest_bulletin_date,bulletins_checked,bulletins_downloaded,records_extracted,duration_seconds,message
-init-archive,2026-10-20 18:00:00,init,SUCCESS,2026-10-20,451,451,66291,24.50,Baseline ingestion of 451 official DA AMAS daily price bulletins (March 2025 - October 2026)
+init-archive,2026-10-20 18:00:00,init,SUCCESS,2026-10-20,451,451,66291,24.5,Baseline ingestion of 451 official DA AMAS daily price bulletins (March 2025 - October 2026)
+run_20261025_132315,2026-10-25 13:23:15,workflow_dispatch,SUCCESS,2026-10-23,4,3,624,47.64,Successfully ingested 3 new bulletin(s) with 624 records. Panel updated to 2026-10-23.
