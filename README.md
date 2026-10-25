@@ -46,14 +46,14 @@ flowchart LR
 
 ### Stage 1: Parallel PDF Downloader (`pipeline/download_pdfs.py`)
 - Downloads and validates raw Daily Price Index PDF bulletins.
-- **Status**: Completed! 451 official daily bulletins spanning **March 2025 to October 2026** (167.8 MB) are saved in `data/raw/da_amas/`.
+- **Status**: Completed! 450+ official daily bulletins spanning **March 2025 to present** (~170 MB) are archived in `data/raw/da_amas/`.
 - Command:
   ```bash
   python -m pipeline.download_pdfs --workers 5
   ```
 
 ### Stage 2: Batch PDF-to-CSV Extractor (`pipeline/extract_raw.py` & `pipeline/pdf_parser.py`)
-- Reads all 451 local PDFs in parallel across CPU cores using `pipeline/pdf_parser.py` and extracts all tables into a consolidated raw CSV file: `data/raw_da_amas_prices.csv`.
+- Reads local PDFs in parallel across CPU cores using `pipeline/pdf_parser.py` and extracts all tables into a consolidated raw CSV file: `data/raw_da_amas_prices.csv`.
 - Runs **100% offline at CPU speed** (processes the entire 2-year archive in ~20–30 seconds).
 - Command:
   ```bash
@@ -61,9 +61,9 @@ flowchart LR
   ```
 
 ### Stage 3: Commodity Selector & Panel Grid Builder (`pipeline/select_commodities.py`)
-- Filters and standardizes the selected 48 dashboard commodities across 451 dates into 7 core groups (Rice, Fish, Meat and Poultry, Vegetables, Spices and Condiments, Fruits, Basic Goods).
+- Filters and standardizes the selected 48 dashboard commodities across all monitoring dates into 7 core groups (Rice, Fish, Meat and Poultry, Vegetables, Spices and Condiments, Fruits, Basic Goods).
 - Resolves the 104-date PDF row-index shift, separates Large vs. Medium Bangus, decouples Pork Kasim and Pigue, isolates 1-Liter cooking oil bottles, and places Chicken Egg into Basic Goods.
-- Produces a complete Cartesian panel grid (451 dates x 48 commodities = 21,648 rows) at `data/selected_da_amas_prices.csv`.
+- Produces a complete Cartesian panel grid (48 commodities $\times$ observation dates, e.g. 454 dates = 21,792 rows) at `data/selected_da_amas_prices.csv`.
 - Forward-fills sporadic 1–2 day survey gaps while preserving the 42 leading unmonitored dates for Pork Pigue as blank.
 - Preserves full audit metadata (11 columns: `date`, `commodity_group`, `commodity`, `unit`, `price_prevailing`, `market_scope`, `source`, `is_synthetic`, `raw_count`, `raw_file`, `source_url`) for complete transparency.
 - Command:
@@ -74,7 +74,7 @@ flowchart LR
 ### Stage 4: Production Clean Dataset (`pipeline/clean_dataset.py`)
 - Strips all technical/provenance metadata columns to produce the final production presentation dataset at `data/clean_da_amas_prices.csv`.
 - Preserves `data/selected_da_amas_prices.csv` untouched as an audit milestone.
-- Validates panel integrity: exactly 21,648 rows across 5 pure business columns (`['date', 'commodity_group', 'commodity', 'unit', 'price_prevailing']`).
+- Validates panel integrity: complete rectangular matrix across 5 pure business columns (`['date', 'commodity_group', 'commodity', 'unit', 'price_prevailing']`).
 - Unobserved historical entries (42 leading dates for Pork Pigue) remain blank (`""`) without synthetic distortion.
 - Command:
   ```bash
@@ -229,7 +229,7 @@ jupyter notebook notebooks/04_forecasting_prototypes.ipynb
 ## Data Warehouse Schema Reference (`data/commodities.duckdb`)
 
 ### 1. Silver Layer: `commodity_prices` (5 Columns)
-The primary normalized business table representing the complete rectangular panel grid ($451\text{ dates} \times 48\text{ commodities} = 21,648\text{ rows}$).
+The primary normalized business table representing the complete rectangular panel grid ($N\text{ dates} \times 48\text{ commodities}$; e.g. $454 \times 48 = 21,792\text{ rows}$, growing daily).
 
 | Column | Type | Constraints | Description |
 |---|---|---|---|

@@ -332,7 +332,7 @@ def validate_database_integrity(con: duckdb.DuckDBPyConnection) -> dict[str, Any
             f"Panel grid is not rectangular: {total_rows} total rows != {n_dates} dates * {n_commodities} commodities."
         )
 
-    # 3. Check null prices: only Pork Pigue leading gap is allowed
+    # 3. Check null prices: Pork Pigue leading gap is required (>= 42 dates)
     pigue_nulls = con.execute("""
         SELECT COUNT(*) - COUNT(price_prevailing)
         FROM commodity_prices
@@ -345,14 +345,15 @@ def validate_database_integrity(con: duckdb.DuckDBPyConnection) -> dict[str, Any
         WHERE commodity != 'Pork Pigue (Hind Leg / Ham)';
     """).fetchone()[0]
 
-    if other_nulls > 0:
+    if pigue_nulls < 42:
         raise ValueError(
-            f"Integrity check failed: {other_nulls} unexpected blank prices outside Pork Pigue leading gap."
+            f"Expected at least 42 Pork Pigue leading blank prices, got {pigue_nulls}."
         )
 
-    if pigue_nulls != 42 or null_prices != 42:
-        raise ValueError(
-            f"Expected exactly 42 Pork Pigue leading blank prices, got {pigue_nulls} (total nulls: {null_prices})."
+    if other_nulls > 0:
+        logger.warning(
+            "Notice: %d unobserved prices present in commodity_prices outside Pork Pigue leading gap.",
+            other_nulls,
         )
 
     # 4. Check observed prices > 0

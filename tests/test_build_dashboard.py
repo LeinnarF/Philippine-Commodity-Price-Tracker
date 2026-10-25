@@ -109,7 +109,7 @@ def test_fetch_kpi_summary(duckdb_con):
     kpis = fetch_kpi_summary(duckdb_con)
     assert kpis["total_commodities"] == 48
     assert kpis["total_groups"] == 7
-    assert kpis["total_dates"] == 451
+    assert kpis["total_dates"] >= 451
     assert kpis["observed_today"] == 48
     assert kpis["count_gainers"] + kpis["count_decliners"] + kpis["count_unchanged"] == 48
     assert "latest_date_formatted" in kpis
@@ -177,13 +177,14 @@ def test_fetch_commodity_timeseries(duckdb_con):
     assert meta[default_comm]["max_date"] is not None
 
     sample_comm = default_comm
-    assert len(ts[sample_comm]["dates"]) == 451
-    assert len(ts[sample_comm]["prices"]) == 451
-    assert len(ts[sample_comm]["sma_7d"]) == 451
-    assert len(ts[sample_comm]["sma_30d"]) == 451
-    assert len(ts[sample_comm]["dod_pct"]) == 451
-    assert len(ts[sample_comm]["wow_pct"]) == 451
-    assert len(ts[sample_comm]["mom_pct"]) == 451
+    n_comm_dates = len(ts[sample_comm]["dates"])
+    assert n_comm_dates >= 451
+    assert len(ts[sample_comm]["prices"]) == n_comm_dates
+    assert len(ts[sample_comm]["sma_7d"]) == n_comm_dates
+    assert len(ts[sample_comm]["sma_30d"]) == n_comm_dates
+    assert len(ts[sample_comm]["dod_pct"]) == n_comm_dates
+    assert len(ts[sample_comm]["wow_pct"]) == n_comm_dates
+    assert len(ts[sample_comm]["mom_pct"]) == n_comm_dates
 
 
 def test_fetch_latest_snapshot(duckdb_con):
@@ -199,9 +200,9 @@ def test_fetch_census_history(duckdb_con):
     census_by_date_json, dates = fetch_census_history(duckdb_con)
     by_date = json.loads(census_by_date_json)
 
-    assert len(dates) == 451
-    assert len(by_date) == 451
-    assert dates[0] == "2026-10-20"
+    assert len(dates) >= 451
+    assert len(by_date) == len(dates)
+    assert dates[0] >= "2026-10-20"
     assert dates[-1] == "2025-03-01"
 
     # Each date entry must have all 48 commodity rows with 8 metrics each
@@ -212,8 +213,8 @@ def test_fetch_census_history(duckdb_con):
 
 def test_fetch_audit_info(duckdb_con):
     audit = fetch_audit_info(duckdb_con)
-    assert audit["total_rows"] == 21648
-    assert audit["total_bulletins"] == 451
+    assert audit["total_bulletins"] >= 451
+    assert audit["total_rows"] == audit["total_bulletins"] * 48
     assert audit["synthetic_count"] == 0
     assert audit["market_scope"] == "NCR Wet Markets"
     assert audit["source_agency"] == "da_amas"

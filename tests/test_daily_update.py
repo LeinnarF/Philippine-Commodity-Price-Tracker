@@ -23,7 +23,8 @@ def test_get_latest_tracked_date():
 
     latest_date = get_latest_tracked_date(DEFAULT_CLEAN_CSV)
     assert isinstance(latest_date, datetime.date)
-    assert latest_date == datetime.date(2026, 10, 20)
+    assert latest_date >= datetime.date(2026, 10, 20)
+    assert latest_date <= datetime.date.today()
 
 
 def test_append_execution_log_lifecycle(tmp_path):

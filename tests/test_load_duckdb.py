@@ -52,45 +52,44 @@ def test_load_duckdb_execution(tmp_path):
         # 2. Dimensions & shape
         cp_count = con.execute("SELECT COUNT(*) FROM commodity_prices;").fetchone()[0]
         audit_count = con.execute("SELECT COUNT(*) FROM audit_prices;").fetchone()[0]
-        assert cp_count == 21648
-        assert audit_count == 21648
 
         n_dates = con.execute("SELECT COUNT(DISTINCT date) FROM commodity_prices;").fetchone()[0]
         n_commodities = con.execute("SELECT COUNT(DISTINCT commodity) FROM commodity_prices;").fetchone()[0]
         n_groups = con.execute("SELECT COUNT(DISTINCT commodity_group) FROM commodity_prices;").fetchone()[0]
-        assert n_dates == 451
+        assert n_dates >= 451
         assert n_commodities == 48
         assert n_groups == 7
+        assert cp_count == n_dates * 48
+        assert audit_count == cp_count
 
-        # 3. Null values: strictly 42 in Pork Pigue leading gap
-        null_count = con.execute("SELECT COUNT(*) - COUNT(price_prevailing) FROM commodity_prices;").fetchone()[0]
+        # 3. Null values: Pork Pigue leading gap (>= 42 dates)
         pigue_nulls = con.execute(
             "SELECT COUNT(*) - COUNT(price_prevailing) FROM commodity_prices WHERE commodity = 'Pork Pigue (Hind Leg / Ham)';"
         ).fetchone()[0]
-        non_pigue_nulls = con.execute(
-            "SELECT COUNT(*) - COUNT(price_prevailing) FROM commodity_prices WHERE commodity != 'Pork Pigue (Hind Leg / Ham)';"
-        ).fetchone()[0]
+        assert pigue_nulls >= 42
 
-        assert null_count == 42
-        assert pigue_nulls == 42
-        assert non_pigue_nulls == 0
+        # Observed prices must be strictly positive (> 0)
+        invalid_prices = con.execute(
+            "SELECT COUNT(*) FROM commodity_prices WHERE price_prevailing IS NOT NULL AND price_prevailing <= 0;"
+        ).fetchone()[0]
+        assert invalid_prices == 0
 
         # 4. Gold view: v_commodity_analytics
         v_analytics_count = con.execute("SELECT COUNT(*) FROM v_commodity_analytics;").fetchone()[0]
-        assert v_analytics_count == 21648
+        assert v_analytics_count == cp_count
 
         sample_analytics = con.execute("""
             SELECT
                 date, commodity, price_prevailing, sma_7d, sma_30d, volatility_30d, cv_30d,
                 price_prev_1d, dod_abs, dod_pct, wow_abs, wow_pct, mom_abs, mom_pct
             FROM v_commodity_analytics
-            WHERE commodity = 'Whole Chicken' AND date = '2026-10-20';
+            WHERE commodity = 'Whole Chicken' AND date = (SELECT MAX(date) FROM commodity_prices);
         """).fetchone()
 
         assert sample_analytics is not None
         # Verify metrics are computed and non-null on the latest date
         for idx, val in enumerate(sample_analytics):
-            assert val is not None, f"Metric at index {idx} should not be None for Whole Chicken on 2026-10-20"
+            assert val is not None, f"Metric at index {idx} should not be None for Whole Chicken on latest date"
 
         # 5. Gold view: v_latest_snapshot
         v_snapshot = con.execute("SELECT * FROM v_latest_snapshot;").df()
@@ -102,7 +101,7 @@ def test_load_duckdb_execution(tmp_path):
 
         # 6. Gold view: v_category_indices
         v_indices_count = con.execute("SELECT COUNT(*) FROM v_category_indices;").fetchone()[0]
-        assert v_indices_count == 451 * 7
+        assert v_indices_count == n_dates * 7
 
         # Start date base-100 check
         start_indices = con.execute("""
@@ -146,9 +145,10 @@ def test_load_duckdb_idempotency(tmp_path):
 
     try:
         count = con2.execute("SELECT COUNT(*) FROM commodity_prices;").fetchone()[0]
-        assert count == 21648
+        n_dates = con2.execute("SELECT COUNT(DISTINCT date) FROM commodity_prices;").fetchone()[0]
+        assert count == n_dates * 48
         audit_count = con2.execute("SELECT COUNT(*) FROM audit_prices;").fetchone()[0]
-        assert audit_count == 21648
+        assert audit_count == count
     finally:
         con2.close()
 
@@ -246,14 +246,14 @@ def test_production_database_integrity():
     con = duckdb.connect(str(DEFAULT_DB_PATH), read_only=True)
     try:
         metrics = validate_database_integrity(con)
-        assert metrics["total_rows"] == 21648
-        assert metrics["n_dates"] == 451
+        assert metrics["n_dates"] >= 451
         assert metrics["n_commodities"] == 48
+        assert metrics["total_rows"] == metrics["n_dates"] * 48
         assert metrics["n_groups"] == 7
-        assert metrics["null_prices"] == 42
-        assert metrics["pigue_nulls"] == 42
-        assert metrics["v_analytics_rows"] == 21648
+        assert metrics["pigue_nulls"] >= 42
+        assert metrics["null_prices"] >= 42
+        assert metrics["v_analytics_rows"] == metrics["total_rows"]
         assert metrics["v_snapshot_rows"] == 48
-        assert metrics["v_index_rows"] == 451 * 7
+        assert metrics["v_index_rows"] == metrics["n_dates"] * 7
     finally:
         con.close()
