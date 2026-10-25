@@ -463,8 +463,15 @@ if __name__ == "__main__":
         help="Optional unique run execution identifier",
     )
     parser.add_argument(
-        "--no-rebuild",
+        "--rebuild",
         action="store_true",
+        default=True,
+        help="Rebuild DuckDB warehouse and static dashboard bundle (default: True)",
+    )
+    parser.add_argument(
+        "--no-rebuild",
+        action="store_false",
+        dest="rebuild",
         help="Skip rebuilding DuckDB and the static dashboard",
     )
     parser.add_argument(
@@ -480,7 +487,7 @@ if __name__ == "__main__":
         target_date=target_d,
         trigger=args.trigger,
         run_id=args.run_id,
-        rebuild=not args.no_rebuild,
+        rebuild=args.rebuild,
         dry_run=args.dry_run,
     )
     logger.info("Daily update finished with result: %s", res)

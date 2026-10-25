@@ -7,11 +7,6 @@ on:
     # Secondary check at 14:00 UTC (22:00 Manila Time - PHT) to catch late-afternoon bulletin uploads
     - cron: '0 14 * * 1-6'
   workflow_dispatch:
-    inputs:
-      target_date:
-        description: "Target date up to which to evaluate bulletins (YYYY-MM-DD, leave empty for today)"
-        required: false
-        default: ""
 
 permissions:
   contents: write
@@ -49,11 +44,7 @@ jobs:
 
       - name: Run incremental daily price update
         run: |
-          TARGET_FLAG=""
-          if [ -n "${{ github.event.inputs.target_date }}" ]; then
-            TARGET_FLAG="--target-date ${{ github.event.inputs.target_date }}"
-          fi
-          python -m pipeline.daily_update --trigger github_actions_cron --rebuild $TARGET_FLAG
+          python -m pipeline.daily_update --trigger ${{ github.event_name }} --rebuild
 
       - name: Commit updated datasets and execution logs to repository
         run: |
