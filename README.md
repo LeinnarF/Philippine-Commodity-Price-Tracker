@@ -46,6 +46,11 @@ flowchart LR
 
 ### Stage 1: Parallel PDF Downloader (`pipeline/download_pdfs.py`)
 - Downloads and validates raw Daily Price Index PDF bulletins.
+- **Resilient Date & Pattern Matching Architecture**:
+  Handles evolving DA portal naming schemes automatically (including the October 24, 2026 transition from `Daily-Price-Index-{Month}-{Day}-{Year}.pdf` to `{Month}-{Day}-{Year}-DPI-AFC.pdf`):
+  1. **Multi-Pattern Regex Date Extractor (`extract_date_from_bulletin_url`)**: Parses date components (`Month-Day-Year`, `Day-Month-Year`, and ISO `YYYY-MM-DD`) anywhere in the filename regardless of prefix/suffix changes (`Daily-Price-Index-`, `Revised-`, `-DPI-AFC`, `-DPI`, `-1`).
+  2. **Ranked Candidate Permutation Generator (`generate_candidate_urls`)**: When a date is missing from the portal catalog or a link returns `404`, sequentially probes prioritized URL permutations (`*-DPI-AFC.pdf`, `Daily-Price-Index-*.pdf`, `*-DPI.pdf`, and `-1` revisions).
+  3. **DOM Context & Anchor Text Fallback**: Extracts dates from HTML link text (`<a>`) when filenames are non-standard.
 - **Status**: Completed! 450+ official daily bulletins spanning **March 2025 to present** (~170 MB) are archived in `data/raw/da_amas/`.
 - Command:
   ```bash
@@ -180,7 +185,7 @@ The tracker is engineered as a **zero-overhead static site** deployed to **GitHu
    - Compiles the static bundle and publishes directly to GitHub Pages.
 2. **Push CI/CD Deployment ([`.github/workflows/deploy.yml`](file:///.github/workflows/deploy.yml))**:
    - Triggers on every push to `main` or manual `workflow_dispatch`.
-   - Runs full pytest test suite (38 tests).
+   - Runs full pytest test suite (42 tests).
    - Deterministically builds DuckDB and static dashboard in $< 2\text{ seconds}$ and deploys to GitHub Pages.
 
 ```mermaid

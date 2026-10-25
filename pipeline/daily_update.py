@@ -30,6 +30,7 @@ from pipeline.download_pdfs import (
     PROJECT_USER_AGENT,
     crawl_da_catalog,
     download_single_pdf,
+    generate_candidate_urls,
     is_valid_pdf,
 )
 from pipeline.load_duckdb import (
@@ -241,38 +242,20 @@ def run_daily_update(
                 newly_downloaded.append((d_str, dest_pdf))
                 continue
 
-            # Candidate URLs
-            candidate_urls: list[str] = []
-            if d_str in catalog:
-                candidate_urls.append(catalog[d_str])
-
-            month_name = d.strftime("%B")
-            # Pattern variations on DA WordPress upload path
-            candidate_urls.extend([
-                f"https://www.da.gov.ph/wp-content/uploads/{d.year}/{d.month:02d}/Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
-                f"https://www.da.gov.ph/wp-content/uploads/{d.year}/{d.month:02d}/Daily-Price-Index-{month_name}-{d.day:02d}-{d.year}.pdf",
-                f"https://www.da.gov.ph/wp-content/uploads/{d.year}/{d.month:02d}/Daily-Price-Index-{month_name.lower()}-{d.day}-{d.year}.pdf",
-            ])
-
-            downloaded = False
-            for url in candidate_urls:
-                try:
-                    logger.info("Checking bulletin for %s at %s ...", d_str, url)
-                    date_res, status_res, size_res = download_single_pdf(
-                        date_str=d_str,
-                        pdf_url=url,
-                        client=client,
-                        max_retries=2,
-                    )
-                    if status_res == "DOWNLOADED" and is_valid_pdf(dest_pdf):
-                        logger.info("Successfully downloaded new bulletin for %s (%.1f KB)", d_str, size_res / 1024)
-                        newly_downloaded.append((d_str, dest_pdf))
-                        downloaded = True
-                        break
-                except Exception as dl_err:
-                    logger.debug("Failed checking URL %s: %s", url, dl_err)
-
-            if not downloaded:
+            # Check catalog URL and fallback candidate URL patterns
+            catalog_url = catalog.get(d_str)
+            logger.info("Checking bulletin for %s (catalog match: %s) ...", d_str, bool(catalog_url))
+            date_res, status_res, size_res = download_single_pdf(
+                date_str=d_str,
+                pdf_url=catalog_url,
+                client=client,
+                max_retries=2,
+                dest_dir=target_raw_dir,
+            )
+            if status_res == "DOWNLOADED" and is_valid_pdf(dest_pdf):
+                logger.info("Successfully downloaded new bulletin for %s (%.1f KB)", d_str, size_res / 1024)
+                newly_downloaded.append((d_str, dest_pdf))
+            else:
                 logger.info("No published bulletin found for %s (Holiday, weekend, or not yet uploaded).", d_str)
 
     # 3. Handle outcome if no new bulletins were found

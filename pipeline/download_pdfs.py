@@ -57,7 +57,107 @@ MONTH_MAP = {
     "october": 10,
     "november": 11,
     "december": 12,
+    "jan": 1,
+    "feb": 2,
+    "mar": 3,
+    "apr": 4,
+    "may": 5,
+    "jun": 6,
+    "jul": 7,
+    "aug": 8,
+    "sep": 9,
+    "sept": 9,
+    "oct": 10,
+    "nov": 11,
+    "dec": 12,
 }
+
+
+def extract_date_from_bulletin_url(url: str) -> datetime.date | None:
+    """
+    Extracts a date from a DA price bulletin URL or filename using regex pattern matching.
+    Supports historical and new naming schemes used on the DA portal:
+      - 'October-24-2026-DPI-AFC.pdf' (New convention introduced late Oct 2026)
+      - 'Daily-Price-Index-October-23-2026.pdf' (Historical standard)
+      - 'Revised-Daily-Price-Index-October-7-2026.pdf' (Revisions)
+      - 'Daily-Price-Index-October-8-2026-1.pdf' (Numbered upload duplicates)
+      - '24-October-2026-DPI.pdf' (Day-first variant)
+      - '2026-10-24-DPI.pdf' or '2026_10_24.pdf' (ISO format)
+    """
+    filename = url.split("/")[-1].split("?")[0]
+    clean_name = filename[:-4] if filename.lower().endswith(".pdf") else filename
+
+    # Pattern 1: [Month Name]-[Day]-[Year] (e.g. October-24-2026-DPI-AFC or Daily-Price-Index-October-23-2026)
+    m1 = re.search(r"([A-Za-z]+)[-_ ]+([0-9]{1,2})[-_ ]+([0-9]{4})", clean_name)
+    if m1:
+        m_str, d_str, y_str = m1.groups()
+        m_num = MONTH_MAP.get(m_str.lower())
+        if m_num:
+            try:
+                return datetime.date(int(y_str), m_num, int(d_str))
+            except ValueError:
+                pass
+
+    # Pattern 2: [Day]-[Month Name]-[Year] (e.g. 24-October-2026-DPI)
+    m2 = re.search(r"([0-9]{1,2})[-_ ]+([A-Za-z]+)[-_ ]+([0-9]{4})", clean_name)
+    if m2:
+        d_str, m_str, y_str = m2.groups()
+        m_num = MONTH_MAP.get(m_str.lower())
+        if m_num:
+            try:
+                return datetime.date(int(y_str), m_num, int(d_str))
+            except ValueError:
+                pass
+
+    # Pattern 3: ISO numeric [Year]-[Month]-[Day] (e.g. 2026-10-24 or 2026_10_24)
+    m3 = re.search(r"\b([0-9]{4})[-_]([0-9]{1,2})[-_]([0-9]{1,2})\b", clean_name)
+    if m3:
+        y_str, m_str, d_str = m3.groups()
+        try:
+            return datetime.date(int(y_str), int(m_str), int(d_str))
+        except ValueError:
+            pass
+
+    return None
+
+
+def generate_candidate_urls(target_date: datetime.date | str) -> list[str]:
+    """
+    Generates all known URL variations for a DA price bulletin on a given date.
+    Covers new '*-DPI-AFC.pdf', classic 'Daily-Price-Index-*', shorthand '*-DPI.pdf',
+    revised versions, and padded/unpadded day digits.
+    """
+    if isinstance(target_date, str):
+        target_date = datetime.date.fromisoformat(target_date)
+
+    d = target_date
+    month_name = d.strftime("%B")
+    month_short = d.strftime("%b")
+    base = f"https://www.da.gov.ph/wp-content/uploads/{d.year}/{d.month:02d}"
+
+    patterns = [
+        # New DA naming convention (Oct 2026 onwards): Month-Day-Year-DPI-AFC.pdf
+        f"{base}/{month_name}-{d.day}-{d.year}-DPI-AFC.pdf",
+        f"{base}/{month_name}-{d.day:02d}-{d.year}-DPI-AFC.pdf",
+        # Historical standard: Daily-Price-Index-Month-Day-Year.pdf
+        f"{base}/Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
+        f"{base}/Daily-Price-Index-{month_name}-{d.day:02d}-{d.year}.pdf",
+        # Shorthand DPI variants
+        f"{base}/{month_name}-{d.day}-{d.year}-DPI.pdf",
+        f"{base}/{month_name}-{d.day:02d}-{d.year}-DPI.pdf",
+        # Duplicates/revisions uploaded with '-1' suffix
+        f"{base}/{month_name}-{d.day}-{d.year}-DPI-AFC-1.pdf",
+        f"{base}/Daily-Price-Index-{month_name}-{d.day}-{d.year}-1.pdf",
+        f"{base}/Revised-Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
+        # Abbreviated month names
+        f"{base}/{month_short}-{d.day}-{d.year}-DPI-AFC.pdf",
+        f"{base}/Daily-Price-Index-{month_short}-{d.day}-{d.year}.pdf",
+        # Lowercase variants
+        f"{base}/{month_name.lower()}-{d.day}-{d.year}-dpi-afc.pdf",
+        f"{base}/daily-price-index-{month_name.lower()}-{d.day}-{d.year}.pdf",
+    ]
+    seen: set[str] = set()
+    return [p for p in patterns if not (p in seen or seen.add(p))]
 
 
 def crawl_da_catalog(use_cache: bool = True) -> dict[str, str]:
@@ -91,25 +191,23 @@ def crawl_da_catalog(use_cache: bool = True) -> dict[str, str]:
             date_to_url: dict[str, str] = {}
 
             for a in soup.find_all("a"):
-                href = a.get("href") or ""
-                if not href.lower().endswith(".pdf") or "daily-price-index" not in href.lower():
+                href = (a.get("href") or "").strip()
+                if not href.lower().endswith(".pdf"):
                     continue
 
-                filename = href.split("/")[-1]
-                m = re.search(
-                    r"Daily-Price-Index-([A-Za-z]+)-([0-9]{1,2})-([0-9]{4})",
-                    filename,
-                    re.IGNORECASE,
-                )
-                if m:
-                    month_str, day_str, year_str = m.groups()
-                    month_num = MONTH_MAP.get(month_str.lower())
-                    if month_num:
-                        try:
-                            d = datetime.date(int(year_str), month_num, int(day_str))
-                            date_to_url[d.strftime("%Y-%m-%d")] = href
-                        except ValueError:
-                            continue
+                # Filter for price bulletins (matches DPI, price index, daily price, afc, amas)
+                if not any(k in href.lower() for k in ("price", "dpi", "index", "daily", "afc", "amas")):
+                    continue
+
+                # Extract date from URL filename or anchor text
+                d = extract_date_from_bulletin_url(href)
+                if not d:
+                    text_str = a.get_text().strip()
+                    if text_str:
+                        d = extract_date_from_bulletin_url(text_str)
+
+                if d:
+                    date_to_url[d.strftime("%Y-%m-%d")] = href
 
             logger.info("Found %d official daily PDF bulletins in Department of Agriculture price monitoring portal.", len(date_to_url))
 
@@ -142,54 +240,72 @@ def download_single_pdf(
     client: httpx.Client,
     max_retries: int = 3,
     force: bool = False,
+    dest_dir: Path | None = None,
 ) -> tuple[str, str, int]:
     """
-    Downloads a single bulletin PDF with retries.
+    Downloads a single bulletin PDF with retries and fallback candidate URL patterns.
     Returns (date_str, status, file_size).
     Statuses: 'ALREADY_CACHED', 'DOWNLOADED', 'NOT_FOUND_404', 'FAILED'
     """
-    dest_path = RAW_DATA_DIR / f"{date_str}.pdf"
+    target_dir = dest_dir or RAW_DATA_DIR
+    dest_path = target_dir / f"{date_str}.pdf"
 
     if not force and is_valid_pdf(dest_path):
         return date_str, "ALREADY_CACHED", dest_path.stat().st_size
 
-    # Fallback URL pattern if not in catalog
-    if not pdf_url:
-        date_obj = datetime.date.fromisoformat(date_str)
-        month_name = date_obj.strftime("%B")
-        day_num = date_obj.day
-        year_num = date_obj.year
-        pdf_url = (
-            f"https://www.da.gov.ph/wp-content/uploads/{year_num}/{date_obj.month:02d}/"
-            f"Daily-Price-Index-{month_name}-{day_num}-{year_num}.pdf"
-        )
+    # Build candidate URLs to try:
+    # 1. Catalog URL (if provided)
+    # 2. Known URL pattern variations for this date
+    urls_to_try: list[str] = []
+    if pdf_url:
+        urls_to_try.append(pdf_url)
 
-    for attempt in range(1, max_retries + 1):
-        try:
-            resp = client.get(pdf_url)
-            if resp.status_code == 404:
-                return date_str, "NOT_FOUND_404", 0
-            elif resp.status_code != 200:
+    try:
+        d = datetime.date.fromisoformat(date_str)
+        for cand in generate_candidate_urls(d):
+            if cand not in urls_to_try:
+                urls_to_try.append(cand)
+    except Exception:
+        pass
+
+    if not urls_to_try:
+        return date_str, "FAILED", 0
+
+    had_connection_error = False
+
+    for current_url in urls_to_try:
+        for attempt in range(1, max_retries + 1):
+            try:
+                resp = client.get(current_url)
+                if resp.status_code == 404:
+                    # 404 at this URL candidate, try next pattern
+                    break
+                elif resp.status_code != 200:
+                    time.sleep(0.5 * attempt)
+                    continue
+
+                content = resp.content
+                # Verify magic bytes
+                if not content.startswith(b"%PDF-") or len(content) < 5000:
+                    # Not a real PDF (e.g. 200 OK HTML error page)
+                    break
+
+                target_dir.mkdir(parents=True, exist_ok=True)
+                dest_path.write_bytes(content)
+                return date_str, "DOWNLOADED", len(content)
+
+            except (httpx.ConnectError, httpx.TimeoutException):
+                had_connection_error = True
+                if attempt == max_retries:
+                    break
                 time.sleep(1.0 * attempt)
-                continue
+            except Exception:
+                break
 
-            content = resp.content
-            # Verify magic bytes
-            if not content.startswith(b"%PDF-") or len(content) < 5000:
-                return date_str, "NOT_FOUND_404", 0
+    if had_connection_error:
+        return date_str, "FAILED", 0
 
-            RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
-            dest_path.write_bytes(content)
-            return date_str, "DOWNLOADED", len(content)
-
-        except (httpx.ConnectError, httpx.TimeoutException):
-            if attempt == max_retries:
-                return date_str, "FAILED", 0
-            time.sleep(2.0 * attempt)
-        except Exception:
-            return date_str, "FAILED", 0
-
-    return date_str, "FAILED", 0
+    return date_str, "NOT_FOUND_404", 0
 
 
 def run_parallel_downloader(

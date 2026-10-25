@@ -4,11 +4,15 @@ Unit tests for parallel raw PDF downloader.
 
 import datetime
 from pathlib import Path
+import httpx
 import pytest
 
 from pipeline.download_pdfs import (
     is_valid_pdf,
     download_single_pdf,
+    extract_date_from_bulletin_url,
+    generate_candidate_urls,
+    crawl_da_catalog,
 )
 
 
@@ -57,5 +61,133 @@ def test_downloader_skips_cached_without_network(tmp_path, monkeypatch):
         assert date_str == test_date
         assert status == "ALREADY_CACHED"
         assert size > 5000
+    finally:
+        client.close()
+
+
+def test_extract_date_from_bulletin_url():
+    """Verify regex pattern matching on multiple DA bulletin filename conventions."""
+    # 1. Historical standard format
+    assert extract_date_from_bulletin_url(
+        "https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-23-2026.pdf"
+    ) == datetime.date(2026, 10, 23)
+
+    # 2. New DA format introduced late October 2026
+    assert extract_date_from_bulletin_url(
+        "https://www.da.gov.ph/wp-content/uploads/2026/10/October-24-2026-DPI-AFC.pdf"
+    ) == datetime.date(2026, 10, 24)
+
+    assert extract_date_from_bulletin_url(
+        "https://www.da.gov.ph/wp-content/uploads/2026/10/October-25-2026-DPI-AFC.pdf"
+    ) == datetime.date(2026, 10, 25)
+
+    # 3. Revision prefix
+    assert extract_date_from_bulletin_url(
+        "https://www.da.gov.ph/wp-content/uploads/2026/10/Revised-Daily-Price-Index-October-7-2026.pdf"
+    ) == datetime.date(2026, 10, 7)
+
+    # 4. Duplicate upload suffix '-1'
+    assert extract_date_from_bulletin_url(
+        "https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-8-2026-1.pdf"
+    ) == datetime.date(2026, 10, 8)
+
+    # 5. Day-first variant
+    assert extract_date_from_bulletin_url(
+        "https://www.da.gov.ph/wp-content/uploads/2026/10/24-October-2026-DPI.pdf"
+    ) == datetime.date(2026, 10, 24)
+
+    # 6. ISO numeric date variant
+    assert extract_date_from_bulletin_url(
+        "https://www.da.gov.ph/wp-content/uploads/2026/10/2026-10-24-DPI.pdf"
+    ) == datetime.date(2026, 10, 24)
+
+    # 7. Non-bulletin PDF should return None
+    assert extract_date_from_bulletin_url(
+        "https://www.da.gov.ph/wp-content/uploads/2026/10/annual_guidelines.pdf"
+    ) is None
+
+
+def test_generate_candidate_urls():
+    """Verify that candidate generator produces both new DPI-AFC and legacy Daily-Price-Index URLs."""
+    target_d = datetime.date(2026, 10, 24)
+    candidates = generate_candidate_urls(target_d)
+
+    assert any("October-24-2026-DPI-AFC.pdf" in url for url in candidates)
+    assert any("Daily-Price-Index-October-24-2026.pdf" in url for url in candidates)
+    assert any("October-24-2026-DPI.pdf" in url for url in candidates)
+    # Ensure no duplicates
+    assert len(candidates) == len(set(candidates))
+
+
+def test_crawl_da_catalog_discovers_both_formats(monkeypatch, tmp_path):
+    """Verify that crawl_da_catalog discovers both historical and new DPI-AFC naming formats."""
+    import pipeline.download_pdfs as dl
+
+    fake_html = """
+    <html>
+      <body>
+        <a href="https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-23-2026.pdf">Oct 23</a>
+        <a href="https://www.da.gov.ph/wp-content/uploads/2026/10/October-24-2026-DPI-AFC.pdf">Oct 24</a>
+        <a href="https://www.da.gov.ph/wp-content/uploads/2026/10/October-25-2026-DPI-AFC.pdf">Oct 25</a>
+        <a href="https://www.da.gov.ph/wp-content/uploads/2026/10/random_irrelevant.pdf">Random PDF</a>
+      </body>
+    </html>
+    """
+
+    class FakeResponse:
+        status_code = 200
+        text = fake_html
+
+    class FakeClient:
+        def __init__(self, *args, **kwargs):
+            pass
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            pass
+        def get(self, url):
+            return FakeResponse()
+
+    monkeypatch.setattr(dl.httpx, "Client", FakeClient)
+    monkeypatch.setattr(dl, "RAW_DATA_DIR", tmp_path)
+    monkeypatch.setattr(dl, "CATALOG_CACHE_FILE", tmp_path / "catalog.json")
+
+    catalog = crawl_da_catalog(use_cache=False)
+    assert "2026-10-23" in catalog
+    assert "2026-10-24" in catalog
+    assert "2026-10-25" in catalog
+    assert catalog["2026-10-24"] == "https://www.da.gov.ph/wp-content/uploads/2026/10/October-24-2026-DPI-AFC.pdf"
+    assert "random_irrelevant.pdf" not in str(catalog.values())
+
+
+def test_download_single_pdf_candidate_fallback(tmp_path):
+    """Verify download_single_pdf falls back to candidate URLs when primary/old pattern 404s."""
+    target_date = "2026-10-24"
+    valid_pdf_content = b"%PDF-1.5\n" + b"X" * 6000
+
+    class MockTransport(httpx.BaseTransport):
+        def handle_request(self, request):
+            url_str = str(request.url)
+            # Old name returns 404
+            if "Daily-Price-Index" in url_str:
+                return httpx.Response(404, request=request)
+            # New DPI-AFC format returns 200 with valid PDF
+            elif "October-24-2026-DPI-AFC.pdf" in url_str:
+                return httpx.Response(200, content=valid_pdf_content, request=request)
+            return httpx.Response(404, request=request)
+
+    client = httpx.Client(transport=MockTransport())
+    try:
+        # Pass pdf_url=None to trigger candidate search
+        date_res, status_res, size_res = download_single_pdf(
+            date_str=target_date,
+            pdf_url=None,
+            client=client,
+            dest_dir=tmp_path,
+        )
+        assert date_res == target_date
+        assert status_res == "DOWNLOADED"
+        assert size_res == len(valid_pdf_content)
+        assert (tmp_path / f"{target_date}.pdf").exists()
     finally:
         client.close()
