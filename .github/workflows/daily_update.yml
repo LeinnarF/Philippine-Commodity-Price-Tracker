@@ -1,12 +1,14 @@
 name: Scheduled Daily Price Sync & Pages Deployment
 
+# CEASED FOR NOW: Automated daily collector and Pages sync are disabled
+# pending resolution of PDF bulletin data extraction issues.
 on:
-  schedule:
-    # Runs Monday to Saturday at 10:00 UTC (18:00 Manila Time - PHT), shortly after DA AMAS publishes bulletins
-    - cron: '0 10 * * 1-6'
-    # Secondary check at 14:00 UTC (22:00 Manila Time - PHT) to catch late-afternoon bulletin uploads
-    - cron: '0 14 * * 1-6'
   workflow_dispatch:
+#  schedule:
+#    # Runs Monday to Saturday at 10:00 UTC (18:00 Manila Time - PHT), shortly after DA AMAS publishes bulletins
+#    - cron: '0 10 * * 1-6'
+#    # Secondary check at 14:00 UTC (22:00 Manila Time - PHT) to catch late-afternoon bulletin uploads
+#    - cron: '0 14 * * 1-6'
 
 permissions:
   contents: write
@@ -19,6 +21,8 @@ concurrency:
 
 jobs:
   sync-and-deploy:
+    # Ceased: Automated daily sync and deployments stopped for now
+    if: false
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -53,14 +57,15 @@ jobs:
           git add data/clean_da_amas_prices.csv data/selected_da_amas_prices.csv data/raw_da_amas_prices.csv data/pipeline_execution_logs.csv
           git diff --staged --quiet || (git commit -m "chore(data): auto-update daily DA AMAS prices and execution logs [skip ci]" && git push)
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
+      # GitHub Pages deployment ceased for now
+      # - name: Setup GitHub Pages
+      #   uses: actions/configure-pages@v5
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "public"
+      # - name: Upload Pages artifact
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     path: "public"
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      # - name: Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v4

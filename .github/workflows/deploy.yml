@@ -1,10 +1,12 @@
 name: Deploy Dashboard to GitHub Pages
 
+# CEASED FOR NOW: Automatic deployments to GitHub Pages are temporarily halted
+# pending investigation and fixes for price bulletin data extraction issues.
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+#  push:
+#    branches:
+#      - main
 
 # Permissions required to deploy to GitHub Pages
 permissions:
@@ -19,6 +21,8 @@ concurrency:
 
 jobs:
   build-and-deploy:
+    # Cease deployments to GitHub Pages for now
+    if: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
