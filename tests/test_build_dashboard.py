@@ -269,7 +269,9 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     css_file = tmp_path / "public" / "assets" / "css" / "dashboard.css"
     js_file = tmp_path / "public" / "assets" / "js" / "dashboard.js"
     data_file = tmp_path / "public" / "assets" / "data" / "commodities.js"
+    nojekyll_file = tmp_path / "public" / ".nojekyll"
 
+    assert nojekyll_file.exists()
     assert css_file.exists() and css_file.stat().st_size > 5_000
     assert js_file.exists() and js_file.stat().st_size > 5_000
     assert data_file.exists() and data_file.stat().st_size > 500_000

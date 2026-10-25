@@ -567,6 +567,36 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         FROM audit_prices;
     """).df().to_dict(orient="records")[0]
 
+    # Fetch recent pipeline execution logs if table exists
+    tables = [t[0] for t in con.execute("SHOW TABLES;").fetchall()]
+    execution_logs: list[dict[str, Any]] = []
+    latest_run: dict[str, Any] | None = None
+
+    if "pipeline_execution_logs" in tables:
+        try:
+            log_df = con.execute("""
+                SELECT
+                    run_id,
+                    executed_at::VARCHAR AS executed_at,
+                    trigger,
+                    status,
+                    latest_bulletin_date::VARCHAR AS latest_bulletin_date,
+                    bulletins_checked,
+                    bulletins_downloaded,
+                    records_extracted,
+                    duration_seconds,
+                    message
+                FROM pipeline_execution_logs
+                ORDER BY executed_at DESC
+                LIMIT 15;
+            """).df()
+            if not log_df.empty:
+                execution_logs = log_df.to_dict(orient="records")
+                latest_run = execution_logs[0]
+        except Exception:
+            execution_logs = []
+            latest_run = None
+
     return {
         "total_rows": int(res["total_rows"]),
         "total_bulletins": int(res["total_bulletins"]),
@@ -575,6 +605,8 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "synthetic_count": int(res["synthetic_count"]),
         "market_scope": res["market_scope"] or "NCR Wet Markets",
         "source_agency": res["source_agency"] or "da_amas",
+        "execution_logs": execution_logs,
+        "latest_run": latest_run,
     }
 
 

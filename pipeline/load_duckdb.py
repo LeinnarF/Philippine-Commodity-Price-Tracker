@@ -27,6 +27,7 @@ logger = logging.getLogger("load_duckdb")
 DEFAULT_DB_PATH = Path(__file__).resolve().parent.parent / "data" / "commodities.duckdb"
 DEFAULT_CLEAN_CSV = Path(__file__).resolve().parent.parent / "data" / "clean_da_amas_prices.csv"
 DEFAULT_SELECTED_CSV = Path(__file__).resolve().parent.parent / "data" / "selected_da_amas_prices.csv"
+DEFAULT_LOGS_CSV = Path(__file__).resolve().parent.parent / "data" / "pipeline_execution_logs.csv"
 
 # SQL DDL Definitions
 
@@ -35,6 +36,7 @@ DROP VIEW IF EXISTS v_latest_snapshot CASCADE;
 DROP VIEW IF EXISTS v_category_indices CASCADE;
 DROP VIEW IF EXISTS v_commodity_analytics CASCADE;
 DROP TABLE IF EXISTS fetch_log CASCADE;
+DROP TABLE IF EXISTS pipeline_execution_logs CASCADE;
 DROP TABLE IF EXISTS audit_prices CASCADE;
 DROP TABLE IF EXISTS commodity_prices CASCADE;
 """
@@ -129,6 +131,63 @@ FROM read_csv(
         'raw_count': 'INTEGER',
         'raw_file': 'VARCHAR',
         'source_url': 'VARCHAR'
+    }
+);
+"""
+
+SQL_CREATE_PIPELINE_EXECUTION_LOGS = """
+CREATE OR REPLACE TABLE pipeline_execution_logs (
+    run_id VARCHAR PRIMARY KEY,
+    executed_at TIMESTAMP NOT NULL,
+    trigger VARCHAR NOT NULL,
+    status VARCHAR NOT NULL,
+    latest_bulletin_date DATE,
+    bulletins_checked INTEGER NOT NULL DEFAULT 0,
+    bulletins_downloaded INTEGER NOT NULL DEFAULT 0,
+    records_extracted INTEGER NOT NULL DEFAULT 0,
+    duration_seconds DOUBLE NOT NULL DEFAULT 0.0,
+    message VARCHAR
+);
+"""
+
+SQL_INSERT_PIPELINE_EXECUTION_LOGS = """
+INSERT INTO pipeline_execution_logs (
+    run_id,
+    executed_at,
+    trigger,
+    status,
+    latest_bulletin_date,
+    bulletins_checked,
+    bulletins_downloaded,
+    records_extracted,
+    duration_seconds,
+    message
+)
+SELECT
+    run_id::VARCHAR,
+    executed_at::TIMESTAMP,
+    trigger::VARCHAR,
+    status::VARCHAR,
+    latest_bulletin_date::DATE,
+    bulletins_checked::INTEGER,
+    bulletins_downloaded::INTEGER,
+    records_extracted::INTEGER,
+    duration_seconds::DOUBLE,
+    message::VARCHAR
+FROM read_csv(
+    ?,
+    header=True,
+    columns={
+        'run_id': 'VARCHAR',
+        'executed_at': 'TIMESTAMP',
+        'trigger': 'VARCHAR',
+        'status': 'VARCHAR',
+        'latest_bulletin_date': 'DATE',
+        'bulletins_checked': 'INTEGER',
+        'bulletins_downloaded': 'INTEGER',
+        'records_extracted': 'INTEGER',
+        'duration_seconds': 'DOUBLE',
+        'message': 'VARCHAR'
     }
 );
 """
@@ -243,7 +302,7 @@ def validate_database_integrity(con: duckdb.DuckDBPyConnection) -> dict[str, Any
     if "fetch_log" in tables:
         raise ValueError("Legacy table 'fetch_log' still exists in DuckDB!")
 
-    if "commodity_prices" not in tables or "audit_prices" not in tables:
+    if "commodity_prices" not in tables or "audit_prices" not in tables or "pipeline_execution_logs" not in tables:
         raise ValueError("Missing core silver tables in DuckDB!")
 
     # 2. Check commodity_prices dimensions and completeness
@@ -376,10 +435,11 @@ def load_duckdb(
     db_path: str | Path = DEFAULT_DB_PATH,
     clean_csv: str | Path = DEFAULT_CLEAN_CSV,
     selected_csv: str | Path = DEFAULT_SELECTED_CSV,
+    logs_csv: str | Path | None = DEFAULT_LOGS_CSV,
     con: duckdb.DuckDBPyConnection | None = None,
 ) -> duckdb.DuckDBPyConnection:
     """
-    Builds the DuckDB database from clean and selected CSVs.
+    Builds the DuckDB database from clean, selected, and execution log CSVs.
 
     Parameters
     ----------
@@ -389,6 +449,8 @@ def load_duckdb(
         Path to data/clean_da_amas_prices.csv.
     selected_csv : str | Path
         Path to data/selected_da_amas_prices.csv.
+    logs_csv : str | Path | None
+        Path to data/pipeline_execution_logs.csv.
     con : duckdb.DuckDBPyConnection | None
         Optional existing connection (e.g., for in-memory or custom connections).
         If None, connects to db_path.
@@ -401,6 +463,7 @@ def load_duckdb(
     start_time = time.time()
     clean_path = Path(clean_csv)
     selected_path = Path(selected_csv)
+    logs_path = Path(logs_csv) if logs_csv is not None else None
 
     if not clean_path.exists():
         raise FileNotFoundError(f"Clean CSV file not found: {clean_path}")
@@ -411,6 +474,7 @@ def load_duckdb(
     logger.info("Philippine Commodity Price Tracker: DuckDB Loader (Stage 5)")
     logger.info("Clean CSV Source   : %s", clean_path.resolve())
     logger.info("Selected CSV Source: %s", selected_path.resolve())
+    logger.info("Logs CSV Source    : %s", logs_path.resolve() if logs_path and logs_path.exists() else "None/Not created yet")
     logger.info("Target DuckDB File : %s", Path(db_path).resolve() if con is None else "Custom Connection")
     logger.info("==================================================")
 
@@ -435,19 +499,26 @@ def load_duckdb(
     logger.info("Ingesting selected CSV provenance data into 'audit_prices'...")
     con.execute(SQL_INSERT_AUDIT_PRICES, [str(selected_path.resolve())])
 
-    # 4. Build Gold View: v_commodity_analytics
+    # 4. Build Silver Table: pipeline_execution_logs
+    logger.info("Creating Silver table 'pipeline_execution_logs'...")
+    con.execute(SQL_CREATE_PIPELINE_EXECUTION_LOGS)
+    if logs_path and logs_path.exists():
+        logger.info("Ingesting pipeline execution logs into 'pipeline_execution_logs'...")
+        con.execute(SQL_INSERT_PIPELINE_EXECUTION_LOGS, [str(logs_path.resolve())])
+
+    # 5. Build Gold View: v_commodity_analytics
     logger.info("Creating Gold view 'v_commodity_analytics'...")
     con.execute(SQL_CREATE_VIEW_COMMODITY_ANALYTICS)
 
-    # 5. Build Gold View: v_latest_snapshot
+    # 6. Build Gold View: v_latest_snapshot
     logger.info("Creating Gold view 'v_latest_snapshot'...")
     con.execute(SQL_CREATE_VIEW_LATEST_SNAPSHOT)
 
-    # 6. Build Gold View: v_category_indices
+    # 7. Build Gold View: v_category_indices
     logger.info("Creating Gold view 'v_category_indices'...")
     con.execute(SQL_CREATE_VIEW_CATEGORY_INDICES)
 
-    # 7. Validate Data Integrity
+    # 8. Validate Data Integrity
     logger.info("Validating database constraints and panel integrity...")
     metrics = validate_database_integrity(con)
 
@@ -504,11 +575,18 @@ if __name__ == "__main__":
         default=str(DEFAULT_SELECTED_CSV),
         help=f"Path to selected CSV (default: {DEFAULT_SELECTED_CSV})",
     )
+    parser.add_argument(
+        "--logs-csv",
+        type=str,
+        default=str(DEFAULT_LOGS_CSV),
+        help=f"Path to pipeline execution logs CSV (default: {DEFAULT_LOGS_CSV})",
+    )
 
     args = parser.parse_args()
     connection = load_duckdb(
         db_path=args.db,
         clean_csv=args.clean_csv,
         selected_csv=args.selected_csv,
+        logs_csv=args.logs_csv,
     )
     connection.close()

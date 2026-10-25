@@ -36,6 +36,7 @@ def test_load_duckdb_execution(tmp_path):
         expected_objects = {
             "commodity_prices",
             "audit_prices",
+            "pipeline_execution_logs",
             "v_commodity_analytics",
             "v_latest_snapshot",
             "v_category_indices",
@@ -43,6 +44,10 @@ def test_load_duckdb_execution(tmp_path):
         for obj in expected_objects:
             assert obj in tables, f"Expected {obj} to exist in database"
         assert "fetch_log" not in tables
+
+        # Verify pipeline execution logs table is queryable
+        log_rows = con.execute("SELECT COUNT(*) FROM pipeline_execution_logs;").fetchone()[0]
+        assert log_rows >= 1
 
         # 2. Dimensions & shape
         cp_count = con.execute("SELECT COUNT(*) FROM commodity_prices;").fetchone()[0]

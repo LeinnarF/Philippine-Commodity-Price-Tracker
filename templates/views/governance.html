@@ -131,3 +131,75 @@
     </div>
   </div>
 </div>
+
+<!-- Automated Daily Ingestion & Pipeline Audit Logs -->
+<div class="card" style="margin-top: 24px;">
+  <div class="card-header">
+    <div class="card-title-group">
+      <h2 class="card-title">Automated Daily Ingestion &amp; Pipeline Execution Audit Logs</h2>
+      <p class="card-subtitle" style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+        Immutable audit trail of GitHub Actions crawler executions, new bulletin discoveries, and warehouse ingestion status.
+      </p>
+    </div>
+    {% if audit_info.latest_run %}
+    <span class="status-pill {% if audit_info.latest_run.status == 'SUCCESS' %}status-pill-decrease{% else %}status-pill-increase{% endif %}">
+      Latest Run: {{ audit_info.latest_run.status }}
+    </span>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    {% if audit_info.execution_logs %}
+    <div class="table-responsive">
+      <table class="data-table" style="width: 100%;">
+        <thead>
+          <tr>
+            <th style="text-align: left;">Execution Timestamp (UTC)</th>
+            <th style="text-align: left;">Run ID / Trigger</th>
+            <th style="text-align: center;">Status</th>
+            <th style="text-align: center;">Bulletins Downloaded</th>
+            <th style="text-align: center;">Records Extracted</th>
+            <th style="text-align: center;">Duration</th>
+            <th style="text-align: left;">Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in audit_info.execution_logs %}
+          <tr>
+            <td style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);">
+              {{ log.executed_at }}
+            </td>
+            <td>
+              <strong style="font-family: var(--font-mono); font-size: 12px;">{{ log.run_id }}</strong>
+              <div style="font-size: 11px; color: var(--text-muted);">{{ log.trigger }}</div>
+            </td>
+            <td style="text-align: center;">
+              {% if log.status == 'SUCCESS' %}
+              <span class="badge badge-decrease">SUCCESS</span>
+              {% elif log.status == 'NO_NEW_DATA' %}
+              <span class="badge badge-neutral">NO NEW DATA</span>
+              {% else %}
+              <span class="badge badge-increase">{{ log.status }}</span>
+              {% endif %}
+            </td>
+            <td style="text-align: center; font-family: var(--font-mono);">
+              {{ log.bulletins_downloaded }}
+            </td>
+            <td style="text-align: center; font-family: var(--font-mono);">
+              {{ log.records_extracted | format_num(0) }}
+            </td>
+            <td style="text-align: center; font-family: var(--font-mono); font-size: 12px;">
+              {{ log.duration_seconds }}s
+            </td>
+            <td style="font-size: 12px; color: var(--text-secondary);">
+              {{ log.message }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p style="color: var(--text-muted); font-size: 13px;">No pipeline execution logs recorded yet.</p>
+    {% endif %}
+  </div>
+</div>

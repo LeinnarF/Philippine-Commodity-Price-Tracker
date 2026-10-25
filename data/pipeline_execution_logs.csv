@@ -1,0 +1,2 @@
+run_id,executed_at,trigger,status,latest_bulletin_date,bulletins_checked,bulletins_downloaded,records_extracted,duration_seconds,message
+init-archive,2026-10-20 18:00:00,init,SUCCESS,2026-10-20,451,451,66291,24.50,Baseline ingestion of 451 official DA AMAS daily price bulletins (March 2025 - October 2026)

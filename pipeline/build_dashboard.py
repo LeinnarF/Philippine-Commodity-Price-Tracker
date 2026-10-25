@@ -174,10 +174,15 @@ def write_modular_assets(
     )
     dest_data.write_text(data_js_content, encoding="utf-8")
 
+    # 5. Emit .nojekyll for seamless GitHub Pages deployment
+    nojekyll_file = public_dir / ".nojekyll"
+    nojekyll_file.touch(exist_ok=True)
+
     return {
         "css": dest_css,
         "js": dest_js,
         "data": dest_data,
+        "nojekyll": nojekyll_file,
     }
 
 
