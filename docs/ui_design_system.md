@@ -29,8 +29,8 @@ All UI source files live in `templates/` and are compiled into `public/` via `pi
 |---|---|
 | `templates/base.html` | Root HTML5 document shell, `.app-shell` split layout, footer, asset links, and live-reload watcher script. |
 | `templates/dashboard.html` | Extends `base.html`; defines the 4 top-level `<section class="view-panel">` containers. |
-| `templates/components/sidebar.html` | Left navigation drawer (`.dashboard-sidebar`), brand header, primary view pills, search box, and collapsible commodity tree. |
-| `templates/components/header.html` | Top workspace navbar card (`.dashboard-navbar`), dynamic view kicker/breadcrumbs, commodity stepper/picker, and latest bulletin badge. |
+| `templates/components/sidebar.html` | Left navigation drawer (`.dashboard-sidebar`), brand header with latest bulletin badge, primary view pills, search box, and collapsible commodity tree. |
+| `templates/components/header.html` | Top workspace navbar card (`.dashboard-navbar`), dynamic view kicker/breadcrumbs, and commodity stepper/picker. |
 | `templates/components/kpi_strip.html` | 5-card executive summary KPI strip included at the top of the Market Overview view. |
 | `templates/views/overview.html` | `#view-overview`: Executive KPI strip, 2-column Top 5 Movers tables, and Macro Category Price Indices chart + summary table. |
 | `templates/views/commodity_detail.html` | `#view-commodity`: 7-card compact KPI strip (`#commodity-metrics-strip`) and interactive commodity price + SMA Plotly chart card. |
