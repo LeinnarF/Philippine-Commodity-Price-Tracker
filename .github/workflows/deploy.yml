@@ -38,13 +38,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run automated test suite
-        run: |
-          python -m pytest tests/ -v
-
       - name: Build DuckDB analytical warehouse (Stage 5)
         run: |
           python -m pipeline.load_duckdb
+
+      - name: Run automated test suite
+        run: |
+          python -m pytest tests/ -v
 
       - name: Generate static dashboard bundle (Stage 6)
         run: |
