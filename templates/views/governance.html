@@ -133,13 +133,10 @@
 </div>
 
 <!-- Automated Daily Ingestion & Pipeline Audit Logs -->
-<div class="card" style="margin-top: 24px;">
+<div class="card">
   <div class="card-header">
     <div class="card-title-group">
       <h2 class="card-title">Automated Daily Ingestion &amp; Pipeline Execution Audit Logs</h2>
-      <p class="card-subtitle" style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
-        Immutable audit trail of GitHub Actions crawler executions, new bulletin discoveries, and warehouse ingestion status.
-      </p>
     </div>
     {% if audit_info.latest_run %}
     <span class="status-pill {% if audit_info.latest_run.status == 'SUCCESS' %}status-pill-decrease{% else %}status-pill-increase{% endif %}">
@@ -147,50 +144,50 @@
     </span>
     {% endif %}
   </div>
-  <div class="card-body">
+  <div class="card-body" style="padding: 0;">
     {% if audit_info.execution_logs %}
-    <div class="table-responsive">
-      <table class="data-table" style="width: 100%;">
+    <div class="table-container" style="border: none; border-radius: 0;">
+      <table class="formal-table">
         <thead>
           <tr>
-            <th style="text-align: left;">Execution Timestamp (UTC)</th>
-            <th style="text-align: left;">Run ID / Trigger</th>
-            <th style="text-align: center;">Status</th>
-            <th style="text-align: center;">Bulletins Downloaded</th>
-            <th style="text-align: center;">Records Extracted</th>
-            <th style="text-align: center;">Duration</th>
-            <th style="text-align: left;">Details</th>
+            <th>Execution Timestamp (UTC)</th>
+            <th>Run ID / Trigger</th>
+            <th class="text-center">Status</th>
+            <th class="text-right">Bulletins Downloaded</th>
+            <th class="text-right">Records Extracted</th>
+            <th class="text-right">Duration</th>
+            <th>Details</th>
           </tr>
         </thead>
         <tbody>
           {% for log in audit_info.execution_logs %}
           <tr>
-            <td style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);">
+            <td class="font-mono" style="color: var(--text-secondary); white-space: nowrap;">
               {{ log.executed_at }}
             </td>
             <td>
-              <strong style="font-family: var(--font-mono); font-size: 12px;">{{ log.run_id }}</strong>
+              <div class="font-mono" style="font-weight: 600; color: var(--text-heading);">{{ log.run_id }}</div>
               <div style="font-size: 11px; color: var(--text-muted);">{{ log.trigger }}</div>
             </td>
-            <td style="text-align: center;">
+            <td class="text-center">
               {% if log.status == 'SUCCESS' %}
-              <span class="badge badge-decrease">SUCCESS</span>
+              <span class="status-pill status-pill-decrease">SUCCESS</span>
               {% elif log.status == 'NO_NEW_DATA' %}
-              <span class="badge badge-neutral">NO NEW DATA</span>
+              <span class="status-pill status-pill-neutral">NO NEW DATA</span>
               {% else %}
-              <span class="badge badge-increase">{{ log.status }}</span>
+              <span class="status-pill status-pill-increase">{{ log.status }}</span>
               {% endif %}
             </td>
-            <td style="text-align: center; font-family: var(--font-mono);">
-              {{ log.bulletins_downloaded }}
+            <td class="text-right font-mono">
+              {{ log.bulletins_downloaded | format_num(0) }}
             </td>
-            <td style="text-align: center; font-family: var(--font-mono);">
+            <td class="text-right font-mono">
               {{ log.records_extracted | format_num(0) }}
             </td>
-            <td style="text-align: center; font-family: var(--font-mono); font-size: 12px;">
-              {{ log.duration_seconds }}s
+            <td class="text-right font-mono">
+              {{ log.duration_seconds }}<span class="unit-suffix">s</span>
             </td>
-            <td style="font-size: 12px; color: var(--text-secondary);">
+            <td style="color: var(--text-secondary);">
               {{ log.message }}
             </td>
           </tr>
@@ -199,7 +196,9 @@
       </table>
     </div>
     {% else %}
-    <p style="color: var(--text-muted); font-size: 13px;">No pipeline execution logs recorded yet.</p>
+    <div style="padding: 24px 20px; color: var(--text-muted); font-size: 13px;">
+      No pipeline execution logs recorded yet.
+    </div>
     {% endif %}
   </div>
 </div>
