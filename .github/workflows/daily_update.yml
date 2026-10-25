@@ -45,7 +45,7 @@ jobs:
 
       - name: Run automated test suite
         run: |
-          pytest tests/ -v
+          python -m pytest tests/ -v
 
       - name: Run incremental daily price update
         run: |

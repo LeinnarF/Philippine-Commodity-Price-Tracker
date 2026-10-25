@@ -40,7 +40,7 @@ jobs:
 
       - name: Run automated test suite
         run: |
-          pytest tests/ -v
+          python -m pytest tests/ -v
 
       - name: Build DuckDB analytical warehouse (Stage 5)
         run: |
