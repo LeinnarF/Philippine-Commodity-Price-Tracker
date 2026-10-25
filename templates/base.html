@@ -4,7 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{% block title %}Philippine Commodity Price Tracker | Bantay Presyo{% endblock %}</title>
+  <title>{% block title %}Philippine Commodity Price Tracker | Bantay Presyo — Daily Retail Market Prices{% endblock %}</title>
+
+  <!-- Primary Search Engine Meta Tags -->
+  <meta name="title" content="Philippine Commodity Price Tracker | Bantay Presyo — Daily Retail Market Prices">
+  <meta name="description" content="Official Philippine retail commodity price tracker (Bantay Presyo). Track daily prevailing prices, 7-day and 30-day moving averages, price velocity, and volatility across 48 basic agri-fishery goods in Metro Manila wet markets.">
+  <meta name="keywords" content="Bantay Presyo, Philippine commodity price tracker, Department of Agriculture price monitoring, DA AMAS price index, Metro Manila wet market prices, retail food prices Philippines, rice prices NCR, pork liempo price, galunggong price, onion prices Philippines, agricultural price trends">
+  <meta name="author" content="Philippine Commodity Price Tracker">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="theme-color" content="#15803d">
+  <link rel="canonical" href="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/">
+
+  <!-- Open Graph / Facebook / LinkedIn / Messaging -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_PH">
+  <meta property="og:url" content="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/">
+  <meta property="og:site_name" content="Philippine Commodity Price Tracker (Bantay Presyo)">
+  <meta property="og:title" content="Philippine Commodity Price Tracker | Bantay Presyo — Daily Retail Prices">
+  <meta property="og:description" content="Automated daily retail price tracking and market intelligence for 48 basic agri-fishery commodities across NCR wet markets, sourced directly from Department of Agriculture bulletins.">
+  <meta property="og:image" content="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/assets/img/crop-icon.png">
+  <meta property="og:image:alt" content="Philippine Commodity Price Tracker Logo">
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/">
+  <meta name="twitter:title" content="Philippine Commodity Price Tracker | Bantay Presyo — Daily Retail Prices">
+  <meta name="twitter:description" content="Automated daily retail price tracking and market intelligence for 48 basic food commodities across Metro Manila wet markets.">
+  <meta name="twitter:image" content="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/assets/img/crop-icon.png">
+
+  <!-- Schema.org JSON-LD Structured Data for Google Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "@id": "https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/#app",
+        "name": "Philippine Commodity Price Tracker (Bantay Presyo)",
+        "url": "https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "description": "Daily automated retail price tracker for 48 basic agri-fishery commodities across Metro Manila wet markets.",
+        "inLanguage": "en-PH"
+      },
+      {
+        "@type": "Dataset",
+        "@id": "https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/#dataset",
+        "name": "Metro Manila Retail Food Commodity Prices Panel Dataset",
+        "description": "Rectangular daily retail price panel of 48 basic food commodities across National Capital Region wet markets.",
+        "temporalCoverage": "2025-03-01/{{ kpis.latest_date }}",
+        "spatialCoverage": {
+          "@type": "Place",
+          "name": "National Capital Region (NCR), Metro Manila, Philippines"
+        },
+        "creator": {
+          "@type": "GovernmentOrganization",
+          "name": "Department of Agriculture - Agribusiness and Marketing Assistance Service (DA-AMAS)",
+          "url": "https://www.da.gov.ph/price-monitoring/"
+        },
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "variableMeasured": "Prevailing Retail Price in Philippine Peso (PHP)"
+      }
+    ]
+  }
+  </script>
 
   <!-- Favicon & Brand Icons -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">

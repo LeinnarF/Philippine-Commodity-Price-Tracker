@@ -178,11 +178,38 @@ def write_modular_assets(
     nojekyll_file = public_dir / ".nojekyll"
     nojekyll_file.touch(exist_ok=True)
 
+    # 6. Emit search engine robots.txt
+    robots_file = public_dir / "robots.txt"
+    robots_file.write_text(
+        "User-agent: *\n"
+        "Allow: /\n\n"
+        "Sitemap: https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/sitemap.xml\n",
+        encoding="utf-8",
+    )
+
+    # 7. Emit search engine sitemap.xml
+    sitemap_file = public_dir / "sitemap.xml"
+    latest_date_str = str(data_ctx.get("kpis", {}).get("latest_date", "2026-10-20"))
+    sitemap_file.write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        '  <url>\n'
+        '    <loc>https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/</loc>\n'
+        f'    <lastmod>{latest_date_str}</lastmod>\n'
+        '    <changefreq>daily</changefreq>\n'
+        '    <priority>1.0</priority>\n'
+        '  </url>\n'
+        '</urlset>\n',
+        encoding="utf-8",
+    )
+
     return {
         "css": dest_css,
         "js": dest_js,
         "data": dest_data,
         "nojekyll": nojekyll_file,
+        "robots": robots_file,
+        "sitemap": sitemap_file,
     }
 
 

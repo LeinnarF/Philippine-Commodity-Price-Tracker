@@ -270,8 +270,14 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     js_file = tmp_path / "public" / "assets" / "js" / "dashboard.js"
     data_file = tmp_path / "public" / "assets" / "data" / "commodities.js"
     nojekyll_file = tmp_path / "public" / ".nojekyll"
+    robots_file = tmp_path / "public" / "robots.txt"
+    sitemap_file = tmp_path / "public" / "sitemap.xml"
 
     assert nojekyll_file.exists()
+    assert robots_file.exists()
+    assert sitemap_file.exists()
+    assert "Sitemap:" in robots_file.read_text(encoding="utf-8")
+    assert "<urlset" in sitemap_file.read_text(encoding="utf-8")
     assert css_file.exists() and css_file.stat().st_size > 5_000
     assert js_file.exists() and js_file.stat().st_size > 5_000
     assert data_file.exists() and data_file.stat().st_size > 500_000
