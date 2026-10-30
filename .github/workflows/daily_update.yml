@@ -31,19 +31,19 @@ jobs:
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
-          python-version: "3.12"
 
       - name: Install dependencies
         run: |
-          uv pip install -r requirements.txt --system --break-system-packages
+          uv venv --python 3.12
+          uv pip install -r requirements.txt
 
       - name: Run automated test suite
         run: |
-          python -m pytest tests/ -v
+          uv run python -m pytest tests/ -v
 
       - name: Run incremental daily price update
         run: |
-          python -m pipeline.daily_update --trigger ${{ github.event_name }} --rebuild
+          uv run python -m pipeline.daily_update --trigger ${{ github.event_name }} --rebuild
 
       - name: Commit updated datasets and execution logs to repository
         run: |
