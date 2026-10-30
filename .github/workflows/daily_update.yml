@@ -35,7 +35,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv pip install -r requirements.txt --system
+          uv pip install -r requirements.txt --system --break-system-packages
 
       - name: Run automated test suite
         run: |
