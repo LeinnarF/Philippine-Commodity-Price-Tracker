@@ -1,12 +1,13 @@
 name: Scheduled Daily Price Sync & Pages Deployment
 
+# HALTED FOR NOW: Automated daily collector is disabled pending resolution of PDF bulletin selection.
 on:
   workflow_dispatch:
-  schedule:
-    # Runs daily at 10:00 UTC (18:00 Manila Time - PHT), shortly after DA AMAS publishes bulletins
-    - cron: '0 10 * * *'
-    # Secondary check daily at 14:00 UTC (22:00 Manila Time - PHT) to catch late-afternoon bulletin uploads
-    - cron: '0 14 * * *'
+#  schedule:
+#    # Runs daily at 10:00 UTC (18:00 Manila Time - PHT), shortly after DA AMAS publishes bulletins
+#    - cron: '0 10 * * *'
+#    # Secondary check daily at 14:00 UTC (22:00 Manila Time - PHT) to catch late-afternoon bulletin uploads
+#    - cron: '0 14 * * *'
 
 permissions:
   contents: write
@@ -19,6 +20,8 @@ concurrency:
 
 jobs:
   sync-and-deploy:
+    # Halted: Automated daily sync stopped for now
+    if: false
     runs-on: ubuntu-latest
     environment:
       name: github-pages
