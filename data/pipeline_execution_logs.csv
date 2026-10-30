@@ -2,3 +2,4 @@ run_id,executed_at,trigger,status,latest_bulletin_date,bulletins_checked,bulleti
 init-archive,2026-10-20 18:00:00,init,SUCCESS,2026-10-20,451,451,66291,24.5,Baseline ingestion of 451 official DA price monitoring daily price bulletins (March 2025 - October 2026)
 run_20261025_132315,2026-10-25 13:23:15,workflow_dispatch,SUCCESS,2026-10-23,4,3,624,47.64,Successfully ingested 3 new bulletin(s) with 624 records. Panel updated to 2026-10-23.
 run_20261030_115435,2026-10-30 11:54:35,workflow_dispatch,SUCCESS,2026-10-30,4,4,192,41.88,Successfully ingested 4 new bulletin(s) with 192 records in-memory. Panel updated to 2026-10-30.
+run_20261030_190800,2026-10-30 19:08:00,schedule,NO_NEW_DATA,2026-10-30,0,0,0,0.02,Dataset is already up to date with latest observation (2026-10-30).
