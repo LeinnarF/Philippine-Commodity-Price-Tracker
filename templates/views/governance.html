@@ -1,5 +1,5 @@
 <!-- Unified Governance KPI Strip (Matches Overview & Commodity Detail KPI Cards) -->
-<div class="kpi-grid kpi-grid-4">
+<div class="kpi-grid">
   <div class="kpi-card">
     <div class="kpi-card-body">
       <div class="kpi-card-header">
@@ -69,28 +69,6 @@
       </div>
     </div>
   </div>
-
-  <div class="kpi-card">
-    <div class="kpi-card-body">
-      <div class="kpi-card-header">
-        <div class="kpi-card-info">
-          <span class="kpi-label">Synthetic Data Count</span>
-          <div class="kpi-value text-drop">{{ audit_info.synthetic_count | int }} (0.00%)</div>
-        </div>
-        <div class="kpi-icon-box kpi-icon-drop" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            <path d="m9 12 2 2 4-4"></path>
-          </svg>
-        </div>
-      </div>
-      <hr class="kpi-card-divider">
-      <div class="kpi-detail">
-        <span class="kpi-highlight">100% Verified</span>
-        <span class="kpi-context">zero fabricated observations</span>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- Data Integrity & Methodology Audit Box -->
@@ -99,12 +77,6 @@
     <div class="card-title-group">
       <h2 class="card-title">Data Governance, Verification &amp; Methodology Disclosure</h2>
     </div>
-    <span class="status-pill status-pill-decrease">
-      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: -1px; margin-right: 4px;" aria-hidden="true">
-        <polyline points="20 6 9 17 4 12"></polyline>
-      </svg>
-      Zero Synthetic Records Assertion
-    </span>
   </div>
   <div class="card-body">
     <div class="methodology-text">
@@ -138,11 +110,6 @@
     <div class="card-title-group">
       <h2 class="card-title">Automated Daily Ingestion &amp; Pipeline Execution Audit Logs</h2>
     </div>
-    {% if audit_info.latest_run %}
-    <span class="status-pill {% if audit_info.latest_run.status == 'SUCCESS' %}status-pill-decrease{% else %}status-pill-increase{% endif %}">
-      Latest Run: {{ audit_info.latest_run.status }}
-    </span>
-    {% endif %}
   </div>
   <div class="card-body" style="padding: 0;">
     {% if audit_info.execution_logs %}
@@ -200,5 +167,54 @@
       No pipeline execution logs recorded yet.
     </div>
     {% endif %}
+  </div>
+</div>
+
+<!-- Official DA Daily Price Index PDF Register -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title-group">
+      <h2 class="card-title">Official DA Daily Price Index PDF Register</h2>
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- Table Container -->
+    <div class="table-container">
+      <table class="formal-table" id="bulletin-register-table">
+        <thead>
+          <tr>
+            <th class="sortable" data-sort="date" style="width: 25%;">Bulletin Date ⇅</th>
+            <th class="sortable" data-sort="source" style="width: 75%;">Official Source ⇅</th>
+          </tr>
+        </thead>
+        <tbody id="bulletin-register-tbody">
+          {% for b in audit_info.bulletins[:10] %}
+          <tr>
+            <td>
+              <div style="font-weight: 600; color: var(--text-heading);">{{ b.date_str | format_date }}</div>
+            </td>
+            <td>
+              {% if b.source_url %}
+              <a
+                href="{{ b.source_url }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="source-url-link font-mono"
+                title="Open official DA price monitoring PDF bulletin in new tab"
+              >{{ b.source_url }}</a>
+              {% else %}
+              <span style="color: var(--text-muted); font-size: 12px;">Unpublished</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="table-pagination" id="bulletin-table-pagination">
+      <!-- Injected by dashboard.js -->
+    </div>
   </div>
 </div>

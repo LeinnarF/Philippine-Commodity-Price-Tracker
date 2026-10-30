@@ -13,6 +13,7 @@
   const commodityMetadata = payload.commodityMeta || {};
   const defaultCommodity = payload.defaultCommodity || Object.keys(commodityMetadata)[0] || "";
   const censusDates = payload.censusDates || [];
+  const bulletinData = payload.bulletins || [];
 
   // Rehydrate shared dates reference onto each commodity series & index dates for O(1) lookup
   const dateIndexMap = {};
@@ -40,6 +41,12 @@
   let categoryChartInitialized = false;
   let commodityTablePage = 1;
   const COMMODITY_TABLE_PAGE_SIZE = 10;
+  let bulletinCurrentPage = 1;
+  const BULLETIN_PAGE_SIZE = 10;
+  let bulletinSearchTerm = "";
+  let bulletinSelectedMonth = "ALL";
+  let bulletinSortColumn = "date";
+  let bulletinSortAsc = false;
 
   // ========================================================================
   // 1. Formatting Helpers
@@ -346,14 +353,14 @@
       counter.textContent = `Showing ${startIndex + 1}–${endIndex} of ${totalRecords} observation dates (Page ${commodityTablePage} of ${totalPages})`;
     }
 
-    renderTablePagination(commodityTablePage, totalPages, (newPage) => {
+    renderTablePagination("commodity-history-pagination", commodityTablePage, totalPages, (newPage) => {
       commodityTablePage = newPage;
       renderCommodityHistoryTable(commName);
     });
   }
 
-  function renderTablePagination(currentPage, totalPages, onPageChange) {
-    const container = document.getElementById("commodity-history-pagination");
+  function renderTablePagination(containerId, currentPage, totalPages, onPageChange) {
+    const container = document.getElementById(containerId);
     if (!container) return;
 
     if (totalPages <= 1) {
@@ -1215,7 +1222,137 @@
       });
     }
 
+    // Initialize bulletin register table if present
+    initBulletinRegister();
+
     window.addEventListener("hashchange", handleHashRoute);
+  }
+
+  function initBulletinRegister() {
+    const tbody = document.getElementById("bulletin-register-tbody");
+    if (!tbody || !bulletinData || bulletinData.length === 0) return;
+
+    const searchInput = document.getElementById("bulletin-search-input");
+    const monthSelect = document.getElementById("bulletin-month-select");
+    const headers = document.querySelectorAll("#bulletin-register-table th.sortable");
+
+    function updateSortHeaders() {
+      headers.forEach((th) => {
+        const col = th.getAttribute("data-sort");
+        const rawText = th.textContent.replace(/[▲▼⇅]/g, "").trim();
+        if (col === bulletinSortColumn) {
+          th.textContent = `${rawText} ${bulletinSortAsc ? "▲" : "▼"}`;
+        } else {
+          th.textContent = `${rawText} ⇅`;
+        }
+      });
+    }
+
+    function renderBulletinTable() {
+      const counter = document.getElementById("bulletin-table-counter");
+      const paginationContainer = document.getElementById("bulletin-table-pagination");
+
+      // Filter
+      const filtered = bulletinData.filter((item) => {
+        if (bulletinSelectedMonth !== "ALL" && item.ym !== bulletinSelectedMonth) {
+          return false;
+        }
+        if (bulletinSearchTerm) {
+          const term = bulletinSearchTerm.toLowerCase();
+          const dStr = (item.date_str || "").toLowerCase();
+          const sUrl = (item.source_url || "").toLowerCase();
+          const rFile = (item.raw_file || "").toLowerCase();
+          const ymStr = (item.ym_label || "").toLowerCase();
+          const formatted = formatDisplayDate(item.date_str).toLowerCase();
+          if (!dStr.includes(term) && !sUrl.includes(term) && !rFile.includes(term) && !ymStr.includes(term) && !formatted.includes(term)) {
+            return false;
+          }
+        }
+        return true;
+      });
+
+      // Sort
+      filtered.sort((a, b) => {
+        let cmp = 0;
+        if (bulletinSortColumn === "date") {
+          cmp = a.date_str.localeCompare(b.date_str);
+        } else if (bulletinSortColumn === "source") {
+          cmp = (a.source_url || "").localeCompare(b.source_url || "");
+        }
+        return bulletinSortAsc ? cmp : -cmp;
+      });
+
+      const totalRecords = filtered.length;
+      const totalPages = Math.ceil(totalRecords / BULLETIN_PAGE_SIZE) || 1;
+      if (bulletinCurrentPage > totalPages) bulletinCurrentPage = totalPages;
+      if (bulletinCurrentPage < 1) bulletinCurrentPage = 1;
+
+      if (totalRecords === 0) {
+        tbody.innerHTML = '<tr><td colspan="2" class="text-center" style="padding: 28px; color: var(--text-muted); font-size: 13px;">No official bulletins match the selected filter or search query.</td></tr>';
+        if (counter) counter.textContent = "Showing 0 bulletins";
+        if (paginationContainer) paginationContainer.innerHTML = "";
+        return;
+      }
+
+      const startIndex = (bulletinCurrentPage - 1) * BULLETIN_PAGE_SIZE;
+      const endIndex = Math.min(startIndex + BULLETIN_PAGE_SIZE, totalRecords);
+
+      let html = "";
+      for (let i = startIndex; i < endIndex; i++) {
+        const b = filtered[i];
+        const sourceLink = b.source_url
+          ? `<a href="${b.source_url}" target="_blank" rel="noopener noreferrer" class="source-url-link font-mono" title="Open official DA price monitoring PDF bulletin in new tab">${b.source_url}</a>`
+          : `<span style="color: var(--text-muted); font-size: 12px;">Unpublished</span>`;
+
+        html += "<tr>";
+        html += `<td><div style="font-weight: 600; color: var(--text-heading);">${formatDisplayDate(b.date_str)}</div></td>`;
+        html += `<td>${sourceLink}</td>`;
+        html += "</tr>";
+      }
+      tbody.innerHTML = html;
+
+      if (counter) {
+        counter.textContent = `Showing ${startIndex + 1}–${endIndex} of ${totalRecords} bulletins (Page ${bulletinCurrentPage} of ${totalPages})`;
+      }
+
+      renderTablePagination("bulletin-table-pagination", bulletinCurrentPage, totalPages, (newPage) => {
+        bulletinCurrentPage = newPage;
+        renderBulletinTable();
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        bulletinSearchTerm = e.target.value.trim();
+        bulletinCurrentPage = 1;
+        renderBulletinTable();
+      });
+    }
+
+    if (monthSelect) {
+      monthSelect.addEventListener("change", (e) => {
+        bulletinSelectedMonth = e.target.value;
+        bulletinCurrentPage = 1;
+        renderBulletinTable();
+      });
+    }
+
+    headers.forEach((th) => {
+      th.addEventListener("click", () => {
+        const col = th.getAttribute("data-sort");
+        if (bulletinSortColumn === col) {
+          bulletinSortAsc = !bulletinSortAsc;
+        } else {
+          bulletinSortColumn = col;
+          bulletinSortAsc = col === "source";
+        }
+        updateSortHeaders();
+        renderBulletinTable();
+      });
+    });
+
+    updateSortHeaders();
+    renderBulletinTable();
   }
 
   // Initialize on DOMContentLoaded

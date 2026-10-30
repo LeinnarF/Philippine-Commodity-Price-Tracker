@@ -597,6 +597,36 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
             execution_logs = []
             latest_run = None
 
+    # Fetch all bulletin provenance records grouped by date
+    bulletin_rows: list[dict[str, Any]] = []
+    available_months: list[dict[str, str]] = []
+    try:
+        bulletin_df = con.execute("""
+            SELECT
+                date::VARCHAR AS date_str,
+                strftime(date, '%Y-%m') AS ym,
+                strftime(date, '%B %Y') AS ym_label,
+                MAX(raw_file) AS raw_file,
+                MAX(source_url) AS source_url,
+                COUNT(price_prevailing)::INTEGER AS recorded_items,
+                COUNT(*)::INTEGER AS total_items
+            FROM audit_prices
+            GROUP BY date
+            ORDER BY date DESC;
+        """).df()
+        if not bulletin_df.empty:
+            bulletin_rows = bulletin_df.to_dict(orient="records")
+            seen_ym = set()
+            for r in bulletin_rows:
+                ym = r["ym"]
+                if ym not in seen_ym:
+                    seen_ym.add(ym)
+                    available_months.append({"ym": ym, "label": r["ym_label"]})
+    except Exception as exc:
+        logger.warning("Failed to fetch bulletin provenance register: %s", exc)
+        bulletin_rows = []
+        available_months = []
+
     return {
         "total_rows": int(res["total_rows"]),
         "total_bulletins": int(res["total_bulletins"]),
@@ -607,6 +637,8 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "source_agency": res["source_agency"] or "da_amas",
         "execution_logs": execution_logs,
         "latest_run": latest_run,
+        "bulletins": bulletin_rows,
+        "available_months": available_months,
     }
 
 

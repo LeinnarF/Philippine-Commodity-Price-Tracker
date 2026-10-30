@@ -1636,6 +1636,21 @@ body {
   user-select: none;
 }
 
+/* Direct Source PDF Hyperlink */
+.source-url-link {
+  color: var(--da-green-800);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-all;
+  transition: color 0.15s ease;
+}
+
+.source-url-link:hover {
+  color: var(--da-green-600);
+}
+
 /* Methodology / Audit Section */
 .audit-grid {
   display: grid;

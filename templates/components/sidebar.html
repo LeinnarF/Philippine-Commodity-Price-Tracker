@@ -8,7 +8,7 @@
       <span class="brand-title">Philippine Commodity Price Tracker</span>
     </div>
   </div>
-      <div class="sidebar-date-badge" title="Latest available DA AMAS bulletin">
+      <div class="sidebar-date-badge" title="Latest available DA price monitoring bulletin">
         <span class="date-lbl">Latest Bulletin:</span>
         <strong class="date-val">{{ kpis.latest_date_short }}</strong>
       </div>
@@ -96,7 +96,7 @@
   <div class="sidebar-tree" id="sidebar-commodity-tree">
     {% for grp, items in commodities_by_group.items() %}
     <div
-      class="sidebar-group {% if loop.first %}expanded{% endif %}"
+      class="sidebar-group"
       data-group-name="{{ grp }}"
     >
       <button type="button" class="sidebar-group-toggle">

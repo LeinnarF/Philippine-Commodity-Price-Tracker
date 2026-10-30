@@ -218,6 +218,10 @@ def test_fetch_audit_info(duckdb_con):
     assert audit["synthetic_count"] == 0
     assert audit["market_scope"] == "NCR Wet Markets"
     assert audit["source_agency"] == "da_amas"
+    assert "bulletins" in audit
+    assert len(audit["bulletins"]) == audit["total_bulletins"]
+    assert "available_months" in audit
+    assert len(audit["available_months"]) > 0
 
 
 # =====================================================================
@@ -238,6 +242,8 @@ def test_render_dashboard_html(duckdb_con):
     assert "category-index-plot" in html
     assert "commodity-trend-plot" in html
     assert "master-price-table" in html
+    assert "bulletin-register-table" in html
+    assert "source-url-link" in html
     assert "{{" not in html
     assert "{%" not in html
     assert "/__dev_poll__" not in html
