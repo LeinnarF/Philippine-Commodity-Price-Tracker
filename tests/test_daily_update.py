@@ -19,7 +19,7 @@ from pipeline.load_duckdb import DEFAULT_LOGS_CSV
 def test_get_latest_tracked_date():
     """Verify that get_latest_tracked_date correctly identifies the newest observation date."""
     if not DEFAULT_CLEAN_CSV.exists():
-        pytest.skip("clean_da_amas_prices.csv not found")
+        pytest.skip("cleaned_dataset.csv not found")
 
     latest_date = get_latest_tracked_date(DEFAULT_CLEAN_CSV)
     assert isinstance(latest_date, datetime.date)
@@ -119,3 +119,96 @@ def test_run_daily_update_already_up_to_date(tmp_path):
     logs_df = pd.read_csv(logs_csv)
     assert len(logs_df) == 1
     assert logs_df.iloc[0]["status"] == "NO_NEW_DATA"
+
+
+def test_run_daily_update_successful_incremental_ingestion(monkeypatch, tmp_path):
+    """Verify in-memory ingestion, panel standardization, bulletin registry, and log recording."""
+    from pipeline.commodity_schema import get_commodity_definitions
+
+    clean_csv = tmp_path / "cleaned_dataset.csv"
+    logs_csv = tmp_path / "pipeline_execution_logs.csv"
+    bulletins_csv = tmp_path / "server_daily_bulletins.csv"
+
+    defs = get_commodity_definitions()
+
+    # Pre-populate day 1 (2026-10-25) with all 48 commodities
+    day1_records = []
+    for item in defs:
+        day1_records.append({
+            "date": "2026-10-25",
+            "commodity_group": item["category"],
+            "commodity": item["commodity"],
+            "unit": item["unit"],
+            "price_prevailing": 100.0,
+            "source_url": "https://example.com/2026-10-25.pdf",
+        })
+    pd.DataFrame(day1_records).to_csv(clean_csv, index=False)
+
+    # Pre-populate server bulletins
+    pd.DataFrame([{"date": "2026-10-25", "pdf_url": "https://example.com/2026-10-25.pdf"}]).to_csv(
+        bulletins_csv, index=False
+    )
+
+    # Mock catalog crawler & in-memory fetch
+    monkeypatch.setattr(
+        "pipeline.daily_update.crawl_da_catalog",
+        lambda use_cache=False: {"2026-10-26": "https://example.com/2026-10-26.pdf"},
+    )
+    monkeypatch.setattr(
+        "pipeline.daily_update.fetch_bulletin_bytes_in_memory",
+        lambda date_str, catalog_url, client: (b"%PDF-1.4 mock", "https://example.com/2026-10-26.pdf"),
+    )
+
+    # Mock raw PDF parser
+    monkeypatch.setattr(
+        "pipeline.daily_update.parse_da_amas_pdf",
+        lambda pdf_source, target_date, source_url: pd.DataFrame([{"dummy": 1}]),
+    )
+
+    # Mock standardize_bulletin_records to return 48 standardized panel items
+    mock_std_records = []
+    for item in defs:
+        mock_std_records.append({
+            "date": "2026-10-26",
+            "commodity_group": item["category"],
+            "commodity": item["commodity"],
+            "unit": item["unit"],
+            "price_prevailing": 120.0,
+            "source_url": "https://example.com/2026-10-26.pdf",
+        })
+
+    monkeypatch.setattr(
+        "pipeline.daily_update.standardize_bulletin_records",
+        lambda df_raw, target_date, source_url: mock_std_records,
+    )
+
+    # Run updater targeting 2026-10-26
+    res = run_daily_update(
+        clean_csv_path=clean_csv,
+        logs_csv_path=logs_csv,
+        bulletins_csv_path=bulletins_csv,
+        target_date=datetime.date(2026, 10, 26),
+        rebuild=False,
+    )
+
+    assert res["status"] == "SUCCESS"
+    assert res["bulletins_downloaded"] == 1
+    assert res["records_extracted"] == 48
+
+    # Verify updated clean dataset
+    updated_df = pd.read_csv(clean_csv)
+    assert len(updated_df) == 96
+    assert updated_df["date"].nunique() == 2
+    assert (updated_df[updated_df["date"] == "2026-10-26"]["price_prevailing"] == 120.0).all()
+
+    # Verify server bulletins registry updated
+    updated_bulletins = pd.read_csv(bulletins_csv)
+    assert len(updated_bulletins) == 2
+    assert "2026-10-26" in updated_bulletins["date"].values
+
+    # Verify log entry
+    logs_df = pd.read_csv(logs_csv)
+    assert len(logs_df) == 1
+    assert logs_df.iloc[0]["status"] == "SUCCESS"
+    assert logs_df.iloc[0]["bulletins_downloaded"] == 1
+    assert logs_df.iloc[0]["records_extracted"] == 48

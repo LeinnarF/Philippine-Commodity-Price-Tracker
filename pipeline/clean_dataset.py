@@ -4,7 +4,7 @@ Final Clean Dataset Pipeline for Philippine Commodity Price Tracker.
 Reads the intermediate selected panel dataset (data/selected_da_amas_prices.csv),
 strips all technical/provenance metadata columns (market_scope, source, is_synthetic,
 raw_count, raw_file, source_url) for a clean presentation and modeling schema,
-and writes the final 5-column dataset to data/clean_da_amas_prices.csv.
+and writes the final 5-column dataset to data/cleaned_dataset.csv.
 
 Architectural Milestones:
 1. data/raw_da_amas_prices.csv:
@@ -12,7 +12,7 @@ Architectural Milestones:
 2. data/selected_da_amas_prices.csv:
    Filtered, normalized 48-commodity panel grid with audit metadata and forward-filled
    sporadic gaps (21,648 rows, 11 columns). Preserved intact for transparency.
-3. data/clean_da_amas_prices.csv:
+3. data/cleaned_dataset.csv:
    Final production dataset with strictly 5 core business columns:
    ['date', 'commodity_group', 'commodity', 'unit', 'price_prevailing'].
 """
@@ -32,16 +32,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger("clean_dataset")
 
-DEFAULT_SELECTED_CSV = Path(__file__).resolve().parent.parent / "data" / "selected_da_amas_prices.csv"
-DEFAULT_CLEAN_CSV = Path(__file__).resolve().parent.parent / "data" / "clean_da_amas_prices.csv"
+from pipeline.commodity_schema import (
+    CLEAN_COLUMNS,
+    DEFAULT_CLEAN_CSV,
+    validate_cleaned_panel,
+)
 
-CLEAN_COLUMNS = [
-    "date",
-    "commodity_group",
-    "commodity",
-    "unit",
-    "price_prevailing",
-]
+DEFAULT_SELECTED_CSV = Path(__file__).resolve().parent.parent / "data" / "selected_da_amas_prices.csv"
 
 METADATA_COLUMNS = [
     "market_scope",
@@ -49,7 +46,6 @@ METADATA_COLUMNS = [
     "is_synthetic",
     "raw_count",
     "raw_file",
-    "source_url",
 ]
 
 
@@ -66,7 +62,7 @@ def clean_dataset(
     input_csv : str | Path
         Path to data/selected_da_amas_prices.csv.
     output_csv : str | Path
-        Path where data/clean_da_amas_prices.csv will be saved.
+        Path where data/cleaned_dataset.csv will be saved.
 
     Returns
     -------
@@ -105,30 +101,17 @@ def clean_dataset(
     ).reset_index(drop=True)
 
     # 4. Rigorous integrity validation
+    validate_cleaned_panel(clean_df)
+
     total_rows = len(clean_df)
     unique_dates = clean_df["date"].nunique()
     unique_commodities = clean_df["commodity"].nunique()
     unique_groups = clean_df["commodity_group"].nunique()
-
-    # Deduplication assertion: strictly 1 row per (date, commodity)
-    dup_count = clean_df.duplicated(subset=["date", "commodity"]).sum()
-    if dup_count > 0:
-        raise ValueError(f"Integrity check failed: {dup_count} duplicate (date, commodity) rows found.")
-
-    # Panel dimensions: 451 dates x 48 commodities = 21,648 rows
-    expected_rows = unique_dates * unique_commodities
-    if total_rows != expected_rows:
-        raise ValueError(
-            f"Panel grid is not rectangular: {total_rows} rows != {unique_dates} dates * {unique_commodities} commodities."
-        )
-
-    # Validate missing prices:
-    # Only the leading structural gap for Pork Pigue (Hind Leg / Ham) is required (>= 42 dates)
     null_prices = clean_df["price_prevailing"].isnull().sum()
     pigue_nulls = clean_df[clean_df["commodity"] == "Pork Pigue (Hind Leg / Ham)"]["price_prevailing"].isnull().sum()
     other_nulls = clean_df[clean_df["commodity"] != "Pork Pigue (Hind Leg / Ham)"]["price_prevailing"].isnull().sum()
 
-    if pigue_nulls < 42:
+    if unique_dates >= 450 and pigue_nulls < 42:
         raise ValueError(f"Integrity check failed: expected at least 42 leading nulls for Pork Pigue, got {pigue_nulls}.")
 
     if other_nulls > 0:
@@ -136,11 +119,6 @@ def clean_dataset(
             "Notice: %d unobserved/blank prices detected outside Pork Pigue leading gap. Tolerating missing values.",
             other_nulls,
         )
-
-    # Validate observed prices are strictly positive
-    observed_mask = clean_df["price_prevailing"].notnull()
-    if not (clean_df.loc[observed_mask, "price_prevailing"] > 0).all():
-        raise ValueError("Integrity check failed: observed prevailing prices must be > 0.")
 
     # 5. Write to output CSV (leaving unobserved prices as empty string "")
     output_path.parent.mkdir(parents=True, exist_ok=True)

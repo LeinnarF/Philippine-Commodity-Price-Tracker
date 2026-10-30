@@ -1,14 +1,12 @@
 name: Scheduled Daily Price Sync & Pages Deployment
 
-# CEASED FOR NOW: Automated daily collector and Pages sync are disabled
-# pending resolution of PDF bulletin data extraction issues.
 on:
   workflow_dispatch:
-#  schedule:
-#    # Runs Monday to Saturday at 10:00 UTC (18:00 Manila Time - PHT), shortly after DA AMAS publishes bulletins
-#    - cron: '0 10 * * 1-6'
-#    # Secondary check at 14:00 UTC (22:00 Manila Time - PHT) to catch late-afternoon bulletin uploads
-#    - cron: '0 14 * * 1-6'
+  schedule:
+    # Runs daily at 10:00 UTC (18:00 Manila Time - PHT), shortly after DA AMAS publishes bulletins
+    - cron: '0 10 * * *'
+    # Secondary check daily at 14:00 UTC (22:00 Manila Time - PHT) to catch late-afternoon bulletin uploads
+    - cron: '0 14 * * *'
 
 permissions:
   contents: write
@@ -21,8 +19,6 @@ concurrency:
 
 jobs:
   sync-and-deploy:
-    # Ceased: Automated daily sync and deployments stopped for now
-    if: false
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -31,16 +27,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+      - name: Install uv and Set up Python
+        uses: astral-sh/setup-uv@v5
         with:
+          enable-cache: true
           python-version: "3.12"
-          cache: "pip"
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          uv pip install -r requirements.txt --system
 
       - name: Run automated test suite
         run: |
@@ -54,18 +49,17 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/clean_da_amas_prices.csv data/selected_da_amas_prices.csv data/raw_da_amas_prices.csv data/pipeline_execution_logs.csv
+          git add data/cleaned_dataset.csv data/server_daily_bulletins.csv data/pipeline_execution_logs.csv
           git diff --staged --quiet || (git commit -m "chore(data): auto-update daily DA AMAS prices and execution logs [skip ci]" && git push)
 
-      # GitHub Pages deployment ceased for now
-      # - name: Setup GitHub Pages
-      #   uses: actions/configure-pages@v5
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
 
-      # - name: Upload Pages artifact
-      #   uses: actions/upload-pages-artifact@v3
-      #   with:
-      #     path: "public"
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "public"
 
-      # - name: Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

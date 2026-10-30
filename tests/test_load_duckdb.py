@@ -20,14 +20,13 @@ def test_load_duckdb_execution(tmp_path):
     Verify load_duckdb creates silver tables, gold views, enforces 21,648 rows,
     451 dates, 48 commodities, 7 groups, and correct window metrics.
     """
-    if not DEFAULT_CLEAN_CSV.exists() or not DEFAULT_SELECTED_CSV.exists():
-        pytest.skip("Source CSV files not found")
+    if not DEFAULT_CLEAN_CSV.exists():
+        pytest.skip("Clean CSV file not found")
 
     temp_db_path = tmp_path / "test_commodities.duckdb"
     con = load_duckdb(
         db_path=temp_db_path,
         clean_csv=DEFAULT_CLEAN_CSV,
-        selected_csv=DEFAULT_SELECTED_CSV,
     )
 
     try:
@@ -123,8 +122,8 @@ def test_load_duckdb_idempotency(tmp_path):
     Verify that executing load_duckdb multiple times consecutively on the same database
     runs cleanly and produces the exact same row counts and schema.
     """
-    if not DEFAULT_CLEAN_CSV.exists() or not DEFAULT_SELECTED_CSV.exists():
-        pytest.skip("Source CSV files not found")
+    if not DEFAULT_CLEAN_CSV.exists():
+        pytest.skip("Clean CSV file not found")
 
     temp_db_path = tmp_path / "idempotent.duckdb"
 
@@ -132,7 +131,6 @@ def test_load_duckdb_idempotency(tmp_path):
     con1 = load_duckdb(
         db_path=temp_db_path,
         clean_csv=DEFAULT_CLEAN_CSV,
-        selected_csv=DEFAULT_SELECTED_CSV,
     )
     con1.close()
 
@@ -140,7 +138,6 @@ def test_load_duckdb_idempotency(tmp_path):
     con2 = load_duckdb(
         db_path=temp_db_path,
         clean_csv=DEFAULT_CLEAN_CSV,
-        selected_csv=DEFAULT_SELECTED_CSV,
     )
 
     try:
@@ -157,8 +154,8 @@ def test_legacy_cleanup(tmp_path):
     """
     Verify that legacy pre-refactor tables (such as fetch_log) are cleanly dropped.
     """
-    if not DEFAULT_CLEAN_CSV.exists() or not DEFAULT_SELECTED_CSV.exists():
-        pytest.skip("Source CSV files not found")
+    if not DEFAULT_CLEAN_CSV.exists():
+        pytest.skip("Clean CSV file not found")
 
     temp_db_path = tmp_path / "legacy_test.duckdb"
 
@@ -171,7 +168,6 @@ def test_legacy_cleanup(tmp_path):
     con = load_duckdb(
         db_path=temp_db_path,
         clean_csv=DEFAULT_CLEAN_CSV,
-        selected_csv=DEFAULT_SELECTED_CSV,
     )
 
     try:
@@ -185,52 +181,45 @@ def test_constraints_enforcement(tmp_path):
     """
     Verify DuckDB CHECK constraints and PRIMARY KEY constraints reject invalid data.
     """
-    if not DEFAULT_CLEAN_CSV.exists() or not DEFAULT_SELECTED_CSV.exists():
-        pytest.skip("Source CSV files not found")
+    if not DEFAULT_CLEAN_CSV.exists():
+        pytest.skip("Clean CSV file not found")
 
     temp_db_path = tmp_path / "constraints_test.duckdb"
     con = load_duckdb(
         db_path=temp_db_path,
         clean_csv=DEFAULT_CLEAN_CSV,
-        selected_csv=DEFAULT_SELECTED_CSV,
     )
 
     try:
         # 1. Negative price in commodity_prices
         with pytest.raises(duckdb.ConstraintException):
             con.execute(
-                "INSERT INTO commodity_prices VALUES ('2026-10-21', 'Fish', 'Test Tilapia', 'kg', -25.0);"
+                "INSERT INTO commodity_prices VALUES ('2026-10-21', 'Fish', 'Test Tilapia', 'kg', -25.0, 'http://test.pdf');"
             )
 
         # 2. Zero price in commodity_prices
         with pytest.raises(duckdb.ConstraintException):
             con.execute(
-                "INSERT INTO commodity_prices VALUES ('2026-10-21', 'Fish', 'Test Tilapia', 'kg', 0.0);"
+                "INSERT INTO commodity_prices VALUES ('2026-10-21', 'Fish', 'Test Tilapia', 'kg', 0.0, 'http://test.pdf');"
             )
 
         # 3. Duplicate PK (date, commodity) in commodity_prices
         with pytest.raises(duckdb.ConstraintException):
             con.execute(
-                "INSERT INTO commodity_prices VALUES ('2026-10-20', 'Fish', 'Tilapia', 'kg', 160.0);"
+                "INSERT INTO commodity_prices VALUES ('2026-10-20', 'Fish', 'Tilapia', 'kg', 160.0, 'http://test.pdf');"
             )
 
-        # 4. is_synthetic = TRUE in audit_prices
-        with pytest.raises(duckdb.ConstraintException):
-            con.execute("""
-                INSERT INTO audit_prices VALUES (
-                    '2026-10-21', 'Fish', 'Test Tilapia', 'kg', 160.0,
-                    'NCR Wet Markets', 'da_amas', TRUE, 1, 'test.pdf', 'https://example.com'
-                );
-            """)
-
-        # 5. raw_count < 0 in audit_prices
-        with pytest.raises(duckdb.ConstraintException):
-            con.execute("""
-                INSERT INTO audit_prices VALUES (
-                    '2026-10-21', 'Fish', 'Test Tilapia', 'kg', 160.0,
-                    'NCR Wet Markets', 'da_amas', FALSE, -1, 'test.pdf', 'https://example.com'
-                );
-            """)
+        # 4. audit_prices view mirrors commodity_prices and derives audit metadata
+        view_row = con.execute("""
+            SELECT market_scope, source, is_synthetic, raw_count, raw_file, source_url
+            FROM audit_prices
+            LIMIT 1;
+        """).fetchone()
+        assert view_row is not None
+        assert view_row[0] == "NCR Wet Markets"
+        assert view_row[1] == "da_amas"
+        assert view_row[2] is False
+        assert view_row[3] in (0, 1)
 
     finally:
         con.close()

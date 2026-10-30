@@ -1,12 +1,10 @@
 name: Deploy Dashboard to GitHub Pages
 
-# CEASED FOR NOW: Automatic deployments to GitHub Pages are temporarily halted
-# pending investigation and fixes for price bulletin data extraction issues.
 on:
   workflow_dispatch:
-#  push:
-#    branches:
-#      - main
+  push:
+    branches:
+      - main
 
 # Permissions required to deploy to GitHub Pages
 permissions:
@@ -21,26 +19,23 @@ concurrency:
 
 jobs:
   build-and-deploy:
-    # Cease deployments to GitHub Pages for now
-    if: false
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+      - name: Install uv and Set up Python
+        uses: astral-sh/setup-uv@v5
         with:
+          enable-cache: true
           python-version: "3.12"
-          cache: "pip"
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          uv pip install -r requirements.txt --system
 
       - name: Build DuckDB analytical warehouse (Stage 5)
         run: |

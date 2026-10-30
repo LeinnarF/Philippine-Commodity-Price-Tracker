@@ -7,6 +7,7 @@ Handles structural layout variations across 2025 and 2026 bulletins.
 
 from __future__ import annotations
 
+import io
 import logging
 import re
 from pathlib import Path
@@ -59,24 +60,31 @@ def infer_unit(commodity: str, spec: str) -> str:
 
 
 def parse_da_amas_pdf(
-    pdf_path: str | Path,
+    pdf_source: str | Path | io.BytesIO | bytes,
     target_date: str,
     source_url: str | None = None,
 ) -> pd.DataFrame:
     """
     Parses an official Department of Agriculture price monitoring "Daily Price Index" PDF bulletin across all pages.
     Handles both 2025 (4-column with UNIT) and 2026 (3-column) layout variations.
+    Supports file paths, Path objects, bytes, or in-memory BytesIO streams.
     Includes commodities with valid numeric prices as well as rows with missing/unreported
     prices (e.g. 'n/a', '-', or blank).
     """
-    pdf_path = Path(pdf_path)
-    if not pdf_path.exists():
-        raise FileNotFoundError(f"PDF bulletin not found at: {pdf_path}")
+    if isinstance(pdf_source, bytes):
+        open_target = io.BytesIO(pdf_source)
+    elif isinstance(pdf_source, io.BytesIO):
+        open_target = pdf_source
+    else:
+        pdf_path = Path(pdf_source)
+        if not pdf_path.exists():
+            raise FileNotFoundError(f"PDF bulletin not found at: {pdf_path}")
+        open_target = pdf_path
 
     records = []
     current_group = "Other"
 
-    with pdfplumber.open(pdf_path) as pdf:
+    with pdfplumber.open(open_target) as pdf:
         for page in pdf.pages:
             tables = page.extract_tables()
             for table in tables:

@@ -25,8 +25,9 @@ logging.basicConfig(
 logger = logging.getLogger("load_duckdb")
 
 DEFAULT_DB_PATH = Path(__file__).resolve().parent.parent / "data" / "commodities.duckdb"
-DEFAULT_CLEAN_CSV = Path(__file__).resolve().parent.parent / "data" / "clean_da_amas_prices.csv"
+DEFAULT_CLEAN_CSV = Path(__file__).resolve().parent.parent / "data" / "cleaned_dataset.csv"
 DEFAULT_SELECTED_CSV = Path(__file__).resolve().parent.parent / "data" / "selected_da_amas_prices.csv"
+DEFAULT_BULLETINS_CSV = Path(__file__).resolve().parent.parent / "data" / "server_daily_bulletins.csv"
 DEFAULT_LOGS_CSV = Path(__file__).resolve().parent.parent / "data" / "pipeline_execution_logs.csv"
 
 # SQL DDL Definitions
@@ -35,6 +36,7 @@ SQL_DROP_LEGACY_AND_EXISTING = """
 DROP VIEW IF EXISTS v_latest_snapshot CASCADE;
 DROP VIEW IF EXISTS v_category_indices CASCADE;
 DROP VIEW IF EXISTS v_commodity_analytics CASCADE;
+DROP VIEW IF EXISTS audit_prices CASCADE;
 DROP TABLE IF EXISTS fetch_log CASCADE;
 DROP TABLE IF EXISTS pipeline_execution_logs CASCADE;
 DROP TABLE IF EXISTS audit_prices CASCADE;
@@ -48,18 +50,20 @@ CREATE OR REPLACE TABLE commodity_prices (
     commodity VARCHAR NOT NULL,
     unit VARCHAR NOT NULL,
     price_prevailing DOUBLE CHECK (price_prevailing IS NULL OR price_prevailing > 0),
+    source_url VARCHAR,
     PRIMARY KEY (date, commodity)
 );
 """
 
 SQL_INSERT_COMMODITY_PRICES = """
-INSERT INTO commodity_prices (date, commodity_group, commodity, unit, price_prevailing)
+INSERT INTO commodity_prices (date, commodity_group, commodity, unit, price_prevailing, source_url)
 SELECT
     date::DATE,
     commodity_group::VARCHAR,
     commodity::VARCHAR,
     unit::VARCHAR,
-    price_prevailing::DOUBLE
+    price_prevailing::DOUBLE,
+    source_url::VARCHAR
 FROM read_csv(
     ?,
     header=True,
@@ -68,9 +72,27 @@ FROM read_csv(
         'commodity_group': 'VARCHAR',
         'commodity': 'VARCHAR',
         'unit': 'VARCHAR',
-        'price_prevailing': 'DOUBLE'
+        'price_prevailing': 'DOUBLE',
+        'source_url': 'VARCHAR'
     }
 );
+"""
+
+SQL_CREATE_AUDIT_PRICES_VIEW = """
+CREATE OR REPLACE VIEW audit_prices AS
+SELECT
+    date,
+    commodity_group,
+    commodity,
+    unit,
+    price_prevailing,
+    'NCR Wet Markets' AS market_scope,
+    'da_amas' AS source,
+    FALSE AS is_synthetic,
+    CASE WHEN price_prevailing IS NOT NULL THEN 1 ELSE 0 END AS raw_count,
+    split_part(split_part(COALESCE(source_url, ''), '?', 1), '/', -1) AS raw_file,
+    COALESCE(source_url, '') AS source_url
+FROM commodity_prices;
 """
 
 SQL_CREATE_AUDIT_PRICES = """
@@ -435,23 +457,26 @@ def validate_database_integrity(con: duckdb.DuckDBPyConnection) -> dict[str, Any
 def load_duckdb(
     db_path: str | Path = DEFAULT_DB_PATH,
     clean_csv: str | Path = DEFAULT_CLEAN_CSV,
-    selected_csv: str | Path = DEFAULT_SELECTED_CSV,
+    selected_csv: str | Path | None = None,
     logs_csv: str | Path | None = DEFAULT_LOGS_CSV,
+    bulletins_csv: str | Path | None = DEFAULT_BULLETINS_CSV,
     con: duckdb.DuckDBPyConnection | None = None,
 ) -> duckdb.DuckDBPyConnection:
     """
-    Builds the DuckDB database from clean, selected, and execution log CSVs.
+    Builds the DuckDB database from clean, selected (optional), and execution log CSVs.
 
     Parameters
     ----------
     db_path : str | Path
         Path to DuckDB database file (e.g. data/commodities.duckdb).
     clean_csv : str | Path
-        Path to data/clean_da_amas_prices.csv.
-    selected_csv : str | Path
-        Path to data/selected_da_amas_prices.csv.
+        Path to data/cleaned_dataset.csv.
+    selected_csv : str | Path | None
+        Optional path to data/selected_da_amas_prices.csv. If omitted, audit_prices is built as a view on commodity_prices.
     logs_csv : str | Path | None
         Path to data/pipeline_execution_logs.csv.
+    bulletins_csv : str | Path | None
+        Optional path to data/server_daily_bulletins.csv.
     con : duckdb.DuckDBPyConnection | None
         Optional existing connection (e.g., for in-memory or custom connections).
         If None, connects to db_path.
@@ -463,18 +488,16 @@ def load_duckdb(
     """
     start_time = time.time()
     clean_path = Path(clean_csv)
-    selected_path = Path(selected_csv)
+    selected_path = Path(selected_csv) if selected_csv is not None else None
     logs_path = Path(logs_csv) if logs_csv is not None else None
+    bulletins_path = Path(bulletins_csv) if bulletins_csv is not None else None
 
     if not clean_path.exists():
         raise FileNotFoundError(f"Clean CSV file not found: {clean_path}")
-    if not selected_path.exists():
-        raise FileNotFoundError(f"Selected CSV file not found: {selected_path}")
 
     logger.info("==================================================")
     logger.info("Philippine Commodity Price Tracker: DuckDB Loader (Stage 5)")
     logger.info("Clean CSV Source   : %s", clean_path.resolve())
-    logger.info("Selected CSV Source: %s", selected_path.resolve())
     logger.info("Logs CSV Source    : %s", logs_path.resolve() if logs_path and logs_path.exists() else "None/Not created yet")
     logger.info("Target DuckDB File : %s", Path(db_path).resolve() if con is None else "Custom Connection")
     logger.info("==================================================")
@@ -494,11 +517,26 @@ def load_duckdb(
     logger.info("Ingesting clean CSV data into 'commodity_prices'...")
     con.execute(SQL_INSERT_COMMODITY_PRICES, [str(clean_path.resolve())])
 
-    # 3. Build Silver Table: audit_prices
-    logger.info("Creating Silver table 'audit_prices'...")
-    con.execute(SQL_CREATE_AUDIT_PRICES)
-    logger.info("Ingesting selected CSV provenance data into 'audit_prices'...")
-    con.execute(SQL_INSERT_AUDIT_PRICES, [str(selected_path.resolve())])
+    # 3. Build Silver Table/View: audit_prices
+    if selected_path and selected_path.exists():
+        logger.info("Creating Silver table 'audit_prices' from %s...", selected_path.name)
+        con.execute(SQL_CREATE_AUDIT_PRICES)
+        logger.info("Ingesting selected CSV provenance data into 'audit_prices'...")
+        con.execute(SQL_INSERT_AUDIT_PRICES, [str(selected_path.resolve())])
+    else:
+        logger.info("Creating Silver view 'audit_prices' from 'commodity_prices'...")
+        con.execute(SQL_CREATE_AUDIT_PRICES_VIEW)
+
+    # Ingest server_bulletins if present
+    if bulletins_path and bulletins_path.exists():
+        con.execute("""
+            CREATE OR REPLACE TABLE server_bulletins (
+                date DATE PRIMARY KEY,
+                pdf_url VARCHAR NOT NULL
+            );
+            INSERT INTO server_bulletins
+            SELECT date::DATE, pdf_url::VARCHAR FROM read_csv_auto(?);
+        """, [str(bulletins_path.resolve())])
 
     # 4. Build Silver Table: pipeline_execution_logs
     logger.info("Creating Silver table 'pipeline_execution_logs'...")

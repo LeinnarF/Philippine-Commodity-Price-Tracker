@@ -338,12 +338,11 @@ def run_parallel_downloader(
         logger.error("No bulletins discovered. Check network connection.")
         return {"downloaded": 0, "cached": 0, "not_found": 0, "failed": 0}
 
-    # Filter target dates within range (skipping Sundays)
+    # Target dates within range (including Sundays)
     target_dates = []
     curr = start_date
     while curr <= end_date:
-        if curr.weekday() != 6:  # Exclude Sundays
-            target_dates.append(curr.strftime("%Y-%m-%d"))
+        target_dates.append(curr.strftime("%Y-%m-%d"))
         curr += datetime.timedelta(days=1)
 
     target_dates.sort(reverse=True)  # Most recent first
