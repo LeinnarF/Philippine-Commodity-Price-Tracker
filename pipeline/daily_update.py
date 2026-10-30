@@ -34,6 +34,8 @@ from pipeline.download_pdfs import (
     PROJECT_USER_AGENT,
     crawl_da_catalog,
     generate_candidate_urls,
+    is_valid_dpi_bulletin_url,
+    probe_dpi_url_for_date,
 )
 from pipeline.load_duckdb import (
     DEFAULT_BULLETINS_CSV,
@@ -49,6 +51,10 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger("daily_update")
+
+# Minimum number of observed commodities required out of the 48 panel items
+# Genuine DA AMAS Daily Price Index bulletins report 40-48 items; non-DPI files report far fewer.
+MIN_OBSERVED_PANEL_COMMODITIES = 30
 
 
 def get_latest_tracked_date(clean_csv_path: Path = DEFAULT_CLEAN_CSV) -> datetime.date:
@@ -124,23 +130,37 @@ def fetch_bulletin_bytes_in_memory(
     catalog_url: str | None,
     client: httpx.Client,
     max_retries: int = 2,
+    known_url: str | None = None,
 ) -> tuple[bytes | None, str | None]:
     """
     Attempts to download bulletin PDF bytes into memory.
-    Tries the catalog URL followed by standard candidate naming patterns.
+    Prioritizes verified known DPI URLs (e.g. from server_daily_bulletins.csv)
+    and candidate DPI URLs. Strictly enforces is_valid_dpi_bulletin_url.
     Returns (pdf_bytes_or_None, final_url_or_None).
     """
     urls_to_try: list[str] = []
-    if catalog_url:
-        urls_to_try.append(catalog_url)
 
+    # 1. Verified known DPI URL for this date
+    if known_url and is_valid_dpi_bulletin_url(known_url):
+        urls_to_try.append(known_url)
+
+    # 2. Revised catalog URL (prioritized if an official revision was uploaded)
+    if catalog_url and is_valid_dpi_bulletin_url(catalog_url) and "revised" in catalog_url.lower():
+        if catalog_url not in urls_to_try:
+            urls_to_try.append(catalog_url)
+
+    # 3. Strict candidate DPI naming patterns
     try:
         d = datetime.date.fromisoformat(date_str)
         for cand in generate_candidate_urls(d):
-            if cand not in urls_to_try:
+            if cand not in urls_to_try and is_valid_dpi_bulletin_url(cand):
                 urls_to_try.append(cand)
     except Exception:
         pass
+
+    # 4. Validated catalog URL
+    if catalog_url and is_valid_dpi_bulletin_url(catalog_url) and catalog_url not in urls_to_try:
+        urls_to_try.append(catalog_url)
 
     for current_url in urls_to_try:
         for attempt in range(1, max_retries + 1):
@@ -161,6 +181,25 @@ def fetch_bulletin_bytes_in_memory(
                 time.sleep(0.5 * attempt)
 
     return None, None
+
+
+def _rebuild_warehouse_and_dashboard(
+    db_path: Path,
+    clean_csv_path: Path,
+    logs_csv_path: Path,
+) -> None:
+    """Rebuilds the DuckDB analytical warehouse and static HTML dashboard bundle."""
+    logger.info("Rebuilding DuckDB analytical warehouse (Stage 5)...")
+    con = load_duckdb(
+        db_path=db_path,
+        clean_csv=clean_csv_path,
+        logs_csv=logs_csv_path,
+    )
+    con.close()
+
+    logger.info("Rebuilding static dashboard bundle (Stage 6)...")
+    from pipeline.build_dashboard import build_dashboard
+    build_dashboard(db_path=db_path)
 
 
 def run_daily_update(
@@ -188,8 +227,15 @@ def run_daily_update(
     logger.info("Execution Time  : %s UTC", now_utc)
     logger.info("==================================================")
 
-    # 1. Determine date range
-    latest_tracked = get_latest_tracked_date(clean_csv_path)
+    # 1. Determine date range and local state
+    existing_dates: set[str] = set()
+    latest_tracked = datetime.date(2025, 3, 1)
+    if clean_csv_path.exists():
+        clean_dates_df = pd.read_csv(clean_csv_path, usecols=["date"])
+        if not clean_dates_df.empty and "date" in clean_dates_df.columns:
+            existing_dates = set(clean_dates_df["date"].dropna().astype(str).unique())
+            latest_tracked = get_latest_tracked_date(clean_csv_path)
+
     today = target_date or datetime.date.today()
     logger.info("Current Max Tracked Date : %s", latest_tracked)
     logger.info("Target Evaluation Date   : %s", today)
@@ -213,7 +259,7 @@ def run_daily_update(
                 message=msg,
             )
             if rebuild:
-                load_duckdb(db_path=db_path, clean_csv=clean_csv_path, logs_csv=logs_csv_path)
+                _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv_path=logs_csv_path)
         return {
             "status": "NO_NEW_DATA",
             "latest_date": str(latest_tracked),
@@ -222,12 +268,55 @@ def run_daily_update(
             "duration": elapsed,
         }
 
-    # Evaluate all calendar days (no day-of-week skipping; ingest whenever available)
+    # Read verified known DPI bulletin URLs from server_daily_bulletins.csv
+    server_bulletins_map: dict[str, str] = {}
+    if bulletins_csv_path.exists():
+        try:
+            s_df = pd.read_csv(bulletins_csv_path)
+            if "date" in s_df.columns and "pdf_url" in s_df.columns:
+                for _, r in s_df.dropna(subset=["date", "pdf_url"]).iterrows():
+                    d_k = str(r["date"]).strip()
+                    u_k = str(r["pdf_url"]).strip()
+                    if is_valid_dpi_bulletin_url(u_k):
+                        server_bulletins_map[d_k] = u_k
+        except Exception as s_err:
+            logger.warning("Could not read server bulletins CSV (%s): %s", bulletins_csv_path, s_err)
+
+    # Dates to evaluate: days from latest_tracked + 1 up to today not yet tracked
     dates_to_check: list[datetime.date] = []
     curr = latest_tracked + datetime.timedelta(days=1)
     while curr <= today:
-        dates_to_check.append(curr)
+        if curr.strftime("%Y-%m-%d") not in existing_dates:
+            dates_to_check.append(curr)
         curr += datetime.timedelta(days=1)
+
+    if not dates_to_check:
+        msg = f"Dataset is already up to date with latest observation ({latest_tracked})."
+        logger.info(msg)
+        elapsed = time.time() - start_time
+        if not dry_run:
+            append_execution_log(
+                logs_csv_path=logs_csv_path,
+                run_id=resolved_run_id,
+                executed_at=now_utc,
+                trigger=trigger,
+                status="NO_NEW_DATA",
+                latest_bulletin_date=str(latest_tracked),
+                bulletins_checked=0,
+                bulletins_downloaded=0,
+                records_extracted=0,
+                duration_seconds=elapsed,
+                message=msg,
+            )
+            if rebuild:
+                _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv_path=logs_csv_path)
+        return {
+            "status": "NO_NEW_DATA",
+            "latest_date": str(latest_tracked),
+            "bulletins_downloaded": 0,
+            "records_extracted": 0,
+            "duration": elapsed,
+        }
 
     logger.info("Dates to evaluate (%d dates): %s to %s", len(dates_to_check), dates_to_check[0], dates_to_check[-1])
 
@@ -244,12 +333,14 @@ def run_daily_update(
     with httpx.Client(timeout=30.0, follow_redirects=True, headers=headers) as client:
         for d in dates_to_check:
             d_str = d.strftime("%Y-%m-%d")
+            known_url = server_bulletins_map.get(d_str)
             catalog_url = catalog.get(d_str)
 
             pdf_bytes, final_url = fetch_bulletin_bytes_in_memory(
                 date_str=d_str,
                 catalog_url=catalog_url,
                 client=client,
+                known_url=known_url,
             )
             if pdf_bytes and final_url:
                 logger.info("Successfully fetched new bulletin for %s in-memory (%.1f KB)", d_str, len(pdf_bytes) / 1024)
@@ -277,7 +368,7 @@ def run_daily_update(
                 message=msg,
             )
             if rebuild:
-                load_duckdb(db_path=db_path, clean_csv=clean_csv_path, logs_csv=logs_csv_path)
+                _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv_path=logs_csv_path)
         return {
             "status": "NO_NEW_DATA",
             "latest_date": str(latest_tracked),
@@ -289,6 +380,7 @@ def run_daily_update(
     # 4. Parse records directly in-memory and standardize without forward filling
     logger.info("Extracting price records from %d newly discovered bulletin(s)...", len(new_bulletins))
     extracted_records: list[dict[str, Any]] = []
+    validated_bulletin_urls: list[tuple[str, str]] = []
 
     for d_str, source_url, pdf_bytes in new_bulletins:
         try:
@@ -303,15 +395,41 @@ def run_daily_update(
                     target_date=d_str,
                     source_url=source_url,
                 )
+
+                # Content & Coverage Gate:
+                # 1. Genuine DPI bulletins report 40-48 observed panel prices
+                observed_count = sum(1 for r in panel_records if pd.notna(r.get("price_prevailing")))
+                # 2. Reject non-food / cigarette bulletins
+                raw_commodities = ""
+                if "commodity" in pdf_df.columns:
+                    raw_commodities = " ".join(pdf_df["commodity"].dropna().astype(str).tolist()).lower()
+                has_prohibited = any(kw in raw_commodities for kw in ("marlboro", "winston", "cigarette", "cigarettes", "tobacco"))
+
+                if observed_count < MIN_OBSERVED_PANEL_COMMODITIES or has_prohibited:
+                    logger.warning(
+                        "Bulletin for %s failed Daily Price Index content gate (observed items: %d/48, prohibited: %s). Rejecting.",
+                        d_str,
+                        observed_count,
+                        has_prohibited,
+                    )
+                    continue
+
                 extracted_records.extend(panel_records)
-                logger.info("Extracted %d panel commodity records for %s", len(panel_records), d_str)
+                validated_bulletin_urls.append((d_str, source_url))
+                logger.info("Extracted %d panel commodity records for %s (observed: %d/48)", len(panel_records), d_str, observed_count)
             else:
                 logger.warning("No records extracted from bulletin %s", d_str)
         except Exception as parse_err:
             logger.error("Failed to parse bulletin %s: %s", d_str, parse_err)
 
     if not extracted_records:
-        msg = f"Discovered {len(new_bulletins)} bulletins but failed to parse price records."
+        if new_bulletins:
+            msg = f"Discovered {len(new_bulletins)} candidate bulletins but all were rejected by the Daily Price Index content and coverage gate."
+            status_code = "FAILED"
+        else:
+            msg = f"Evaluated {len(dates_to_check)} candidate dates ({dates_to_check[0]} to {dates_to_check[-1]}). No new bulletins published on DA portal yet."
+            status_code = "NO_NEW_DATA"
+
         logger.warning(msg)
         elapsed = time.time() - start_time
         if not dry_run:
@@ -320,7 +438,7 @@ def run_daily_update(
                 run_id=resolved_run_id,
                 executed_at=now_utc,
                 trigger=trigger,
-                status="FAILED",
+                status=status_code,
                 latest_bulletin_date=str(latest_tracked),
                 bulletins_checked=len(dates_to_check),
                 bulletins_downloaded=len(new_bulletins),
@@ -328,8 +446,10 @@ def run_daily_update(
                 duration_seconds=elapsed,
                 message=msg,
             )
+            if rebuild:
+                _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv=logs_csv_path)
         return {
-            "status": "FAILED",
+            "status": status_code,
             "latest_date": str(latest_tracked),
             "bulletins_downloaded": len(new_bulletins),
             "records_extracted": 0,
@@ -341,7 +461,7 @@ def run_daily_update(
         return {
             "status": "DRY_RUN_SUCCESS",
             "latest_date": str(latest_tracked),
-            "bulletins_downloaded": len(new_bulletins),
+            "bulletins_downloaded": len(validated_bulletin_urls),
             "records_extracted": len(extracted_records),
             "duration": time.time() - start_time,
         }
@@ -370,7 +490,7 @@ def run_daily_update(
         server_df = pd.read_csv(bulletins_csv_path)
         new_bulletin_rows = [
             {"date": b[0], "pdf_url": b[1]}
-            for b in new_bulletins
+            for b in validated_bulletin_urls
             if b[0] not in server_df["date"].values
         ]
         if new_bulletin_rows:
@@ -384,7 +504,7 @@ def run_daily_update(
 
     # 6. Record Audit Log Entry
     status_msg = (
-        f"Successfully ingested {len(new_bulletins)} new bulletin(s) with {len(extracted_records)} "
+        f"Successfully ingested {len(validated_bulletin_urls)} new bulletin(s) with {len(extracted_records)} "
         f"records in-memory. Panel updated to {new_latest_date}."
     )
     logger.info(status_msg)
@@ -396,7 +516,7 @@ def run_daily_update(
         status="SUCCESS",
         latest_bulletin_date=str(new_latest_date),
         bulletins_checked=len(dates_to_check),
-        bulletins_downloaded=len(new_bulletins),
+        bulletins_downloaded=len(validated_bulletin_urls),
         records_extracted=len(extracted_records),
         duration_seconds=elapsed,
         message=status_msg,
@@ -404,22 +524,12 @@ def run_daily_update(
 
     # 7. Rebuild Warehouse & Static Dashboard
     if rebuild:
-        logger.info("Rebuilding DuckDB analytical warehouse (Stage 5)...")
-        con = load_duckdb(
-            db_path=db_path,
-            clean_csv=clean_csv_path,
-            logs_csv=logs_csv_path,
-        )
-        con.close()
-
-        logger.info("Rebuilding static dashboard bundle (Stage 6)...")
-        from pipeline.build_dashboard import build_dashboard
-        build_dashboard(db_path=db_path)
+        _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv=logs_csv_path)
 
     return {
         "status": "SUCCESS",
         "latest_date": str(new_latest_date),
-        "bulletins_downloaded": len(new_bulletins),
+        "bulletins_downloaded": len(validated_bulletin_urls),
         "records_extracted": len(extracted_records),
         "duration": elapsed,
     }

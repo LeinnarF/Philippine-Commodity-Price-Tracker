@@ -44,6 +44,57 @@ RAW_DATA_DIR = Path(__file__).resolve().parent.parent / "data" / "raw" / "da_ama
 CATALOG_CACHE_FILE = RAW_DATA_DIR / "catalog.json"
 MISSING_LOG_FILE = RAW_DATA_DIR / "missing_dates.txt"
 
+# Keywords that indicate general price monitoring, non-food commodities (cigarettes), or non-daily bulletins.
+# Daily Price Index bulletins must NOT match any of these.
+DPI_EXCLUSION_KEYWORDS = (
+    "price-monitoring",
+    "price_monitoring",
+    "pricemonitoring",
+    "cigarette",
+    "cigarettes",
+    "tobacco",
+    "cigar",
+    "cigars",
+    "nicotine",
+    "vape",
+    "smoking",
+    "weekly",
+    "fertilizer",
+)
+
+
+def is_valid_dpi_bulletin_url(url: str, anchor_text: str = "") -> bool:
+    """
+    Validates that a URL points to an official DA Daily Price Index (DPI) bulletin.
+    Strictly excludes general 'Price Monitoring', cigarette/tobacco, fertilizer,
+    or weekly report files.
+    """
+    if not url:
+        return False
+
+    url_lower = url.lower()
+    anchor_lower = (anchor_text or "").lower()
+
+    # Reject if any exclusion keyword is present in url or anchor text
+    for kw in DPI_EXCLUSION_KEYWORDS:
+        if kw in url_lower or kw in anchor_lower:
+            return False
+
+    # Extract filename
+    filename = url_lower.split("/")[-1].split("?")[0]
+    if not filename.endswith(".pdf"):
+        return False
+
+    # Must contain "daily-price-index" or "dpi" as a distinct token/part
+    if "daily-price-index" in filename or "daily_price_index" in filename:
+        return True
+
+    # Check for dpi pattern: e.g. -dpi-, -dpi., _dpi_, _dpi., -dpi-afc
+    if re.search(r"(^|[-_])dpi([-_.]|$)", filename):
+        return True
+
+    return False
+
 MONTH_MAP = {
     "january": 1,
     "february": 2,
@@ -156,8 +207,26 @@ def generate_candidate_urls(target_date: datetime.date | str) -> list[str]:
         f"{base}/{month_name.lower()}-{d.day}-{d.year}-dpi-afc.pdf",
         f"{base}/daily-price-index-{month_name.lower()}-{d.day}-{d.year}.pdf",
     ]
+
+    # End-of-month bulletins are occasionally uploaded in the following month's folder
+    if d.day >= 25:
+        if d.month == 12:
+            next_year, next_month = d.year + 1, 1
+        else:
+            next_year, next_month = d.year, d.month + 1
+        base_next = f"https://www.da.gov.ph/wp-content/uploads/{next_year}/{next_month:02d}"
+
+        patterns.extend([
+            f"{base_next}/{month_name}-{d.day}-{d.year}-DPI-AFC.pdf",
+            f"{base_next}/{month_name}-{d.day:02d}-{d.year}-DPI-AFC.pdf",
+            f"{base_next}/Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
+            f"{base_next}/Daily-Price-Index-{month_name}-{d.day:02d}-{d.year}.pdf",
+            f"{base_next}/Revised-Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
+            f"{base_next}/{month_name}-{d.day}-{d.year}-DPI.pdf",
+        ])
+
     seen: set[str] = set()
-    return [p for p in patterns if not (p in seen or seen.add(p))]
+    return [p for p in patterns if is_valid_dpi_bulletin_url(p) and not (p in seen or seen.add(p))]
 
 
 def crawl_da_catalog(use_cache: bool = True) -> dict[str, str]:
@@ -195,19 +264,24 @@ def crawl_da_catalog(use_cache: bool = True) -> dict[str, str]:
                 if not href.lower().endswith(".pdf"):
                     continue
 
-                # Filter for price bulletins (matches DPI, price index, daily price, afc, amas)
-                if not any(k in href.lower() for k in ("price", "dpi", "index", "daily", "afc", "amas")):
+                anchor_text = a.get_text().strip()
+                # Strict DPI filter: rejects Price-Monitoring, cigarettes, weekly bulletins, etc.
+                if not is_valid_dpi_bulletin_url(href, anchor_text):
                     continue
 
                 # Extract date from URL filename or anchor text
                 d = extract_date_from_bulletin_url(href)
-                if not d:
-                    text_str = a.get_text().strip()
-                    if text_str:
-                        d = extract_date_from_bulletin_url(text_str)
+                if not d and anchor_text:
+                    d = extract_date_from_bulletin_url(anchor_text)
 
                 if d:
-                    date_to_url[d.strftime("%Y-%m-%d")] = href
+                    d_key = d.strftime("%Y-%m-%d")
+                    # Do not overwrite unless current is missing or new link is an official revision
+                    if d_key not in date_to_url:
+                        date_to_url[d_key] = href
+                    elif "revised" in href.lower() and "revised" not in date_to_url[d_key].lower():
+                        logger.info("Replacing bulletin for %s with revised version: %s", d_key, href)
+                        date_to_url[d_key] = href
 
             logger.info("Found %d official daily PDF bulletins in Department of Agriculture price monitoring portal.", len(date_to_url))
 
@@ -234,6 +308,51 @@ def is_valid_pdf(file_path: Path) -> bool:
         return False
 
 
+def probe_dpi_url_for_date(
+    date_str: str,
+    client: httpx.Client,
+    catalog_url: str | None = None,
+) -> str | None:
+    """
+    Lightweight probe for a valid Daily Price Index bulletin on the DA server for a given date.
+    Tries generate_candidate_urls() first via HEAD / Range GET requests, then falls back
+    to catalog_url ONLY if it passes is_valid_dpi_bulletin_url().
+    Returns the verified direct PDF URL if found, else None.
+    """
+    urls_to_try: list[str] = []
+
+    try:
+        d = datetime.date.fromisoformat(date_str)
+        for cand in generate_candidate_urls(d):
+            if cand not in urls_to_try and is_valid_dpi_bulletin_url(cand):
+                urls_to_try.append(cand)
+    except Exception:
+        pass
+
+    if catalog_url and is_valid_dpi_bulletin_url(catalog_url) and catalog_url not in urls_to_try:
+        if "revised" in catalog_url.lower():
+            urls_to_try.insert(0, catalog_url)
+        else:
+            urls_to_try.append(catalog_url)
+
+    for url in urls_to_try:
+        try:
+            resp = client.head(url, timeout=10.0)
+            if resp.status_code == 200:
+                content_type = resp.headers.get("content-type", "").lower()
+                content_length = int(resp.headers.get("content-length", 0))
+                if ("pdf" in content_type or url.lower().endswith(".pdf")) and (content_length == 0 or content_length > 5000):
+                    return url
+            elif resp.status_code in (403, 405, 501):
+                resp = client.get(url, headers={"Range": "bytes=0-1024"}, timeout=10.0)
+                if resp.status_code in (200, 206) and resp.content.startswith(b"%PDF-"):
+                    return url
+        except Exception:
+            continue
+
+    return None
+
+
 def download_single_pdf(
     date_str: str,
     pdf_url: str | None,
@@ -254,16 +373,19 @@ def download_single_pdf(
         return date_str, "ALREADY_CACHED", dest_path.stat().st_size
 
     # Build candidate URLs to try:
-    # 1. Catalog URL (if provided)
-    # 2. Known URL pattern variations for this date
+    # 1. Catalog / explicit URL (if provided, must be valid DPI; otherwise reject immediately)
+    # 2. Known URL pattern variations for this date as fallback
     urls_to_try: list[str] = []
-    if pdf_url:
+    if pdf_url is not None:
+        if not is_valid_dpi_bulletin_url(pdf_url):
+            logger.warning("Rejected non-DPI URL for date %s: %s", date_str, pdf_url)
+            return date_str, "INVALID_URL", 0
         urls_to_try.append(pdf_url)
 
     try:
         d = datetime.date.fromisoformat(date_str)
         for cand in generate_candidate_urls(d):
-            if cand not in urls_to_try:
+            if cand not in urls_to_try and is_valid_dpi_bulletin_url(cand):
                 urls_to_try.append(cand)
     except Exception:
         pass
