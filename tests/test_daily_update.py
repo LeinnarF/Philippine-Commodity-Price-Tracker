@@ -435,15 +435,22 @@ def test_run_daily_update_uses_known_server_bulletins_url(monkeypatch, tmp_path)
         lambda df_raw, target_date, source_url: day2_records,
     )
 
+    rebuild_calls = []
+    monkeypatch.setattr(
+        "pipeline.daily_update._rebuild_warehouse_and_dashboard",
+        lambda db_path, clean_csv_path, logs_csv_path: rebuild_calls.append((db_path, clean_csv_path, logs_csv_path)),
+    )
+
     res = run_daily_update(
         clean_csv_path=clean_csv,
         logs_csv_path=logs_csv,
         bulletins_csv_path=bulletins_csv,
         target_date=datetime.date(2026, 10, 26),
-        rebuild=False,
+        rebuild=True,
     )
 
     assert res["status"] == "SUCCESS"
+    assert len(rebuild_calls) == 1
     assert received_known_url == known_target_url
     clean_df = pd.read_csv(clean_csv)
     assert len(clean_df) == 96
@@ -463,7 +470,7 @@ def test_run_daily_update_rebuild_invoked_on_no_new_data(monkeypatch, tmp_path):
     rebuild_calls = []
     monkeypatch.setattr(
         "pipeline.daily_update._rebuild_warehouse_and_dashboard",
-        lambda **kwargs: rebuild_calls.append(kwargs),
+        lambda db_path, clean_csv_path, logs_csv_path: rebuild_calls.append((db_path, clean_csv_path, logs_csv_path)),
     )
 
     res = run_daily_update(

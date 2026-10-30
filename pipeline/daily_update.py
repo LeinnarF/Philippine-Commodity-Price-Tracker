@@ -144,12 +144,11 @@ def fetch_bulletin_bytes_in_memory(
     if known_url and is_valid_dpi_bulletin_url(known_url):
         urls_to_try.append(known_url)
 
-    # 2. Revised catalog URL (prioritized if an official revision was uploaded)
-    if catalog_url and is_valid_dpi_bulletin_url(catalog_url) and "revised" in catalog_url.lower():
-        if catalog_url not in urls_to_try:
-            urls_to_try.append(catalog_url)
+    # 2. Validated catalog URL from DA portal (strictly verified as DPI)
+    if catalog_url and is_valid_dpi_bulletin_url(catalog_url) and catalog_url not in urls_to_try:
+        urls_to_try.append(catalog_url)
 
-    # 3. Strict candidate DPI naming patterns
+    # 3. Strict candidate DPI naming patterns (fallback when not yet linked on portal page)
     try:
         d = datetime.date.fromisoformat(date_str)
         for cand in generate_candidate_urls(d):
@@ -157,10 +156,6 @@ def fetch_bulletin_bytes_in_memory(
                 urls_to_try.append(cand)
     except Exception:
         pass
-
-    # 4. Validated catalog URL
-    if catalog_url and is_valid_dpi_bulletin_url(catalog_url) and catalog_url not in urls_to_try:
-        urls_to_try.append(catalog_url)
 
     for current_url in urls_to_try:
         for attempt in range(1, max_retries + 1):
@@ -447,7 +442,7 @@ def run_daily_update(
                 message=msg,
             )
             if rebuild:
-                _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv=logs_csv_path)
+                _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv_path=logs_csv_path)
         return {
             "status": status_code,
             "latest_date": str(latest_tracked),
@@ -485,19 +480,15 @@ def run_daily_update(
     tmp_clean.replace(clean_csv_path)
     logger.info("Successfully updated clean dataset: %d total rows in %s", len(combined_clean_df), clean_csv_path.name)
 
-    # Also update server_daily_bulletins.csv if tracked
-    if bulletins_csv_path.exists():
+    # Also update server_daily_bulletins.csv if tracked (upsert verified URLs)
+    if bulletins_csv_path.exists() and validated_bulletin_urls:
         server_df = pd.read_csv(bulletins_csv_path)
-        new_bulletin_rows = [
-            {"date": b[0], "pdf_url": b[1]}
-            for b in validated_bulletin_urls
-            if b[0] not in server_df["date"].values
-        ]
-        if new_bulletin_rows:
-            server_df = pd.concat([server_df, pd.DataFrame(new_bulletin_rows)], ignore_index=True)
-            server_df = server_df.sort_values(by="date").reset_index(drop=True)
-            server_df.to_csv(bulletins_csv_path, index=False)
-            logger.info("Updated %s with %d new bulletin entries.", bulletins_csv_path.name, len(new_bulletin_rows))
+        upsert_rows = [{"date": b[0], "pdf_url": b[1]} for b in validated_bulletin_urls]
+        server_df = pd.concat([server_df, pd.DataFrame(upsert_rows)], ignore_index=True)
+        server_df = server_df.drop_duplicates(subset=["date"], keep="last")
+        server_df = server_df.sort_values(by="date").reset_index(drop=True)
+        server_df.to_csv(bulletins_csv_path, index=False)
+        logger.info("Synchronized %s with %d verified bulletin entries.", bulletins_csv_path.name, len(upsert_rows))
 
     new_latest_date = get_latest_tracked_date(clean_csv_path)
     elapsed = time.time() - start_time
@@ -524,7 +515,7 @@ def run_daily_update(
 
     # 7. Rebuild Warehouse & Static Dashboard
     if rebuild:
-        _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv=logs_csv_path)
+        _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv_path=logs_csv_path)
 
     return {
         "status": "SUCCESS",
