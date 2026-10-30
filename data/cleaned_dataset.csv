@@ -28655,3 +28655,195 @@ date,commodity_group,commodity,unit,price_prevailing,source_url
 2026-10-26,Vegetables,White Corn,kg,116.76,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-26-2026.pdf
 2026-10-26,Vegetables,White Potato,kg,178.22,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-26-2026.pdf
 2026-10-26,Vegetables,Yellow Corn,kg,99.06,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-26-2026.pdf
+2026-10-27,Basic Goods,Brown Sugar,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Basic Goods,Chicken Egg (Medium White),piece,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Basic Goods,Cooking Oil (Coconut),bottle (1L),,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Basic Goods,Cooking Oil (Palm),bottle (1L),,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Basic Goods,Refined Sugar,kg,80.86,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Basic Goods,Washed Sugar,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fish,Bangus (Large),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fish,Bangus (Medium),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fish,Galunggong (Local),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fish,Sardines (Tamban),kg,171.05,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fish,Tilapia,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Avocado,kg,71.86,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Banana (Lakatan),kg,40.15,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Banana (Latundan),kg,101.74,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Banana (Saba),kg,58.66,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Mango (Carabao),kg,342.04,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Melon,kg,375.71,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Papaya,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Pomelo,kg,193.55,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Fruits,Watermelon,kg,125.82,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Meat and Poultry,Beef Brisket,kg,449.48,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Meat and Poultry,Beef Rump,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Meat and Poultry,Pork Belly (Liempo),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Meat and Poultry,Pork Kasim (Picnic Shoulder),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Meat and Poultry,Pork Pigue (Hind Leg / Ham),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Meat and Poultry,Whole Chicken,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Rice,Premium Rice,kg,361.15,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Rice,Regular Milled Rice,kg,177.41,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Rice,Well Milled Rice,kg,249.59,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Spices and Condiments,Calamansi,kg,152.09,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Spices and Condiments,Garlic (Imported),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Spices and Condiments,Garlic (Native),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Spices and Condiments,Ginger,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Spices and Condiments,Red Onion,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Ampalaya (Bitter Gourd),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Bell Pepper (Green),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Bell Pepper (Red),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Cabbage (Rare Ball),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Cabbage (Scorpio),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Cabbage (Wonder Ball),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Carrots,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Eggplant,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Native Pechay,bundle,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Squash,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Tomato,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,White Corn,kg,114.52,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,White Potato,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-27,Vegetables,Yellow Corn,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-27-2026.pdf
+2026-10-28,Basic Goods,Brown Sugar,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Basic Goods,Chicken Egg (Medium White),piece,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Basic Goods,Cooking Oil (Coconut),bottle (1L),,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Basic Goods,Cooking Oil (Palm),bottle (1L),,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Basic Goods,Refined Sugar,kg,82.1,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Basic Goods,Washed Sugar,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fish,Bangus (Large),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fish,Bangus (Medium),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fish,Galunggong (Local),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fish,Sardines (Tamban),kg,170.47,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fish,Tilapia,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Avocado,kg,73.35,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Banana (Lakatan),kg,40.54,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Banana (Latundan),kg,99.58,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Banana (Saba),kg,58.37,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Mango (Carabao),kg,327.58,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Melon,kg,362.5,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Papaya,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Pomelo,kg,196.35,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Fruits,Watermelon,kg,122.69,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Meat and Poultry,Beef Brisket,kg,446.42,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Meat and Poultry,Beef Rump,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Meat and Poultry,Pork Belly (Liempo),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Meat and Poultry,Pork Kasim (Picnic Shoulder),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Meat and Poultry,Pork Pigue (Hind Leg / Ham),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Meat and Poultry,Whole Chicken,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Rice,Premium Rice,kg,358.51,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Rice,Regular Milled Rice,kg,45.0,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Rice,Well Milled Rice,kg,145.93,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Spices and Condiments,Calamansi,kg,152.33,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Spices and Condiments,Garlic (Imported),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Spices and Condiments,Garlic (Native),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Spices and Condiments,Ginger,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Spices and Condiments,Red Onion,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Ampalaya (Bitter Gourd),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Bell Pepper (Green),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Bell Pepper (Red),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Cabbage (Rare Ball),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Cabbage (Scorpio),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Cabbage (Wonder Ball),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Carrots,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Eggplant,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Native Pechay,bundle,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Squash,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Tomato,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,White Corn,kg,121.88,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,White Potato,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-28,Vegetables,Yellow Corn,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-28-2026.pdf
+2026-10-29,Basic Goods,Brown Sugar,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Basic Goods,Chicken Egg (Medium White),piece,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Basic Goods,Cooking Oil (Coconut),bottle (1L),,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Basic Goods,Cooking Oil (Palm),bottle (1L),,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Basic Goods,Refined Sugar,kg,81.1,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Basic Goods,Washed Sugar,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fish,Bangus (Large),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fish,Bangus (Medium),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fish,Galunggong (Local),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fish,Sardines (Tamban),kg,175.12,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fish,Tilapia,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Avocado,kg,72.28,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Banana (Lakatan),kg,40.26,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Banana (Latundan),kg,101.6,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Banana (Saba),kg,57.9,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Mango (Carabao),kg,333.75,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Melon,kg,375.0,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Papaya,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Pomelo,kg,196.41,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Fruits,Watermelon,kg,125.5,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Meat and Poultry,Beef Brisket,kg,448.77,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Meat and Poultry,Beef Rump,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Meat and Poultry,Pork Belly (Liempo),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Meat and Poultry,Pork Kasim (Picnic Shoulder),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Meat and Poultry,Pork Pigue (Hind Leg / Ham),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Meat and Poultry,Whole Chicken,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Rice,Premium Rice,kg,358.79,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Rice,Regular Milled Rice,kg,45.7,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Rice,Well Milled Rice,kg,145.75,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Spices and Condiments,Calamansi,kg,151.51,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Spices and Condiments,Garlic (Imported),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Spices and Condiments,Garlic (Native),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Spices and Condiments,Ginger,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Spices and Condiments,Red Onion,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Ampalaya (Bitter Gourd),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Bell Pepper (Green),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Bell Pepper (Red),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Cabbage (Rare Ball),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Cabbage (Scorpio),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Cabbage (Wonder Ball),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Carrots,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Eggplant,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Native Pechay,bundle,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Squash,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Tomato,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,White Corn,kg,115.36,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,White Potato,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-29,Vegetables,Yellow Corn,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-29-2026.pdf
+2026-10-30,Basic Goods,Brown Sugar,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Basic Goods,Chicken Egg (Medium White),piece,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Basic Goods,Cooking Oil (Coconut),bottle (1L),,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Basic Goods,Cooking Oil (Palm),bottle (1L),,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Basic Goods,Refined Sugar,kg,80.83,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Basic Goods,Washed Sugar,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fish,Bangus (Large),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fish,Bangus (Medium),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fish,Galunggong (Local),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fish,Sardines (Tamban),kg,174.19,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fish,Tilapia,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Avocado,kg,71.77,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Banana (Lakatan),kg,40.41,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Banana (Latundan),kg,102.39,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Banana (Saba),kg,58.67,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Mango (Carabao),kg,328.28,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Melon,kg,375.71,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Papaya,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Pomelo,kg,196.06,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Fruits,Watermelon,kg,125.76,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Meat and Poultry,Beef Brisket,kg,448.52,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Meat and Poultry,Beef Rump,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Meat and Poultry,Pork Belly (Liempo),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Meat and Poultry,Pork Kasim (Picnic Shoulder),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Meat and Poultry,Pork Pigue (Hind Leg / Ham),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Meat and Poultry,Whole Chicken,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Rice,Premium Rice,kg,359.81,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Rice,Regular Milled Rice,kg,174.33,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Rice,Well Milled Rice,kg,144.73,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Spices and Condiments,Calamansi,kg,152.24,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Spices and Condiments,Garlic (Imported),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Spices and Condiments,Garlic (Native),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Spices and Condiments,Ginger,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Spices and Condiments,Red Onion,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Ampalaya (Bitter Gourd),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Bell Pepper (Green),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Bell Pepper (Red),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Cabbage (Rare Ball),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Cabbage (Scorpio),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Cabbage (Wonder Ball),kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Carrots,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Eggplant,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Native Pechay,bundle,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Squash,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Tomato,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,White Corn,kg,108.87,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,White Potato,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
+2026-10-30,Vegetables,Yellow Corn,kg,,https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf
