@@ -4,3 +4,4 @@ run_20261025_132315,2026-10-25 13:23:15,workflow_dispatch,SUCCESS,2026-10-23,4,3
 run_20261030_115435,2026-10-30 11:54:35,workflow_dispatch,SUCCESS,2026-10-30,4,4,192,41.88,Successfully ingested 4 new bulletin(s) with 192 records in-memory. Panel updated to 2026-10-30.
 run_20261030_190800,2026-10-30 19:08:00,schedule,NO_NEW_DATA,2026-10-30,0,0,0,0.02,Dataset is already up to date with latest observation (2026-10-30).
 run_20261031_153229,2026-10-31 15:32:29,schedule,NO_NEW_DATA,2026-10-30,1,0,0,1814.02,Evaluated 1 candidate dates (2026-10-31 to 2026-10-31). No new bulletins published on DA portal yet.
+run_20261031_182458,2026-10-31 18:24:58,schedule,NO_NEW_DATA,2026-10-30,1,0,0,1805.48,Evaluated 1 candidate dates (2026-10-31 to 2026-10-31). No new bulletins published on DA portal yet.
