@@ -36,9 +36,11 @@ class DashboardDevState:
 def collect_watch_mtimes(
     template_dir: Path,
     db_path: Path,
-) -> tuple[dict[str, float], float]:
+    data_dir: Path | None = None,
+) -> tuple[dict[str, float], float, dict[str, float]]:
     """
-    Snapshots modification timestamps for all template/asset files and the DuckDB file.
+    Snapshots modification timestamps for all template/asset files, DuckDB file,
+    and source data CSV files.
     """
     template_mtimes: dict[str, float] = {}
     if template_dir.exists():
@@ -56,7 +58,17 @@ def collect_watch_mtimes(
         except OSError:
             db_mtime = 0.0
 
-    return template_mtimes, db_mtime
+    data_mtimes: dict[str, float] = {}
+    resolved_data_dir = data_dir or db_path.parent
+    if resolved_data_dir.exists():
+        for path in sorted(resolved_data_dir.glob("*.csv")):
+            if path.is_file():
+                try:
+                    data_mtimes[str(path.resolve())] = path.stat().st_mtime
+                except OSError:
+                    continue
+
+    return template_mtimes, db_mtime, data_mtimes
 
 
 class DevServerRequestHandler(SimpleHTTPRequestHandler):
@@ -137,7 +149,7 @@ def run_dev_watcher(
     )
 
     dev_state = DashboardDevState(build_id=initial_build_id)
-    prev_tpl_mtimes, prev_db_mtime = collect_watch_mtimes(tpl_dir, db_file)
+    prev_tpl_mtimes, prev_db_mtime, prev_data_mtimes = collect_watch_mtimes(tpl_dir, db_file)
 
     handler_cls = partial(
         DevServerRequestHandler,
@@ -155,6 +167,7 @@ def run_dev_watcher(
     logger.info("  Local URL     : http://%s:%d", host, actual_port)
     logger.info("  Watching Tpls : %s", tpl_dir)
     logger.info("  Watching DB   : %s", db_file)
+    logger.info("  Watching CSVs : %s/*.csv", db_file.parent)
     logger.info("  Press Ctrl+C to stop")
     logger.info("==================================================")
 
@@ -164,7 +177,32 @@ def run_dev_watcher(
             time.sleep(poll_interval)
             cycles += 1
 
-            curr_tpl_mtimes, curr_db_mtime = collect_watch_mtimes(tpl_dir, db_file)
+            curr_tpl_mtimes, curr_db_mtime, curr_data_mtimes = collect_watch_mtimes(tpl_dir, db_file)
+            data_changed = curr_data_mtimes != prev_data_mtimes
+
+            if data_changed:
+                changed_csvs = [
+                    Path(k).name
+                    for k, v in curr_data_mtimes.items()
+                    if prev_data_mtimes.get(k) != v
+                ]
+                logger.info(
+                    "Source CSV change detected (%s) -> rebuilding DuckDB analytical warehouse...",
+                    ", ".join(changed_csvs) or "data updated",
+                )
+                try:
+                    from pipeline.load_duckdb import load_duckdb
+
+                    con = load_duckdb(db_path=db_file)
+                    con.close()
+                    # Update curr_db_mtime after warehouse reload
+                    try:
+                        curr_db_mtime = db_file.stat().st_mtime
+                    except OSError:
+                        pass
+                except Exception as exc:
+                    logger.error("DuckDB pipeline rebuild failed: %s", exc)
+
             db_changed = curr_db_mtime != prev_db_mtime
             tpl_changed = curr_tpl_mtimes != prev_tpl_mtimes
 
@@ -202,6 +240,9 @@ def run_dev_watcher(
 
                 prev_tpl_mtimes = curr_tpl_mtimes
                 prev_db_mtime = curr_db_mtime
+
+            if data_changed:
+                prev_data_mtimes = curr_data_mtimes
 
             if max_cycles is not None and cycles >= max_cycles:
                 break

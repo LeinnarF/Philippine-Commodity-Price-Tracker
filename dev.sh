@@ -19,8 +19,24 @@ else
     exit 1
 fi
 
-# Ensure DuckDB warehouse exists; build if missing
+# Ensure DuckDB warehouse exists or is up-to-date with underlying CSV data
+should_build_db=false
+
 if [ ! -f "data/commodities.duckdb" ]; then
+    echo "DuckDB analytical warehouse missing (data/commodities.duckdb)."
+    should_build_db=true
+else
+    # Check if any input CSV files are newer than the DuckDB database
+    for csv_file in data/cleaned_dataset.csv data/server_daily_bulletins.csv data/pipeline_execution_logs.csv; do
+        if [ -f "$csv_file" ] && [ "$csv_file" -nt "data/commodities.duckdb" ]; then
+            echo "Detected updated source dataset ($csv_file is newer than commodities.duckdb)."
+            should_build_db=true
+            break
+        fi
+    done
+fi
+
+if [ "$should_build_db" = true ]; then
     echo "Building DuckDB analytical warehouse (data/commodities.duckdb)..."
     "$PYTHON_BIN" -m pipeline.load_duckdb
 fi

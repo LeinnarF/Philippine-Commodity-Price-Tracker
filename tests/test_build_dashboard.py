@@ -321,9 +321,10 @@ def test_render_dashboard_missing_template(tmp_path, duckdb_con):
 def test_collect_watch_mtimes():
     if not DEFAULT_DB_PATH.exists():
         pytest.skip("DuckDB database not found at DEFAULT_DB_PATH")
-    tpl_mtimes, db_mtime = collect_watch_mtimes(DEFAULT_TEMPLATE_DIR, DEFAULT_DB_PATH)
+    tpl_mtimes, db_mtime, data_mtimes = collect_watch_mtimes(DEFAULT_TEMPLATE_DIR, DEFAULT_DB_PATH)
     assert len(tpl_mtimes) >= 9  # base.html, dashboard.html, components/*, views/*, assets/*
     assert db_mtime > 0
+    assert len(data_mtimes) >= 1  # cleaned_dataset.csv, etc.
 
 
 def test_dev_watcher_rebuild_cycle(tmp_path):
