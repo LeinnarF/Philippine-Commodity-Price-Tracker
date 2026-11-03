@@ -5,6 +5,7 @@ DuckDB SQL analytical queries and Plotly figure builders for the dashboard.
 from __future__ import annotations
 
 from datetime import date
+import datetime
 import json
 from typing import Any
 
@@ -259,8 +260,31 @@ def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[st
         ORDER BY date, commodity_group;
     """).df()
 
+    cat_price_stats_df = con.execute("""
+        SELECT
+            commodity_group,
+            ROUND(AVG(price_prevailing), 2) AS avg_price,
+            ROUND(AVG(dod_pct), 2) AS cat_dod_pct,
+            ROUND(AVG(wow_pct), 2) AS cat_wow_pct,
+            ROUND(AVG(mom_pct), 2) AS cat_mom_pct,
+            ROUND(MIN(price_prevailing), 2) AS min_price,
+            ROUND(MAX(price_prevailing), 2) AS max_price,
+            LIST({
+                'commodity': commodity,
+                'price_prevailing': ROUND(price_prevailing, 2),
+                'unit': unit,
+                'dod_pct': ROUND(dod_pct, 2),
+                'wow_pct': ROUND(wow_pct, 2),
+                'mom_pct': ROUND(mom_pct, 2),
+                'slug': LOWER(REGEXP_REPLACE(REGEXP_REPLACE(commodity, '[^a-zA-Z0-9]+', '-'), '^-|-$', ''))
+            } ORDER BY price_prevailing ASC) AS commodities
+        FROM v_latest_snapshot
+        GROUP BY commodity_group;
+    """).df()
+    cat_price_map = {r["commodity_group"]: r for r in cat_price_stats_df.to_dict(orient="records")}
+
     # Enrich each category summary row with palette color, breadth percentages,
-    # and multi-horizon sparkline + range metrics (30D, 90D, 1Y, ALL)
+    # price averages, ranges, and multi-horizon sparkline + range metrics
     for row in summary_rows:
         grp = row["commodity_group"]
         total = max(int(row["total_commodities"]), 1)
@@ -275,6 +299,30 @@ def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[st
         row["pct_down"] = round((down / total) * 100.0, 1)
         row["color"] = CATEGORY_PALETTE.get(grp, "#15803d")
         row["slug"] = slugify_filter(grp)
+
+        # Basket price stats
+        price_stats = cat_price_map.get(grp, {})
+        row["avg_price"] = price_stats.get("avg_price", 0.0)
+        row["cat_dod_pct"] = price_stats.get("cat_dod_pct", row.get("dod_pct", 0.0))
+        row["cat_wow_pct"] = price_stats.get("cat_wow_pct", row.get("wow_pct", 0.0))
+        row["cat_mom_pct"] = price_stats.get("cat_mom_pct", row.get("mom_pct", 0.0))
+        row["min_price"] = price_stats.get("min_price", 0.0)
+        row["max_price"] = price_stats.get("max_price", 0.0)
+        row["commodities"] = price_stats.get("commodities", [])
+        row["unit"] = "kg / pc" if grp == "Basic Goods" else "kg"
+
+        cluster_layout = {
+            "Rice": {"col_span": 4, "tile_cols": 3},
+            "Meat and Poultry": {"col_span": 4, "tile_cols": 3},
+            "Fish": {"col_span": 4, "tile_cols": 3},
+            "Vegetables": {"col_span": 7, "tile_cols": 4},
+            "Fruits": {"col_span": 5, "tile_cols": 3},
+            "Spices and Condiments": {"col_span": 6, "tile_cols": 3},
+            "Basic Goods": {"col_span": 6, "tile_cols": 3},
+        }
+        cfg = cluster_layout.get(grp, {"col_span": 6, "tile_cols": 3})
+        row["col_span"] = cfg["col_span"]
+        row["tile_cols"] = cfg["tile_cols"]
 
         grp_vals = ts_df[ts_df["commodity_group"] == grp]["index_base100"].tolist()
         horizons = {
@@ -367,6 +415,16 @@ def fetch_category_indices(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[st
     )
 
     chart_json = json.dumps(json.loads(fig.to_json()), separators=(",", ":"))
+    group_order = {
+        "Rice": 1,
+        "Meat and Poultry": 2,
+        "Fish": 3,
+        "Vegetables": 4,
+        "Fruits": 5,
+        "Spices and Condiments": 6,
+        "Basic Goods": 7,
+    }
+    summary_rows.sort(key=lambda r: group_order.get(r.get("commodity_group"), 99))
     return summary_rows, chart_json
 
 
@@ -642,6 +700,79 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
     }
 
 
+def fetch_bulletin_heatmap(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
+    """
+    Builds an archival weekly matrix of published Department of Agriculture bulletins and gaps
+    for the activity heatmap on the Market Overview view.
+    """
+    bulletins_df = con.execute("""
+        SELECT DISTINCT date::DATE AS b_date
+        FROM server_bulletins
+        ORDER BY b_date ASC
+    """).df()
+
+    if bulletins_df.empty:
+        return {"weeks": [], "months": [], "total_bulletins": 0, "total_days": 0}
+
+    pub_dates = set(bulletins_df["b_date"])
+    earliest = min(pub_dates)
+    latest = max(pub_dates)
+
+    # Align to full weeks starting on Sunday and ending on Saturday
+    start_date = earliest - datetime.timedelta(days=(earliest.weekday() + 1) % 7)
+    end_date = latest + datetime.timedelta(days=(5 - latest.weekday()) % 7)
+
+    total_days = (end_date - start_date).days + 1
+    num_weeks = max(total_days // 7, 1)
+
+    months: list[dict[str, Any]] = []
+    cur_month: str | None = None
+    weeks_data: list[list[dict[str, Any]]] = []
+
+    for w in range(num_weeks):
+        week_col: list[dict[str, Any]] = []
+        week_start = start_date + datetime.timedelta(days=w * 7)
+
+        m_name = week_start.strftime("%b")
+        if m_name != cur_month:
+            cur_month = m_name
+            year_suffix = week_start.strftime(" '%y") if week_start.month in (1, 3) else ""
+            months.append({"label": f"{m_name}{year_suffix}", "col_idx": w})
+
+        for d in range(7):
+            day_date = week_start + datetime.timedelta(days=d)
+            is_pub = day_date in pub_dates
+            is_latest = (day_date == latest)
+            is_in_range = (earliest <= day_date <= latest)
+
+            status_text = (
+                "Official DA Bulletin Extracted"
+                if is_pub
+                else ("Non-reporting gap / holiday" if is_in_range else "Out of observation range")
+            )
+
+            week_col.append({
+                "date": day_date.strftime("%Y-%m-%d"),
+                "date_formatted": day_date.strftime("%B %d, %Y"),
+                "day": day_date.day,
+                "is_published": is_pub,
+                "is_latest": is_latest,
+                "is_in_range": is_in_range,
+                "status_text": status_text,
+            })
+        weeks_data.append(week_col)
+
+    return {
+        "weeks": weeks_data,
+        "months": months,
+        "total_bulletins": len(pub_dates),
+        "total_days": len(pub_dates),
+        "latest_date": latest.strftime("%Y-%m-%d"),
+        "earliest_date": earliest.strftime("%Y-%m-%d"),
+        "total_weeks": num_weeks,
+    }
+
+
 def load_all_dashboard_data(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
     """
     Loads all analytical models from DuckDB into a single reusable context dictionary.
@@ -649,6 +780,7 @@ def load_all_dashboard_data(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
     kpis = fetch_kpi_summary(con)
     top_movers = fetch_top_movers(con, limit=5)
     category_summary, category_chart_json = fetch_category_indices(con)
+    bulletin_heatmap = fetch_bulletin_heatmap(con)
     (
         timeseries_json,
         commodity_meta_json,
@@ -669,6 +801,7 @@ def load_all_dashboard_data(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "top_movers": top_movers,
         "category_summary": category_summary,
         "category_indices_chart_json": category_chart_json,
+        "bulletin_heatmap": bulletin_heatmap,
         "timeseries_json": timeseries_json,
         "commodity_meta_json": commodity_meta_json,
         "commodities_by_group": commodities_by_group,

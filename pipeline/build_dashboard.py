@@ -35,6 +35,7 @@ from pipeline.dashboard.filters import (
 from pipeline.dashboard.queries import (
     CATEGORY_PALETTE,
     fetch_audit_info,
+    fetch_bulletin_heatmap,
     fetch_category_indices,
     fetch_census_history,
     fetch_commodity_timeseries,

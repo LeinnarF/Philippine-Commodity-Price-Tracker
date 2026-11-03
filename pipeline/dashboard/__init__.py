@@ -16,6 +16,7 @@ from pipeline.dashboard.filters import (
 from pipeline.dashboard.queries import (
     CATEGORY_PALETTE,
     fetch_audit_info,
+    fetch_bulletin_heatmap,
     fetch_category_indices,
     fetch_commodity_timeseries,
     fetch_kpi_summary,
@@ -29,6 +30,7 @@ __all__ = [
     "change_badge_filter",
     "currency_filter",
     "fetch_audit_info",
+    "fetch_bulletin_heatmap",
     "fetch_category_indices",
     "fetch_commodity_timeseries",
     "fetch_kpi_summary",

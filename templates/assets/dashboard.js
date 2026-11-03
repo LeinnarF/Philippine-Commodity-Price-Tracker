@@ -113,20 +113,8 @@
   // ========================================================================
 
   function initCategoryChart() {
-    const container = document.getElementById("category-index-plot");
-    if (!container || container.querySelector("#category-performance-table")) return;
-    if (typeof Plotly === "undefined") return;
-    if (!categoryChartInitialized) {
-      Plotly.newPlot(
-        container,
-        categoryChartPayload.data,
-        categoryChartPayload.layout,
-        { responsive: true, displayModeBar: "hover", displaylogo: false }
-      );
-      categoryChartInitialized = true;
-    } else {
-      Plotly.Plots.resize(container);
-    }
+    // The category overview is now rendered via the native interactive treemap matrix
+    return;
   }
 
   function updateCategoryHorizon(horizonKey) {
@@ -907,22 +895,70 @@
       });
     });
 
-    document.querySelectorAll(".btn-timeframe").forEach((btn) => {
+    // Commodity Detail Chart Timeframe Controls (1M / 3M / 6M / 1Y / ALL)
+    document.querySelectorAll(".chart-header-controls .btn-timeframe").forEach((btn) => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".btn-timeframe").forEach((b) => b.classList.remove("active"));
+        document.querySelectorAll(".chart-header-controls .btn-timeframe").forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
         activeTimeframe = btn.getAttribute("data-timeframe") || "ALL";
         renderCommodityChart(activeCommodity);
       });
     });
 
-    // Category Performance Matrix Horizon Buttons (30D / 90D / 1Y / ALL)
-    document.querySelectorAll(".btn-cat-timeframe").forEach((btn) => {
+    // Treemap Timeframe Toggle (1-Day vs 7-Day vs 30-Day)
+    const catTfButtons = document.querySelectorAll("#category-timeframe-pills .btn-timeframe");
+    catTfButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".btn-cat-timeframe").forEach((b) => b.classList.remove("active"));
+        catTfButtons.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-        const horizon = btn.getAttribute("data-cat-timeframe") || "ALL";
-        updateCategoryHorizon(horizon);
+        const tf = btn.getAttribute("data-timeframe") || "7d";
+
+        let attr = "data-wow";
+        if (tf === "1d") {
+          attr = "data-dod";
+        } else if (tf === "30d") {
+          attr = "data-mom";
+        }
+
+        document.querySelectorAll(".treemap-tile").forEach((tile) => {
+          const raw = tile.getAttribute(attr);
+          const delta = parseFloat(raw || "0");
+          const deltaEl = tile.querySelector(".tile-delta");
+
+          let arrow = "— 0.0%";
+          if (delta > 0.001) {
+            arrow = `▲ +${delta.toFixed(1)}%`;
+          } else if (delta < -0.001) {
+            arrow = `▼ ${Math.abs(delta).toFixed(1)}%`;
+          }
+          if (deltaEl) {
+            deltaEl.textContent = arrow;
+          }
+
+          tile.classList.remove("tile-gain-high", "tile-gain-low", "tile-flat", "tile-drop-low", "tile-drop-high");
+          if (delta > 3.0) {
+            tile.classList.add("tile-gain-high");
+          } else if (delta > 0.001) {
+            tile.classList.add("tile-gain-low");
+          } else if (delta < -3.0) {
+            tile.classList.add("tile-drop-high");
+          } else if (delta < -0.001) {
+            tile.classList.add("tile-drop-low");
+          } else {
+            tile.classList.add("tile-flat");
+          }
+        });
+      });
+    });
+
+    // Clickable Treemap Tiles -> Navigate to Commodity Detail
+    document.querySelectorAll(".treemap-tile").forEach((tile) => {
+      tile.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const comm = tile.getAttribute("data-commodity");
+        if (comm) {
+          activateView("commodity", comm, true);
+        }
       });
     });
 
