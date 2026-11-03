@@ -34,6 +34,8 @@ from pipeline.download_pdfs import (
     PROJECT_USER_AGENT,
     crawl_da_catalog,
     generate_candidate_urls,
+    is_dpi_afc_url,
+    is_finalized_dpi_url,
     is_valid_dpi_bulletin_url,
     probe_dpi_url_for_date,
 )
@@ -131,28 +133,41 @@ def fetch_bulletin_bytes_in_memory(
     client: httpx.Client,
     max_retries: int = 2,
     known_url: str | None = None,
+    only_finalized: bool = False,
 ) -> tuple[bytes | None, str | None]:
     """
     Attempts to download bulletin PDF bytes into memory.
     Prioritizes verified known DPI URLs (e.g. from server_daily_bulletins.csv)
     and candidate DPI URLs. Strictly enforces is_valid_dpi_bulletin_url.
+    When only_finalized=True, restricts candidate URLs exclusively to finalized
+    non-AFC bulletins (e.g. 'Daily-Price-Index-*', 'Revised-Daily-Price-Index-*').
     Returns (pdf_bytes_or_None, final_url_or_None).
     """
+    url_validator = is_finalized_dpi_url if only_finalized else is_valid_dpi_bulletin_url
     urls_to_try: list[str] = []
 
+    # If catalog_url is finalized while known_url is provisional DPI-AFC, prefer catalog_url first
+    if (
+        catalog_url
+        and is_finalized_dpi_url(catalog_url)
+        and known_url
+        and is_dpi_afc_url(known_url)
+    ):
+        urls_to_try.append(catalog_url)
+
     # 1. Verified known DPI URL for this date
-    if known_url and is_valid_dpi_bulletin_url(known_url):
+    if known_url and url_validator(known_url) and known_url not in urls_to_try:
         urls_to_try.append(known_url)
 
     # 2. Validated catalog URL from DA portal (strictly verified as DPI)
-    if catalog_url and is_valid_dpi_bulletin_url(catalog_url) and catalog_url not in urls_to_try:
+    if catalog_url and url_validator(catalog_url) and catalog_url not in urls_to_try:
         urls_to_try.append(catalog_url)
 
     # 3. Strict candidate DPI naming patterns (fallback when not yet linked on portal page)
     try:
         d = datetime.date.fromisoformat(date_str)
         for cand in generate_candidate_urls(d):
-            if cand not in urls_to_try and is_valid_dpi_bulletin_url(cand):
+            if cand not in urls_to_try and url_validator(cand):
                 urls_to_try.append(cand)
     except Exception:
         pass
@@ -224,47 +239,30 @@ def run_daily_update(
 
     # 1. Determine date range and local state
     existing_dates: set[str] = set()
+    clean_afc_dates: set[str] = set()
     latest_tracked = datetime.date(2025, 3, 1)
     if clean_csv_path.exists():
-        clean_dates_df = pd.read_csv(clean_csv_path, usecols=["date"])
+        header_cols = pd.read_csv(clean_csv_path, nrows=0).columns.tolist()
+        cols_to_read = ["date", "source_url"] if "source_url" in header_cols else ["date"]
+        clean_dates_df = pd.read_csv(clean_csv_path, usecols=cols_to_read)
         if not clean_dates_df.empty and "date" in clean_dates_df.columns:
             existing_dates = set(clean_dates_df["date"].dropna().astype(str).unique())
             latest_tracked = get_latest_tracked_date(clean_csv_path)
+            if "source_url" in clean_dates_df.columns:
+                for _, r in clean_dates_df.dropna(subset=["date", "source_url"]).drop_duplicates(subset=["date"]).iterrows():
+                    d_k = str(r["date"]).strip()
+                    u_k = str(r["source_url"]).strip()
+                    if is_dpi_afc_url(u_k):
+                        clean_afc_dates.add(d_k)
 
     today = target_date or datetime.date.today()
+    today_str = today.strftime("%Y-%m-%d")
     logger.info("Current Max Tracked Date : %s", latest_tracked)
     logger.info("Target Evaluation Date   : %s", today)
 
-    if latest_tracked >= today:
-        msg = f"Dataset is already up to date with latest observation ({latest_tracked})."
-        logger.info(msg)
-        elapsed = time.time() - start_time
-        if not dry_run:
-            append_execution_log(
-                logs_csv_path=logs_csv_path,
-                run_id=resolved_run_id,
-                executed_at=now_utc,
-                trigger=trigger,
-                status="NO_NEW_DATA",
-                latest_bulletin_date=str(latest_tracked),
-                bulletins_checked=0,
-                bulletins_downloaded=0,
-                records_extracted=0,
-                duration_seconds=elapsed,
-                message=msg,
-            )
-            if rebuild:
-                _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv_path=logs_csv_path)
-        return {
-            "status": "NO_NEW_DATA",
-            "latest_date": str(latest_tracked),
-            "bulletins_downloaded": 0,
-            "records_extracted": 0,
-            "duration": elapsed,
-        }
-
     # Read verified known DPI bulletin URLs from server_daily_bulletins.csv
     server_bulletins_map: dict[str, str] = {}
+    server_afc_dates: set[str] = set()
     if bulletins_csv_path.exists():
         try:
             s_df = pd.read_csv(bulletins_csv_path)
@@ -274,18 +272,27 @@ def run_daily_update(
                     u_k = str(r["pdf_url"]).strip()
                     if is_valid_dpi_bulletin_url(u_k):
                         server_bulletins_map[d_k] = u_k
+                        if is_dpi_afc_url(u_k):
+                            server_afc_dates.add(d_k)
         except Exception as s_err:
             logger.warning("Could not read server bulletins CSV (%s): %s", bulletins_csv_path, s_err)
 
+    # Tracked dates (<= today) that still use provisional *-DPI-AFC.pdf URLs and should be checked for finalized Daily-Price-Index upgrades
+    provisional_afc_dates = sorted(
+        d_str for d_str in (clean_afc_dates | server_afc_dates)
+        if d_str in existing_dates and d_str <= today_str
+    )
+
     # Dates to evaluate: days from latest_tracked + 1 up to today not yet tracked
     dates_to_check: list[datetime.date] = []
-    curr = latest_tracked + datetime.timedelta(days=1)
-    while curr <= today:
-        if curr.strftime("%Y-%m-%d") not in existing_dates:
-            dates_to_check.append(curr)
-        curr += datetime.timedelta(days=1)
+    if latest_tracked < today:
+        curr = latest_tracked + datetime.timedelta(days=1)
+        while curr <= today:
+            if curr.strftime("%Y-%m-%d") not in existing_dates:
+                dates_to_check.append(curr)
+            curr += datetime.timedelta(days=1)
 
-    if not dates_to_check:
+    if not dates_to_check and not provisional_afc_dates:
         msg = f"Dataset is already up to date with latest observation ({latest_tracked})."
         logger.info(msg)
         elapsed = time.time() - start_time
@@ -313,7 +320,16 @@ def run_daily_update(
             "duration": elapsed,
         }
 
-    logger.info("Dates to evaluate (%d dates): %s to %s", len(dates_to_check), dates_to_check[0], dates_to_check[-1])
+    if dates_to_check:
+        logger.info("Dates to evaluate (%d dates): %s to %s", len(dates_to_check), dates_to_check[0], dates_to_check[-1])
+    if provisional_afc_dates:
+        logger.info(
+            "Provisional DPI-AFC dates to check for finalized Daily-Price-Index upgrade (%d dates): %s",
+            len(provisional_afc_dates),
+            ", ".join(provisional_afc_dates),
+        )
+
+    total_checked = len(dates_to_check) if dates_to_check else len(provisional_afc_dates)
 
     # 2. Discover available bulletins
     catalog: dict[str, str] = {}
@@ -326,6 +342,32 @@ def run_daily_update(
     headers = {"User-Agent": PROJECT_USER_AGENT}
 
     with httpx.Client(timeout=30.0, follow_redirects=True, headers=headers) as client:
+        # 2a. Check existing provisional DPI-AFC dates for finalized Daily-Price-Index upgrades
+        for d_str in provisional_afc_dates:
+            cat_url = catalog.get(d_str)
+            finalized_catalog_url = cat_url if (cat_url and is_finalized_dpi_url(cat_url)) else None
+            srv_url = server_bulletins_map.get(d_str)
+            finalized_known_url = srv_url if (srv_url and is_finalized_dpi_url(srv_url)) else None
+
+            pdf_bytes, final_url = fetch_bulletin_bytes_in_memory(
+                date_str=d_str,
+                catalog_url=finalized_catalog_url,
+                client=client,
+                known_url=finalized_known_url,
+                only_finalized=True,
+            )
+            if pdf_bytes and final_url and is_finalized_dpi_url(final_url):
+                logger.info(
+                    "Upgrading provisional DPI-AFC bulletin for %s to finalized Daily-Price-Index URL: %s (%.1f KB)",
+                    d_str,
+                    final_url,
+                    len(pdf_bytes) / 1024,
+                )
+                new_bulletins.append((d_str, final_url, pdf_bytes))
+            else:
+                logger.info("No finalized Daily-Price-Index replacement found yet for provisional DPI-AFC date %s.", d_str)
+
+        # 2b. Check new missing dates
         for d in dates_to_check:
             d_str = d.strftime("%Y-%m-%d")
             known_url = server_bulletins_map.get(d_str)
@@ -343,9 +385,15 @@ def run_daily_update(
             else:
                 logger.info("No published bulletin found for %s (Holiday, weekend, or not yet uploaded).", d_str)
 
-    # 3. Handle outcome if no new bulletins were found
+    # 3. Handle outcome if no new or upgraded bulletins were found
     if not new_bulletins:
-        msg = f"Evaluated {len(dates_to_check)} candidate dates ({dates_to_check[0]} to {dates_to_check[-1]}). No new bulletins published on DA portal yet."
+        if dates_to_check:
+            msg = f"Evaluated {len(dates_to_check)} candidate dates ({dates_to_check[0]} to {dates_to_check[-1]}). No new bulletins published on DA portal yet."
+        else:
+            msg = (
+                f"Dataset is already up to date ({latest_tracked}). Checked {len(provisional_afc_dates)} "
+                f"provisional DPI-AFC bulletin(s); no finalized Daily-Price-Index replacement published yet."
+            )
         logger.info(msg)
         elapsed = time.time() - start_time
         if not dry_run:
@@ -356,7 +404,7 @@ def run_daily_update(
                 trigger=trigger,
                 status="NO_NEW_DATA",
                 latest_bulletin_date=str(latest_tracked),
-                bulletins_checked=len(dates_to_check),
+                bulletins_checked=total_checked,
                 bulletins_downloaded=0,
                 records_extracted=0,
                 duration_seconds=elapsed,
@@ -421,8 +469,14 @@ def run_daily_update(
         if new_bulletins:
             msg = f"Discovered {len(new_bulletins)} candidate bulletins but all were rejected by the Daily Price Index content and coverage gate."
             status_code = "FAILED"
-        else:
+        elif dates_to_check:
             msg = f"Evaluated {len(dates_to_check)} candidate dates ({dates_to_check[0]} to {dates_to_check[-1]}). No new bulletins published on DA portal yet."
+            status_code = "NO_NEW_DATA"
+        else:
+            msg = (
+                f"Dataset is already up to date ({latest_tracked}). Checked {len(provisional_afc_dates)} "
+                f"provisional DPI-AFC bulletin(s); no finalized Daily-Price-Index replacement published yet."
+            )
             status_code = "NO_NEW_DATA"
 
         logger.warning(msg)
@@ -435,7 +489,7 @@ def run_daily_update(
                 trigger=trigger,
                 status=status_code,
                 latest_bulletin_date=str(latest_tracked),
-                bulletins_checked=len(dates_to_check),
+                bulletins_checked=total_checked,
                 bulletins_downloaded=len(new_bulletins),
                 records_extracted=0,
                 duration_seconds=elapsed,
@@ -506,7 +560,7 @@ def run_daily_update(
         trigger=trigger,
         status="SUCCESS",
         latest_bulletin_date=str(new_latest_date),
-        bulletins_checked=len(dates_to_check),
+        bulletins_checked=total_checked,
         bulletins_downloaded=len(validated_bulletin_urls),
         records_extracted=len(extracted_records),
         duration_seconds=elapsed,

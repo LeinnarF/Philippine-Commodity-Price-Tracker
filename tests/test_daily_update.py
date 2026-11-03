@@ -482,3 +482,147 @@ def test_run_daily_update_rebuild_invoked_on_no_new_data(monkeypatch, tmp_path):
 
     assert res["status"] == "NO_NEW_DATA"
     assert len(rebuild_calls) == 1
+
+
+def test_run_daily_update_upgrades_provisional_dpi_afc_bulletin(monkeypatch, tmp_path):
+    """
+    Verify that when an existing date was collected as a provisional *-DPI-AFC.pdf bulletin
+    (even when latest_tracked >= target_date), run_daily_update detects and upgrades it to
+    the finalized Daily-Price-Index-*.pdf bulletin in both cleaned_dataset.csv and
+    server_daily_bulletins.csv.
+    """
+    from pipeline.commodity_schema import get_commodity_definitions
+
+    clean_csv = tmp_path / "cleaned_dataset.csv"
+    logs_csv = tmp_path / "pipeline_execution_logs.csv"
+    bulletins_csv = tmp_path / "server_daily_bulletins.csv"
+
+    defs = get_commodity_definitions()
+    provisional_url = "https://www.da.gov.ph/wp-content/uploads/2026/10/October-30-2026-DPI-AFC.pdf"
+    finalized_url = "https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-30-2026.pdf"
+
+    # Pre-populate 2026-10-30 with provisional DPI-AFC URL
+    initial_records = [
+        {
+            "date": "2026-10-30",
+            "commodity_group": item["category"],
+            "commodity": item["commodity"],
+            "unit": item["unit"],
+            "price_prevailing": 100.0,
+            "source_url": provisional_url,
+        }
+        for item in defs
+    ]
+    pd.DataFrame(initial_records).to_csv(clean_csv, index=False)
+    pd.DataFrame([{"date": "2026-10-30", "pdf_url": provisional_url}]).to_csv(bulletins_csv, index=False)
+
+    # Catalog now exposes finalized Daily-Price-Index URL
+    monkeypatch.setattr(
+        "pipeline.daily_update.crawl_da_catalog",
+        lambda use_cache=False: {"2026-10-30": finalized_url},
+    )
+    monkeypatch.setattr(
+        "pipeline.daily_update.fetch_bulletin_bytes_in_memory",
+        lambda date_str, catalog_url, client, **kwargs: (
+            (b"%PDF-1.5 finalized", catalog_url) if kwargs.get("only_finalized") else (None, None)
+        ),
+    )
+    monkeypatch.setattr(
+        "pipeline.daily_update.parse_da_amas_pdf",
+        lambda pdf_source, target_date, source_url: pd.DataFrame([{"commodity": "Rice"}]),
+    )
+
+    upgraded_records = [
+        {
+            "date": "2026-10-30",
+            "commodity_group": item["category"],
+            "commodity": item["commodity"],
+            "unit": item["unit"],
+            "price_prevailing": 105.0,
+            "source_url": finalized_url,
+        }
+        for item in defs
+    ]
+    monkeypatch.setattr(
+        "pipeline.daily_update.standardize_bulletin_records",
+        lambda df_raw, target_date, source_url: upgraded_records,
+    )
+
+    # Run on the exact same date (latest_tracked == target_date == 2026-10-30)
+    res = run_daily_update(
+        clean_csv_path=clean_csv,
+        logs_csv_path=logs_csv,
+        bulletins_csv_path=bulletins_csv,
+        target_date=datetime.date(2026, 10, 30),
+        rebuild=False,
+    )
+
+    assert res["status"] == "SUCCESS"
+    assert res["bulletins_downloaded"] == 1
+    assert res["records_extracted"] == 48
+
+    # Verify cleaned_dataset.csv updated both prices and source_url
+    clean_df = pd.read_csv(clean_csv)
+    assert len(clean_df) == 48
+    assert (clean_df["source_url"] == finalized_url).all()
+    assert (clean_df["price_prevailing"] == 105.0).all()
+
+    # Verify server_daily_bulletins.csv updated pdf_url from DPI-AFC to Daily-Price-Index
+    srv_df = pd.read_csv(bulletins_csv)
+    assert len(srv_df) == 1
+    assert srv_df.iloc[0]["pdf_url"] == finalized_url
+
+
+def test_run_daily_update_retains_dpi_afc_when_finalized_not_yet_available(monkeypatch, tmp_path):
+    """
+    Verify that when an existing date has a provisional *-DPI-AFC.pdf URL and no finalized
+    Daily-Price-Index replacement is published yet, the existing DPI-AFC entry is preserved.
+    """
+    from pipeline.commodity_schema import get_commodity_definitions
+
+    clean_csv = tmp_path / "cleaned_dataset.csv"
+    logs_csv = tmp_path / "pipeline_execution_logs.csv"
+    bulletins_csv = tmp_path / "server_daily_bulletins.csv"
+
+    defs = get_commodity_definitions()
+    provisional_url = "https://www.da.gov.ph/wp-content/uploads/2026/10/October-30-2026-DPI-AFC.pdf"
+
+    initial_records = [
+        {
+            "date": "2026-10-30",
+            "commodity_group": item["category"],
+            "commodity": item["commodity"],
+            "unit": item["unit"],
+            "price_prevailing": 100.0,
+            "source_url": provisional_url,
+        }
+        for item in defs
+    ]
+    pd.DataFrame(initial_records).to_csv(clean_csv, index=False)
+    pd.DataFrame([{"date": "2026-10-30", "pdf_url": provisional_url}]).to_csv(bulletins_csv, index=False)
+
+    monkeypatch.setattr(
+        "pipeline.daily_update.crawl_da_catalog",
+        lambda use_cache=False: {"2026-10-30": provisional_url},
+    )
+    monkeypatch.setattr(
+        "pipeline.daily_update.fetch_bulletin_bytes_in_memory",
+        lambda date_str, catalog_url, client, **kwargs: (None, None),
+    )
+
+    res = run_daily_update(
+        clean_csv_path=clean_csv,
+        logs_csv_path=logs_csv,
+        bulletins_csv_path=bulletins_csv,
+        target_date=datetime.date(2026, 10, 30),
+        rebuild=False,
+    )
+
+    assert res["status"] == "NO_NEW_DATA"
+    assert res["bulletins_downloaded"] == 0
+
+    clean_df = pd.read_csv(clean_csv)
+    assert (clean_df["source_url"] == provisional_url).all()
+    srv_df = pd.read_csv(bulletins_csv)
+    assert srv_df.iloc[0]["pdf_url"] == provisional_url
+

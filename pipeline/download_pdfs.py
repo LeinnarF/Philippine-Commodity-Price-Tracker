@@ -95,6 +95,26 @@ def is_valid_dpi_bulletin_url(url: str, anchor_text: str = "") -> bool:
 
     return False
 
+
+def is_dpi_afc_url(url: str) -> bool:
+    """
+    Returns True if the URL points to a provisional '*-DPI-AFC.pdf' bulletin.
+    """
+    if not is_valid_dpi_bulletin_url(url):
+        return False
+    filename = url.lower().split("/")[-1].split("?")[0]
+    return "dpi-afc" in filename or "dpi_afc" in filename
+
+
+def is_finalized_dpi_url(url: str) -> bool:
+    """
+    Returns True if the URL points to a finalized Daily Price Index bulletin
+    (e.g. 'Daily-Price-Index-*', 'Revised-Daily-Price-Index-*') and NOT a
+    provisional '*-DPI-AFC.pdf' file.
+    """
+    return is_valid_dpi_bulletin_url(url) and not is_dpi_afc_url(url)
+
+
 MONTH_MAP = {
     "january": 1,
     "february": 2,
@@ -186,26 +206,27 @@ def generate_candidate_urls(target_date: datetime.date | str) -> list[str]:
     month_short = d.strftime("%b")
     base = f"https://www.da.gov.ph/wp-content/uploads/{d.year}/{d.month:02d}"
 
-    patterns = [
-        # New DA naming convention (Oct 2026 onwards): Month-Day-Year-DPI-AFC.pdf
-        f"{base}/{month_name}-{d.day}-{d.year}-DPI-AFC.pdf",
-        f"{base}/{month_name}-{d.day:02d}-{d.year}-DPI-AFC.pdf",
-        # Historical standard: Daily-Price-Index-Month-Day-Year.pdf
+    finalized_patterns = [
+        # Official revisions and finalized Daily-Price-Index standard (prioritized over provisional DPI-AFC)
+        f"{base}/Revised-Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
         f"{base}/Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
         f"{base}/Daily-Price-Index-{month_name}-{d.day:02d}-{d.year}.pdf",
+        f"{base}/Daily-Price-Index-{month_name}-{d.day}-{d.year}-1.pdf",
         # Shorthand DPI variants
         f"{base}/{month_name}-{d.day}-{d.year}-DPI.pdf",
         f"{base}/{month_name}-{d.day:02d}-{d.year}-DPI.pdf",
-        # Duplicates/revisions uploaded with '-1' suffix
-        f"{base}/{month_name}-{d.day}-{d.year}-DPI-AFC-1.pdf",
-        f"{base}/Daily-Price-Index-{month_name}-{d.day}-{d.year}-1.pdf",
-        f"{base}/Revised-Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
-        # Abbreviated month names
-        f"{base}/{month_short}-{d.day}-{d.year}-DPI-AFC.pdf",
+        # Abbreviated month & lowercase finalized variants
         f"{base}/Daily-Price-Index-{month_short}-{d.day}-{d.year}.pdf",
-        # Lowercase variants
-        f"{base}/{month_name.lower()}-{d.day}-{d.year}-dpi-afc.pdf",
         f"{base}/daily-price-index-{month_name.lower()}-{d.day}-{d.year}.pdf",
+    ]
+
+    afc_patterns = [
+        # Provisional DA naming convention: Month-Day-Year-DPI-AFC.pdf (fallback when finalized DPI not yet available)
+        f"{base}/{month_name}-{d.day}-{d.year}-DPI-AFC.pdf",
+        f"{base}/{month_name}-{d.day:02d}-{d.year}-DPI-AFC.pdf",
+        f"{base}/{month_name}-{d.day}-{d.year}-DPI-AFC-1.pdf",
+        f"{base}/{month_short}-{d.day}-{d.year}-DPI-AFC.pdf",
+        f"{base}/{month_name.lower()}-{d.day}-{d.year}-dpi-afc.pdf",
     ]
 
     # End-of-month bulletins are occasionally uploaded in the following month's folder
@@ -216,14 +237,18 @@ def generate_candidate_urls(target_date: datetime.date | str) -> list[str]:
             next_year, next_month = d.year, d.month + 1
         base_next = f"https://www.da.gov.ph/wp-content/uploads/{next_year}/{next_month:02d}"
 
-        patterns.extend([
-            f"{base_next}/{month_name}-{d.day}-{d.year}-DPI-AFC.pdf",
-            f"{base_next}/{month_name}-{d.day:02d}-{d.year}-DPI-AFC.pdf",
+        finalized_patterns.extend([
+            f"{base_next}/Revised-Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
             f"{base_next}/Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
             f"{base_next}/Daily-Price-Index-{month_name}-{d.day:02d}-{d.year}.pdf",
-            f"{base_next}/Revised-Daily-Price-Index-{month_name}-{d.day}-{d.year}.pdf",
             f"{base_next}/{month_name}-{d.day}-{d.year}-DPI.pdf",
         ])
+        afc_patterns.extend([
+            f"{base_next}/{month_name}-{d.day}-{d.year}-DPI-AFC.pdf",
+            f"{base_next}/{month_name}-{d.day:02d}-{d.year}-DPI-AFC.pdf",
+        ])
+
+    patterns = finalized_patterns + afc_patterns
 
     seen: set[str] = set()
     return [p for p in patterns if is_valid_dpi_bulletin_url(p) and not (p in seen or seen.add(p))]
@@ -276,11 +301,15 @@ def crawl_da_catalog(use_cache: bool = True) -> dict[str, str]:
 
                 if d:
                     d_key = d.strftime("%Y-%m-%d")
-                    # Do not overwrite unless current is missing or new link is an official revision
+                    # Do not overwrite unless current is missing, new link is an official revision,
+                    # or current is provisional DPI-AFC and new link is finalized Daily-Price-Index
                     if d_key not in date_to_url:
                         date_to_url[d_key] = href
                     elif "revised" in href.lower() and "revised" not in date_to_url[d_key].lower():
                         logger.info("Replacing bulletin for %s with revised version: %s", d_key, href)
+                        date_to_url[d_key] = href
+                    elif is_dpi_afc_url(date_to_url[d_key]) and is_finalized_dpi_url(href):
+                        logger.info("Replacing provisional DPI-AFC bulletin for %s with finalized version: %s", d_key, href)
                         date_to_url[d_key] = href
 
             logger.info("Found %d official daily PDF bulletins in Department of Agriculture price monitoring portal.", len(date_to_url))

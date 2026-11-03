@@ -32,6 +32,8 @@ from pipeline.download_pdfs import (
     PROJECT_USER_AGENT,
     crawl_da_catalog,
     generate_candidate_urls,
+    is_dpi_afc_url,
+    is_finalized_dpi_url,
 )
 
 DEFAULT_OUTPUT_CSV = PROJECT_ROOT / "data" / "server_daily_bulletins.csv"
@@ -52,10 +54,11 @@ def check_candidate_urls_for_date(
     """
     Checks if a valid PDF bulletin exists on the public server for a given date.
     Performs lightweight HEAD / range GET checks across known WordPress upload patterns.
+    Prioritizes finalized Daily-Price-Index URLs over provisional *-DPI-AFC.pdf URLs.
     Returns (date_str, direct_pdf_url_or_None).
     """
     urls_to_try: list[str] = []
-    if known_url:
+    if known_url and is_finalized_dpi_url(known_url):
         urls_to_try.append(known_url)
 
     try:
@@ -65,6 +68,10 @@ def check_candidate_urls_for_date(
                 urls_to_try.append(cand)
     except Exception:
         pass
+
+    if known_url and known_url not in urls_to_try:
+        # Insert provisional known_url ahead of generic AFC fallbacks if not already tried
+        urls_to_try.append(known_url)
 
     for url in urls_to_try:
         try:
@@ -126,11 +133,11 @@ def scan_and_export_server_bulletins(
     pending_probe: list[tuple[str, str | None]] = []
 
     for d_str in target_dates:
-        if d_str in catalog:
-            # Already mapped and verified in catalog
+        if d_str in catalog and is_finalized_dpi_url(catalog[d_str]):
+            # Already mapped and verified as finalized Daily-Price-Index in catalog
             discovered[d_str] = catalog[d_str]
         else:
-            pending_probe.append((d_str, None))
+            pending_probe.append((d_str, catalog.get(d_str)))
 
     logger.info("Known from catalog: %d | Probing public server for: %d dates", len(discovered), len(pending_probe))
 

@@ -10,6 +10,8 @@ import pytest
 from pipeline.download_pdfs import (
     is_valid_pdf,
     is_valid_dpi_bulletin_url,
+    is_dpi_afc_url,
+    is_finalized_dpi_url,
     download_single_pdf,
     extract_date_from_bulletin_url,
     generate_candidate_urls,
@@ -308,3 +310,32 @@ def test_probe_dpi_url_for_date():
         assert nf_url is None
     finally:
         client.close()
+
+
+def test_is_dpi_afc_and_finalized_dpi_url():
+    """Verify classification between provisional DPI-AFC URLs and finalized Daily-Price-Index URLs."""
+    afc_url = "https://www.da.gov.ph/wp-content/uploads/2026/10/October-30-2026-DPI-AFC.pdf"
+    std_url = "https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-30-2026.pdf"
+    rev_url = "https://www.da.gov.ph/wp-content/uploads/2026/10/Revised-Daily-Price-Index-October-30-2026.pdf"
+    invalid_url = "https://www.da.gov.ph/wp-content/uploads/2026/10/Price-Monitoring-October-30-2026.pdf"
+
+    assert is_dpi_afc_url(afc_url) is True
+    assert is_finalized_dpi_url(afc_url) is False
+
+    assert is_dpi_afc_url(std_url) is False
+    assert is_finalized_dpi_url(std_url) is True
+
+    assert is_dpi_afc_url(rev_url) is False
+    assert is_finalized_dpi_url(rev_url) is True
+
+    assert is_dpi_afc_url(invalid_url) is False
+    assert is_finalized_dpi_url(invalid_url) is False
+
+
+def test_generate_candidate_urls_prioritizes_finalized_over_afc():
+    """Verify that finalized Daily-Price-Index URLs are tried before provisional DPI-AFC URLs."""
+    candidates = generate_candidate_urls(datetime.date(2026, 10, 30))
+    first_finalized_idx = next(i for i, u in enumerate(candidates) if "Daily-Price-Index-October-30-2026.pdf" in u)
+    first_afc_idx = next(i for i, u in enumerate(candidates) if is_dpi_afc_url(u))
+    assert first_finalized_idx < first_afc_idx
+
