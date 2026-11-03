@@ -10,3 +10,4 @@ run_20261101_185118,2026-11-01 18:51:18,schedule,NO_NEW_DATA,2026-10-30,2,0,0,34
 run_20261102_195249,2026-11-02 19:52:49,schedule,NO_NEW_DATA,2026-10-30,3,0,0,853.96,Evaluated 3 candidate dates (2026-10-31 to 2026-11-02). No new bulletins published on DA portal yet.
 run_20261102_224139,2026-11-02 22:41:39,schedule,NO_NEW_DATA,2026-10-30,3,0,0,5058.98,Evaluated 3 candidate dates (2026-10-31 to 2026-11-02). No new bulletins published on DA portal yet.
 run_20261103_025414,2026-11-03 02:54:14,workflow_dispatch,SUCCESS,2026-11-01,4,2,96,77.3,Successfully ingested 2 new bulletin(s) with 96 records in-memory. Panel updated to 2026-11-01.
+run_20261103_105415,2026-11-03 10:54:15,workflow_dispatch,SUCCESS,2026-11-03,2,5,240,78.45,Successfully ingested 5 new bulletin(s) with 240 records in-memory. Panel updated to 2026-11-03.
