@@ -171,7 +171,8 @@ def write_modular_assets(
         f"  commodityMeta: {data_ctx['commodity_meta_json']},\n"
         f"  defaultCommodity: {json.dumps(data_ctx['default_commodity'])},\n"
         f"  censusDates: {json.dumps(data_ctx['census_dates'], separators=(',', ':'))},\n"
-        f"  bulletins: {json.dumps(data_ctx.get('audit_info', {}).get('bulletins', []), separators=(',', ':'))}\n"
+        f"  bulletins: {json.dumps(data_ctx.get('audit_info', {}).get('bulletins', []), separators=(',', ':'))},\n"
+        f"  executionLogs: {json.dumps(data_ctx.get('audit_info', {}).get('execution_logs', []), separators=(',', ':'))}\n"
         "};\n"
     )
     dest_data.write_text(data_js_content, encoding="utf-8")

@@ -293,6 +293,7 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     assert "dates:" in data_content
     assert "timeseries:" in data_content
     assert "censusDates:" in data_content
+    assert "executionLogs:" in data_content
 
     html_content = out_file.read_text(encoding="utf-8")
     assert "census-date-select" in html_content
@@ -300,6 +301,11 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     assert "btn-census-date-next" in html_content
     assert "commodity-history-table" in html_content
     assert "commodity-history-pagination" in html_content
+    assert "audit-logs-table" in html_content
+    assert "audit-logs-pagination" in html_content
+    assert "Records Extracted" not in html_content
+    assert "Bulletins Downloaded" not in html_content
+    assert "<th>Trigger</th>" in html_content
 
 
 def test_build_dashboard_missing_db(tmp_path):

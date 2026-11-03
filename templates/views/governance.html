@@ -111,30 +111,28 @@
       <h2 class="card-title">Automated Daily Ingestion &amp; Pipeline Execution Audit Logs</h2>
     </div>
   </div>
-  <div class="card-body" style="padding: 0;">
+  <div class="card-body">
     {% if audit_info.execution_logs %}
-    <div class="table-container" style="border: none; border-radius: 0;">
-      <table class="formal-table">
+    <div class="table-container">
+      <table class="formal-table" id="audit-logs-table">
         <thead>
           <tr>
             <th>Execution Timestamp (UTC)</th>
-            <th>Run ID / Trigger</th>
+            <th>Run ID</th>
             <th class="text-center">Status</th>
-            <th class="text-right">Bulletins Downloaded</th>
-            <th class="text-right">Records Extracted</th>
+            <th>Trigger</th>
             <th class="text-right">Duration</th>
             <th>Details</th>
           </tr>
         </thead>
-        <tbody>
-          {% for log in audit_info.execution_logs %}
+        <tbody id="audit-logs-tbody">
+          {% for log in audit_info.execution_logs[:10] %}
           <tr>
             <td class="font-mono" style="color: var(--text-secondary); white-space: nowrap;">
               {{ log.executed_at }}
             </td>
             <td>
               <div class="font-mono" style="font-weight: 600; color: var(--text-heading);">{{ log.run_id }}</div>
-              <div style="font-size: 11px; color: var(--text-muted);">{{ log.trigger }}</div>
             </td>
             <td class="text-center">
               {% if log.status == 'SUCCESS' %}
@@ -145,11 +143,8 @@
               <span class="status-pill status-pill-increase">{{ log.status }}</span>
               {% endif %}
             </td>
-            <td class="text-right font-mono">
-              {{ log.bulletins_downloaded | format_num(0) }}
-            </td>
-            <td class="text-right font-mono">
-              {{ log.records_extracted | format_num(0) }}
+            <td class="font-mono" style="color: var(--text-secondary);">
+              {{ log.trigger }}
             </td>
             <td class="text-right font-mono">
               {{ log.duration_seconds }}<span class="unit-suffix">s</span>
@@ -161,6 +156,10 @@
           {% endfor %}
         </tbody>
       </table>
+    </div>
+    <!-- Pagination Controls -->
+    <div class="table-pagination" id="audit-logs-pagination">
+      <!-- Injected by dashboard.js -->
     </div>
     {% else %}
     <div style="padding: 24px 20px; color: var(--text-muted); font-size: 13px;">

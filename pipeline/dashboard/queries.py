@@ -645,8 +645,7 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
                     duration_seconds,
                     message
                 FROM pipeline_execution_logs
-                ORDER BY executed_at DESC
-                LIMIT 15;
+                ORDER BY executed_at DESC;
             """).df()
             if not log_df.empty:
                 execution_logs = log_df.to_dict(orient="records")

@@ -14,6 +14,10 @@
   const defaultCommodity = payload.defaultCommodity || Object.keys(commodityMetadata)[0] || "";
   const censusDates = payload.censusDates || [];
   const bulletinData = payload.bulletins || [];
+  const executionLogsData = payload.executionLogs || [];
+
+  let auditLogsCurrentPage = 1;
+  const AUDIT_LOGS_PAGE_SIZE = 10;
 
   // Rehydrate shared dates reference onto each commodity series & index dates for O(1) lookup
   const dateIndexMap = {};
@@ -1261,6 +1265,9 @@
     // Initialize bulletin register table if present
     initBulletinRegister();
 
+    // Initialize audit logs table if present
+    initAuditLogs();
+
     window.addEventListener("hashchange", handleHashRoute);
   }
 
@@ -1389,6 +1396,64 @@
 
     updateSortHeaders();
     renderBulletinTable();
+  }
+
+  function escapeHtml(str) {
+    if (str == null) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function initAuditLogs() {
+    const tbody = document.getElementById("audit-logs-tbody");
+    if (!tbody || !executionLogsData || executionLogsData.length === 0) return;
+
+    function renderAuditLogsTable() {
+      const totalRecords = executionLogsData.length;
+      const totalPages = Math.ceil(totalRecords / AUDIT_LOGS_PAGE_SIZE) || 1;
+      if (auditLogsCurrentPage > totalPages) auditLogsCurrentPage = totalPages;
+      if (auditLogsCurrentPage < 1) auditLogsCurrentPage = 1;
+
+      const startIndex = (auditLogsCurrentPage - 1) * AUDIT_LOGS_PAGE_SIZE;
+      const endIndex = Math.min(startIndex + AUDIT_LOGS_PAGE_SIZE, totalRecords);
+
+      let html = "";
+      for (let i = startIndex; i < endIndex; i++) {
+        const log = executionLogsData[i];
+        let statusPill = "";
+        if (log.status === "SUCCESS") {
+          statusPill = '<span class="status-pill status-pill-decrease">SUCCESS</span>';
+        } else if (log.status === "NO_NEW_DATA") {
+          statusPill = '<span class="status-pill status-pill-neutral">NO NEW DATA</span>';
+        } else {
+          statusPill = `<span class="status-pill status-pill-increase">${escapeHtml(log.status || "")}</span>`;
+        }
+
+        const duration = log.duration_seconds != null ? log.duration_seconds : "0";
+
+        html += "<tr>";
+        html += `<td class="font-mono" style="color: var(--text-secondary); white-space: nowrap;">${escapeHtml(log.executed_at || "")}</td>`;
+        html += `<td><div class="font-mono" style="font-weight: 600; color: var(--text-heading);">${escapeHtml(log.run_id || "")}</div></td>`;
+        html += `<td class="text-center">${statusPill}</td>`;
+        html += `<td class="font-mono" style="color: var(--text-secondary);">${escapeHtml(log.trigger || "")}</td>`;
+        html += `<td class="text-right font-mono">${duration}<span class="unit-suffix">s</span></td>`;
+        html += `<td style="color: var(--text-secondary);">${escapeHtml(log.message || "")}</td>`;
+        html += "</tr>";
+      }
+
+      tbody.innerHTML = html;
+
+      renderTablePagination("audit-logs-pagination", auditLogsCurrentPage, totalPages, (newPage) => {
+        auditLogsCurrentPage = newPage;
+        renderAuditLogsTable();
+      });
+    }
+
+    renderAuditLogsTable();
   }
 
   // Initialize on DOMContentLoaded
