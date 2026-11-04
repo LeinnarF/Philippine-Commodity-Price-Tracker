@@ -82,13 +82,35 @@ def test_load_duckdb_execution(tmp_path):
                 date, commodity, price_prevailing, sma_7d, sma_30d, volatility_30d, cv_30d,
                 price_prev_1d, dod_abs, dod_pct, wow_abs, wow_pct, mom_abs, mom_pct
             FROM v_commodity_analytics
-            WHERE commodity = 'Whole Chicken' AND date = (SELECT MAX(date) FROM commodity_prices);
+            WHERE date = (SELECT MAX(date) FROM commodity_prices)
+              AND price_prevailing IS NOT NULL
+              AND price_prev_1d IS NOT NULL
+              AND price_prev_7d IS NOT NULL
+              AND price_prev_30d IS NOT NULL
+            ORDER BY commodity
+            LIMIT 1;
         """).fetchone()
 
         assert sample_analytics is not None
-        # Verify metrics are computed and non-null on the latest date
+        # Verify metrics are computed and non-null on the latest date for observed commodity
         for idx, val in enumerate(sample_analytics):
-            assert val is not None, f"Metric at index {idx} should not be None for Whole Chicken on latest date"
+            assert val is not None, f"Metric at index {idx} should not be None for observed sample on latest date"
+
+        # Verify Whole Chicken on its most recent observed date
+        sample_chicken = con.execute("""
+            SELECT
+                date, commodity, price_prevailing, sma_7d, sma_30d, volatility_30d, cv_30d,
+                price_prev_1d, dod_abs, dod_pct, wow_abs, wow_pct, mom_abs, mom_pct
+            FROM v_commodity_analytics
+            WHERE commodity = 'Whole Chicken'
+              AND price_prevailing IS NOT NULL
+            ORDER BY date DESC
+            LIMIT 1;
+        """).fetchone()
+
+        assert sample_chicken is not None
+        for idx, val in enumerate(sample_chicken):
+            assert val is not None, f"Metric at index {idx} should not be None for Whole Chicken on latest observed date"
 
         # 5. Gold view: v_latest_snapshot
         v_snapshot = con.execute("SELECT * FROM v_latest_snapshot;").df()

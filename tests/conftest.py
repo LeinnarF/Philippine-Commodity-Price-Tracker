@@ -23,11 +23,11 @@ def ensure_duckdb_exists():
         load_duckdb,
     )
 
-    if not DEFAULT_DB_PATH.exists() and DEFAULT_CLEAN_CSV.exists() and DEFAULT_SELECTED_CSV.exists():
+    if not DEFAULT_DB_PATH.exists() and DEFAULT_CLEAN_CSV.exists():
         con = load_duckdb(
             db_path=DEFAULT_DB_PATH,
             clean_csv=DEFAULT_CLEAN_CSV,
-            selected_csv=DEFAULT_SELECTED_CSV,
-            logs_csv=DEFAULT_LOGS_CSV,
+            selected_csv=DEFAULT_SELECTED_CSV if DEFAULT_SELECTED_CSV.exists() else None,
+            logs_csv=DEFAULT_LOGS_CSV if DEFAULT_LOGS_CSV.exists() else None,
         )
         con.close()

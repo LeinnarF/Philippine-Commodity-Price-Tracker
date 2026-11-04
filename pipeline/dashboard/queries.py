@@ -7,6 +7,7 @@ from __future__ import annotations
 from datetime import date
 import datetime
 import json
+import math
 from typing import Any
 
 import duckdb
@@ -140,8 +141,14 @@ def _build_sparkline_horizon(values: list[float]) -> dict[str, Any]:
     """
     Computes SVG sparkline polyline/area coordinates and min/max range metrics
     for a given slice of category index values.
+    Filters out any None/NaN values so only genuine observed dates are plotted.
     """
-    if not values:
+    valid_vals = [
+        float(v)
+        for v in values
+        if v is not None and not (isinstance(v, float) and math.isnan(v))
+    ]
+    if not valid_vals:
         return {
             "min_val": 100.0,
             "max_val": 100.0,
@@ -153,21 +160,21 @@ def _build_sparkline_horizon(values: list[float]) -> dict[str, Any]:
             "base100_y": 18.0,
         }
 
-    min_val = float(min(values))
-    max_val = float(max(values))
-    cur_val = float(values[-1])
+    min_val = float(min(valid_vals))
+    max_val = float(max(valid_vals))
+    cur_val = float(valid_vals[-1])
     span = max_val - min_val
     range_pct = round(((cur_val - min_val) / span) * 100.0, 1) if span > 1e-6 else 50.0
     range_pct = max(0.0, min(100.0, range_pct))
 
     # Downsample to at most 48 points while preserving start and end
-    n = len(values)
+    n = len(valid_vals)
     max_pts = 48
     if n <= max_pts:
-        sampled = values
+        sampled = valid_vals
     else:
         idxs = [round(i * (n - 1) / (max_pts - 1)) for i in range(max_pts)]
-        sampled = [values[idx] for idx in idxs]
+        sampled = [valid_vals[idx] for idx in idxs]
 
     pad_x = 4.0
     pad_y = 5.0
