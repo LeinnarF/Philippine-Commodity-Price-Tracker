@@ -1,33 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
-  <!-- Minimalist Forest Green Canvas -->
+  <!-- Minimalist Deep Forest Green Canvas -->
   <rect width="512" height="512" rx="112" fill="#064e3b"/>
 
   <g stroke-linecap="round" stroke-linejoin="round">
-    <!-- Base Foundation Line -->
-    <line x1="200" y1="384" x2="312" y2="384" stroke="#ffffff" stroke-width="16"/>
+    <!-- Baseline Axis -->
+    <line x1="104" y1="392" x2="408" y2="392" stroke="#ffffff" stroke-width="16" stroke-opacity="0.9"/>
 
-    <!-- Central Pillar -->
-    <line x1="256" y1="384" x2="256" y2="216" stroke="#ffffff" stroke-width="16"/>
+    <!-- Bar 1 (Short: 45% Translucent White) -->
+    <rect x="128" y="280" width="56" height="112" rx="20" fill="#ffffff" fill-opacity="0.45"/>
 
-    <!-- Horizontal Balance Beam -->
-    <line x1="116" y1="216" x2="396" y2="216" stroke="#ffffff" stroke-width="16"/>
+    <!-- Bar 2 (Medium: 75% Translucent White) -->
+    <rect x="228" y="208" width="56" height="184" rx="20" fill="#ffffff" fill-opacity="0.8"/>
 
-    <!-- Left Pan Suspension Lines -->
-    <line x1="116" y1="216" x2="80" y2="300" stroke="#ffffff" stroke-width="10" stroke-opacity="0.9"/>
-    <line x1="116" y1="216" x2="152" y2="300" stroke="#ffffff" stroke-width="10" stroke-opacity="0.9"/>
-    <!-- Left Pan Bowl (Smooth Parabolic Cradle) -->
-    <path d="M 68,300 Q 116,356 164,300 Z" fill="#f59e0b"/>
+    <!-- Bar 3 (Tall: 100% Solid Crisp White) -->
+    <rect x="328" y="136" width="56" height="256" rx="20" fill="#ffffff"/>
 
-    <!-- Right Pan Suspension Lines -->
-    <line x1="396" y1="216" x2="360" y2="300" stroke="#ffffff" stroke-width="10" stroke-opacity="0.9"/>
-    <line x1="396" y1="216" x2="432" y2="300" stroke="#ffffff" stroke-width="10" stroke-opacity="0.9"/>
-    <!-- Right Pan Bowl (Smooth Parabolic Cradle) -->
-    <path d="M 348,300 Q 396,356 444,300 Z" fill="#f59e0b"/>
+    <!-- Sweeping Solid White Trendline Curve -->
+    <path d="M 120,312 Q 220,260 256,180 T 384,104" fill="none" stroke="#ffffff" stroke-width="20"/>
 
-    <!-- Central Fulcrum Ring & Upward Indicator Arrow -->
-    <circle cx="256" cy="216" r="30" fill="#064e3b" stroke="#ffffff" stroke-width="14"/>
-    <circle cx="256" cy="216" r="12" fill="#f59e0b"/>
-    <!-- Upward Trend Indicator Arrow -->
-    <polygon points="256,128 274,180 238,180" fill="#f59e0b" stroke="#f59e0b" stroke-width="4"/>
+    <!-- Terminal Trend Node (White with Forest Green Core) -->
+    <circle cx="390" cy="100" r="24" fill="#064e3b" stroke="#ffffff" stroke-width="8"/>
+    <circle cx="390" cy="100" r="10" fill="#ffffff"/>
   </g>
 </svg>
