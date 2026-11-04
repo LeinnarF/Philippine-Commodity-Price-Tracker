@@ -7,14 +7,34 @@
   "use strict";
 
   const payload = window.DASHBOARD_DATA || {};
-  const categoryChartPayload = payload.categoryChart || { data: [], layout: {} };
   const sharedDates = payload.dates || [];
   const timeseriesData = payload.timeseries || {};
   const commodityMetadata = payload.commodityMeta || {};
   const defaultCommodity = payload.defaultCommodity || Object.keys(commodityMetadata)[0] || "";
-  const censusDates = payload.censusDates || [];
+  const censusDates = (payload.censusDates && payload.censusDates.length > 0)
+    ? payload.censusDates
+    : sharedDates.slice().reverse();
   const bulletinData = payload.bulletins || [];
   const executionLogsData = payload.executionLogs || [];
+
+  let plotlyLoadPromise = null;
+  function ensurePlotly() {
+    if (typeof Plotly !== "undefined") {
+      return Promise.resolve(window.Plotly);
+    }
+    if (!plotlyLoadPromise) {
+      plotlyLoadPromise = new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://cdn.plot.ly/plotly-basic-2.35.2.min.js";
+        script.charset = "utf-8";
+        script.async = true;
+        script.onload = () => resolve(window.Plotly);
+        script.onerror = () => reject(new Error("Failed to load Plotly"));
+        document.head.appendChild(script);
+      });
+    }
+    return plotlyLoadPromise;
+  }
 
   let auditLogsCurrentPage = 1;
   const AUDIT_LOGS_PAGE_SIZE = 10;
@@ -429,13 +449,29 @@
 
   function renderCommodityChart(commName) {
     const container = document.getElementById("commodity-trend-plot");
-    if (!container || typeof Plotly === "undefined") return;
+    if (!container) return;
 
     const meta = commodityMetadata[commName];
     const ts = timeseriesData[commName];
     if (!meta || !ts) return;
 
     updateCommodityChartHeader(commName);
+
+    if (typeof Plotly === "undefined") {
+      container.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:13px;"><span style="display:inline-block;margin-right:8px;">⏳</span> Loading interactive chart engine…</div>';
+      ensurePlotly()
+        .then(() => {
+          if (activeView === "commodity" && activeCommodity === commName) {
+            renderCommodityChart(commName);
+          }
+        })
+        .catch(() => {
+          container.innerHTML =
+            '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text-muted);font-size:13px;">Unable to load charting engine. Please check your connection.</div>';
+        });
+      return;
+    }
 
     const sliceCount = getTimeframeCount(activeTimeframe);
 

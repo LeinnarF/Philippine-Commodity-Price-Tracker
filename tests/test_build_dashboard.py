@@ -297,8 +297,11 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     assert "timeseries:" in data_content
     assert "censusDates:" in data_content
     assert "executionLogs:" in data_content
+    assert "categoryChart:" not in data_content
 
     html_content = out_file.read_text(encoding="utf-8")
+    assert "crop-icon.svg" in html_content
+    assert "https://cdn.plot.ly/plotly-basic-2.35.2.min.js" not in html_content
     assert "census-date-select" in html_content
     assert "btn-census-date-prev" in html_content
     assert "btn-census-date-next" in html_content
