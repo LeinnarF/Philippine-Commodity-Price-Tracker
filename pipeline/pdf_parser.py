@@ -26,7 +26,7 @@ def normalize_commodity_group(header_text: str) -> str:
         return "Rice & Cereals"
     elif "FISH" in up:
         return "Fish"
-    elif any(term in up for term in ["BEEF", "PORK", "POULTRY", "MEAT", "LIVESTOCK"]):
+    elif any(term in up for term in ["BEEF", "PORK", "POULTRY", "MEAT", "LIVESTOCK", "CHICKEN"]):
         return "Meat & Poultry"
     elif "LOWLAND" in up:
         return "Lowland Vegetables"

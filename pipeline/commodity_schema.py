@@ -92,7 +92,7 @@ def get_commodity_definitions(
             "matcher": lambda df, is_num: (
                 (is_num & (df["variety"] == "Bangus") & df["unit"].str.contains("Large", na=False))
                 | (~is_num & (df["commodity"] == "Bangus, Large"))
-                | (~is_num & (df["commodity"] == "Bangus") & df["variety"].str.contains("Large", na=False))
+                | (~is_num & df["commodity"].isin(["Bangus", "Milkfish (Bangus)"]) & df["variety"].str.contains("Large", na=False))
             ),
             "description": "Large milkfish (1-2 pcs/kg)",
         },
@@ -103,7 +103,7 @@ def get_commodity_definitions(
             "matcher": lambda df, is_num: (
                 (is_num & (df["variety"] == "Bangus") & df["unit"].str.contains("Medium", na=False))
                 | (~is_num & (df["commodity"] == "Bangus, Medium"))
-                | (~is_num & (df["commodity"] == "Bangus") & df["variety"].str.contains("Medium", na=False))
+                | (~is_num & df["commodity"].isin(["Bangus", "Milkfish (Bangus)"]) & df["variety"].str.contains("Medium", na=False))
             ),
             "description": "Medium milkfish (3-4 pcs/kg)",
         },
@@ -123,7 +123,7 @@ def get_commodity_definitions(
             "unit": "kg",
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Galunggong (Local)"]))
-                | (~is_num & df["commodity"].isin(["Galunggong (Local)", "Galunggong, Local"]))
+                | (~is_num & df["commodity"].isin(["Galunggong (Local)", "Galunggong, Local", "Roundscad (Galunggong), Local"]))
             ),
             "description": "Local round scad (male, medium)",
         },
@@ -133,7 +133,7 @@ def get_commodity_definitions(
             "unit": "kg",
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Sardines (Tamban)"]))
-                | (~is_num & df["commodity"].isin(["Sardines (Tamban)"]))
+                | (~is_num & df["commodity"].isin(["Sardines (Tamban)", "Sardines (Tamban), Local"]))
             ),
             "description": "Fresh tamban sardines",
         },
@@ -147,7 +147,7 @@ def get_commodity_definitions(
             "unit": "kg",
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Whole Chicken"]))
-                | (~is_num & df["commodity"].isin(["Whole Chicken", "Whole Chicken (fully dressed)", "Whole Chicken, Local"]))
+                | (~is_num & df["commodity"].isin(["Whole Chicken", "Whole Chicken (fully dressed)", "Whole Chicken, Local", "Whole Chicken, Unbranded"]))
             ),
             "description": "Fully dressed local broiler chicken",
         },
@@ -157,7 +157,7 @@ def get_commodity_definitions(
             "unit": "kg",
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Pork Belly/Liempo (fresh or chilled)"]))
-                | (~is_num & df["commodity"].isin(["Pork Belly", "Pork Belly (Liempo), Local", "Pork Belly/Liempo (fresh or chilled)"]))
+                | (~is_num & df["commodity"].isin(["Pork Belly", "Pork Belly (Liempo), Local", "Pork Belly/Liempo (fresh or chilled)", "Belly (Liempo), Local"]))
             ),
             "description": "Fresh pork belly / liempo cut",
         },
@@ -167,7 +167,7 @@ def get_commodity_definitions(
             "unit": "kg",
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Local Pork Picnic Shoulder (Kasim)", "Pork Picnic Shoulder (Kasim), Local"]))
-                | (~is_num & df["commodity"].isin(["Pork Picnic Shoulder (Kasim), Local", "Pork Ham/Kasim (fresh or chilled)", "Pork Ham (Kasim), Local"]))
+                | (~is_num & df["commodity"].isin(["Pork Picnic Shoulder (Kasim), Local", "Pork Ham/Kasim (fresh or chilled)", "Pork Ham (Kasim), Local", "Picnic Shoulder (Kasim), Local"]))
                 | (~is_num & (df["commodity"] == "Pork Ham") & (df["variety"] == "Kasim"))
             ),
             "description": "Local pork picnic shoulder (front cut)",
@@ -178,7 +178,7 @@ def get_commodity_definitions(
             "unit": "kg",
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Pork Hind Leg/Pigue (fresh or chilled)", "Pork Hind Leg (Pigue), Local"]))
-                | (~is_num & df["commodity"].isin(["Pork Hind Leg (Pigue), Local"]))
+                | (~is_num & df["commodity"].isin(["Pork Hind Leg (Pigue), Local", "Hind Leg (Pigue), Local"]))
             ),
             "description": "Local pork ham / hind leg cut",
         },
@@ -188,7 +188,7 @@ def get_commodity_definitions(
             "unit": "kg",
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Beef Brisket, Local"]))
-                | (~is_num & df["commodity"].isin(["Beef Brisket", "Beef Brisket, Local"]))
+                | (~is_num & df["commodity"].isin(["Beef Brisket", "Beef Brisket, Local", "Brisket (Punta y Pecho), Local"]))
             ),
             "description": "Local beef brisket (meat with bones)",
         },
@@ -198,7 +198,7 @@ def get_commodity_definitions(
             "unit": "kg",
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Beef Rump, Local"]))
-                | (~is_num & df["commodity"].isin(["Beef Rump", "Beef Rump, Local"]))
+                | (~is_num & df["commodity"].isin(["Beef Rump", "Beef Rump, Local", "Rump (Tapadera), Local"]))
             ),
             "description": "Local lean beef rump / tapadera",
         },
@@ -231,8 +231,8 @@ def get_commodity_definitions(
             "commodity": "Ampalaya (Bitter Gourd)",
             "unit": "kg",
             "matcher": lambda df, is_num: (
-                (is_num & df["variety"].isin(["Ampalaya"]))
-                | (~is_num & df["commodity"].isin(["Ampalaya"]))
+                (is_num & df["variety"].isin(["Ampalaya", "Bitter Gourd (Ampalaya)"]))
+                | (~is_num & df["commodity"].isin(["Ampalaya", "Bitter Gourd (Ampalaya)"]))
             ),
             "description": "Standard bitter gourd",
         },
@@ -421,6 +421,7 @@ def get_commodity_definitions(
             "matcher": lambda df, is_num: (
                 (is_num & df["variety"].isin(["Mango (Carabao)"]))
                 | (~is_num & df["commodity"].isin(["Mango (Carabao)"]))
+                | (~is_num & (df["commodity"] == "Mango") & df["variety"].str.contains("Carabao", na=False))
             ),
             "description": "Ripe Carabao mango (3-4 pcs/kg)",
         },
