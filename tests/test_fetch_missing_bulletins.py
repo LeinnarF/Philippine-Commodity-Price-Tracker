@@ -45,7 +45,7 @@ def test_find_missing_bulletin_dates(tmp_path):
 
 
 def test_extract_date_panel_records_shape():
-    """Verify that extract_date_panel_records produces strictly 48 rows matching expected commodities."""
+    """Verify that extract_date_panel_records produces strictly 50 rows matching expected commodities."""
     # Dummy raw records
     df_raw = pd.DataFrame([
         {
@@ -67,10 +67,10 @@ def test_extract_date_panel_records_shape():
     ])
 
     records = extract_date_panel_records(df_raw, "2025-03-02", "https://example.com/2025-03-02.pdf")
-    assert len(records) == 48
+    assert len(records) == 50
 
     df_out = pd.DataFrame(records)
-    assert df_out["commodity"].nunique() == 48
+    assert df_out["commodity"].nunique() == 50
     assert df_out["commodity_group"].nunique() == 7
 
     # Check observed vs unobserved

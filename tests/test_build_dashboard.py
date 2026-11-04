@@ -108,10 +108,10 @@ def test_slugify_filter():
 
 def test_fetch_kpi_summary(duckdb_con):
     kpis = fetch_kpi_summary(duckdb_con)
-    assert kpis["total_commodities"] == 48
+    assert kpis["total_commodities"] == 50
     assert kpis["total_groups"] == 7
     assert kpis["total_dates"] >= 451
-    assert 30 <= kpis["observed_today"] <= 48
+    assert 30 <= kpis["observed_today"] <= 50
     assert kpis["count_gainers"] + kpis["count_decliners"] + kpis["count_unchanged"] <= kpis["observed_today"]
     assert kpis["count_gainers"] + kpis["count_decliners"] + kpis["count_unchanged"] > 0
     assert "latest_date_formatted" in kpis
@@ -157,8 +157,8 @@ def test_fetch_commodity_timeseries(duckdb_con):
     ts = json.loads(ts_json)
     meta = json.loads(meta_json)
 
-    assert len(ts) == 48
-    assert len(meta) == 48
+    assert len(ts) == 50
+    assert len(meta) == 50
     assert default_comm in ts
     assert len(groups_dict) == 7
 
@@ -192,8 +192,8 @@ def test_fetch_commodity_timeseries(duckdb_con):
 
 def test_fetch_latest_snapshot(duckdb_con):
     rows, counts = fetch_latest_snapshot(duckdb_con)
-    assert len(rows) == 48
-    assert sum(counts.values()) == 48
+    assert len(rows) == 50
+    assert sum(counts.values()) == 50
     assert len(counts) == 7
     assert counts["Vegetables"] == 14
     assert counts["Rice"] == 3
@@ -208,16 +208,16 @@ def test_fetch_census_history(duckdb_con):
     assert dates[0] >= "2026-10-20"
     assert dates[-1] == "2025-03-01"
 
-    # Each date entry must have all 48 commodity rows with 8 metrics each
+    # Each date entry must have all 50 commodity rows with 8 metrics each
     latest_rows = by_date[dates[0]]
-    assert len(latest_rows) == 48
+    assert len(latest_rows) == 50
     assert len(latest_rows[0]) == 8  # [price, dod, wow, mom, s7, s30, vol, cv]
 
 
 def test_fetch_audit_info(duckdb_con):
     audit = fetch_audit_info(duckdb_con)
     assert audit["total_bulletins"] >= 451
-    assert audit["total_rows"] == audit["total_bulletins"] * 48
+    assert audit["total_rows"] == audit["total_bulletins"] * 50
     assert audit["synthetic_count"] == 0
     assert audit["market_scope"] == "NCR Wet Markets"
     assert audit["source_agency"] == "da_amas"

@@ -15,9 +15,9 @@ from pipeline.select_commodities import (
 
 
 def test_commodity_definitions_structure():
-    """Verify that commodity definitions cover the expected 7 categories and 48 items."""
+    """Verify that commodity definitions cover the expected 7 categories and 50 items."""
     defs = get_commodity_definitions(egg_category="Basic Goods", include_corn=True)
-    assert len(defs) == 48
+    assert len(defs) == 50
 
     categories = {d["category"] for d in defs}
     expected_categories = {
@@ -57,7 +57,7 @@ def test_select_commodities_execution(tmp_path):
     assert output_csv.exists()
     assert not selected_df.empty
     n_dates = selected_df["date"].nunique()
-    assert len(selected_df) == n_dates * 48
+    assert len(selected_df) == n_dates * 50
 
     # Required columns (no min or max)
     expected_cols = [
@@ -78,7 +78,7 @@ def test_select_commodities_execution(tmp_path):
     assert "price_max" not in selected_df.columns
 
     # Dimension assertions
-    assert selected_df["commodity"].nunique() == 48
+    assert selected_df["commodity"].nunique() == 50
     assert selected_df["commodity_group"].nunique() == 7
     assert (selected_df["is_synthetic"] == False).all()
 

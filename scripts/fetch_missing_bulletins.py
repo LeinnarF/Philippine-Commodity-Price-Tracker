@@ -352,10 +352,10 @@ def fetch_and_merge_missing_bulletins(
     # Rigorous validation checks
     total_dates = combined_df["date"].nunique()
     total_rows = len(combined_df)
-    expected_rows = total_dates * 48
+    expected_rows = total_dates * len(get_commodity_definitions(egg_category="Basic Goods", include_corn=True))
 
     if total_rows != expected_rows:
-        logger.error("Panel matrix size mismatch: %d rows found, expected %d (%d dates x 48 items)", total_rows, expected_rows, total_dates)
+        logger.error("Panel matrix size mismatch: %d rows found, expected %d (%d dates x %d items)", total_rows, expected_rows, total_dates, len(get_commodity_definitions(egg_category="Basic Goods", include_corn=True)))
         raise ValueError(f"Panel integrity failure: expected {expected_rows} rows, got {total_rows}")
 
     dup_count = combined_df.duplicated(subset=["date", "commodity"]).sum()

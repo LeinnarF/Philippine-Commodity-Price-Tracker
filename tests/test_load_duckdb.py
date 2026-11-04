@@ -56,9 +56,9 @@ def test_load_duckdb_execution(tmp_path):
         n_commodities = con.execute("SELECT COUNT(DISTINCT commodity) FROM commodity_prices;").fetchone()[0]
         n_groups = con.execute("SELECT COUNT(DISTINCT commodity_group) FROM commodity_prices;").fetchone()[0]
         assert n_dates >= 451
-        assert n_commodities == 48
+        assert n_commodities == 50
         assert n_groups == 7
-        assert cp_count == n_dates * 48
+        assert cp_count == n_dates * 50
         assert audit_count == cp_count
 
         # 3. Null values: Pork Pigue leading gap (>= 42 dates)
@@ -92,11 +92,11 @@ def test_load_duckdb_execution(tmp_path):
 
         # 5. Gold view: v_latest_snapshot
         v_snapshot = con.execute("SELECT * FROM v_latest_snapshot;").df()
-        assert len(v_snapshot) == 48
+        assert len(v_snapshot) == 50
         max_date = con.execute("SELECT MAX(date) FROM commodity_prices;").fetchone()[0]
         snapshot_dates = con.execute("SELECT DISTINCT date FROM v_latest_snapshot;").fetchall()
         assert snapshot_dates == [(max_date,)]
-        assert v_snapshot["commodity"].nunique() == 48
+        assert v_snapshot["commodity"].nunique() == 50
 
         # 6. Gold view: v_category_indices
         v_indices_count = con.execute("SELECT COUNT(*) FROM v_category_indices;").fetchone()[0]
@@ -143,7 +143,7 @@ def test_load_duckdb_idempotency(tmp_path):
     try:
         count = con2.execute("SELECT COUNT(*) FROM commodity_prices;").fetchone()[0]
         n_dates = con2.execute("SELECT COUNT(DISTINCT date) FROM commodity_prices;").fetchone()[0]
-        assert count == n_dates * 48
+        assert count == n_dates * 50
         audit_count = con2.execute("SELECT COUNT(*) FROM audit_prices;").fetchone()[0]
         assert audit_count == count
     finally:
@@ -236,13 +236,13 @@ def test_production_database_integrity():
     try:
         metrics = validate_database_integrity(con)
         assert metrics["n_dates"] >= 451
-        assert metrics["n_commodities"] == 48
-        assert metrics["total_rows"] == metrics["n_dates"] * 48
+        assert metrics["n_commodities"] == 50
+        assert metrics["total_rows"] == metrics["n_dates"] * 50
         assert metrics["n_groups"] == 7
         assert metrics["pigue_nulls"] >= 42
         assert metrics["null_prices"] >= 42
         assert metrics["v_analytics_rows"] == metrics["total_rows"]
-        assert metrics["v_snapshot_rows"] == 48
+        assert metrics["v_snapshot_rows"] == 50
         assert metrics["v_index_rows"] == metrics["n_dates"] * 7
     finally:
         con.close()

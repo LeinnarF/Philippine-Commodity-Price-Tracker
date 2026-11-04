@@ -77,7 +77,7 @@ def test_clean_dataset_execution(tmp_path):
     assert temp_output_csv.exists()
     assert not clean_df.empty
     n_dates = clean_df["date"].nunique()
-    assert len(clean_df) == n_dates * 48
+    assert len(clean_df) == n_dates * 50
 
     # 3. Strictly 6 clean columns (no metadata)
     assert list(clean_df.columns) == CLEAN_COLUMNS
@@ -87,7 +87,7 @@ def test_clean_dataset_execution(tmp_path):
     assert "price_max" not in clean_df.columns
 
     # 4. Panel dimensions
-    assert clean_df["commodity"].nunique() == 48
+    assert clean_df["commodity"].nunique() == 50
     assert clean_df["commodity_group"].nunique() == 7
 
     # 5. Deduplication: strictly 1 row per (date, commodity)
@@ -110,8 +110,8 @@ def test_production_clean_csv_integrity():
     assert list(df.columns) == CLEAN_COLUMNS
     n_dates = df["date"].nunique()
     assert n_dates >= 451
-    assert len(df) == n_dates * 48
-    assert df["commodity"].nunique() == 48
+    assert len(df) == n_dates * 50
+    assert df["commodity"].nunique() == 50
     assert df["commodity_group"].nunique() == 7
     pigue_nulls = df[df["commodity"] == "Pork Pigue (Hind Leg / Ham)"]["price_prevailing"].isnull().sum()
     assert pigue_nulls >= 42

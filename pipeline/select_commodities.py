@@ -547,6 +547,34 @@ def get_commodity_definitions(
             ),
             "description": "Pure coconut cooking oil (1-Liter bottle)",
         },
+        {
+            "category": "Basic Goods",
+            "commodity": "Iodized Salt",
+            "unit": "kg",
+            "matcher": lambda df, is_num: (
+                (is_num & ((df["variety"].str.contains(r"iodized", case=False, na=False) & df["variety"].str.contains(r"salt", case=False, na=False)) | df["variety"].isin(["Salt (Iodized)", "Iodized Salt", "Salt, Iodized", "Iodized"])))
+                | (~is_num & (
+                    (df["commodity"].str.contains(r"iodized", case=False, na=False) & df["commodity"].str.contains(r"salt", case=False, na=False))
+                    | (df["commodity"].str.contains(r"salt", case=False, na=False) & df["variety"].str.contains(r"iodized", case=False, na=False))
+                    | df["commodity"].isin(["Salt (Iodized)", "Iodized Salt", "Salt, Iodized"])
+                ))
+            ),
+            "description": "Commercial fine iodized salt",
+        },
+        {
+            "category": "Basic Goods",
+            "commodity": "Rock Salt",
+            "unit": "kg",
+            "matcher": lambda df, is_num: (
+                (is_num & ((df["variety"].str.contains(r"rock", case=False, na=False) & df["variety"].str.contains(r"salt", case=False, na=False)) | df["variety"].isin(["Salt (Rock)", "Rock Salt", "Salt, Rock", "Rock"])))
+                | (~is_num & (
+                    (df["commodity"].str.contains(r"rock", case=False, na=False) & df["commodity"].str.contains(r"salt", case=False, na=False))
+                    | (df["commodity"].str.contains(r"salt", case=False, na=False) & df["variety"].str.contains(r"rock", case=False, na=False))
+                    | df["commodity"].isin(["Salt (Rock)", "Rock Salt", "Salt, Rock"])
+                ))
+            ),
+            "description": "Coarse culinary rock salt",
+        },
     ]
 
     # Optional Corn placement in Vegetables

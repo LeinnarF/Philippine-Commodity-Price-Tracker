@@ -1,7 +1,7 @@
 """
 Core Domain Commodity Schema & Panel Normalization for Philippine Commodity Price Tracker.
 
-Defines the authoritative 48-commodity panel definitions, category classifications,
+Defines the authoritative 50-commodity panel definitions, category classifications,
 retail units, verified official clerical anomaly corrections, and standardization engine.
 Pure observed price reporting: unobserved/missing items remain blank/null (NO forward-filling).
 """
@@ -45,7 +45,7 @@ def get_commodity_definitions(
     include_corn: bool = True,
 ) -> list[dict[str, Any]]:
     """
-    Returns the comprehensive commodity matching rules and target metadata for all 48 tracked commodities.
+    Returns the comprehensive commodity matching rules and target metadata for all 50 tracked commodities.
     """
     definitions: list[dict[str, Any]] = [
         # =====================================================================
@@ -539,6 +539,34 @@ def get_commodity_definitions(
             ),
             "description": "Pure coconut cooking oil (1-Liter bottle)",
         },
+        {
+            "category": "Basic Goods",
+            "commodity": "Iodized Salt",
+            "unit": "kg",
+            "matcher": lambda df, is_num: (
+                (is_num & ((df["variety"].str.contains(r"iodized", case=False, na=False) & df["variety"].str.contains(r"salt", case=False, na=False)) | df["variety"].isin(["Salt (Iodized)", "Iodized Salt", "Salt, Iodized", "Iodized"])))
+                | (~is_num & (
+                    (df["commodity"].str.contains(r"iodized", case=False, na=False) & df["commodity"].str.contains(r"salt", case=False, na=False))
+                    | (df["commodity"].str.contains(r"salt", case=False, na=False) & df["variety"].str.contains(r"iodized", case=False, na=False))
+                    | df["commodity"].isin(["Salt (Iodized)", "Iodized Salt", "Salt, Iodized"])
+                ))
+            ),
+            "description": "Commercial fine iodized salt",
+        },
+        {
+            "category": "Basic Goods",
+            "commodity": "Rock Salt",
+            "unit": "kg",
+            "matcher": lambda df, is_num: (
+                (is_num & ((df["variety"].str.contains(r"rock", case=False, na=False) & df["variety"].str.contains(r"salt", case=False, na=False)) | df["variety"].isin(["Salt (Rock)", "Rock Salt", "Salt, Rock", "Rock"])))
+                | (~is_num & (
+                    (df["commodity"].str.contains(r"rock", case=False, na=False) & df["commodity"].str.contains(r"salt", case=False, na=False))
+                    | (df["commodity"].str.contains(r"salt", case=False, na=False) & df["variety"].str.contains(r"rock", case=False, na=False))
+                    | df["commodity"].isin(["Salt (Rock)", "Rock Salt", "Salt, Rock"])
+                ))
+            ),
+            "description": "Coarse culinary rock salt",
+        },
     ]
 
     # Optional Corn placement in Vegetables
@@ -576,7 +604,7 @@ def standardize_bulletin_records(
     source_url: str = "",
 ) -> list[dict[str, Any]]:
     """
-    Standardizes raw bulletin observations into the strict 48-commodity panel format.
+    Standardizes raw bulletin observations into the strict 50-commodity panel format.
     Pure observed price reporting: unobserved/missing items remain blank/null (NO forward-filling).
     Applies official anomaly corrections where applicable.
     """
@@ -624,9 +652,9 @@ def validate_cleaned_panel(df: pd.DataFrame) -> None:
     """
     Validates panel integrity:
     - Exactly CLEAN_COLUMNS present in correct order
-    - Rectangular Cartesian dimensions: total_rows == unique_dates * 48
+    - Rectangular Cartesian dimensions: total_rows == unique_dates * 50
     - Zero duplicate (date, commodity) rows
-    - 48 unique commodities across 7 commodity groups
+    - 50 unique commodities across 7 commodity groups
     - Prices strictly positive (> 0) when observed
     """
     missing_cols = [c for c in CLEAN_COLUMNS if c not in df.columns]
@@ -637,17 +665,17 @@ def validate_cleaned_panel(df: pd.DataFrame) -> None:
     n_commodities = df["commodity"].nunique()
     n_groups = df["commodity_group"].nunique()
     total_rows = len(df)
-    expected_rows = n_dates * 48
+    expected_rows = n_dates * 50
 
-    if n_commodities != 48:
-        raise ValueError(f"Expected 48 commodities, found {n_commodities}")
+    if n_commodities != 50:
+        raise ValueError(f"Expected 50 commodities, found {n_commodities}")
 
     if n_groups != 7:
         raise ValueError(f"Expected 7 commodity groups, found {n_groups}")
 
     if total_rows != expected_rows:
         raise ValueError(
-            f"Panel is not rectangular: {total_rows} total rows != {n_dates} dates * 48 commodities ({expected_rows})"
+            f"Panel is not rectangular: {total_rows} total rows != {n_dates} dates * 50 commodities ({expected_rows})"
         )
 
     dups = df.duplicated(subset=["date", "commodity"]).sum()

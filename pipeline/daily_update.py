@@ -54,8 +54,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger("daily_update")
 
-# Minimum number of observed commodities required out of the 48 panel items
-# Genuine DA AMAS Daily Price Index bulletins report 40-48 items; non-DPI files report far fewer.
+# Minimum number of observed commodities required out of the 50 panel items
+# Genuine DA AMAS Daily Price Index bulletins report 40-50 items; non-DPI files report far fewer.
 MIN_OBSERVED_PANEL_COMMODITIES = 30
 
 
@@ -440,7 +440,7 @@ def run_daily_update(
                 )
 
                 # Content & Coverage Gate:
-                # 1. Genuine DPI bulletins report 40-48 observed panel prices
+                # 1. Genuine DPI bulletins report 40-50 observed panel prices
                 observed_count = sum(1 for r in panel_records if pd.notna(r.get("price_prevailing")))
                 # 2. Reject non-food / cigarette bulletins
                 raw_commodities = ""
@@ -450,7 +450,7 @@ def run_daily_update(
 
                 if observed_count < MIN_OBSERVED_PANEL_COMMODITIES or has_prohibited:
                     logger.warning(
-                        "Bulletin for %s failed Daily Price Index content gate (observed items: %d/48, prohibited: %s). Rejecting.",
+                        "Bulletin for %s failed Daily Price Index content gate (observed items: %d/50, prohibited: %s). Rejecting.",
                         d_str,
                         observed_count,
                         has_prohibited,
@@ -459,7 +459,7 @@ def run_daily_update(
 
                 extracted_records.extend(panel_records)
                 validated_bulletin_urls.append((d_str, source_url))
-                logger.info("Extracted %d panel commodity records for %s (observed: %d/48)", len(panel_records), d_str, observed_count)
+                logger.info("Extracted %d panel commodity records for %s (observed: %d/50)", len(panel_records), d_str, observed_count)
             else:
                 logger.warning("No records extracted from bulletin %s", d_str)
         except Exception as parse_err:

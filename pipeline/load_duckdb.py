@@ -342,8 +342,8 @@ def validate_database_integrity(con: duckdb.DuckDBPyConnection) -> dict[str, Any
 
     total_rows, n_dates, n_commodities, n_groups, null_prices, min_date, max_date = cp_metrics
 
-    if n_commodities != 48:
-        raise ValueError(f"Expected 48 distinct commodities, found {n_commodities}.")
+    if n_commodities != 50:
+        raise ValueError(f"Expected 50 distinct commodities, found {n_commodities}.")
 
     if n_groups != 7:
         raise ValueError(f"Expected 7 distinct commodity groups, found {n_groups}.")

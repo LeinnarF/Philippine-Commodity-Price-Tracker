@@ -193,11 +193,11 @@ def test_run_daily_update_successful_incremental_ingestion(monkeypatch, tmp_path
 
     assert res["status"] == "SUCCESS"
     assert res["bulletins_downloaded"] == 1
-    assert res["records_extracted"] == 48
+    assert res["records_extracted"] == len(defs)
 
     # Verify updated clean dataset
     updated_df = pd.read_csv(clean_csv)
-    assert len(updated_df) == 96
+    assert len(updated_df) == 2 * len(defs)
     assert updated_df["date"].nunique() == 2
     assert (updated_df[updated_df["date"] == "2026-10-26"]["price_prevailing"] == 120.0).all()
 
@@ -211,7 +211,7 @@ def test_run_daily_update_successful_incremental_ingestion(monkeypatch, tmp_path
     assert len(logs_df) == 1
     assert logs_df.iloc[0]["status"] == "SUCCESS"
     assert logs_df.iloc[0]["bulletins_downloaded"] == 1
-    assert logs_df.iloc[0]["records_extracted"] == 48
+    assert logs_df.iloc[0]["records_extracted"] == len(defs)
 
 
 def test_run_daily_update_rejects_low_observed_commodities(monkeypatch, tmp_path):
@@ -286,7 +286,7 @@ def test_run_daily_update_rejects_low_observed_commodities(monkeypatch, tmp_path
 
     # Dataset must not have been corrupted / modified
     clean_df = pd.read_csv(clean_csv)
-    assert len(clean_df) == 48
+    assert len(clean_df) == len(defs)
     assert clean_df["date"].nunique() == 1
 
     # Server bulletins must not record the invalid bulletin
@@ -371,7 +371,7 @@ def test_run_daily_update_rejects_prohibited_content(monkeypatch, tmp_path):
 
     assert res["status"] == "FAILED"
     clean_df = pd.read_csv(clean_csv)
-    assert len(clean_df) == 48
+    assert len(clean_df) == len(defs)
 
 
 def test_run_daily_update_uses_known_server_bulletins_url(monkeypatch, tmp_path):
@@ -453,7 +453,7 @@ def test_run_daily_update_uses_known_server_bulletins_url(monkeypatch, tmp_path)
     assert len(rebuild_calls) == 1
     assert received_known_url == known_target_url
     clean_df = pd.read_csv(clean_csv)
-    assert len(clean_df) == 96
+    assert len(clean_df) == 2 * len(defs)
     assert clean_df["date"].nunique() == 2
 
 
@@ -559,11 +559,11 @@ def test_run_daily_update_upgrades_provisional_dpi_afc_bulletin(monkeypatch, tmp
 
     assert res["status"] == "SUCCESS"
     assert res["bulletins_downloaded"] == 1
-    assert res["records_extracted"] == 48
+    assert res["records_extracted"] == len(defs)
 
     # Verify cleaned_dataset.csv updated both prices and source_url
     clean_df = pd.read_csv(clean_csv)
-    assert len(clean_df) == 48
+    assert len(clean_df) == len(defs)
     assert (clean_df["source_url"] == finalized_url).all()
     assert (clean_df["price_prevailing"] == 105.0).all()
 

@@ -40,7 +40,7 @@ flowchart TD
     subgraph Automation ["Automated In-Memory Pipeline (pipeline/)"]
         ORCH["pipeline/daily_update.py<br/>(Scheduled Daily Ingestion)"]
         PARSER["pipeline/pdf_parser.py<br/>(In-Memory PDF Table Extractor)"]
-        SCHEMA["pipeline/commodity_schema.py<br/>• 48 Standardized Commodity Definitions<br/>• Matcher Rules & Unit Normalization<br/>• Official Anomaly Corrections<br/>• (Pure Observed - NO Forward-Filling)"]
+        SCHEMA["pipeline/commodity_schema.py<br/>• 50 Standardized Commodity Definitions<br/>• Matcher Rules & Unit Normalization<br/>• Official Anomaly Corrections<br/>• (Pure Observed - NO Forward-Filling)"]
     end
 
     subgraph Storage ["Permanent Tracked Storage (data/)"]
@@ -56,7 +56,7 @@ flowchart TD
     DA -->|Daily Headless Check| ORCH
     ORCH -->|Stream PDF Bytes| PARSER
     PARSER -->|Raw Extracted Records| SCHEMA
-    SCHEMA -->|Append 48 Rows with source_url| CLEAN
+    SCHEMA -->|Append 50 Rows with source_url| CLEAN
     ORCH -->|Log Execution Status| LOGS
     CLEAN --> DUCK
     LOGS --> DUCK
@@ -65,7 +65,7 @@ flowchart TD
 ```
 
 ### 1. Core Domain Schema (`pipeline/commodity_schema.py`)
-- Standardizes the 48 panel commodities across 7 core groups (Rice, Fish, Meat and Poultry, Vegetables, Spices and Condiments, Fruits, Basic Goods).
+- Standardizes the 50 panel commodities across 7 core groups (Rice, Fish, Meat and Poultry, Vegetables, Spices and Condiments, Fruits, Basic Goods).
 - Resolves the 104-date PDF row-index shift, separates Large vs. Medium Bangus, decouples Pork Kasim and Pigue, isolates 1-Liter cooking oil bottles, and places Chicken Egg into Basic Goods.
 - **Pure Observed Prices**: Strictly avoids forward-filling (`ffill`). If an item was unobserved or omitted on a given day, it remains blank/`null` to maintain empirical reporting integrity.
 - **Verified Clerical Anomaly Corrections**: Contains official typographical corrections (e.g., Chicken Egg clerical typo on September 10, 2026).
@@ -76,7 +76,7 @@ flowchart TD
 - Headless, idempotent daily orchestrator engineered for GitHub Actions scheduled execution.
 - Evaluates **all calendar days** (no day-of-week skipping) between the latest tracked observation date and today. Whenever DA publishes a bulletin (including Sundays), it is ingested immediately.
 - Streams PDF bytes directly into memory via `httpx` and `pdfplumber` (no raw PDFs saved to disk).
-- Standardizes records via `commodity_schema` and appends the 48 commodity rows directly to `data/cleaned_dataset.csv`.
+- Standardizes records via `commodity_schema` and appends the 50 commodity rows directly to `data/cleaned_dataset.csv`.
 - Validates rectangular matrix integrity with `validate_cleaned_panel()`.
 - Updates `data/server_daily_bulletins.csv` and logs run metadata to `data/pipeline_execution_logs.csv`.
 - Automatically rebuilds DuckDB (`load_duckdb`) and compiles the static dashboard bundle (`build_dashboard`).
@@ -103,7 +103,7 @@ flowchart TD
 - Compiles modular Jinja2 components (`templates/components/`, `templates/views/`) and static assets into `public/` (`public/index.html`, `public/assets/css/dashboard.css`, `public/assets/js/dashboard.js`, and `public/assets/data/commodities.js`).
 - Automatically emits `public/.nojekyll` for seamless GitHub Pages static hosting.
 - Features an **App-Shell Sidebar Architecture**:
-  - **Expandable Commodity Tree Sidebar**: Quick search filter, primary system views (*Market Overview*, *Full Price Census*, *Data Governance*), and collapsible category groups listing all 48 commodities with live prices and 1-day direction indicators.
+  - **Expandable Commodity Tree Sidebar**: Quick search filter, primary system views (*Market Overview*, *Full Price Census*, *Data Governance*), and collapsible category groups listing all 50 commodities with live prices and 1-day direction indicators.
   - **Dedicated Commodity Detail View**: 7-card summary KPI strip (Prevailing Price, 1d/7d/30d changes, 7d/30d SMA, 30d Volatility & CV), timeframe quick-filters (`1M`, `3M`, `6M`, `1Y`, `All`), and interactive Plotly price & moving average charts.
   - **Integrated Performance Matrix**: Category-level multi-horizon returns (1d, 7d, 30d, 1y, All) and 30-day volatility rankings.
   - **Live Development Watcher (`--watch`)**: Monitors templates, CSS/JS assets, and DuckDB changes, rebuilding in milliseconds and auto-reloading connected browser tabs via `/__dev_poll__`.
@@ -223,13 +223,13 @@ jupyter notebook notebooks/04_forecasting_prototypes.ipynb
 ## Data Warehouse Schema Reference (`data/commodities.duckdb`)
 
 ### 1. Silver Layer: `commodity_prices` (6 Columns)
-The primary normalized business table representing the complete rectangular panel grid ($N\text{ dates} \times 48\text{ commodities}$; e.g. $597 \times 48 = 28,656\text{ rows}$, growing daily).
+The primary normalized business table representing the complete rectangular panel grid ($N\text{ dates} \times 50\text{ commodities}$; e.g. $605 \times 50 = 30,250\text{ rows}$, growing daily).
 
 | Column | Type | Constraints | Description |
 |---|---|---|---|
 | `date` | `DATE` | `NOT NULL` | Survey observation date (YYYY-MM-DD) |
 | `commodity_group` | `VARCHAR` | `NOT NULL` | Standardized category (e.g., 'Rice', 'Fish', 'Meat and Poultry') |
-| `commodity` | `VARCHAR` | `NOT NULL` | Standardized commodity name (48 items) |
+| `commodity` | `VARCHAR` | `NOT NULL` | Standardized commodity name (50 items) |
 | `unit` | `VARCHAR` | `NOT NULL` | Standard measurement unit ('kg', 'piece', 'bottle (1L)', 'bundle') |
 | `price_prevailing` | `DOUBLE` | `CHECK (price_prevailing IS NULL OR price_prevailing > 0)` | Prevailing retail price (₱ PHP); unobserved items remain `NULL` (no forward fill) |
 | `source_url` | `VARCHAR` | `NULLABLE` | Direct link to the official Department of Agriculture PDF bulletin |

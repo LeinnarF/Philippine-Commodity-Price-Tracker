@@ -1,0 +1,1211 @@
+date,commodity_group,commodity,unit,price_prevailing,source_url,raw_commodity,raw_variety
+2025-03-01,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-1-2025.pdf,,
+2025-03-01,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-1-2025.pdf,,
+2025-03-03,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-3-2025.pdf,,
+2025-03-03,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-3-2025.pdf,,
+2025-03-04,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-4-2025.pdf,,
+2025-03-04,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-4-2025.pdf,,
+2025-03-05,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-5-2025.pdf,,
+2025-03-05,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-5-2025.pdf,,
+2025-03-06,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-6-2025.pdf,,
+2025-03-06,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-6-2025.pdf,,
+2025-03-07,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-7-2025.pdf,,
+2025-03-07,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-7-2025.pdf,,
+2025-03-08,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-8-2025.pdf,,
+2025-03-08,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-8-2025.pdf,,
+2025-03-10,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-10-2025.pdf,,
+2025-03-10,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-10-2025.pdf,,
+2025-03-11,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-11-2025.pdf,,
+2025-03-11,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-11-2025.pdf,,
+2025-03-12,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-12-2025.pdf,,
+2025-03-12,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-12-2025.pdf,,
+2025-03-13,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-13-2025.pdf,,
+2025-03-13,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-13-2025.pdf,,
+2025-03-14,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-14-2025.pdf,,
+2025-03-14,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-14-2025.pdf,,
+2025-03-15,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-15-2025.pdf,,
+2025-03-15,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-15-2025.pdf,,
+2025-03-17,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-17-2025.pdf,,
+2025-03-17,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-17-2025.pdf,,
+2025-03-18,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-18-2025.pdf,,
+2025-03-18,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-18-2025.pdf,,
+2025-03-19,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-19-2025.pdf,,
+2025-03-19,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-19-2025.pdf,,
+2025-03-20,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-20-2025.pdf,,
+2025-03-20,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-20-2025.pdf,,
+2025-03-21,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-21-2025.pdf,,
+2025-03-21,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-21-2025.pdf,,
+2025-03-22,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-22-2025.pdf,,
+2025-03-22,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-22-2025.pdf,,
+2025-03-24,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-24-2025.pdf,,
+2025-03-24,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-24-2025.pdf,,
+2025-03-25,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-25-2025.pdf,,
+2025-03-25,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-25-2025.pdf,,
+2025-03-26,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-26-2025.pdf,,
+2025-03-26,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-26-2025.pdf,,
+2025-03-27,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-27-2025.pdf,,
+2025-03-27,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-27-2025.pdf,,
+2025-03-28,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-28-2025.pdf,,
+2025-03-28,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-28-2025.pdf,,
+2025-03-29,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-29-2025.pdf,,
+2025-03-29,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-29-2025.pdf,,
+2025-03-31,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-31-2025.pdf,,
+2025-03-31,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-March-31-2025.pdf,,
+2025-04-01,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-1-2025.pdf,,
+2025-04-01,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-1-2025.pdf,,
+2025-04-02,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-2-2025.pdf,,
+2025-04-02,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-2-2025.pdf,,
+2025-04-03,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-3-2025.pdf,,
+2025-04-03,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-3-2025.pdf,,
+2025-04-04,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-4-2025.pdf,,
+2025-04-04,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-4-2025.pdf,,
+2025-04-05,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-5-2025.pdf,,
+2025-04-05,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-April-5-2025.pdf,,
+2025-04-06,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/04/Revised-Daily-Price-Index-April-6-2025.pdf,Salt (Iodized),per kg
+2025-04-06,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/04/Revised-Daily-Price-Index-April-6-2025.pdf,Salt (Rock),per kg
+2025-04-07,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-7-2025.pdf,Salt (Iodized),per kg
+2025-04-07,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-7-2025.pdf,Salt (Rock),per kg
+2025-04-08,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-8-2025.pdf,Salt (Iodized),per kg
+2025-04-08,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-8-2025.pdf,Salt (Rock),per kg
+2025-04-09,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-9-2025.pdf,Unobserved / Blank,Standard
+2025-04-09,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-9-2025.pdf,Unobserved / Blank,Standard
+2025-04-10,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-10-2025.pdf,,
+2025-04-10,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-10-2025.pdf,,
+2025-04-11,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-11-2025.pdf,,
+2025-04-11,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-11-2025.pdf,,
+2025-04-12,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-12-2025.pdf,,
+2025-04-12,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/04/Daily-Price-Index-April-12-2025.pdf,,
+2025-04-13,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-13-2025.pdf,Salt (Iodized),per kg
+2025-04-13,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-13-2025.pdf,Salt (Rock),per kg
+2025-04-14,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-14-2025.pdf,,
+2025-04-14,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-14-2025.pdf,,
+2025-04-15,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-15-2025.pdf,,
+2025-04-15,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-15-2025.pdf,,
+2025-04-16,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-16-2025.pdf,,
+2025-04-16,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-16-2025.pdf,,
+2025-04-20,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-20-2025.pdf,Salt (Iodized),per kg
+2025-04-20,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-20-2025.pdf,Salt (Rock),per kg
+2025-04-21,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-21-2025.pdf,,
+2025-04-21,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-21-2025.pdf,,
+2025-04-22,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-22-2025.pdf,,
+2025-04-22,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-22-2025.pdf,,
+2025-04-23,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-23-2025.pdf,,
+2025-04-23,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-23-2025.pdf,,
+2025-04-24,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-24-2025.pdf,,
+2025-04-24,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-24-2025.pdf,,
+2025-04-25,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-25-2025.pdf,,
+2025-04-25,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-25-2025.pdf,,
+2025-04-26,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-26-2025.pdf,,
+2025-04-26,Basic Goods,Rock Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-26-2025.pdf,,
+2025-04-27,Basic Goods,Iodized Salt,kg,96.25,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-27-2025.pdf,Salt (Iodized),per kg
+2025-04-27,Basic Goods,Rock Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-27-2025.pdf,Salt (Rock),per kg
+2025-04-28,Basic Goods,Iodized Salt,kg,96.25,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-28-2025.pdf,,
+2025-04-28,Basic Goods,Rock Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-28-2025.pdf,,
+2025-04-29,Basic Goods,Iodized Salt,kg,96.25,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-29-2025.pdf,,
+2025-04-29,Basic Goods,Rock Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-29-2025.pdf,,
+2025-04-30,Basic Goods,Iodized Salt,kg,96.25,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-30-2025.pdf,,
+2025-04-30,Basic Goods,Rock Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-April-30-2025.pdf,,
+2025-05-01,Basic Goods,Iodized Salt,kg,96.25,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-1-2025.pdf,,
+2025-05-01,Basic Goods,Rock Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-1-2025.pdf,,
+2025-05-02,Basic Goods,Iodized Salt,kg,96.25,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-2-2025.pdf,,
+2025-05-02,Basic Goods,Rock Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-2-2025.pdf,,
+2025-05-03,Basic Goods,Iodized Salt,kg,96.25,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-3-2025.pdf,,
+2025-05-03,Basic Goods,Rock Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-3-2025.pdf,,
+2025-05-04,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-May-4-2025.pdf,Salt (Iodized),per kg
+2025-05-04,Basic Goods,Rock Salt,kg,17.5,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-May-4-2025.pdf,Salt (Rock),per kg
+2025-05-05,Basic Goods,Iodized Salt,kg,21.77,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-5-2025.pdf,Salt (Iodized),per kg
+2025-05-05,Basic Goods,Rock Salt,kg,22.33,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-5-2025.pdf,Salt (Rock),per kg
+2025-05-06,Basic Goods,Iodized Salt,kg,29.19,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-6-2025.pdf,Salt (Iodized),per kg
+2025-05-06,Basic Goods,Rock Salt,kg,24.12,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-6-2025.pdf,Salt (Rock),per kg
+2025-05-07,Basic Goods,Iodized Salt,kg,30.7,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-7-2025.pdf,Salt (Iodized),per kg
+2025-05-07,Basic Goods,Rock Salt,kg,23.82,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-7-2025.pdf,Salt (Rock),per kg
+2025-05-08,Basic Goods,Iodized Salt,kg,32.4,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-8-2025.pdf,Salt (Iodized),per kg
+2025-05-08,Basic Goods,Rock Salt,kg,23.29,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-8-2025.pdf,Salt (Rock),per kg
+2025-05-09,Basic Goods,Iodized Salt,kg,27.29,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-9-2025.pdf,Salt (Iodized),per kg
+2025-05-09,Basic Goods,Rock Salt,kg,23.68,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-9-2025.pdf,Salt (Rock),per kg
+2025-05-10,Basic Goods,Iodized Salt,kg,31.96,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-10-2025.pdf,Salt (Iodized),per kg
+2025-05-10,Basic Goods,Rock Salt,kg,22.19,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-10-2025.pdf,Salt (Rock),per kg
+2025-05-11,Basic Goods,Iodized Salt,kg,35.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-11-2025.pdf,Salt (Iodized),per kg
+2025-05-11,Basic Goods,Rock Salt,kg,22.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-11-2025.pdf,Salt (Rock),per kg
+2025-05-12,Basic Goods,Iodized Salt,kg,28.64,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-12-2025.pdf,Salt (Iodized),per kg
+2025-05-12,Basic Goods,Rock Salt,kg,20.13,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-12-2025.pdf,Salt (Rock),per kg
+2025-05-13,Basic Goods,Iodized Salt,kg,27.03,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-13-2025.pdf,Salt (Iodized),per kg
+2025-05-13,Basic Goods,Rock Salt,kg,22.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-13-2025.pdf,Salt (Rock),per kg
+2025-05-14,Basic Goods,Iodized Salt,kg,28.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-14-2025.pdf,Salt (Iodized),per kg
+2025-05-14,Basic Goods,Rock Salt,kg,22.44,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-14-2025.pdf,Salt (Rock),per kg
+2025-05-15,Basic Goods,Iodized Salt,kg,28.28,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-15-2025.pdf,Salt (Iodized),per kg
+2025-05-15,Basic Goods,Rock Salt,kg,21.91,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-15-2025.pdf,Salt (Rock),per kg
+2025-05-16,Basic Goods,Iodized Salt,kg,30.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-16-2025.pdf,Salt (Iodized),per kg
+2025-05-16,Basic Goods,Rock Salt,kg,22.76,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-16-2025.pdf,Salt (Rock),per kg
+2025-05-17,Basic Goods,Iodized Salt,kg,31.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-17-2025.pdf,Salt (Iodized),per kg
+2025-05-17,Basic Goods,Rock Salt,kg,22.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-17-2025.pdf,Salt (Rock),per kg
+2025-05-18,Basic Goods,Iodized Salt,kg,35.5,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-18-2025.pdf,Salt (Iodized),per kg
+2025-05-18,Basic Goods,Rock Salt,kg,24.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-18-2025.pdf,Salt (Rock),per kg
+2025-05-19,Basic Goods,Iodized Salt,kg,34.52,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-19-2025.pdf,Salt (Iodized),per kg
+2025-05-19,Basic Goods,Rock Salt,kg,22.8,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-19-2025.pdf,Salt (Rock),per kg
+2025-05-20,Basic Goods,Iodized Salt,kg,28.7,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-20-2025.pdf,Salt (Iodized),per kg
+2025-05-20,Basic Goods,Rock Salt,kg,22.75,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-20-2025.pdf,Salt (Rock),per kg
+2025-05-21,Basic Goods,Iodized Salt,kg,31.06,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-21-2025.pdf,Salt (Iodized),per kg
+2025-05-21,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-21-2025.pdf,Salt (Rock),per kg
+2025-05-22,Basic Goods,Iodized Salt,kg,28.98,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-22-2025.pdf,Salt (Iodized),per kg
+2025-05-22,Basic Goods,Rock Salt,kg,22.24,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-22-2025.pdf,Salt (Rock),per kg
+2025-05-23,Basic Goods,Iodized Salt,kg,30.82,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-23-2025.pdf,Salt (Iodized),per kg
+2025-05-23,Basic Goods,Rock Salt,kg,22.45,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-23-2025.pdf,Salt (Rock),per kg
+2025-05-24,Basic Goods,Iodized Salt,kg,24.39,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-24-2025.pdf,Salt (Iodized),per kg
+2025-05-24,Basic Goods,Rock Salt,kg,22.18,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-24-2025.pdf,Salt (Rock),per kg
+2025-05-25,Basic Goods,Iodized Salt,kg,39.4,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-25-2025.pdf,Salt (Iodized),per kg
+2025-05-25,Basic Goods,Rock Salt,kg,24.0,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-25-2025.pdf,Salt (Rock),per kg
+2025-05-26,Basic Goods,Iodized Salt,kg,30.63,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-26-2025.pdf,Salt (Iodized),per kg
+2025-05-26,Basic Goods,Rock Salt,kg,22.11,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-26-2025.pdf,Salt (Rock),per kg
+2025-05-27,Basic Goods,Iodized Salt,kg,27.44,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-27-2025.pdf,Salt (Iodized),per kg
+2025-05-27,Basic Goods,Rock Salt,kg,22.24,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-27-2025.pdf,Salt (Rock),per kg
+2025-05-28,Basic Goods,Iodized Salt,kg,27.98,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-28-2025.pdf,Salt (Iodized),per kg
+2025-05-28,Basic Goods,Rock Salt,kg,22.2,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-28-2025.pdf,Salt (Rock),per kg
+2025-05-29,Basic Goods,Iodized Salt,kg,30.15,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-29-2025.pdf,Salt (Iodized),per kg
+2025-05-29,Basic Goods,Rock Salt,kg,22.17,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-29-2025.pdf,Salt (Rock),per kg
+2025-05-30,Basic Goods,Iodized Salt,kg,27.13,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-30-2025.pdf,Salt (Iodized),per kg
+2025-05-30,Basic Goods,Rock Salt,kg,21.67,https://www.da.gov.ph/wp-content/uploads/2025/05/Daily-Price-Index-May-30-2025.pdf,Salt (Rock),per kg
+2025-05-31,Basic Goods,Iodized Salt,kg,30.57,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-May-31-2025.pdf,Salt (Iodized),per kg
+2025-05-31,Basic Goods,Rock Salt,kg,20.48,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-May-31-2025.pdf,Salt (Rock),per kg
+2025-06-01,Basic Goods,Iodized Salt,kg,29.4,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-1-2025.pdf,Salt (Iodized),per kg
+2025-06-01,Basic Goods,Rock Salt,kg,22.0,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-1-2025.pdf,Salt (Rock),per kg
+2025-06-02,Basic Goods,Iodized Salt,kg,30.5,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-2-2025.pdf,Salt (Iodized),per kg
+2025-06-02,Basic Goods,Rock Salt,kg,22.13,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-2-2025.pdf,Salt (Rock),per kg
+2025-06-03,Basic Goods,Iodized Salt,kg,26.28,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-3-2025.pdf,Salt (Iodized),per kg
+2025-06-03,Basic Goods,Rock Salt,kg,22.28,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-3-2025.pdf,Salt (Rock),per kg
+2025-06-04,Basic Goods,Iodized Salt,kg,26.52,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-4-2025.pdf,Salt (Iodized),per kg
+2025-06-04,Basic Goods,Rock Salt,kg,22.18,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-4-2025.pdf,Salt (Rock),per kg
+2025-06-05,Basic Goods,Iodized Salt,kg,27.5,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-5-2025.pdf,Salt (Iodized),per kg
+2025-06-05,Basic Goods,Rock Salt,kg,21.79,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-5-2025.pdf,Salt (Rock),per kg
+2025-06-06,Basic Goods,Iodized Salt,kg,26.9,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-6-2025.pdf,Salt (Iodized),per kg
+2025-06-06,Basic Goods,Rock Salt,kg,22.1,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-6-2025.pdf,Salt (Rock),per kg
+2025-06-07,Basic Goods,Iodized Salt,kg,37.63,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-7-2025.pdf,Salt (Iodized),per kg
+2025-06-07,Basic Goods,Rock Salt,kg,20.58,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-7-2025.pdf,Salt (Rock),per kg
+2025-06-08,Basic Goods,Iodized Salt,kg,36.4,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-8-2025.pdf,Salt (Iodized),per kg
+2025-06-08,Basic Goods,Rock Salt,kg,24.0,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-8-2025.pdf,Salt (Rock),per kg
+2025-06-09,Basic Goods,Iodized Salt,kg,25.83,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-9-2025.pdf,Salt (Iodized),per kg
+2025-06-09,Basic Goods,Rock Salt,kg,21.7,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-9-2025.pdf,Salt (Rock),per kg
+2025-06-10,Basic Goods,Iodized Salt,kg,28.19,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-10-2025.pdf,Salt (Iodized),per kg
+2025-06-10,Basic Goods,Rock Salt,kg,22.2,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-10-2025.pdf,Salt (Rock),per kg
+2025-06-11,Basic Goods,Iodized Salt,kg,33.67,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-11-2025.pdf,Salt (Iodized),per kg
+2025-06-11,Basic Goods,Rock Salt,kg,20.91,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-11-2025.pdf,Salt (Rock),per kg
+2025-06-12,Basic Goods,Iodized Salt,kg,33.06,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-12-2025.pdf,Salt (Iodized),per kg
+2025-06-12,Basic Goods,Rock Salt,kg,21.74,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-12-2025.pdf,Salt (Rock),per kg
+2025-06-13,Basic Goods,Iodized Salt,kg,30.38,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-13-2025.pdf,Salt (Iodized),per kg
+2025-06-13,Basic Goods,Rock Salt,kg,21.08,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-13-2025.pdf,Salt (Rock),per kg
+2025-06-14,Basic Goods,Iodized Salt,kg,36.92,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-14-2025.pdf,Salt (Iodized),per kg
+2025-06-14,Basic Goods,Rock Salt,kg,21.26,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-14-2025.pdf,Salt (Rock),per kg
+2025-06-15,Basic Goods,Iodized Salt,kg,32.33,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-15-2025.pdf,Salt (Iodized),per kg
+2025-06-15,Basic Goods,Rock Salt,kg,21.0,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-15-2025.pdf,Salt (Rock),per kg
+2025-06-16,Basic Goods,Iodized Salt,kg,36.81,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-16-2025.pdf,Salt (Iodized),per kg
+2025-06-16,Basic Goods,Rock Salt,kg,21.75,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-16-2025.pdf,Salt (Rock),per kg
+2025-06-17,Basic Goods,Iodized Salt,kg,35.04,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-17-2025.pdf,Salt (Iodized),per kg
+2025-06-17,Basic Goods,Rock Salt,kg,20.37,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-17-2025.pdf,Salt (Rock),per kg
+2025-06-18,Basic Goods,Iodized Salt,kg,34.94,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-18-2025.pdf,Salt (Iodized),per kg
+2025-06-18,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-18-2025.pdf,Salt (Rock),per kg
+2025-06-19,Basic Goods,Iodized Salt,kg,33.83,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-19-2025.pdf,Salt (Iodized),per kg
+2025-06-19,Basic Goods,Rock Salt,kg,20.69,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-19-2025.pdf,Salt (Rock),per kg
+2025-06-20,Basic Goods,Iodized Salt,kg,44.16,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-20-2025.pdf,Salt (Iodized),per kg
+2025-06-20,Basic Goods,Rock Salt,kg,21.13,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-20-2025.pdf,Salt (Rock),per kg
+2025-06-21,Basic Goods,Iodized Salt,kg,42.23,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-21-2025.pdf,Salt (Iodized),per kg
+2025-06-21,Basic Goods,Rock Salt,kg,20.33,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-21-2025.pdf,Salt (Rock),per kg
+2025-06-22,Basic Goods,Iodized Salt,kg,45.0,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-22-2025.pdf,Salt (Iodized),per kg
+2025-06-22,Basic Goods,Rock Salt,kg,21.67,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-22-2025.pdf,Salt (Rock),per kg
+2025-06-23,Basic Goods,Iodized Salt,kg,40.64,https://www.da.gov.ph/wp-content/uploads/2025/06/Revised-Daily-Price-Index-June-23-2025.pdf,Salt (Iodized),per kg
+2025-06-23,Basic Goods,Rock Salt,kg,20.35,https://www.da.gov.ph/wp-content/uploads/2025/06/Revised-Daily-Price-Index-June-23-2025.pdf,Salt (Rock),per kg
+2025-06-24,Basic Goods,Iodized Salt,kg,39.62,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-24-2025.pdf,Salt (Iodized),per kg
+2025-06-24,Basic Goods,Rock Salt,kg,20.29,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-24-2025.pdf,Salt (Rock),per kg
+2025-06-25,Basic Goods,Iodized Salt,kg,42.11,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-25-2025.pdf,Salt (Iodized),per kg
+2025-06-25,Basic Goods,Rock Salt,kg,20.56,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-25-2025.pdf,Salt (Rock),per kg
+2025-06-26,Basic Goods,Iodized Salt,kg,40.32,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-26-2025.pdf,Salt (Iodized),per kg
+2025-06-26,Basic Goods,Rock Salt,kg,20.34,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-26-2025.pdf,Salt (Rock),per kg
+2025-06-27,Basic Goods,Iodized Salt,kg,41.84,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-27-2025.pdf,Salt (Iodized),per kg
+2025-06-27,Basic Goods,Rock Salt,kg,20.84,https://www.da.gov.ph/wp-content/uploads/2025/06/Daily-Price-Index-June-27-2025.pdf,Salt (Rock),per kg
+2025-06-28,Basic Goods,Iodized Salt,kg,40.47,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-28-2025.pdf,Salt (Iodized),per kg
+2025-06-28,Basic Goods,Rock Salt,kg,19.96,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-28-2025.pdf,Salt (Rock),per kg
+2025-06-29,Basic Goods,Iodized Salt,kg,47.5,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-29-2025.pdf,Salt (Iodized),per kg
+2025-06-29,Basic Goods,Rock Salt,kg,20.67,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-29-2025.pdf,Salt (Rock),per kg
+2025-06-30,Basic Goods,Iodized Salt,kg,37.14,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-30-2025.pdf,Salt (Iodized),per kg
+2025-06-30,Basic Goods,Rock Salt,kg,19.84,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-June-30-2025.pdf,Salt (Rock),per kg
+2025-07-01,Basic Goods,Iodized Salt,kg,40.32,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-1-2025.pdf,Salt (Iodized),per kg
+2025-07-01,Basic Goods,Rock Salt,kg,20.34,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-1-2025.pdf,Salt (Rock),per kg
+2025-07-02,Basic Goods,Iodized Salt,kg,39.73,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-July-2-2025.pdf,Salt (Iodized),per kg
+2025-07-02,Basic Goods,Rock Salt,kg,20.0,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-July-2-2025.pdf,Salt (Rock),per kg
+2025-07-03,Basic Goods,Iodized Salt,kg,41.67,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-3-2025.pdf,Salt (Iodized),per kg
+2025-07-03,Basic Goods,Rock Salt,kg,20.27,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-3-2025.pdf,Salt (Rock),per kg
+2025-07-04,Basic Goods,Iodized Salt,kg,42.1,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-4-2025.pdf,Salt (Iodized),per kg
+2025-07-04,Basic Goods,Rock Salt,kg,20.13,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-4-2025.pdf,Salt (Rock),per kg
+2025-07-05,Basic Goods,Iodized Salt,kg,44.69,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-5-2025.pdf,Salt (Iodized),per kg
+2025-07-05,Basic Goods,Rock Salt,kg,19.58,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-5-2025.pdf,Salt (Rock),per kg
+2025-07-06,Basic Goods,Iodized Salt,kg,50.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-6-2025.pdf,Salt (Iodized),per kg
+2025-07-06,Basic Goods,Rock Salt,kg,20.83,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-6-2025.pdf,Salt (Rock),per kg
+2025-07-07,Basic Goods,Iodized Salt,kg,44.45,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-7-2025.pdf,Salt (Iodized),per kg
+2025-07-07,Basic Goods,Rock Salt,kg,20.06,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-7-2025.pdf,Salt (Rock),per kg
+2025-07-08,Basic Goods,Iodized Salt,kg,42.26,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-8-2025.pdf,Salt (Iodized),per kg
+2025-07-08,Basic Goods,Rock Salt,kg,20.25,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-8-2025.pdf,Salt (Rock),per kg
+2025-07-09,Basic Goods,Iodized Salt,kg,42.26,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-9-2025.pdf,Salt (Iodized),per kg
+2025-07-09,Basic Goods,Rock Salt,kg,20.25,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-9-2025.pdf,Salt (Rock),per kg
+2025-07-10,Basic Goods,Iodized Salt,kg,46.08,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-10-2025.pdf,Salt (Iodized),per kg
+2025-07-10,Basic Goods,Rock Salt,kg,21.22,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-10-2025.pdf,Salt (Rock),per kg
+2025-07-11,Basic Goods,Iodized Salt,kg,46.08,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-11-2025.pdf,Salt (Iodized),per kg
+2025-07-11,Basic Goods,Rock Salt,kg,21.22,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-11-2025.pdf,Salt (Rock),per kg
+2025-07-12,Basic Goods,Iodized Salt,kg,42.79,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-12-2025.pdf,Salt (Iodized),per kg
+2025-07-12,Basic Goods,Rock Salt,kg,24.2,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-12-2025.pdf,Salt (Rock),per kg
+2025-07-13,Basic Goods,Iodized Salt,kg,43.33,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-13-2025.pdf,Salt (Iodized),per kg
+2025-07-13,Basic Goods,Rock Salt,kg,19.8,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-13-2025.pdf,Salt (Rock),per kg
+2025-07-14,Basic Goods,Iodized Salt,kg,47.51,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-14-2025.pdf,Salt (Iodized),per kg
+2025-07-14,Basic Goods,Rock Salt,kg,20.93,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-14-2025.pdf,Salt (Rock),per kg
+2025-07-15,Basic Goods,Iodized Salt,kg,41.72,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-15-2025.pdf,Salt (Iodized),per kg
+2025-07-15,Basic Goods,Rock Salt,kg,22.51,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-15-2025.pdf,Salt (Rock),per kg
+2025-07-16,Basic Goods,Iodized Salt,kg,42.58,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-16-2025.pdf,Salt (Iodized),per kg
+2025-07-16,Basic Goods,Rock Salt,kg,20.31,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-16-2025.pdf,Salt (Rock),per kg
+2025-07-17,Basic Goods,Iodized Salt,kg,42.58,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-17-2025.pdf,Salt (Iodized),per kg
+2025-07-17,Basic Goods,Rock Salt,kg,20.31,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-17-2025.pdf,Salt (Rock),per kg
+2025-07-18,Basic Goods,Iodized Salt,kg,40.4,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-18-2025.pdf,Salt (Iodized),per kg
+2025-07-18,Basic Goods,Rock Salt,kg,20.32,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-18-2025.pdf,Salt (Rock),per kg
+2025-07-19,Basic Goods,Iodized Salt,kg,45.45,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-19-2025.pdf,Salt (Iodized),per kg
+2025-07-19,Basic Goods,Rock Salt,kg,20.47,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-19-2025.pdf,Salt (Rock),per kg
+2025-07-20,Basic Goods,Iodized Salt,kg,47.67,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-20-2025.pdf,Salt (Iodized),per kg
+2025-07-20,Basic Goods,Rock Salt,kg,20.83,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-20-2025.pdf,Salt (Rock),per kg
+2025-07-21,Basic Goods,Iodized Salt,kg,42.58,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-21-2025.pdf,Salt (Iodized),per kg
+2025-07-21,Basic Goods,Rock Salt,kg,20.54,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-21-2025.pdf,Salt (Rock),per kg
+2025-07-22,Basic Goods,Iodized Salt,kg,39.16,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-22-2025.pdf,Salt (Iodized),per kg
+2025-07-22,Basic Goods,Rock Salt,kg,19.93,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-22-2025.pdf,Salt (Rock),per kg
+2025-07-23,Basic Goods,Iodized Salt,kg,44.33,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-23-2025.pdf,Salt (Iodized),per kg
+2025-07-23,Basic Goods,Rock Salt,kg,20.67,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-23-2025.pdf,Salt (Rock),per kg
+2025-07-24,Basic Goods,Iodized Salt,kg,43.88,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-24-2025.pdf,Salt (Iodized),per kg
+2025-07-24,Basic Goods,Rock Salt,kg,20.19,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-24-2025.pdf,Salt (Rock),per kg
+2025-07-25,Basic Goods,Iodized Salt,kg,46.3,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-25-2025.pdf,Salt (Iodized),per kg
+2025-07-25,Basic Goods,Rock Salt,kg,20.82,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-25-2025.pdf,Salt (Rock),per kg
+2025-07-26,Basic Goods,Iodized Salt,kg,45.82,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-26-2025.pdf,Salt (Iodized),per kg
+2025-07-26,Basic Goods,Rock Salt,kg,20.72,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-26-2025.pdf,Salt (Rock),per kg
+2025-07-27,Basic Goods,Iodized Salt,kg,45.0,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-27-2025.pdf,Salt (Iodized),per kg
+2025-07-27,Basic Goods,Rock Salt,kg,20.67,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-27-2025.pdf,Salt (Rock),per kg
+2025-07-28,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-28-2025-1.pdf,Salt (Iodized),per kg
+2025-07-28,Basic Goods,Rock Salt,kg,20.66,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-28-2025-1.pdf,Salt (Rock),per kg
+2025-07-29,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-29-2025.pdf,Salt (Iodized),per kg
+2025-07-29,Basic Goods,Rock Salt,kg,20.66,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-29-2025.pdf,Salt (Rock),per kg
+2025-07-30,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-30-2025.pdf,Salt (Iodized),per kg
+2025-07-30,Basic Goods,Rock Salt,kg,20.66,https://www.da.gov.ph/wp-content/uploads/2025/07/Daily-Price-Index-July-30-2025.pdf,Salt (Rock),per kg
+2025-07-31,Basic Goods,Iodized Salt,kg,42.9,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-July-31-2025.pdf,Salt (Iodized),per kg
+2025-07-31,Basic Goods,Rock Salt,kg,20.68,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-July-31-2025.pdf,Salt (Rock),per kg
+2025-08-01,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-1-2025.pdf,Salt (Iodized),per kg
+2025-08-01,Basic Goods,Rock Salt,kg,20.53,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-1-2025.pdf,Salt (Rock),per kg
+2025-08-02,Basic Goods,Iodized Salt,kg,43.85,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-2-2025-1.pdf,Salt (Iodized),per kg
+2025-08-02,Basic Goods,Rock Salt,kg,20.68,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-2-2025-1.pdf,Salt (Rock),per kg
+2025-08-03,Basic Goods,Iodized Salt,kg,48.0,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-3-2025.pdf,Salt (Iodized),per kg
+2025-08-03,Basic Goods,Rock Salt,kg,20.0,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-3-2025.pdf,Salt (Rock),per kg
+2025-08-04,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-4-2025.pdf,Salt (Iodized),per kg
+2025-08-04,Basic Goods,Rock Salt,kg,20.66,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-4-2025.pdf,Salt (Rock),per kg
+2025-08-05,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-5-2025.pdf,Salt (Iodized),per kg
+2025-08-05,Basic Goods,Rock Salt,kg,20.66,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-5-2025.pdf,Salt (Rock),per kg
+2025-08-06,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-6-2025-1.pdf,Salt (Iodized),per kg
+2025-08-06,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-6-2025-1.pdf,Salt (Rock),per kg
+2025-08-07,Basic Goods,Iodized Salt,kg,42.23,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-7-2025.pdf,Salt (Iodized),per kg
+2025-08-07,Basic Goods,Rock Salt,kg,20.82,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-7-2025.pdf,Salt (Rock),per kg
+2025-08-08,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-8-2025.pdf,Salt (Iodized),per kg
+2025-08-08,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-8-2025.pdf,Salt (Rock),per kg
+2025-08-09,Basic Goods,Iodized Salt,kg,41.9,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-9-2025.pdf,Salt (Iodized),per kg
+2025-08-09,Basic Goods,Rock Salt,kg,20.9,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-9-2025.pdf,Salt (Rock),per kg
+2025-08-10,Basic Goods,Iodized Salt,kg,45.0,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-10-2025.pdf,Salt (Iodized),per kg
+2025-08-10,Basic Goods,Rock Salt,kg,19.83,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-10-2025.pdf,Salt (Rock),per kg
+2025-08-11,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-11-2025.pdf,Salt (Iodized),per kg
+2025-08-11,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-11-2025.pdf,Salt (Rock),per kg
+2025-08-12,Basic Goods,Iodized Salt,kg,42.01,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-12-2025.pdf,Salt (Iodized),per kg
+2025-08-12,Basic Goods,Rock Salt,kg,22.86,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-12-2025.pdf,Salt (Rock),per kg
+2025-08-13,Basic Goods,Iodized Salt,kg,42.01,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-13-2025.pdf,Salt (Iodized),per kg
+2025-08-13,Basic Goods,Rock Salt,kg,22.06,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-13-2025.pdf,Salt (Rock),per kg
+2025-08-14,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-14-2025.pdf,Salt (Iodized),per kg
+2025-08-14,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-14-2025.pdf,Salt (Rock),per kg
+2025-08-15,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-15-2025.pdf,Salt (Iodized),per kg
+2025-08-15,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-15-2025.pdf,Salt (Rock),per kg
+2025-08-16,Basic Goods,Iodized Salt,kg,42.81,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-16-2025.pdf,Salt (Iodized),per kg
+2025-08-16,Basic Goods,Rock Salt,kg,20.81,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-16-2025.pdf,Salt (Rock),per kg
+2025-08-17,Basic Goods,Iodized Salt,kg,47.5,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-17-2025.pdf,Salt (Iodized),per kg
+2025-08-17,Basic Goods,Rock Salt,kg,20.67,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-17-2025.pdf,Salt (Rock),per kg
+2025-08-18,Basic Goods,Iodized Salt,kg,43.45,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-18-2025.pdf,Salt (Iodized),per kg
+2025-08-18,Basic Goods,Rock Salt,kg,20.79,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-18-2025.pdf,Salt (Rock),per kg
+2025-08-19,Basic Goods,Iodized Salt,kg,43.45,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-19-2025.pdf,Salt (Iodized),per kg
+2025-08-19,Basic Goods,Rock Salt,kg,20.79,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-19-2025.pdf,Salt (Rock),per kg
+2025-08-20,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-20-2025.pdf,Salt (Iodized),per kg
+2025-08-20,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-20-2025.pdf,Salt (Rock),per kg
+2025-08-21,Basic Goods,Iodized Salt,kg,42.42,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-21-2025.pdf,Salt (Iodized),per kg
+2025-08-21,Basic Goods,Rock Salt,kg,20.62,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-21-2025.pdf,Salt (Rock),per kg
+2025-08-22,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-22-2025.pdf,Salt (Iodized),per kg
+2025-08-22,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-22-2025.pdf,Salt (Rock),per kg
+2025-08-23,Basic Goods,Iodized Salt,kg,42.28,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-23-2025.pdf,Salt (Iodized),per kg
+2025-08-23,Basic Goods,Rock Salt,kg,20.65,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-23-2025.pdf,Salt (Rock),per kg
+2025-08-24,Basic Goods,Iodized Salt,kg,50.0,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-24-2025.pdf,Salt (Iodized),per kg
+2025-08-24,Basic Goods,Rock Salt,kg,20.67,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-24-2025.pdf,Salt (Rock),per kg
+2025-08-25,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-25-2025.pdf,Salt (Iodized),per kg
+2025-08-25,Basic Goods,Rock Salt,kg,20.74,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-25-2025.pdf,Salt (Rock),per kg
+2025-08-26,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-26-2025.pdf,Salt (Iodized),per kg
+2025-08-26,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-26-2025.pdf,Salt (Rock),per kg
+2025-08-27,Basic Goods,Iodized Salt,kg,42.83,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-27-2025.pdf,Salt (Iodized),per kg
+2025-08-27,Basic Goods,Rock Salt,kg,20.72,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-27-2025.pdf,Salt (Rock),per kg
+2025-08-28,Basic Goods,Iodized Salt,kg,42.95,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-28-2025.pdf,Salt (Iodized),per kg
+2025-08-28,Basic Goods,Rock Salt,kg,20.85,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-28-2025.pdf,Salt (Rock),per kg
+2025-08-29,Basic Goods,Iodized Salt,kg,42.95,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-29-2025.pdf,Salt (Iodized),per kg
+2025-08-29,Basic Goods,Rock Salt,kg,20.86,https://www.da.gov.ph/wp-content/uploads/2025/08/Daily-Price-Index-August-29-2025.pdf,Salt (Rock),per kg
+2025-08-30,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-August-30-2025.pdf,Salt (Iodized),per kg
+2025-08-30,Basic Goods,Rock Salt,kg,20.55,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-August-30-2025.pdf,Salt (Rock),per kg
+2025-08-31,Basic Goods,Iodized Salt,kg,51.25,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-August-31-2025.pdf,Salt (Iodized),per kg
+2025-08-31,Basic Goods,Rock Salt,kg,19.8,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-August-31-2025.pdf,Salt (Rock),per kg
+2025-09-01,Basic Goods,Iodized Salt,kg,41.93,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-September-1-2025.pdf,Salt (Iodized),per kg
+2025-09-01,Basic Goods,Rock Salt,kg,20.89,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-September-1-2025.pdf,Salt (Rock),per kg
+2025-09-02,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-September-2-2025.pdf,Salt (Iodized),per kg
+2025-09-02,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-September-2-2025.pdf,Salt (Rock),per kg
+2025-09-03,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-September-3-2025.pdf,Salt (Iodized),per kg
+2025-09-03,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-September-3-2025.pdf,Salt (Rock),per kg
+2025-09-04,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-September-4-2025.pdf,Salt (Iodized),per kg
+2025-09-04,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/09/Revised-Daily-Price-Index-September-4-2025.pdf,Salt (Rock),per kg
+2025-09-05,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-5-2025.pdf,Salt (Iodized),per kg
+2025-09-05,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-5-2025.pdf,Salt (Rock),per kg
+2025-09-06,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-6-2025.pdf,Salt (Iodized),per kg
+2025-09-06,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-6-2025.pdf,Salt (Rock),per kg
+2025-09-07,Basic Goods,Iodized Salt,kg,48.0,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-7-2025.pdf,Salt (Iodized),per kg
+2025-09-07,Basic Goods,Rock Salt,kg,18.8,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-7-2025.pdf,Salt (Rock),per kg
+2025-09-08,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-8-2025.pdf,Salt (Iodized),per kg
+2025-09-08,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-8-2025.pdf,Salt (Rock),per kg
+2025-09-09,Basic Goods,Iodized Salt,kg,42.49,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-9-2025.pdf,Salt (Iodized),per kg
+2025-09-09,Basic Goods,Rock Salt,kg,20.83,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-9-2025.pdf,Salt (Rock),per kg
+2025-09-10,Basic Goods,Iodized Salt,kg,42.57,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-10-2025.pdf,Salt (Iodized),per kg
+2025-09-10,Basic Goods,Rock Salt,kg,20.66,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-10-2025.pdf,Salt (Rock),per kg
+2025-09-11,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-11-2025.pdf,Salt (Iodized),per kg
+2025-09-11,Basic Goods,Rock Salt,kg,20.77,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-11-2025.pdf,Salt (Rock),per kg
+2025-09-12,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-12-2025.pdf,Salt (Iodized),per kg
+2025-09-12,Basic Goods,Rock Salt,kg,21.37,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-12-2025.pdf,Salt (Rock),per kg
+2025-09-13,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-13-2025.pdf,Salt (Iodized),per kg
+2025-09-13,Basic Goods,Rock Salt,kg,21.37,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-13-2025.pdf,Salt (Rock),per kg
+2025-09-14,Basic Goods,Iodized Salt,kg,47.5,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-14-2025.pdf,Salt (Iodized),per kg
+2025-09-14,Basic Goods,Rock Salt,kg,20.67,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-14-2025.pdf,Salt (Rock),per kg
+2025-09-15,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-15-2025.pdf,Salt (Iodized),per kg
+2025-09-15,Basic Goods,Rock Salt,kg,20.77,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-15-2025.pdf,Salt (Rock),per kg
+2025-09-16,Basic Goods,Iodized Salt,kg,42.6,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-16-2025.pdf,Salt (Iodized),per kg
+2025-09-16,Basic Goods,Rock Salt,kg,20.77,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-16-2025.pdf,Salt (Rock),per kg
+2025-09-17,Basic Goods,Iodized Salt,kg,41.93,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-17-2025.pdf,Salt (Iodized),per kg
+2025-09-17,Basic Goods,Rock Salt,kg,20.85,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-17-2025.pdf,Salt (Rock),per kg
+2025-09-18,Basic Goods,Iodized Salt,kg,41.93,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-18-2025.pdf,Salt (Iodized),per kg
+2025-09-18,Basic Goods,Rock Salt,kg,20.82,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-18-2025.pdf,Salt (Rock),per kg
+2025-09-19,Basic Goods,Iodized Salt,kg,41.43,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-19-2025.pdf,Salt (Iodized),per kg
+2025-09-19,Basic Goods,Rock Salt,kg,20.82,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-19-2025.pdf,Salt (Rock),per kg
+2025-09-20,Basic Goods,Iodized Salt,kg,41.31,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-20-2025.pdf,Salt (Iodized),per kg
+2025-09-20,Basic Goods,Rock Salt,kg,20.54,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-20-2025.pdf,Salt (Rock),per kg
+2025-09-21,Basic Goods,Iodized Salt,kg,46.75,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-21-2025.pdf,Salt (Iodized),per kg
+2025-09-21,Basic Goods,Rock Salt,kg,21.5,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-21-2025.pdf,Salt (Rock),per kg
+2025-09-22,Basic Goods,Iodized Salt,kg,41.57,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-22-2025.pdf,Salt (Iodized),per kg
+2025-09-22,Basic Goods,Rock Salt,kg,20.58,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-22-2025.pdf,Salt (Rock),per kg
+2025-09-23,Basic Goods,Iodized Salt,kg,40.26,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-September-23-2025.pdf,Salt (Iodized),Standard
+2025-09-23,Basic Goods,Rock Salt,kg,20.7,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-September-23-2025.pdf,Salt (Rock),Standard
+2025-09-24,Basic Goods,Iodized Salt,kg,41.52,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-24-2025.pdf,Salt (Iodized),Standard
+2025-09-24,Basic Goods,Rock Salt,kg,20.68,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-24-2025.pdf,Salt (Rock),Standard
+2025-09-25,Basic Goods,Iodized Salt,kg,41.52,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-September-25-2025.pdf,Salt (Iodized),Standard
+2025-09-25,Basic Goods,Rock Salt,kg,20.68,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-September-25-2025.pdf,Salt (Rock),Standard
+2025-09-26,Basic Goods,Iodized Salt,kg,46.96,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-26-2025.pdf,Salt (Iodized),Standard
+2025-09-26,Basic Goods,Rock Salt,kg,25.04,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-26-2025.pdf,Salt (Rock),Standard
+2025-09-27,Basic Goods,Iodized Salt,kg,46.36,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-27-2025.pdf,Salt (Iodized),Standard
+2025-09-27,Basic Goods,Rock Salt,kg,28.58,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-27-2025.pdf,Salt (Rock),Standard
+2025-09-28,Basic Goods,Iodized Salt,kg,44.25,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-28-2025.pdf,Salt (Iodized),Standard
+2025-09-28,Basic Goods,Rock Salt,kg,19.8,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-28-2025.pdf,Salt (Rock),Standard
+2025-09-29,Basic Goods,Iodized Salt,kg,42.45,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-29-2025.pdf,Salt (Iodized),Standard
+2025-09-29,Basic Goods,Rock Salt,kg,20.66,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-29-2025.pdf,Salt (Rock),Standard
+2025-09-30,Basic Goods,Iodized Salt,kg,41.65,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-30-2025.pdf,Salt (Iodized),Standard
+2025-09-30,Basic Goods,Rock Salt,kg,20.68,https://www.da.gov.ph/wp-content/uploads/2025/09/Daily-Price-Index-September-30-2025.pdf,Salt (Rock),Standard
+2025-10-01,Basic Goods,Iodized Salt,kg,42.26,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-1-2025.pdf,Salt (Iodized),Standard
+2025-10-01,Basic Goods,Rock Salt,kg,20.57,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-1-2025.pdf,Salt (Rock),Standard
+2025-10-02,Basic Goods,Iodized Salt,kg,40.75,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-2-2025.pdf,Salt (Iodized),Standard
+2025-10-02,Basic Goods,Rock Salt,kg,20.73,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-2-2025.pdf,Salt (Rock),Standard
+2025-10-03,Basic Goods,Iodized Salt,kg,41.46,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-3-2025.pdf,Salt (Iodized),Standard
+2025-10-03,Basic Goods,Rock Salt,kg,20.74,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-3-2025.pdf,Salt (Rock),Standard
+2025-10-04,Basic Goods,Iodized Salt,kg,45.57,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-4-2025.pdf,Salt (Iodized),Standard
+2025-10-04,Basic Goods,Rock Salt,kg,24.83,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-4-2025.pdf,Salt (Rock),Standard
+2025-10-05,Basic Goods,Iodized Salt,kg,43.0,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-5-2025.pdf,Salt (Iodized),Standard
+2025-10-05,Basic Goods,Rock Salt,kg,21.25,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-5-2025.pdf,Salt (Rock),Standard
+2025-10-06,Basic Goods,Iodized Salt,kg,43.22,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-6-2025.pdf,Salt (Iodized),Standard
+2025-10-06,Basic Goods,Rock Salt,kg,21.23,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-6-2025.pdf,Salt (Rock),Standard
+2025-10-07,Basic Goods,Iodized Salt,kg,41.29,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-7-2025.pdf,Salt (Iodized),Standard
+2025-10-07,Basic Goods,Rock Salt,kg,20.95,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-7-2025.pdf,Salt (Rock),Standard
+2025-10-08,Basic Goods,Iodized Salt,kg,40.84,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-8-2025.pdf,Salt (Iodized),Standard
+2025-10-08,Basic Goods,Rock Salt,kg,21.04,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-8-2025.pdf,Salt (Rock),Standard
+2025-10-09,Basic Goods,Iodized Salt,kg,42.29,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-9-2025.pdf,Salt (Iodized),Standard
+2025-10-09,Basic Goods,Rock Salt,kg,24.47,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-9-2025.pdf,Salt (Rock),Standard
+2025-10-10,Basic Goods,Iodized Salt,kg,41.68,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-10-2025.pdf,Salt (Iodized),Standard
+2025-10-10,Basic Goods,Rock Salt,kg,24.18,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-10-2025.pdf,Salt (Rock),Standard
+2025-10-11,Basic Goods,Iodized Salt,kg,42.27,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-11-2025.pdf,Salt (Iodized),Standard
+2025-10-11,Basic Goods,Rock Salt,kg,25.01,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-11-2025.pdf,Salt (Rock),Standard
+2025-10-12,Basic Goods,Iodized Salt,kg,52.6,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-12-2025.pdf,Salt (Iodized),Standard
+2025-10-12,Basic Goods,Rock Salt,kg,19.44,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-12-2025.pdf,Salt (Rock),Standard
+2025-10-13,Basic Goods,Iodized Salt,kg,39.99,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-13-2025.pdf,Salt (Iodized),Standard
+2025-10-13,Basic Goods,Rock Salt,kg,20.72,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-13-2025.pdf,Salt (Rock),Standard
+2025-10-14,Basic Goods,Iodized Salt,kg,39.81,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-14-2025.pdf,Salt (Iodized),Standard
+2025-10-14,Basic Goods,Rock Salt,kg,20.73,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-14-2025.pdf,Salt (Rock),Standard
+2025-10-15,Basic Goods,Iodized Salt,kg,39.81,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-15-2025.pdf,Salt (Iodized),Standard
+2025-10-15,Basic Goods,Rock Salt,kg,21.0,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-15-2025.pdf,Salt (Rock),Standard
+2025-10-16,Basic Goods,Iodized Salt,kg,39.81,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-16-2025.pdf,Salt (Iodized),Standard
+2025-10-16,Basic Goods,Rock Salt,kg,21.0,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-16-2025.pdf,Salt (Rock),Standard
+2025-10-17,Basic Goods,Iodized Salt,kg,38.37,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-17-2025.pdf,Salt (Iodized),Standard
+2025-10-17,Basic Goods,Rock Salt,kg,20.74,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-17-2025.pdf,Salt (Rock),Standard
+2025-10-18,Basic Goods,Iodized Salt,kg,40.12,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-18-2025.pdf,Salt (Iodized),Standard
+2025-10-18,Basic Goods,Rock Salt,kg,20.79,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-18-2025.pdf,Salt (Rock),Standard
+2025-10-19,Basic Goods,Iodized Salt,kg,51.25,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-19-2025.pdf,Salt (Iodized),Standard
+2025-10-19,Basic Goods,Rock Salt,kg,19.4,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-19-2025.pdf,Salt (Rock),Standard
+2025-10-20,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-20-2025.pdf,Salt (Iodized),Standard
+2025-10-20,Basic Goods,Rock Salt,kg,21.0,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-20-2025.pdf,Salt (Rock),Standard
+2025-10-21,Basic Goods,Iodized Salt,kg,38.49,https://www.da.gov.ph/wp-content/uploads/2025/10/Revised-Daily-Price-Index-October-21-2025.pdf,Salt (Iodized),Standard
+2025-10-21,Basic Goods,Rock Salt,kg,21.01,https://www.da.gov.ph/wp-content/uploads/2025/10/Revised-Daily-Price-Index-October-21-2025.pdf,Salt (Rock),Standard
+2025-10-22,Basic Goods,Iodized Salt,kg,38.58,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-22-2025.pdf,Salt (Iodized),Standard
+2025-10-22,Basic Goods,Rock Salt,kg,21.01,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-22-2025.pdf,Salt (Rock),Standard
+2025-10-23,Basic Goods,Iodized Salt,kg,38.87,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-23-2025.pdf,Salt (Iodized),Standard
+2025-10-23,Basic Goods,Rock Salt,kg,21.16,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-23-2025.pdf,Salt (Rock),Standard
+2025-10-24,Basic Goods,Iodized Salt,kg,38.65,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-24-2025.pdf,Salt (Iodized),Standard
+2025-10-24,Basic Goods,Rock Salt,kg,20.95,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-24-2025.pdf,Salt (Rock),Standard
+2025-10-25,Basic Goods,Iodized Salt,kg,39.09,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-25-2025.pdf,Salt (Iodized),Standard
+2025-10-25,Basic Goods,Rock Salt,kg,20.99,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-25-2025.pdf,Salt (Rock),Standard
+2025-10-26,Basic Goods,Iodized Salt,kg,56.5,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-26-2025.pdf,Salt (Iodized),Standard
+2025-10-26,Basic Goods,Rock Salt,kg,18.43,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-26-2025.pdf,Salt (Rock),Standard
+2025-10-27,Basic Goods,Iodized Salt,kg,39.14,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-27-2025.pdf,Salt (Iodized),Standard
+2025-10-27,Basic Goods,Rock Salt,kg,20.89,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-27-2025.pdf,Salt (Rock),Standard
+2025-10-28,Basic Goods,Iodized Salt,kg,38.58,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-28-2025.pdf,Salt (Iodized),Standard
+2025-10-28,Basic Goods,Rock Salt,kg,20.99,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-28-2025.pdf,Salt (Rock),Standard
+2025-10-29,Basic Goods,Iodized Salt,kg,38.58,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-29-2025.pdf,Salt (Iodized),Standard
+2025-10-29,Basic Goods,Rock Salt,kg,20.99,https://www.da.gov.ph/wp-content/uploads/2025/10/Daily-Price-Index-October-29-2025.pdf,Salt (Rock),Standard
+2025-10-30,Basic Goods,Iodized Salt,kg,38.65,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-October-30-2025.pdf,Salt (Iodized),Standard
+2025-10-30,Basic Goods,Rock Salt,kg,21.0,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-October-30-2025.pdf,Salt (Rock),Standard
+2025-10-31,Basic Goods,Iodized Salt,kg,39.18,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-October-31-2025.pdf,Salt (Iodized),Standard
+2025-10-31,Basic Goods,Rock Salt,kg,20.81,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-October-31-2025.pdf,Salt (Rock),Standard
+2025-11-01,Basic Goods,Iodized Salt,kg,40.27,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-1-2025.pdf,Salt (Iodized),Standard
+2025-11-01,Basic Goods,Rock Salt,kg,20.86,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-1-2025.pdf,Salt (Rock),Standard
+2025-11-02,Basic Goods,Iodized Salt,kg,49.5,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-2-2025.pdf,Salt (Iodized),Standard
+2025-11-02,Basic Goods,Rock Salt,kg,19.9,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-2-2025.pdf,Salt (Rock),Standard
+2025-11-03,Basic Goods,Iodized Salt,kg,38.65,https://www.da.gov.ph/wp-content/uploads/2025/11/Revised-Daily-Price-Index-November-3-2025.pdf,Salt (Iodized),Standard
+2025-11-03,Basic Goods,Rock Salt,kg,21.0,https://www.da.gov.ph/wp-content/uploads/2025/11/Revised-Daily-Price-Index-November-3-2025.pdf,Salt (Rock),Standard
+2025-11-04,Basic Goods,Iodized Salt,kg,39.01,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-4-2025.pdf,Salt (Iodized),Standard
+2025-11-04,Basic Goods,Rock Salt,kg,21.87,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-4-2025.pdf,Salt (Rock),Standard
+2025-11-05,Basic Goods,Iodized Salt,kg,39.09,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-5-2025.pdf,Salt (Iodized),Standard
+2025-11-05,Basic Goods,Rock Salt,kg,21.68,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-5-2025.pdf,Salt (Rock),Standard
+2025-11-06,Basic Goods,Iodized Salt,kg,39.09,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-6-2025.pdf,Salt (Iodized),Standard
+2025-11-06,Basic Goods,Rock Salt,kg,21.68,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-6-2025.pdf,Salt (Rock),Standard
+2025-11-07,Basic Goods,Iodized Salt,kg,39.09,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-7-2025.pdf,Salt (Iodized),Standard
+2025-11-07,Basic Goods,Rock Salt,kg,21.68,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-7-2025.pdf,Salt (Rock),Standard
+2025-11-08,Basic Goods,Iodized Salt,kg,39.69,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-8-2025.pdf,Salt (Iodized),Standard
+2025-11-08,Basic Goods,Rock Salt,kg,21.55,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-8-2025.pdf,Salt (Rock),Standard
+2025-11-09,Basic Goods,Iodized Salt,kg,48.14,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-9-2025.pdf,Salt (Iodized),Standard
+2025-11-09,Basic Goods,Rock Salt,kg,18.9,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-9-2025.pdf,Salt (Rock),Standard
+2025-11-10,Basic Goods,Iodized Salt,kg,36.23,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-10-2025.pdf,Salt (Iodized),Standard
+2025-11-10,Basic Goods,Rock Salt,kg,22.15,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-10-2025.pdf,Salt (Rock),Standard
+2025-11-11,Basic Goods,Iodized Salt,kg,39.49,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-11-2025.pdf,Salt (Iodized),Standard
+2025-11-11,Basic Goods,Rock Salt,kg,21.79,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-11-2025.pdf,Salt (Rock),Standard
+2025-11-12,Basic Goods,Iodized Salt,kg,39.35,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-12-2025.pdf,Salt (Iodized),Standard
+2025-11-12,Basic Goods,Rock Salt,kg,21.72,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-12-2025.pdf,Salt (Rock),Standard
+2025-11-13,Basic Goods,Iodized Salt,kg,38.6,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-13-2025.pdf,Salt (Iodized),Standard
+2025-11-13,Basic Goods,Rock Salt,kg,21.28,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-13-2025.pdf,Salt (Rock),Standard
+2025-11-14,Basic Goods,Iodized Salt,kg,38.6,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-14-2025.pdf,Salt (Iodized),Standard
+2025-11-14,Basic Goods,Rock Salt,kg,21.28,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-14-2025.pdf,Salt (Rock),Standard
+2025-11-15,Basic Goods,Iodized Salt,kg,39.13,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-15-2025.pdf,Salt (Iodized),Standard
+2025-11-15,Basic Goods,Rock Salt,kg,21.26,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-15-2025.pdf,Salt (Rock),Standard
+2025-11-16,Basic Goods,Iodized Salt,kg,51.0,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-16-2025.pdf,Salt (Iodized),Standard
+2025-11-16,Basic Goods,Rock Salt,kg,19.4,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-16-2025.pdf,Salt (Rock),Standard
+2025-11-17,Basic Goods,Iodized Salt,kg,39.54,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-17-2025.pdf,Salt (Iodized),Standard
+2025-11-17,Basic Goods,Rock Salt,kg,21.46,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-17-2025.pdf,Salt (Rock),Standard
+2025-11-18,Basic Goods,Iodized Salt,kg,39.92,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-18-2025.pdf,Salt (Iodized),Standard
+2025-11-18,Basic Goods,Rock Salt,kg,21.39,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-18-2025.pdf,Salt (Rock),Standard
+2025-11-19,Basic Goods,Iodized Salt,kg,39.92,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-19-2025.pdf,Salt (Iodized),Standard
+2025-11-19,Basic Goods,Rock Salt,kg,21.39,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-19-2025.pdf,Salt (Rock),Standard
+2025-11-20,Basic Goods,Iodized Salt,kg,39.66,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-20-2025.pdf,Salt (Iodized),Standard
+2025-11-20,Basic Goods,Rock Salt,kg,21.26,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-20-2025.pdf,Salt (Rock),Standard
+2025-11-21,Basic Goods,Iodized Salt,kg,39.66,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-21-2025.pdf,Salt (Iodized),Standard
+2025-11-21,Basic Goods,Rock Salt,kg,21.26,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-21-2025.pdf,Salt (Rock),Standard
+2025-11-22,Basic Goods,Iodized Salt,kg,40.26,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-22-2025.pdf,Salt (Iodized),Standard
+2025-11-22,Basic Goods,Rock Salt,kg,21.47,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-22-2025.pdf,Salt (Rock),Standard
+2025-11-23,Basic Goods,Iodized Salt,kg,46.67,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-23-2025.pdf,Salt (Iodized),Standard
+2025-11-23,Basic Goods,Rock Salt,kg,20.57,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-23-2025.pdf,Salt (Rock),Standard
+2025-11-24,Basic Goods,Iodized Salt,kg,39.66,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-24-2025.pdf,Salt (Iodized),Standard
+2025-11-24,Basic Goods,Rock Salt,kg,21.26,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-24-2025.pdf,Salt (Rock),Standard
+2025-11-25,Basic Goods,Iodized Salt,kg,39.05,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-25-2025.pdf,Salt (Iodized),Standard
+2025-11-25,Basic Goods,Rock Salt,kg,21.12,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-25-2025.pdf,Salt (Rock),Standard
+2025-11-26,Basic Goods,Iodized Salt,kg,39.44,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-26-2025.pdf,Salt (Iodized),Standard
+2025-11-26,Basic Goods,Rock Salt,kg,21.06,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-26-2025.pdf,Salt (Rock),Standard
+2025-11-27,Basic Goods,Iodized Salt,kg,39.44,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-27-2025.pdf,Salt (Iodized),Standard
+2025-11-27,Basic Goods,Rock Salt,kg,21.06,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-27-2025.pdf,Salt (Rock),Standard
+2025-11-28,Basic Goods,Iodized Salt,kg,39.6,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-28-2025.pdf,Salt (Iodized),Standard
+2025-11-28,Basic Goods,Rock Salt,kg,21.2,https://www.da.gov.ph/wp-content/uploads/2025/11/Daily-Price-Index-November-28-2025.pdf,Salt (Rock),Standard
+2025-11-29,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-November-29-2025.pdf,Salt (Iodized),Standard
+2025-11-29,Basic Goods,Rock Salt,kg,20.97,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-November-29-2025.pdf,Salt (Rock),Standard
+2025-11-30,Basic Goods,Iodized Salt,kg,50.86,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-November-30-2025.pdf,Salt (Iodized),Standard
+2025-11-30,Basic Goods,Rock Salt,kg,19.89,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-November-30-2025.pdf,Salt (Rock),Standard
+2025-12-01,Basic Goods,Iodized Salt,kg,39.55,https://www.da.gov.ph/wp-content/uploads/2025/12/Revised-Daily-Price-Index-December-1-2025.pdf,Salt (Iodized),Standard
+2025-12-01,Basic Goods,Rock Salt,kg,21.12,https://www.da.gov.ph/wp-content/uploads/2025/12/Revised-Daily-Price-Index-December-1-2025.pdf,Salt (Rock),Standard
+2025-12-02,Basic Goods,Iodized Salt,kg,39.55,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-2-2025.pdf,Salt (Iodized),Standard
+2025-12-02,Basic Goods,Rock Salt,kg,21.12,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-2-2025.pdf,Salt (Rock),Standard
+2025-12-03,Basic Goods,Iodized Salt,kg,39.55,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-3-2025.pdf,Salt (Iodized),Standard
+2025-12-03,Basic Goods,Rock Salt,kg,21.12,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-3-2025.pdf,Salt (Rock),Standard
+2025-12-04,Basic Goods,Iodized Salt,kg,39.0,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-4-2025.pdf,Salt (Iodized),Standard
+2025-12-04,Basic Goods,Rock Salt,kg,21.24,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-4-2025.pdf,Salt (Rock),Standard
+2025-12-05,Basic Goods,Iodized Salt,kg,37.31,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-5-2025.pdf,Salt (Iodized),Standard
+2025-12-05,Basic Goods,Rock Salt,kg,21.5,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-5-2025.pdf,Salt (Rock),Standard
+2025-12-06,Basic Goods,Iodized Salt,kg,36.71,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-6-2025.pdf,Salt (Iodized),Standard
+2025-12-06,Basic Goods,Rock Salt,kg,21.35,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-6-2025.pdf,Salt (Rock),Standard
+2025-12-07,Basic Goods,Iodized Salt,kg,49.5,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-7-2025.pdf,Salt (Iodized),Standard
+2025-12-07,Basic Goods,Rock Salt,kg,20.9,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-7-2025.pdf,Salt (Rock),Standard
+2025-12-08,Basic Goods,Iodized Salt,kg,37.34,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-8-2025.pdf,Salt (Iodized),Standard
+2025-12-08,Basic Goods,Rock Salt,kg,21.32,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-8-2025.pdf,Salt (Rock),Standard
+2025-12-09,Basic Goods,Iodized Salt,kg,37.79,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-9-2025.pdf,Salt (Iodized),Standard
+2025-12-09,Basic Goods,Rock Salt,kg,21.2,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-9-2025.pdf,Salt (Rock),Standard
+2025-12-10,Basic Goods,Iodized Salt,kg,37.63,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-10-2025.pdf,Salt (Iodized),Standard
+2025-12-10,Basic Goods,Rock Salt,kg,21.05,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-10-2025.pdf,Salt (Rock),Standard
+2025-12-11,Basic Goods,Iodized Salt,kg,37.63,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-11-2025.pdf,Salt (Iodized),Standard
+2025-12-11,Basic Goods,Rock Salt,kg,21.05,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-11-2025.pdf,Salt (Rock),Standard
+2025-12-12,Basic Goods,Iodized Salt,kg,37.32,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-12-2025.pdf,Salt (Iodized),Standard
+2025-12-12,Basic Goods,Rock Salt,kg,21.47,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-12-2025.pdf,Salt (Rock),Standard
+2025-12-13,Basic Goods,Iodized Salt,kg,38.3,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-13-2025.pdf,Salt (Iodized),Standard
+2025-12-13,Basic Goods,Rock Salt,kg,21.41,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-13-2025.pdf,Salt (Rock),Standard
+2025-12-14,Basic Goods,Iodized Salt,kg,46.78,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-14-2025.pdf,Salt (Iodized),Standard
+2025-12-14,Basic Goods,Rock Salt,kg,22.18,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-14-2025.pdf,Salt (Rock),Standard
+2025-12-15,Basic Goods,Iodized Salt,kg,37.84,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-15-2025.pdf,Salt (Iodized),Standard
+2025-12-15,Basic Goods,Rock Salt,kg,21.44,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-15-2025.pdf,Salt (Rock),Standard
+2025-12-16,Basic Goods,Iodized Salt,kg,37.84,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-16-2025.pdf,Salt (Iodized),Standard
+2025-12-16,Basic Goods,Rock Salt,kg,21.44,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-16-2025.pdf,Salt (Rock),Standard
+2025-12-17,Basic Goods,Iodized Salt,kg,39.0,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-17-2025.pdf,Salt (Iodized),Standard
+2025-12-17,Basic Goods,Rock Salt,kg,21.4,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-17-2025.pdf,Salt (Rock),Standard
+2025-12-18,Basic Goods,Iodized Salt,kg,39.67,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-18-2025.pdf,Salt (Iodized),Standard
+2025-12-18,Basic Goods,Rock Salt,kg,21.24,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-18-2025.pdf,Salt (Rock),Standard
+2025-12-19,Basic Goods,Iodized Salt,kg,39.82,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-19-2025.pdf,Salt (Iodized),Standard
+2025-12-19,Basic Goods,Rock Salt,kg,21.4,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-19-2025.pdf,Salt (Rock),Standard
+2025-12-20,Basic Goods,Iodized Salt,kg,39.71,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-20-2025.pdf,Salt (Iodized),Standard
+2025-12-20,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-20-2025.pdf,Salt (Rock),Standard
+2025-12-21,Basic Goods,Iodized Salt,kg,48.83,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-21-2025.pdf,Salt (Iodized),Standard
+2025-12-21,Basic Goods,Rock Salt,kg,21.67,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-21-2025.pdf,Salt (Rock),Standard
+2025-12-22,Basic Goods,Iodized Salt,kg,39.69,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-22-2025.pdf,Salt (Iodized),Standard
+2025-12-22,Basic Goods,Rock Salt,kg,21.19,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-22-2025.pdf,Salt (Rock),Standard
+2025-12-23,Basic Goods,Iodized Salt,kg,39.36,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-23-2025.pdf,Salt (Iodized),Standard
+2025-12-23,Basic Goods,Rock Salt,kg,21.13,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-23-2025.pdf,Salt (Rock),Standard
+2025-12-24,Basic Goods,Iodized Salt,kg,39.76,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-24-2025.pdf,Salt (Iodized),Standard
+2025-12-24,Basic Goods,Rock Salt,kg,21.08,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-24-2025.pdf,Salt (Rock),Standard
+2025-12-25,Basic Goods,Iodized Salt,kg,38.79,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-25-2025.pdf,Salt (Iodized),Standard
+2025-12-25,Basic Goods,Rock Salt,kg,20.98,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-25-2025.pdf,Salt (Rock),Standard
+2025-12-26,Basic Goods,Iodized Salt,kg,38.31,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-26-2025.pdf,Salt (Iodized),Standard
+2025-12-26,Basic Goods,Rock Salt,kg,21.03,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-26-2025.pdf,Salt (Rock),Standard
+2025-12-27,Basic Goods,Iodized Salt,kg,38.84,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-27-2025.pdf,Salt (Iodized),Standard
+2025-12-27,Basic Goods,Rock Salt,kg,21.24,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-27-2025.pdf,Salt (Rock),Standard
+2025-12-28,Basic Goods,Iodized Salt,kg,49.5,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-28-2025.pdf,Salt (Iodized),Standard
+2025-12-28,Basic Goods,Rock Salt,kg,21.9,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-28-2025.pdf,Salt (Rock),Standard
+2025-12-29,Basic Goods,Iodized Salt,kg,39.23,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-29-2025.pdf,Salt (Iodized),Standard
+2025-12-29,Basic Goods,Rock Salt,kg,21.53,https://www.da.gov.ph/wp-content/uploads/2025/12/Daily-Price-Index-December-29-2025.pdf,Salt (Rock),Standard
+2025-12-30,Basic Goods,Iodized Salt,kg,41.15,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-December-30-2025.pdf,Salt (Iodized),Standard
+2025-12-30,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-December-30-2025.pdf,Salt (Rock),Standard
+2025-12-31,Basic Goods,Iodized Salt,kg,39.43,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-December-31-2025.pdf,Salt (Iodized),Standard
+2025-12-31,Basic Goods,Rock Salt,kg,21.45,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-December-31-2025.pdf,Salt (Rock),Standard
+2026-01-01,Basic Goods,Iodized Salt,kg,40.46,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-1-2026.pdf,Salt (Iodized),Standard
+2026-01-01,Basic Goods,Rock Salt,kg,22.07,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-1-2026.pdf,Salt (Rock),Standard
+2026-01-02,Basic Goods,Iodized Salt,kg,39.83,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-2-2026.pdf,Salt (Iodized),Standard
+2026-01-02,Basic Goods,Rock Salt,kg,21.8,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-2-2026.pdf,Salt (Rock),Standard
+2026-01-03,Basic Goods,Iodized Salt,kg,37.94,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-3-2026.pdf,Salt (Iodized),Standard
+2026-01-03,Basic Goods,Rock Salt,kg,21.78,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-3-2026.pdf,Salt (Rock),Standard
+2026-01-04,Basic Goods,Iodized Salt,kg,48.75,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-4-2026.pdf,Salt (Iodized),Standard
+2026-01-04,Basic Goods,Rock Salt,kg,21.4,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-4-2026.pdf,Salt (Rock),Standard
+2026-01-05,Basic Goods,Iodized Salt,kg,40.09,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-5-2026.pdf,Salt (Iodized),Standard
+2026-01-05,Basic Goods,Rock Salt,kg,21.56,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-5-2026.pdf,Salt (Rock),Standard
+2026-01-06,Basic Goods,Iodized Salt,kg,39.96,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-6-2026.pdf,Salt (Iodized),Standard
+2026-01-06,Basic Goods,Rock Salt,kg,21.2,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-6-2026.pdf,Salt (Rock),Standard
+2026-01-07,Basic Goods,Iodized Salt,kg,40.03,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-7-2026.pdf,Salt (Iodized),Standard
+2026-01-07,Basic Goods,Rock Salt,kg,21.14,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-7-2026.pdf,Salt (Rock),Standard
+2026-01-08,Basic Goods,Iodized Salt,kg,40.16,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-8-2026.pdf,Salt (Iodized),Standard
+2026-01-08,Basic Goods,Rock Salt,kg,21.51,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-8-2026.pdf,Salt (Rock),Standard
+2026-01-09,Basic Goods,Iodized Salt,kg,39.96,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-9-2026.pdf,Salt (Iodized),Standard
+2026-01-09,Basic Goods,Rock Salt,kg,21.41,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-9-2026.pdf,Salt (Rock),Standard
+2026-01-10,Basic Goods,Iodized Salt,kg,40.16,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-10-2026.pdf,Salt (Iodized),Standard
+2026-01-10,Basic Goods,Rock Salt,kg,21.51,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-10-2026.pdf,Salt (Rock),Standard
+2026-01-11,Basic Goods,Iodized Salt,kg,51.57,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-11-2026.pdf,Salt (Iodized),Standard
+2026-01-11,Basic Goods,Rock Salt,kg,21.4,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-11-2026.pdf,Salt (Rock),Standard
+2026-01-12,Basic Goods,Iodized Salt,kg,40.09,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-12-2026.pdf,Salt (Iodized),Standard
+2026-01-12,Basic Goods,Rock Salt,kg,21.32,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-12-2026.pdf,Salt (Rock),Standard
+2026-01-13,Basic Goods,Iodized Salt,kg,41.7,https://www.da.gov.ph/wp-content/uploads/2026/01/Revised-Daily-Price-Index-January-13-2026.pdf,Salt (Iodized),Standard
+2026-01-13,Basic Goods,Rock Salt,kg,21.47,https://www.da.gov.ph/wp-content/uploads/2026/01/Revised-Daily-Price-Index-January-13-2026.pdf,Salt (Rock),Standard
+2026-01-14,Basic Goods,Iodized Salt,kg,40.09,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-14-2026-1.pdf,Salt (Iodized),Standard
+2026-01-14,Basic Goods,Rock Salt,kg,21.42,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-14-2026-1.pdf,Salt (Rock),Standard
+2026-01-15,Basic Goods,Iodized Salt,kg,37.81,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-15-2026.pdf,Salt (Iodized),Standard
+2026-01-15,Basic Goods,Rock Salt,kg,21.16,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-15-2026.pdf,Salt (Rock),Standard
+2026-01-16,Basic Goods,Iodized Salt,kg,40.25,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-16-2026.pdf,Salt (Iodized),Standard
+2026-01-16,Basic Goods,Rock Salt,kg,21.41,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-16-2026.pdf,Salt (Rock),Standard
+2026-01-17,Basic Goods,Iodized Salt,kg,40.25,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-17-2026.pdf,Salt (Iodized),Standard
+2026-01-17,Basic Goods,Rock Salt,kg,21.46,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-17-2026.pdf,Salt (Rock),Standard
+2026-01-18,Basic Goods,Iodized Salt,kg,40.14,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-18-2026.pdf,Salt (Iodized),Standard
+2026-01-18,Basic Goods,Rock Salt,kg,20.82,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-18-2026.pdf,Salt (Rock),Standard
+2026-01-19,Basic Goods,Iodized Salt,kg,37.44,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-19-2026.pdf,Salt (Iodized),Standard
+2026-01-19,Basic Goods,Rock Salt,kg,21.69,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-19-2026.pdf,Salt (Rock),Standard
+2026-01-20,Basic Goods,Iodized Salt,kg,37.39,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-20-2026.pdf,Salt (Iodized),Standard
+2026-01-20,Basic Goods,Rock Salt,kg,21.5,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-20-2026.pdf,Salt (Rock),Standard
+2026-01-21,Basic Goods,Iodized Salt,kg,38.73,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-21-2026.pdf,Salt (Iodized),Standard
+2026-01-21,Basic Goods,Rock Salt,kg,21.58,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-21-2026.pdf,Salt (Rock),Standard
+2026-01-22,Basic Goods,Iodized Salt,kg,40.17,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-22-2026.pdf,Salt (Iodized),Standard
+2026-01-22,Basic Goods,Rock Salt,kg,21.58,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-22-2026.pdf,Salt (Rock),Standard
+2026-01-23,Basic Goods,Iodized Salt,kg,38.73,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-23-2026.pdf,Salt (Iodized),Standard
+2026-01-23,Basic Goods,Rock Salt,kg,21.58,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-23-2026.pdf,Salt (Rock),Standard
+2026-01-24,Basic Goods,Iodized Salt,kg,39.61,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-24-2026.pdf,Salt (Iodized),Standard
+2026-01-24,Basic Goods,Rock Salt,kg,21.64,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-24-2026.pdf,Salt (Rock),Standard
+2026-01-25,Basic Goods,Iodized Salt,kg,49.29,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-25-2026.pdf,Salt (Iodized),Standard
+2026-01-25,Basic Goods,Rock Salt,kg,21.9,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-25-2026.pdf,Salt (Rock),Standard
+2026-01-26,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-26-2026-1.pdf,Salt (Iodized),Standard
+2026-01-26,Basic Goods,Rock Salt,kg,21.58,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-26-2026-1.pdf,Salt (Rock),Standard
+2026-01-27,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/01/Revised-Daily-Price-Index-January-27-2026.pdf,Salt (Iodized),Standard
+2026-01-27,Basic Goods,Rock Salt,kg,21.49,https://www.da.gov.ph/wp-content/uploads/2026/01/Revised-Daily-Price-Index-January-27-2026.pdf,Salt (Rock),Standard
+2026-01-28,Basic Goods,Iodized Salt,kg,38.73,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-28-2026.pdf,Salt (Iodized),Standard
+2026-01-28,Basic Goods,Rock Salt,kg,21.56,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-28-2026.pdf,Salt (Rock),Standard
+2026-01-29,Basic Goods,Iodized Salt,kg,38.37,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-29-2026.pdf,Salt (Iodized),Standard
+2026-01-29,Basic Goods,Rock Salt,kg,21.67,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-29-2026.pdf,Salt (Rock),Standard
+2026-01-30,Basic Goods,Iodized Salt,kg,38.73,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-30-2026.pdf,Salt (Iodized),Standard
+2026-01-30,Basic Goods,Rock Salt,kg,21.56,https://www.da.gov.ph/wp-content/uploads/2026/01/Daily-Price-Index-January-30-2026.pdf,Salt (Rock),Standard
+2026-01-31,Basic Goods,Iodized Salt,kg,38.68,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-January-31-2026.pdf,Salt (Iodized),Standard
+2026-01-31,Basic Goods,Rock Salt,kg,21.55,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-January-31-2026.pdf,Salt (Rock),Standard
+2026-02-01,Basic Goods,Iodized Salt,kg,41.78,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-1-2026.pdf,Salt (Iodized),Standard
+2026-02-01,Basic Goods,Rock Salt,kg,20.36,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-1-2026.pdf,Salt (Rock),Standard
+2026-02-02,Basic Goods,Iodized Salt,kg,38.89,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-2-2026.pdf,Salt (Iodized),Standard
+2026-02-02,Basic Goods,Rock Salt,kg,21.52,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-2-2026.pdf,Salt (Rock),Standard
+2026-02-03,Basic Goods,Iodized Salt,kg,38.99,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-3-2026.pdf,Salt (Iodized),Standard
+2026-02-03,Basic Goods,Rock Salt,kg,21.76,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-3-2026.pdf,Salt (Rock),Standard
+2026-02-04,Basic Goods,Iodized Salt,kg,40.25,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-4-2026.pdf,Salt (Iodized),Standard
+2026-02-04,Basic Goods,Rock Salt,kg,21.52,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-4-2026.pdf,Salt (Rock),Standard
+2026-02-05,Basic Goods,Iodized Salt,kg,40.25,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-5-2026.pdf,Salt (Iodized),Standard
+2026-02-05,Basic Goods,Rock Salt,kg,21.52,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-5-2026.pdf,Salt (Rock),Standard
+2026-02-06,Basic Goods,Iodized Salt,kg,40.25,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-6-2026.pdf,Salt (Iodized),Standard
+2026-02-06,Basic Goods,Rock Salt,kg,21.62,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-6-2026.pdf,Salt (Rock),Standard
+2026-02-07,Basic Goods,Iodized Salt,kg,38.9,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-7-2026.pdf,Salt (Iodized),Standard
+2026-02-07,Basic Goods,Rock Salt,kg,21.78,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-7-2026.pdf,Salt (Rock),Standard
+2026-02-08,Basic Goods,Iodized Salt,kg,49.29,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-8-2026.pdf,Salt (Iodized),Standard
+2026-02-08,Basic Goods,Rock Salt,kg,21.9,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-8-2026.pdf,Salt (Rock),Standard
+2026-02-09,Basic Goods,Iodized Salt,kg,40.32,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-9-2026.pdf,Salt (Iodized),Standard
+2026-02-09,Basic Goods,Rock Salt,kg,21.78,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-9-2026.pdf,Salt (Rock),Standard
+2026-02-10,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-10-2026.pdf,Salt (Iodized),Standard
+2026-02-10,Basic Goods,Rock Salt,kg,21.78,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-10-2026.pdf,Salt (Rock),Standard
+2026-02-11,Basic Goods,Iodized Salt,kg,38.93,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-11-2026.pdf,Salt (Iodized),Standard
+2026-02-11,Basic Goods,Rock Salt,kg,21.86,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-11-2026.pdf,Salt (Rock),Standard
+2026-02-12,Basic Goods,Iodized Salt,kg,38.8,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-12-2026.pdf,Salt (Iodized),Standard
+2026-02-12,Basic Goods,Rock Salt,kg,21.61,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-12-2026.pdf,Salt (Rock),Standard
+2026-02-13,Basic Goods,Iodized Salt,kg,38.92,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-13-2026.pdf,Salt (Iodized),Standard
+2026-02-13,Basic Goods,Rock Salt,kg,21.61,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-13-2026.pdf,Salt (Rock),Standard
+2026-02-14,Basic Goods,Iodized Salt,kg,39.56,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-14-2026.pdf,Salt (Iodized),Standard
+2026-02-14,Basic Goods,Rock Salt,kg,21.53,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-14-2026.pdf,Salt (Rock),Standard
+2026-02-15,Basic Goods,Iodized Salt,kg,40.29,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-15-2026.pdf,Salt (Iodized),Standard
+2026-02-15,Basic Goods,Rock Salt,kg,20.82,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-15-2026.pdf,Salt (Rock),Standard
+2026-02-16,Basic Goods,Iodized Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-16-2026.pdf,Salt (Iodized),Standard
+2026-02-16,Basic Goods,Rock Salt,kg,21.61,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-16-2026.pdf,Salt (Rock),Standard
+2026-02-17,Basic Goods,Iodized Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-17-2026.pdf,Salt (Iodized),Standard
+2026-02-17,Basic Goods,Rock Salt,kg,21.61,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-17-2026.pdf,Salt (Rock),Standard
+2026-02-18,Basic Goods,Iodized Salt,kg,38.75,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-18-2026.pdf,Salt (Iodized),Standard
+2026-02-18,Basic Goods,Rock Salt,kg,21.61,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-18-2026.pdf,Salt (Rock),Standard
+2026-02-19,Basic Goods,Iodized Salt,kg,38.77,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-19-2026.pdf,Salt (Iodized),Standard
+2026-02-19,Basic Goods,Rock Salt,kg,21.6,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-19-2026.pdf,Salt (Rock),Standard
+2026-02-20,Basic Goods,Iodized Salt,kg,39.2,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-20-2026.pdf,Salt (Iodized),Standard
+2026-02-20,Basic Goods,Rock Salt,kg,21.63,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-20-2026.pdf,Salt (Rock),Standard
+2026-02-21,Basic Goods,Iodized Salt,kg,39.2,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-21-2026.pdf,Salt (Iodized),Standard
+2026-02-21,Basic Goods,Rock Salt,kg,21.68,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-21-2026.pdf,Salt (Rock),Standard
+2026-02-22,Basic Goods,Iodized Salt,kg,48.29,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-22-2026.pdf,Salt (Iodized),Standard
+2026-02-22,Basic Goods,Rock Salt,kg,21.56,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-22-2026.pdf,Salt (Rock),Standard
+2026-02-23,Basic Goods,Iodized Salt,kg,38.71,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-23-2026.pdf,Salt (Iodized),Standard
+2026-02-23,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-23-2026.pdf,Salt (Rock),Standard
+2026-02-24,Basic Goods,Iodized Salt,kg,38.97,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-24-2026.pdf,Salt (Iodized),Standard
+2026-02-24,Basic Goods,Rock Salt,kg,21.65,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-24-2026.pdf,Salt (Rock),Standard
+2026-02-25,Basic Goods,Iodized Salt,kg,38.77,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-25-2026.pdf,Salt (Iodized),Standard
+2026-02-25,Basic Goods,Rock Salt,kg,21.43,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-25-2026.pdf,Salt (Rock),Standard
+2026-02-26,Basic Goods,Iodized Salt,kg,38.73,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-26-2026.pdf,Salt (Iodized),Standard
+2026-02-26,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/02/Daily-Price-Index-February-26-2026.pdf,Salt (Rock),Standard
+2026-02-27,Basic Goods,Iodized Salt,kg,38.73,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-February-27-2026.pdf,Salt (Iodized),Standard
+2026-02-27,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-February-27-2026.pdf,Salt (Rock),Standard
+2026-02-28,Basic Goods,Iodized Salt,kg,38.28,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-February-28-2026.pdf,Salt (Iodized),Standard
+2026-02-28,Basic Goods,Rock Salt,kg,21.45,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-February-28-2026.pdf,Salt (Rock),Standard
+2026-03-01,Basic Goods,Iodized Salt,kg,42.63,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-1-2026.pdf,Salt (Iodized),Standard
+2026-03-01,Basic Goods,Rock Salt,kg,20.9,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-1-2026.pdf,Salt (Rock),Standard
+2026-03-02,Basic Goods,Iodized Salt,kg,40.75,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-2-2026.pdf,Salt (Iodized),Standard
+2026-03-02,Basic Goods,Rock Salt,kg,21.4,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-2-2026.pdf,Salt (Rock),Standard
+2026-03-03,Basic Goods,Iodized Salt,kg,39.1,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-3-2026.pdf,Salt (Iodized),Standard
+2026-03-03,Basic Goods,Rock Salt,kg,21.41,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-3-2026.pdf,Salt (Rock),Standard
+2026-03-04,Basic Goods,Iodized Salt,kg,38.72,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-4-2026.pdf,Salt (Iodized),Standard
+2026-03-04,Basic Goods,Rock Salt,kg,21.43,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-4-2026.pdf,Salt (Rock),Standard
+2026-03-05,Basic Goods,Iodized Salt,kg,38.21,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-5-2026.pdf,Salt (Iodized),Standard
+2026-03-05,Basic Goods,Rock Salt,kg,21.45,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-5-2026.pdf,Salt (Rock),Standard
+2026-03-06,Basic Goods,Iodized Salt,kg,38.4,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-6-2026.pdf,Salt (Iodized),Standard
+2026-03-06,Basic Goods,Rock Salt,kg,21.42,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-6-2026.pdf,Salt (Rock),Standard
+2026-03-07,Basic Goods,Iodized Salt,kg,40.06,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-7-2026.pdf,Salt (Iodized),Standard
+2026-03-07,Basic Goods,Rock Salt,kg,21.37,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-7-2026.pdf,Salt (Rock),Standard
+2026-03-08,Basic Goods,Iodized Salt,kg,42.0,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-8-2026.pdf,Salt (Iodized),Standard
+2026-03-08,Basic Goods,Rock Salt,kg,20.9,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-8-2026.pdf,Salt (Rock),Standard
+2026-03-09,Basic Goods,Iodized Salt,kg,37.35,https://www.da.gov.ph/wp-content/uploads/2026/03/Revised-Daily-Price-Index-March-9-2026.pdf,Salt (Iodized),Standard
+2026-03-09,Basic Goods,Rock Salt,kg,21.29,https://www.da.gov.ph/wp-content/uploads/2026/03/Revised-Daily-Price-Index-March-9-2026.pdf,Salt (Rock),Standard
+2026-03-10,Basic Goods,Iodized Salt,kg,38.64,https://www.da.gov.ph/wp-content/uploads/2026/03/Revised-Daily-Price-Index-March-10-2026.pdf,Salt (Iodized),Standard
+2026-03-10,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/03/Revised-Daily-Price-Index-March-10-2026.pdf,Salt (Rock),Standard
+2026-03-11,Basic Goods,Iodized Salt,kg,38.43,https://www.da.gov.ph/wp-content/uploads/2026/03/Revised-Daily-Price-Index-March-11-2026.pdf,Salt (Iodized),Standard
+2026-03-11,Basic Goods,Rock Salt,kg,21.1,https://www.da.gov.ph/wp-content/uploads/2026/03/Revised-Daily-Price-Index-March-11-2026.pdf,Salt (Rock),Standard
+2026-03-12,Basic Goods,Iodized Salt,kg,39.37,https://www.da.gov.ph/wp-content/uploads/2026/03/Revised-Daily-Price-Index-March-12-2026.pdf,Salt (Iodized),Standard
+2026-03-12,Basic Goods,Rock Salt,kg,21.24,https://www.da.gov.ph/wp-content/uploads/2026/03/Revised-Daily-Price-Index-March-12-2026.pdf,Salt (Rock),Standard
+2026-03-13,Basic Goods,Iodized Salt,kg,38.55,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-13-2026.pdf,Salt (Iodized),Standard
+2026-03-13,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-13-2026.pdf,Salt (Rock),Standard
+2026-03-14,Basic Goods,Iodized Salt,kg,38.55,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-14-2026.pdf,Salt (Iodized),Standard
+2026-03-14,Basic Goods,Rock Salt,kg,21.37,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-14-2026.pdf,Salt (Rock),Standard
+2026-03-15,Basic Goods,Iodized Salt,kg,47.0,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-15-2026.pdf,Salt (Iodized),Standard
+2026-03-15,Basic Goods,Rock Salt,kg,21.9,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-15-2026.pdf,Salt (Rock),Standard
+2026-03-16,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-16-2026.pdf,Salt (Iodized),Standard
+2026-03-16,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-16-2026.pdf,Salt (Rock),Standard
+2026-03-17,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-17-2026.pdf,Salt (Iodized),Standard
+2026-03-17,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-17-2026.pdf,Salt (Rock),Standard
+2026-03-18,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-18-2026.pdf,Salt (Iodized),Standard
+2026-03-18,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-18-2026.pdf,Salt (Rock),Standard
+2026-03-19,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-19-2026.pdf,Salt (Iodized),Standard
+2026-03-19,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-19-2026.pdf,Salt (Rock),Standard
+2026-03-20,Basic Goods,Iodized Salt,kg,39.64,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-20-2026.pdf,Salt (Iodized),Standard
+2026-03-20,Basic Goods,Rock Salt,kg,21.24,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-20-2026.pdf,Salt (Rock),Standard
+2026-03-21,Basic Goods,Iodized Salt,kg,38.62,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-21-2026.pdf,Salt (Iodized),Standard
+2026-03-21,Basic Goods,Rock Salt,kg,21.04,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-21-2026.pdf,Salt (Rock),Standard
+2026-03-22,Basic Goods,Iodized Salt,kg,45.14,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-22-2026.pdf,Salt (Iodized),Standard
+2026-03-22,Basic Goods,Rock Salt,kg,20.9,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-22-2026.pdf,Salt (Rock),Standard
+2026-03-23,Basic Goods,Iodized Salt,kg,38.26,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-23-2026.pdf,Salt (Iodized),Standard
+2026-03-23,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-23-2026.pdf,Salt (Rock),Standard
+2026-03-24,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-24-2026.pdf,Salt (Iodized),Standard
+2026-03-24,Basic Goods,Rock Salt,kg,21.43,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-24-2026.pdf,Salt (Rock),Standard
+2026-03-25,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-25-2026.pdf,Salt (Iodized),Standard
+2026-03-25,Basic Goods,Rock Salt,kg,21.43,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-25-2026.pdf,Salt (Rock),Standard
+2026-03-26,Basic Goods,Iodized Salt,kg,38.78,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-26-2026.pdf,Salt (Iodized),Standard
+2026-03-26,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-26-2026.pdf,Salt (Rock),Standard
+2026-03-27,Basic Goods,Iodized Salt,kg,38.91,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-27-2026.pdf,Salt (Iodized),Standard
+2026-03-27,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-27-2026.pdf,Salt (Rock),Standard
+2026-03-28,Basic Goods,Iodized Salt,kg,39.64,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-28-2026.pdf,Salt (Iodized),Standard
+2026-03-28,Basic Goods,Rock Salt,kg,21.29,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-28-2026.pdf,Salt (Rock),Standard
+2026-03-29,Basic Goods,Iodized Salt,kg,46.22,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-29-2026.pdf,Salt (Iodized),Standard
+2026-03-29,Basic Goods,Rock Salt,kg,21.27,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-29-2026.pdf,Salt (Rock),Standard
+2026-03-30,Basic Goods,Iodized Salt,kg,39.15,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-30-2026.pdf,Salt (Iodized),Standard
+2026-03-30,Basic Goods,Rock Salt,kg,21.41,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-30-2026.pdf,Salt (Rock),Standard
+2026-03-31,Basic Goods,Iodized Salt,kg,39.13,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-31-2026.pdf,Salt (Iodized),Standard
+2026-03-31,Basic Goods,Rock Salt,kg,21.7,https://www.da.gov.ph/wp-content/uploads/2026/03/Daily-Price-Index-March-31-2026.pdf,Salt (Rock),Standard
+2026-04-01,Basic Goods,Iodized Salt,kg,39.14,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-1-2026.pdf,Salt (Iodized),Standard
+2026-04-01,Basic Goods,Rock Salt,kg,21.51,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-1-2026.pdf,Salt (Rock),Standard
+2026-04-02,Basic Goods,Iodized Salt,kg,39.14,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-2-2026.pdf,Salt (Iodized),Standard
+2026-04-02,Basic Goods,Rock Salt,kg,21.51,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-2-2026.pdf,Salt (Rock),Standard
+2026-04-03,Basic Goods,Iodized Salt,kg,38.63,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-3-2026.pdf,Salt (Iodized),Standard
+2026-04-03,Basic Goods,Rock Salt,kg,21.49,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-3-2026.pdf,Salt (Rock),Standard
+2026-04-04,Basic Goods,Iodized Salt,kg,38.92,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-4-2026.pdf,Salt (Iodized),Standard
+2026-04-04,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-4-2026.pdf,Salt (Rock),Standard
+2026-04-05,Basic Goods,Iodized Salt,kg,49.0,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-5-2026.pdf,Salt (Iodized),Standard
+2026-04-05,Basic Goods,Rock Salt,kg,21.13,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-5-2026.pdf,Salt (Rock),Standard
+2026-04-06,Basic Goods,Iodized Salt,kg,40.18,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-6-2026.pdf,Salt (Iodized),Standard
+2026-04-06,Basic Goods,Rock Salt,kg,21.47,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-6-2026.pdf,Salt (Rock),Standard
+2026-04-07,Basic Goods,Iodized Salt,kg,40.53,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-7-2026.pdf,Salt (Iodized),Standard
+2026-04-07,Basic Goods,Rock Salt,kg,21.71,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-7-2026.pdf,Salt (Rock),Standard
+2026-04-08,Basic Goods,Iodized Salt,kg,39.53,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-8-2026.pdf,Salt (Iodized),Standard
+2026-04-08,Basic Goods,Rock Salt,kg,21.1,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-8-2026.pdf,Salt (Rock),Standard
+2026-04-09,Basic Goods,Iodized Salt,kg,40.11,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-9-2026.pdf,Salt (Iodized),Standard
+2026-04-09,Basic Goods,Rock Salt,kg,21.42,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-9-2026.pdf,Salt (Rock),Standard
+2026-04-10,Basic Goods,Iodized Salt,kg,38.41,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-10-2026.pdf,Salt (Iodized),Standard
+2026-04-10,Basic Goods,Rock Salt,kg,21.31,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-10-2026.pdf,Salt (Rock),Standard
+2026-04-11,Basic Goods,Iodized Salt,kg,40.49,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-11-2026.pdf,Salt (Iodized),Standard
+2026-04-11,Basic Goods,Rock Salt,kg,21.46,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-11-2026.pdf,Salt (Rock),Standard
+2026-04-12,Basic Goods,Iodized Salt,kg,46.22,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-12-2026.pdf,Salt (Iodized),Standard
+2026-04-12,Basic Goods,Rock Salt,kg,20.82,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-12-2026.pdf,Salt (Rock),Standard
+2026-04-13,Basic Goods,Iodized Salt,kg,40.99,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-13-2026.pdf,Salt (Iodized),Standard
+2026-04-13,Basic Goods,Rock Salt,kg,21.53,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-13-2026.pdf,Salt (Rock),Standard
+2026-04-14,Basic Goods,Iodized Salt,kg,39.23,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-14-2026.pdf,Salt (Iodized),Standard
+2026-04-14,Basic Goods,Rock Salt,kg,21.46,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-14-2026.pdf,Salt (Rock),Standard
+2026-04-15,Basic Goods,Iodized Salt,kg,39.81,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-15-2026.pdf,Salt (Iodized),Standard
+2026-04-15,Basic Goods,Rock Salt,kg,21.45,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-15-2026.pdf,Salt (Rock),Standard
+2026-04-16,Basic Goods,Iodized Salt,kg,39.73,https://www.da.gov.ph/wp-content/uploads/2026/04/Revised-Daily-Price-Index-April-16-2026.pdf,Salt (Iodized),Standard
+2026-04-16,Basic Goods,Rock Salt,kg,21.3,https://www.da.gov.ph/wp-content/uploads/2026/04/Revised-Daily-Price-Index-April-16-2026.pdf,Salt (Rock),Standard
+2026-04-17,Basic Goods,Iodized Salt,kg,40.31,https://www.da.gov.ph/wp-content/uploads/2026/04/Revised-Daily-Price-Index-April-17-2026.pdf,Salt (Iodized),Standard
+2026-04-17,Basic Goods,Rock Salt,kg,21.05,https://www.da.gov.ph/wp-content/uploads/2026/04/Revised-Daily-Price-Index-April-17-2026.pdf,Salt (Rock),Standard
+2026-04-18,Basic Goods,Iodized Salt,kg,40.43,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-18-2026.pdf,Salt (Iodized),Standard
+2026-04-18,Basic Goods,Rock Salt,kg,21.34,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-18-2026.pdf,Salt (Rock),Standard
+2026-04-19,Basic Goods,Iodized Salt,kg,47.0,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-19-2026.pdf,Salt (Iodized),Standard
+2026-04-19,Basic Goods,Rock Salt,kg,20.13,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-19-2026.pdf,Salt (Rock),Standard
+2026-04-20,Basic Goods,Iodized Salt,kg,38.58,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-20-2026.pdf,Salt (Iodized),Standard
+2026-04-20,Basic Goods,Rock Salt,kg,21.43,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-20-2026.pdf,Salt (Rock),Standard
+2026-04-21,Basic Goods,Iodized Salt,kg,39.74,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-21-2026.pdf,Salt (Iodized),Standard
+2026-04-21,Basic Goods,Rock Salt,kg,21.5,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-21-2026.pdf,Salt (Rock),Standard
+2026-04-22,Basic Goods,Iodized Salt,kg,40.23,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-22-2026.pdf,Salt (Iodized),Standard
+2026-04-22,Basic Goods,Rock Salt,kg,21.59,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-22-2026.pdf,Salt (Rock),Standard
+2026-04-23,Basic Goods,Iodized Salt,kg,40.04,https://www.da.gov.ph/wp-content/uploads/2026/04/April-23-2026-DPI-AFC.pdf,Salt (Iodized),Standard
+2026-04-23,Basic Goods,Rock Salt,kg,21.53,https://www.da.gov.ph/wp-content/uploads/2026/04/April-23-2026-DPI-AFC.pdf,Salt (Rock),Standard
+2026-04-24,Basic Goods,Iodized Salt,kg,39.55,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-24-2026.pdf,Salt (Iodized),Standard
+2026-04-24,Basic Goods,Rock Salt,kg,21.3,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-24-2026.pdf,Salt (Rock),Standard
+2026-04-25,Basic Goods,Iodized Salt,kg,39.56,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-25-2026.pdf,Salt (Iodized),Standard
+2026-04-25,Basic Goods,Rock Salt,kg,21.55,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-25-2026.pdf,Salt (Rock),Standard
+2026-04-26,Basic Goods,Iodized Salt,kg,35.65,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-26-2026.pdf,Salt (Iodized),Standard
+2026-04-26,Basic Goods,Rock Salt,kg,21.2,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-26-2026.pdf,Salt (Rock),Standard
+2026-04-27,Basic Goods,Iodized Salt,kg,39.62,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-27-2026.pdf,Salt (Iodized),Standard
+2026-04-27,Basic Goods,Rock Salt,kg,21.55,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-27-2026.pdf,Salt (Rock),Standard
+2026-04-28,Basic Goods,Iodized Salt,kg,40.37,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-28-2026.pdf,Salt (Iodized),Standard
+2026-04-28,Basic Goods,Rock Salt,kg,21.67,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-28-2026.pdf,Salt (Rock),Standard
+2026-04-29,Basic Goods,Iodized Salt,kg,39.67,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-29-2026.pdf,Salt (Iodized),Standard
+2026-04-29,Basic Goods,Rock Salt,kg,21.5,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-29-2026.pdf,Salt (Rock),Standard
+2026-04-30,Basic Goods,Iodized Salt,kg,39.67,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-30-2026.pdf,Salt (Iodized),Standard
+2026-04-30,Basic Goods,Rock Salt,kg,21.5,https://www.da.gov.ph/wp-content/uploads/2026/04/Daily-Price-Index-April-30-2026.pdf,Salt (Rock),Standard
+2026-05-01,Basic Goods,Iodized Salt,kg,39.67,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-1-2026.pdf,Salt (Iodized),Standard
+2026-05-01,Basic Goods,Rock Salt,kg,21.3,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-1-2026.pdf,Salt (Rock),Standard
+2026-05-02,Basic Goods,Iodized Salt,kg,39.67,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-2-2026.pdf,Salt (Iodized),Standard
+2026-05-02,Basic Goods,Rock Salt,kg,21.3,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-2-2026.pdf,Salt (Rock),Standard
+2026-05-03,Basic Goods,Iodized Salt,kg,35.69,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-3-2026.pdf,Salt (Iodized),Standard
+2026-05-03,Basic Goods,Rock Salt,kg,21.33,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-3-2026.pdf,Salt (Rock),Standard
+2026-05-04,Basic Goods,Iodized Salt,kg,40.44,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-4-2026.pdf,Salt (Iodized),Standard
+2026-05-04,Basic Goods,Rock Salt,kg,21.19,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-4-2026.pdf,Salt (Rock),Standard
+2026-05-05,Basic Goods,Iodized Salt,kg,41.44,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-5-2026.pdf,Salt (Iodized),Standard
+2026-05-05,Basic Goods,Rock Salt,kg,20.93,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-5-2026.pdf,Salt (Rock),Standard
+2026-05-06,Basic Goods,Iodized Salt,kg,41.98,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-6-2026.pdf,Salt (Iodized),Standard
+2026-05-06,Basic Goods,Rock Salt,kg,21.22,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-6-2026.pdf,Salt (Rock),Standard
+2026-05-07,Basic Goods,Iodized Salt,kg,41.07,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-7-2026.pdf,Salt (Iodized),Standard
+2026-05-07,Basic Goods,Rock Salt,kg,21.16,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-7-2026.pdf,Salt (Rock),Standard
+2026-05-08,Basic Goods,Iodized Salt,kg,41.64,https://www.da.gov.ph/wp-content/uploads/2026/05/Revised-Daily-Price-Index-May-8-2026.pdf,Salt (Iodized),Standard
+2026-05-08,Basic Goods,Rock Salt,kg,21.11,https://www.da.gov.ph/wp-content/uploads/2026/05/Revised-Daily-Price-Index-May-8-2026.pdf,Salt (Rock),Standard
+2026-05-09,Basic Goods,Iodized Salt,kg,41.07,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-9-2026.pdf,Salt (Iodized),Standard
+2026-05-09,Basic Goods,Rock Salt,kg,21.11,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-9-2026.pdf,Salt (Rock),Standard
+2026-05-10,Basic Goods,Iodized Salt,kg,35.33,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-10-2026.pdf,Salt (Iodized),Standard
+2026-05-10,Basic Goods,Rock Salt,kg,21.41,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-10-2026.pdf,Salt (Rock),Standard
+2026-05-11,Basic Goods,Iodized Salt,kg,41.07,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-11-2026.pdf,Salt (Iodized),Standard
+2026-05-11,Basic Goods,Rock Salt,kg,21.11,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-11-2026.pdf,Salt (Rock),Standard
+2026-05-12,Basic Goods,Iodized Salt,kg,41.07,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-12-2026.pdf,Salt (Iodized),Standard
+2026-05-12,Basic Goods,Rock Salt,kg,21.11,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-12-2026.pdf,Salt (Rock),Standard
+2026-05-13,Basic Goods,Iodized Salt,kg,41.13,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-13-2026.pdf,Salt (Iodized),Standard
+2026-05-13,Basic Goods,Rock Salt,kg,21.16,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-13-2026.pdf,Salt (Rock),Standard
+2026-05-14,Basic Goods,Iodized Salt,kg,41.13,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-14-2026.pdf,Salt (Iodized),Standard
+2026-05-14,Basic Goods,Rock Salt,kg,21.16,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-14-2026.pdf,Salt (Rock),Standard
+2026-05-15,Basic Goods,Iodized Salt,kg,41.13,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-15-2026.pdf,Salt (Iodized),Standard
+2026-05-15,Basic Goods,Rock Salt,kg,21.16,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-15-2026.pdf,Salt (Rock),Standard
+2026-05-16,Basic Goods,Iodized Salt,kg,41.91,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-16-2026.pdf,Salt (Iodized),Standard
+2026-05-16,Basic Goods,Rock Salt,kg,21.19,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-16-2026.pdf,Salt (Rock),Standard
+2026-05-17,Basic Goods,Iodized Salt,kg,35.36,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-17-2026.pdf,Salt (Iodized),Standard
+2026-05-17,Basic Goods,Rock Salt,kg,21.5,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-17-2026.pdf,Salt (Rock),Standard
+2026-05-18,Basic Goods,Iodized Salt,kg,40.54,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-18-2026.pdf,Salt (Iodized),Standard
+2026-05-18,Basic Goods,Rock Salt,kg,20.78,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-18-2026.pdf,Salt (Rock),Standard
+2026-05-19,Basic Goods,Iodized Salt,kg,41.13,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-19-2026.pdf,Salt (Iodized),Standard
+2026-05-19,Basic Goods,Rock Salt,kg,21.15,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-19-2026.pdf,Salt (Rock),Standard
+2026-05-20,Basic Goods,Iodized Salt,kg,41.07,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-20-2026.pdf,Salt (Iodized),Standard
+2026-05-20,Basic Goods,Rock Salt,kg,21.1,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-20-2026.pdf,Salt (Rock),Standard
+2026-05-21,Basic Goods,Iodized Salt,kg,41.3,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-21-2026.pdf,Salt (Iodized),Standard
+2026-05-21,Basic Goods,Rock Salt,kg,21.1,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-21-2026.pdf,Salt (Rock),Standard
+2026-05-22,Basic Goods,Iodized Salt,kg,41.3,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-22-2026.pdf,Salt (Iodized),Standard
+2026-05-22,Basic Goods,Rock Salt,kg,21.1,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-22-2026.pdf,Salt (Rock),Standard
+2026-05-23,Basic Goods,Iodized Salt,kg,41.3,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-23-2026.pdf,Salt (Iodized),Standard
+2026-05-23,Basic Goods,Rock Salt,kg,21.1,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-23-2026.pdf,Salt (Rock),Standard
+2026-05-24,Basic Goods,Iodized Salt,kg,34.69,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-24-2026.pdf,Salt (Iodized),Standard
+2026-05-24,Basic Goods,Rock Salt,kg,21.26,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-24-2026.pdf,Salt (Rock),Standard
+2026-05-25,Basic Goods,Iodized Salt,kg,39.61,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-25-2026.pdf,Salt (Iodized),Standard
+2026-05-25,Basic Goods,Rock Salt,kg,20.95,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-25-2026.pdf,Salt (Rock),Standard
+2026-05-26,Basic Goods,Iodized Salt,kg,42.71,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-26-2026.pdf,Salt (Iodized),Standard
+2026-05-26,Basic Goods,Rock Salt,kg,21.83,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-26-2026.pdf,Salt (Rock),Standard
+2026-05-27,Basic Goods,Iodized Salt,kg,42.18,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-27-2026.pdf,Salt (Iodized),Standard
+2026-05-27,Basic Goods,Rock Salt,kg,21.62,https://www.da.gov.ph/wp-content/uploads/2026/05/Daily-Price-Index-May-27-2026.pdf,Salt (Rock),Standard
+2026-05-28,Basic Goods,Iodized Salt,kg,41.56,https://www.da.gov.ph/wp-content/uploads/2026/06/Revised-Daily-Price-Index-May-28-2026.pdf,Salt (Iodized),Standard
+2026-05-28,Basic Goods,Rock Salt,kg,21.55,https://www.da.gov.ph/wp-content/uploads/2026/06/Revised-Daily-Price-Index-May-28-2026.pdf,Salt (Rock),Standard
+2026-05-29,Basic Goods,Iodized Salt,kg,41.78,https://www.da.gov.ph/wp-content/uploads/2026/06/Revised-Daily-Price-Index-May-29-2026.pdf,Salt (Iodized),Standard
+2026-05-29,Basic Goods,Rock Salt,kg,21.55,https://www.da.gov.ph/wp-content/uploads/2026/06/Revised-Daily-Price-Index-May-29-2026.pdf,Salt (Rock),Standard
+2026-05-30,Basic Goods,Iodized Salt,kg,42.24,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-May-30-2026.pdf,Salt (Iodized),Standard
+2026-05-30,Basic Goods,Rock Salt,kg,21.73,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-May-30-2026.pdf,Salt (Rock),Standard
+2026-05-31,Basic Goods,Iodized Salt,kg,37.25,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-May-31-2026.pdf,Salt (Iodized),Standard
+2026-05-31,Basic Goods,Rock Salt,kg,21.89,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-May-31-2026.pdf,Salt (Rock),Standard
+2026-06-01,Basic Goods,Iodized Salt,kg,42.27,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-1-2026.pdf,Salt (Iodized),Standard
+2026-06-01,Basic Goods,Rock Salt,kg,21.73,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-1-2026.pdf,Salt (Rock),Standard
+2026-06-02,Basic Goods,Iodized Salt,kg,41.81,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-2-2026.pdf,Salt (Iodized),Standard
+2026-06-02,Basic Goods,Rock Salt,kg,21.55,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-2-2026.pdf,Salt (Rock),Standard
+2026-06-03,Basic Goods,Iodized Salt,kg,41.83,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-3-2026.pdf,Salt (Iodized),Standard
+2026-06-03,Basic Goods,Rock Salt,kg,21.36,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-3-2026.pdf,Salt (Rock),Standard
+2026-06-04,Basic Goods,Iodized Salt,kg,41.58,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-4-2026.pdf,Salt (Iodized),Standard
+2026-06-04,Basic Goods,Rock Salt,kg,21.55,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-4-2026.pdf,Salt (Rock),Standard
+2026-06-05,Basic Goods,Iodized Salt,kg,42.16,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-5-2026.pdf,Salt (Iodized),Standard
+2026-06-05,Basic Goods,Rock Salt,kg,21.57,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-5-2026.pdf,Salt (Rock),Standard
+2026-06-06,Basic Goods,Iodized Salt,kg,42.16,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-6-2026.pdf,Salt (Iodized),Standard
+2026-06-06,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-6-2026.pdf,Salt (Rock),Standard
+2026-06-07,Basic Goods,Iodized Salt,kg,36.24,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-7-2026.pdf,Salt (Iodized),Standard
+2026-06-07,Basic Goods,Rock Salt,kg,22.05,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-7-2026.pdf,Salt (Rock),Standard
+2026-06-08,Basic Goods,Iodized Salt,kg,42.16,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-8-2026.pdf,Salt (Iodized),Standard
+2026-06-08,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-8-2026.pdf,Salt (Rock),Standard
+2026-06-09,Basic Goods,Iodized Salt,kg,42.44,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-9-2026.pdf,Salt (Iodized),Standard
+2026-06-09,Basic Goods,Rock Salt,kg,21.77,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-9-2026.pdf,Salt (Rock),Standard
+2026-06-10,Basic Goods,Iodized Salt,kg,41.84,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-10-2026.pdf,Salt (Iodized),Standard
+2026-06-10,Basic Goods,Rock Salt,kg,21.73,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-10-2026.pdf,Salt (Rock),Standard
+2026-06-11,Basic Goods,Iodized Salt,kg,41.84,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-11-2026.pdf,Salt (Iodized),Standard
+2026-06-11,Basic Goods,Rock Salt,kg,21.73,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-11-2026.pdf,Salt (Rock),Standard
+2026-06-12,Basic Goods,Iodized Salt,kg,41.84,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-12-2026.pdf,Salt (Iodized),Standard
+2026-06-12,Basic Goods,Rock Salt,kg,21.73,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-12-2026.pdf,Salt (Rock),Standard
+2026-06-13,Basic Goods,Iodized Salt,kg,42.61,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-13-2026.pdf,Salt (Iodized),Standard
+2026-06-13,Basic Goods,Rock Salt,kg,21.9,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-13-2026.pdf,Salt (Rock),Standard
+2026-06-14,Basic Goods,Iodized Salt,kg,36.73,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-14-2026.pdf,Salt (Iodized),Standard
+2026-06-14,Basic Goods,Rock Salt,kg,22.0,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-14-2026.pdf,Salt (Rock),Standard
+2026-06-15,Basic Goods,Iodized Salt,kg,41.84,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-15-2026.pdf,Salt (Iodized),Standard
+2026-06-15,Basic Goods,Rock Salt,kg,21.68,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-15-2026.pdf,Salt (Rock),Standard
+2026-06-16,Basic Goods,Iodized Salt,kg,41.84,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-16-2026.pdf,Salt (Iodized),Standard
+2026-06-16,Basic Goods,Rock Salt,kg,21.68,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-16-2026.pdf,Salt (Rock),Standard
+2026-06-17,Basic Goods,Iodized Salt,kg,41.84,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-17-2026.pdf,Salt (Iodized),Standard
+2026-06-17,Basic Goods,Rock Salt,kg,21.68,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-17-2026.pdf,Salt (Rock),Standard
+2026-06-18,Basic Goods,Iodized Salt,kg,41.84,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-18-2026.pdf,Salt (Iodized),Standard
+2026-06-18,Basic Goods,Rock Salt,kg,21.68,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-18-2026.pdf,Salt (Rock),Standard
+2026-06-19,Basic Goods,Iodized Salt,kg,42.51,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-19-2026.pdf,Salt (Iodized),Standard
+2026-06-19,Basic Goods,Rock Salt,kg,21.78,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-19-2026.pdf,Salt (Rock),Standard
+2026-06-20,Basic Goods,Iodized Salt,kg,41.88,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-20-2026.pdf,Salt (Iodized),Standard
+2026-06-20,Basic Goods,Rock Salt,kg,21.73,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-20-2026.pdf,Salt (Rock),Standard
+2026-06-21,Basic Goods,Iodized Salt,kg,37.14,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-21-2026.pdf,Salt (Iodized),Standard
+2026-06-21,Basic Goods,Rock Salt,kg,22.44,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-21-2026.pdf,Salt (Rock),Standard
+2026-06-22,Basic Goods,Iodized Salt,kg,42.92,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-22-2026.pdf,Salt (Iodized),Standard
+2026-06-22,Basic Goods,Rock Salt,kg,21.38,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-22-2026.pdf,Salt (Rock),Standard
+2026-06-23,Basic Goods,Iodized Salt,kg,42.04,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-23-2026.pdf,Salt (Iodized),Standard
+2026-06-23,Basic Goods,Rock Salt,kg,21.35,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-23-2026.pdf,Salt (Rock),Standard
+2026-06-24,Basic Goods,Iodized Salt,kg,41.97,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-24-2026.pdf,Salt (Iodized),Standard
+2026-06-24,Basic Goods,Rock Salt,kg,21.41,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-24-2026.pdf,Salt (Rock),Standard
+2026-06-25,Basic Goods,Iodized Salt,kg,42.27,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-25-2026.pdf,Salt (Iodized),Standard
+2026-06-25,Basic Goods,Rock Salt,kg,21.88,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-25-2026.pdf,Salt (Rock),Standard
+2026-06-26,Basic Goods,Iodized Salt,kg,42.21,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-26-2026.pdf,Salt (Iodized),Standard
+2026-06-26,Basic Goods,Rock Salt,kg,21.97,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-26-2026.pdf,Salt (Rock),Standard
+2026-06-27,Basic Goods,Iodized Salt,kg,41.4,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-27-2026.pdf,Salt (Iodized),Standard
+2026-06-27,Basic Goods,Rock Salt,kg,21.99,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-27-2026.pdf,Salt (Rock),Standard
+2026-06-28,Basic Goods,Iodized Salt,kg,41.51,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-28-2026.pdf,Salt (Iodized),Standard
+2026-06-28,Basic Goods,Rock Salt,kg,22.0,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-28-2026.pdf,Salt (Rock),Standard
+2026-06-29,Basic Goods,Iodized Salt,kg,41.59,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-29-2026.pdf,Salt (Iodized),Standard
+2026-06-29,Basic Goods,Rock Salt,kg,22.07,https://www.da.gov.ph/wp-content/uploads/2026/06/Daily-Price-Index-June-29-2026.pdf,Salt (Rock),Standard
+2026-06-30,Basic Goods,Iodized Salt,kg,41.54,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-June-30-2026.pdf,Salt (Iodized),Standard
+2026-06-30,Basic Goods,Rock Salt,kg,22.07,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-June-30-2026.pdf,Salt (Rock),Standard
+2026-07-01,Basic Goods,Iodized Salt,kg,41.59,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-1-2026.pdf,Salt (Iodized),Standard
+2026-07-01,Basic Goods,Rock Salt,kg,22.11,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-1-2026.pdf,Salt (Rock),Standard
+2026-07-02,Basic Goods,Iodized Salt,kg,41.54,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-2-2026.pdf,Salt (Iodized),Standard
+2026-07-02,Basic Goods,Rock Salt,kg,22.02,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-2-2026.pdf,Salt (Rock),Standard
+2026-07-03,Basic Goods,Iodized Salt,kg,41.36,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-3-2026.pdf,Salt (Iodized),Standard
+2026-07-03,Basic Goods,Rock Salt,kg,22.1,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-3-2026.pdf,Salt (Rock),Standard
+2026-07-04,Basic Goods,Iodized Salt,kg,41.86,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-4-2026.pdf,Salt (Iodized),Standard
+2026-07-04,Basic Goods,Rock Salt,kg,22.21,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-4-2026.pdf,Salt (Rock),Standard
+2026-07-05,Basic Goods,Iodized Salt,kg,41.86,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-5-2026.pdf,Salt (Iodized),Standard
+2026-07-05,Basic Goods,Rock Salt,kg,22.31,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-5-2026.pdf,Salt (Rock),Standard
+2026-07-06,Basic Goods,Iodized Salt,kg,41.45,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-6-2026.pdf,Salt (Iodized),Standard
+2026-07-06,Basic Goods,Rock Salt,kg,22.08,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-6-2026.pdf,Salt (Rock),Standard
+2026-07-07,Basic Goods,Iodized Salt,kg,41.45,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-7-2026.pdf,Salt (Iodized),Standard
+2026-07-07,Basic Goods,Rock Salt,kg,22.18,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-7-2026.pdf,Salt (Rock),Standard
+2026-07-08,Basic Goods,Iodized Salt,kg,40.0,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-8-2026.pdf,Salt (Iodized),Standard
+2026-07-08,Basic Goods,Rock Salt,kg,20.0,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-8-2026.pdf,Salt (Rock),Standard
+2026-07-09,Basic Goods,Iodized Salt,kg,41.54,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-9-2026.pdf,Salt (Iodized),Standard
+2026-07-09,Basic Goods,Rock Salt,kg,22.19,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-9-2026.pdf,Salt (Rock),Standard
+2026-07-10,Basic Goods,Iodized Salt,kg,41.54,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-10-2026.pdf,Salt (Iodized),Standard
+2026-07-10,Basic Goods,Rock Salt,kg,22.19,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-10-2026.pdf,Salt (Rock),Standard
+2026-07-11,Basic Goods,Iodized Salt,kg,41.82,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-11-2026.pdf,Salt (Iodized),Standard
+2026-07-11,Basic Goods,Rock Salt,kg,22.8,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-11-2026.pdf,Salt (Rock),Standard
+2026-07-12,Basic Goods,Iodized Salt,kg,43.17,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-12-2026.pdf,Salt (Iodized),Standard
+2026-07-12,Basic Goods,Rock Salt,kg,22.64,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-12-2026.pdf,Salt (Rock),Standard
+2026-07-13,Basic Goods,Iodized Salt,kg,41.59,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-13-2026.pdf,Salt (Iodized),Standard
+2026-07-13,Basic Goods,Rock Salt,kg,22.23,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-13-2026.pdf,Salt (Rock),Standard
+2026-07-14,Basic Goods,Iodized Salt,kg,42.16,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-14-2026-1.pdf,Salt (Iodized),Standard
+2026-07-14,Basic Goods,Rock Salt,kg,22.23,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-14-2026-1.pdf,Salt (Rock),Standard
+2026-07-15,Basic Goods,Iodized Salt,kg,42.16,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-15-2026.pdf,Salt (Iodized),Standard
+2026-07-15,Basic Goods,Rock Salt,kg,22.23,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-15-2026.pdf,Salt (Rock),Standard
+2026-07-16,Basic Goods,Iodized Salt,kg,42.58,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-16-2026.pdf,Salt (Iodized),Standard
+2026-07-16,Basic Goods,Rock Salt,kg,22.26,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-16-2026.pdf,Salt (Rock),Standard
+2026-07-17,Basic Goods,Iodized Salt,kg,42.24,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-17-2026.pdf,Salt (Iodized),Standard
+2026-07-17,Basic Goods,Rock Salt,kg,22.19,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-17-2026.pdf,Salt (Rock),Standard
+2026-07-18,Basic Goods,Iodized Salt,kg,42.73,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-18-2026.pdf,Salt (Iodized),Standard
+2026-07-18,Basic Goods,Rock Salt,kg,22.44,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-18-2026.pdf,Salt (Rock),Standard
+2026-07-19,Basic Goods,Iodized Salt,kg,42.73,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-19-2026.pdf,Salt (Iodized),Standard
+2026-07-19,Basic Goods,Rock Salt,kg,22.44,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-19-2026.pdf,Salt (Rock),Standard
+2026-07-20,Basic Goods,Iodized Salt,kg,42.24,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-20-2026.pdf,Salt (Iodized),Standard
+2026-07-20,Basic Goods,Rock Salt,kg,22.21,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-20-2026.pdf,Salt (Rock),Standard
+2026-07-21,Basic Goods,Iodized Salt,kg,42.24,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-21-2026.pdf,Salt (Iodized),Standard
+2026-07-21,Basic Goods,Rock Salt,kg,22.21,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-21-2026.pdf,Salt (Rock),Standard
+2026-07-22,Basic Goods,Iodized Salt,kg,42.17,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-22-2026.pdf,Salt (Iodized),Standard
+2026-07-22,Basic Goods,Rock Salt,kg,22.12,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-22-2026.pdf,Salt (Rock),Standard
+2026-07-23,Basic Goods,Iodized Salt,kg,42.17,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-23-2026.pdf,Salt (Iodized),Standard
+2026-07-23,Basic Goods,Rock Salt,kg,22.12,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-23-2026.pdf,Salt (Rock),Standard
+2026-07-24,Basic Goods,Iodized Salt,kg,42.17,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-24-2026.pdf,Salt (Iodized),Standard
+2026-07-24,Basic Goods,Rock Salt,kg,22.12,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-24-2026.pdf,Salt (Rock),Standard
+2026-07-25,Basic Goods,Iodized Salt,kg,42.66,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-25-2026.pdf,Salt (Iodized),Standard
+2026-07-25,Basic Goods,Rock Salt,kg,22.34,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-25-2026.pdf,Salt (Rock),Standard
+2026-07-26,Basic Goods,Iodized Salt,kg,42.42,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-26-2026.pdf,Salt (Iodized),Standard
+2026-07-26,Basic Goods,Rock Salt,kg,22.32,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-26-2026.pdf,Salt (Rock),Standard
+2026-07-27,Basic Goods,Iodized Salt,kg,43.37,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-27-2026.pdf,Salt (Iodized),Standard
+2026-07-27,Basic Goods,Rock Salt,kg,22.44,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-27-2026.pdf,Salt (Rock),Standard
+2026-07-28,Basic Goods,Iodized Salt,kg,43.25,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-28-2026.pdf,Salt (Iodized),Standard
+2026-07-28,Basic Goods,Rock Salt,kg,22.45,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-28-2026.pdf,Salt (Rock),Standard
+2026-07-29,Basic Goods,Iodized Salt,kg,42.05,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-29-2026.pdf,Salt (Iodized),Standard
+2026-07-29,Basic Goods,Rock Salt,kg,22.12,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-29-2026.pdf,Salt (Rock),Standard
+2026-07-30,Basic Goods,Iodized Salt,kg,42.96,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-30-2026.pdf,Salt (Iodized),Standard
+2026-07-30,Basic Goods,Rock Salt,kg,21.61,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-30-2026.pdf,Salt (Rock),Standard
+2026-07-31,Basic Goods,Iodized Salt,kg,43.11,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-31-2026.pdf,Salt (Iodized),Standard
+2026-07-31,Basic Goods,Rock Salt,kg,21.65,https://www.da.gov.ph/wp-content/uploads/2026/07/Daily-Price-Index-July-31-2026.pdf,Salt (Rock),Standard
+2026-08-01,Basic Goods,Iodized Salt,kg,43.07,https://www.da.gov.ph/wp-content/uploads/2026/08/Revised-Daily-Price-Index-August-1-2026.pdf,Salt (Iodized),Standard
+2026-08-01,Basic Goods,Rock Salt,kg,21.74,https://www.da.gov.ph/wp-content/uploads/2026/08/Revised-Daily-Price-Index-August-1-2026.pdf,Salt (Rock),Standard
+2026-08-02,Basic Goods,Iodized Salt,kg,43.07,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-2-2026.pdf,Salt (Iodized),Standard
+2026-08-02,Basic Goods,Rock Salt,kg,22.03,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-2-2026.pdf,Salt (Rock),Standard
+2026-08-03,Basic Goods,Iodized Salt,kg,43.7,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-3-2026.pdf,Salt (Iodized),Standard
+2026-08-03,Basic Goods,Rock Salt,kg,22.02,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-3-2026.pdf,Salt (Rock),Standard
+2026-08-04,Basic Goods,Iodized Salt,kg,42.54,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-4-2026.pdf,Salt (Iodized),Standard
+2026-08-04,Basic Goods,Rock Salt,kg,21.84,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-4-2026.pdf,Salt (Rock),Standard
+2026-08-05,Basic Goods,Iodized Salt,kg,42.73,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-5-2026.pdf,Salt (Iodized),Standard
+2026-08-05,Basic Goods,Rock Salt,kg,21.92,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-5-2026.pdf,Salt (Rock),Standard
+2026-08-06,Basic Goods,Iodized Salt,kg,42.54,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-6-2026.pdf,Salt (Iodized),Standard
+2026-08-06,Basic Goods,Rock Salt,kg,21.84,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-6-2026.pdf,Salt (Rock),Standard
+2026-08-07,Basic Goods,Iodized Salt,kg,42.54,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-7-2026.pdf,Salt (Iodized),Standard
+2026-08-07,Basic Goods,Rock Salt,kg,21.84,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-7-2026.pdf,Salt (Rock),Standard
+2026-08-08,Basic Goods,Iodized Salt,kg,43.07,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-8-2026.pdf,Salt (Iodized),Standard
+2026-08-08,Basic Goods,Rock Salt,kg,21.97,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-8-2026.pdf,Salt (Rock),Standard
+2026-08-09,Basic Goods,Iodized Salt,kg,42.8,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-9-2026.pdf,Salt (Iodized),Standard
+2026-08-09,Basic Goods,Rock Salt,kg,21.96,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-9-2026.pdf,Salt (Rock),Standard
+2026-08-10,Basic Goods,Iodized Salt,kg,44.33,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-10-2026.pdf,Salt (Iodized),Standard
+2026-08-10,Basic Goods,Rock Salt,kg,22.14,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-10-2026.pdf,Salt (Rock),Standard
+2026-08-11,Basic Goods,Iodized Salt,kg,43.7,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-11-2026.pdf,Salt (Iodized),Standard
+2026-08-11,Basic Goods,Rock Salt,kg,21.93,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-11-2026.pdf,Salt (Rock),Standard
+2026-08-12,Basic Goods,Iodized Salt,kg,42.9,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-12-2026.pdf,Salt (Iodized),Standard
+2026-08-12,Basic Goods,Rock Salt,kg,21.84,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-12-2026.pdf,Salt (Rock),Standard
+2026-08-13,Basic Goods,Iodized Salt,kg,41.12,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-13-2026.pdf,Salt (Iodized),Standard
+2026-08-13,Basic Goods,Rock Salt,kg,21.77,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-13-2026.pdf,Salt (Rock),Standard
+2026-08-14,Basic Goods,Iodized Salt,kg,41.12,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-14-2026.pdf,Salt (Iodized),Standard
+2026-08-14,Basic Goods,Rock Salt,kg,21.77,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-14-2026.pdf,Salt (Rock),Standard
+2026-08-15,Basic Goods,Iodized Salt,kg,41.02,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-15-2026.pdf,Salt (Iodized),Standard
+2026-08-15,Basic Goods,Rock Salt,kg,22.34,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-15-2026.pdf,Salt (Rock),Standard
+2026-08-16,Basic Goods,Iodized Salt,kg,41.51,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-16-2026.pdf,Salt (Iodized),Standard
+2026-08-16,Basic Goods,Rock Salt,kg,21.91,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-16-2026.pdf,Salt (Rock),Standard
+2026-08-17,Basic Goods,Iodized Salt,kg,42.54,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-17-2026.pdf,Salt (Iodized),Standard
+2026-08-17,Basic Goods,Rock Salt,kg,21.78,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-17-2026.pdf,Salt (Rock),Standard
+2026-08-18,Basic Goods,Iodized Salt,kg,42.54,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-18-2026.pdf,Salt (Iodized),Standard
+2026-08-18,Basic Goods,Rock Salt,kg,21.78,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-18-2026.pdf,Salt (Rock),Standard
+2026-08-19,Basic Goods,Iodized Salt,kg,43.1,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-19-2026.pdf,Salt (Iodized),Standard
+2026-08-19,Basic Goods,Rock Salt,kg,22.01,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-19-2026.pdf,Salt (Rock),Standard
+2026-08-20,Basic Goods,Iodized Salt,kg,42.46,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-20-2026.pdf,Salt (Iodized),Standard
+2026-08-20,Basic Goods,Rock Salt,kg,21.83,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-20-2026.pdf,Salt (Rock),Standard
+2026-08-21,Basic Goods,Iodized Salt,kg,42.46,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-21-2026.pdf,Salt (Iodized),Standard
+2026-08-21,Basic Goods,Rock Salt,kg,21.83,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-21-2026.pdf,Salt (Rock),Standard
+2026-08-22,Basic Goods,Iodized Salt,kg,43.16,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-22-2026.pdf,Salt (Iodized),Standard
+2026-08-22,Basic Goods,Rock Salt,kg,22.01,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-22-2026.pdf,Salt (Rock),Standard
+2026-08-23,Basic Goods,Iodized Salt,kg,43.16,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-23-2026.pdf,Salt (Iodized),Standard
+2026-08-23,Basic Goods,Rock Salt,kg,22.01,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-23-2026.pdf,Salt (Rock),Standard
+2026-08-24,Basic Goods,Iodized Salt,kg,42.48,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-24-2026.pdf,Salt (Iodized),Standard
+2026-08-24,Basic Goods,Rock Salt,kg,21.8,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-24-2026.pdf,Salt (Rock),Standard
+2026-08-25,Basic Goods,Iodized Salt,kg,42.48,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-25-2026.pdf,Salt (Iodized),Standard
+2026-08-25,Basic Goods,Rock Salt,kg,21.8,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-25-2026.pdf,Salt (Rock),Standard
+2026-08-26,Basic Goods,Iodized Salt,kg,42.25,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-26-2026.pdf,Salt (Iodized),Standard
+2026-08-26,Basic Goods,Rock Salt,kg,21.77,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-26-2026.pdf,Salt (Rock),Standard
+2026-08-27,Basic Goods,Iodized Salt,kg,42.25,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-27-2026.pdf,Salt (Iodized),Standard
+2026-08-27,Basic Goods,Rock Salt,kg,21.77,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-27-2026.pdf,Salt (Rock),Standard
+2026-08-28,Basic Goods,Iodized Salt,kg,42.04,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-28-2026.pdf,Salt (Iodized),Standard
+2026-08-28,Basic Goods,Rock Salt,kg,21.81,https://www.da.gov.ph/wp-content/uploads/2026/08/Daily-Price-Index-August-28-2026.pdf,Salt (Rock),Standard
+2026-08-29,Basic Goods,Iodized Salt,kg,41.56,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-August-29-2026.pdf,Salt (Iodized),Standard
+2026-08-29,Basic Goods,Rock Salt,kg,21.99,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-August-29-2026.pdf,Salt (Rock),Standard
+2026-08-30,Basic Goods,Iodized Salt,kg,42.13,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-August-30-2026.pdf,Salt (Iodized),Standard
+2026-08-30,Basic Goods,Rock Salt,kg,22.15,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-August-30-2026.pdf,Salt (Rock),Standard
+2026-08-31,Basic Goods,Iodized Salt,kg,42.36,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-August-31-2026.pdf,Salt (Iodized),Standard
+2026-08-31,Basic Goods,Rock Salt,kg,21.73,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-August-31-2026.pdf,Salt (Rock),Standard
+2026-09-01,Basic Goods,Iodized Salt,kg,41.76,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-1-2026.pdf,Salt (Iodized),Standard
+2026-09-01,Basic Goods,Rock Salt,kg,21.92,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-1-2026.pdf,Salt (Rock),Standard
+2026-09-02,Basic Goods,Iodized Salt,kg,42.04,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-2-2026.pdf,Salt (Iodized),Standard
+2026-09-02,Basic Goods,Rock Salt,kg,21.81,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-2-2026.pdf,Salt (Rock),Standard
+2026-09-03,Basic Goods,Iodized Salt,kg,42.14,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-3-2026.pdf,Salt (Iodized),Standard
+2026-09-03,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-3-2026.pdf,Salt (Rock),Standard
+2026-09-04,Basic Goods,Iodized Salt,kg,42.14,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-4-2026.pdf,Salt (Iodized),Standard
+2026-09-04,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-4-2026.pdf,Salt (Rock),Standard
+2026-09-05,Basic Goods,Iodized Salt,kg,42.62,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-5-2026.pdf,Salt (Iodized),Standard
+2026-09-05,Basic Goods,Rock Salt,kg,22.03,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-5-2026.pdf,Salt (Rock),Standard
+2026-09-06,Basic Goods,Iodized Salt,kg,43.14,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-6-2026.pdf,Salt (Iodized),Standard
+2026-09-06,Basic Goods,Rock Salt,kg,22.21,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-6-2026.pdf,Salt (Rock),Standard
+2026-09-07,Basic Goods,Iodized Salt,kg,40.18,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-7-2026.pdf,Salt (Iodized),Standard
+2026-09-07,Basic Goods,Rock Salt,kg,21.8,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-7-2026.pdf,Salt (Rock),Standard
+2026-09-08,Basic Goods,Iodized Salt,kg,41.76,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-8-2026.pdf,Salt (Iodized),Standard
+2026-09-08,Basic Goods,Rock Salt,kg,21.85,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-8-2026.pdf,Salt (Rock),Standard
+2026-09-09,Basic Goods,Iodized Salt,kg,40.46,https://www.da.gov.ph/wp-content/uploads/2026/09/Revised-Daily-Price-Index-September-9-2026.pdf,Salt (Iodized),Standard
+2026-09-09,Basic Goods,Rock Salt,kg,21.85,https://www.da.gov.ph/wp-content/uploads/2026/09/Revised-Daily-Price-Index-September-9-2026.pdf,Salt (Rock),Standard
+2026-09-10,Basic Goods,Iodized Salt,kg,40.76,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-10-2026.pdf,Salt (Iodized),Standard
+2026-09-10,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-10-2026.pdf,Salt (Rock),Standard
+2026-09-11,Basic Goods,Iodized Salt,kg,42.18,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-11-2026.pdf,Salt (Iodized),Standard
+2026-09-11,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-11-2026.pdf,Salt (Rock),Standard
+2026-09-12,Basic Goods,Iodized Salt,kg,44.54,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-12-2026.pdf,Salt (Iodized),Standard
+2026-09-12,Basic Goods,Rock Salt,kg,22.25,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-12-2026.pdf,Salt (Rock),Standard
+2026-09-13,Basic Goods,Iodized Salt,kg,42.84,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-13-2026.pdf,Salt (Iodized),Standard
+2026-09-13,Basic Goods,Rock Salt,kg,22.36,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-13-2026.pdf,Salt (Rock),Standard
+2026-09-14,Basic Goods,Iodized Salt,kg,42.18,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-14-2026.pdf,Salt (Iodized),Standard
+2026-09-14,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-14-2026.pdf,Salt (Rock),Standard
+2026-09-15,Basic Goods,Iodized Salt,kg,42.18,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-15-2026.pdf,Salt (Iodized),Standard
+2026-09-15,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-15-2026.pdf,Salt (Rock),Standard
+2026-09-16,Basic Goods,Iodized Salt,kg,42.18,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-16-2026.pdf,Salt (Iodized),Standard
+2026-09-16,Basic Goods,Rock Salt,kg,21.84,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-16-2026.pdf,Salt (Rock),Standard
+2026-09-17,Basic Goods,Iodized Salt,kg,42.18,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-17-2026.pdf,Salt (Iodized),Standard
+2026-09-17,Basic Goods,Rock Salt,kg,21.84,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-17-2026.pdf,Salt (Rock),Standard
+2026-09-18,Basic Goods,Iodized Salt,kg,42.07,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-18-2026.pdf,Salt (Iodized),Standard
+2026-09-18,Basic Goods,Rock Salt,kg,21.94,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-18-2026.pdf,Salt (Rock),Standard
+2026-09-19,Basic Goods,Iodized Salt,kg,42.22,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-19-2026.pdf,Salt (Iodized),Standard
+2026-09-19,Basic Goods,Rock Salt,kg,22.15,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-19-2026.pdf,Salt (Rock),Standard
+2026-09-20,Basic Goods,Iodized Salt,kg,40.72,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-20-2026.pdf,Salt (Iodized),Standard
+2026-09-20,Basic Goods,Rock Salt,kg,21.58,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-20-2026.pdf,Salt (Rock),Standard
+2026-09-21,Basic Goods,Iodized Salt,kg,42.43,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-21-2026-1.pdf,Salt (Iodized),Standard
+2026-09-21,Basic Goods,Rock Salt,kg,21.98,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-21-2026-1.pdf,Salt (Rock),Standard
+2026-09-22,Basic Goods,Iodized Salt,kg,42.18,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-22-2026-1.pdf,Salt (Iodized),Standard
+2026-09-22,Basic Goods,Rock Salt,kg,21.74,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-22-2026-1.pdf,Salt (Rock),Standard
+2026-09-23,Basic Goods,Iodized Salt,kg,41.27,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-23-2026-1.pdf,Salt (Iodized),Standard
+2026-09-23,Basic Goods,Rock Salt,kg,21.4,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-23-2026-1.pdf,Salt (Rock),Standard
+2026-09-24,Basic Goods,Iodized Salt,kg,41.11,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-24-2026-1.pdf,Salt (Iodized),Standard
+2026-09-24,Basic Goods,Rock Salt,kg,21.42,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-24-2026-1.pdf,Salt (Rock),Standard
+2026-09-25,Basic Goods,Iodized Salt,kg,41.85,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-25-2026.pdf,Salt (Iodized),Standard
+2026-09-25,Basic Goods,Rock Salt,kg,21.82,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-25-2026.pdf,Salt (Rock),Standard
+2026-09-26,Basic Goods,Iodized Salt,kg,42.95,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-26-2026.pdf,Salt (Iodized),Standard
+2026-09-26,Basic Goods,Rock Salt,kg,22.38,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-26-2026.pdf,Salt (Rock),Standard
+2026-09-27,Basic Goods,Iodized Salt,kg,43.0,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-27-2026.pdf,Salt (Iodized),Standard
+2026-09-27,Basic Goods,Rock Salt,kg,22.4,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-27-2026.pdf,Salt (Rock),Standard
+2026-09-28,Basic Goods,Iodized Salt,kg,42.32,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-28-2026.pdf,Salt (Iodized),Standard
+2026-09-28,Basic Goods,Rock Salt,kg,22.2,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-28-2026.pdf,Salt (Rock),Standard
+2026-09-29,Basic Goods,Iodized Salt,kg,42.28,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-29-2026.pdf,Salt (Iodized),Standard
+2026-09-29,Basic Goods,Rock Salt,kg,22.2,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-29-2026.pdf,Salt (Rock),Standard
+2026-09-30,Basic Goods,Iodized Salt,kg,42.18,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-30-2026.pdf,Salt (Iodized),Standard
+2026-09-30,Basic Goods,Rock Salt,kg,22.2,https://www.da.gov.ph/wp-content/uploads/2026/09/Daily-Price-Index-September-30-2026.pdf,Salt (Rock),Standard
+2026-10-01,Basic Goods,Iodized Salt,kg,41.7,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-1-2026-1.pdf,Salt (Iodized),Standard
+2026-10-01,Basic Goods,Rock Salt,kg,22.26,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-1-2026-1.pdf,Salt (Rock),Standard
+2026-10-02,Basic Goods,Iodized Salt,kg,42.46,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-2-2026.pdf,Salt (Iodized),Standard
+2026-10-02,Basic Goods,Rock Salt,kg,22.36,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-2-2026.pdf,Salt (Rock),Standard
+2026-10-03,Basic Goods,Iodized Salt,kg,42.85,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-3-2026.pdf,Salt (Iodized),Standard
+2026-10-03,Basic Goods,Rock Salt,kg,22.29,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-3-2026.pdf,Salt (Rock),Standard
+2026-10-04,Basic Goods,Iodized Salt,kg,42.85,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-4-2026.pdf,Salt (Iodized),Standard
+2026-10-04,Basic Goods,Rock Salt,kg,22.25,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-4-2026.pdf,Salt (Rock),Standard
+2026-10-05,Basic Goods,Iodized Salt,kg,41.46,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-5-2026.pdf,Salt (Iodized),Standard
+2026-10-05,Basic Goods,Rock Salt,kg,21.89,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-5-2026.pdf,Salt (Rock),Standard
+2026-10-06,Basic Goods,Iodized Salt,kg,41.87,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-6-2026.pdf,Salt (Iodized),Standard
+2026-10-06,Basic Goods,Rock Salt,kg,22.11,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-6-2026.pdf,Salt (Rock),Standard
+2026-10-07,Basic Goods,Iodized Salt,kg,43.28,https://www.da.gov.ph/wp-content/uploads/2026/10/Revised-Daily-Price-Index-October-7-2026.pdf,Salt (Iodized),Standard
+2026-10-07,Basic Goods,Rock Salt,kg,22.48,https://www.da.gov.ph/wp-content/uploads/2026/10/Revised-Daily-Price-Index-October-7-2026.pdf,Salt (Rock),Standard
+2026-10-08,Basic Goods,Iodized Salt,kg,42.84,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-8-2026-1.pdf,Salt (Iodized),Standard
+2026-10-08,Basic Goods,Rock Salt,kg,22.29,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-8-2026-1.pdf,Salt (Rock),Standard
+2026-10-09,Basic Goods,Iodized Salt,kg,42.97,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-9-2026.pdf,Salt (Iodized),Standard
+2026-10-09,Basic Goods,Rock Salt,kg,22.68,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-9-2026.pdf,Salt (Rock),Standard
+2026-10-10,Basic Goods,Iodized Salt,kg,43.73,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-10-2026.pdf,Salt (Iodized),Standard
+2026-10-10,Basic Goods,Rock Salt,kg,22.56,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-10-2026.pdf,Salt (Rock),Standard
+2026-10-11,Basic Goods,Iodized Salt,kg,44.45,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-11-2026.pdf,Salt (Iodized),Standard
+2026-10-11,Basic Goods,Rock Salt,kg,22.57,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-11-2026.pdf,Salt (Rock),Standard
+2026-10-12,Basic Goods,Iodized Salt,kg,44.15,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-12-2026.pdf,Salt (Iodized),Standard
+2026-10-12,Basic Goods,Rock Salt,kg,22.4,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-12-2026.pdf,Salt (Rock),Standard
+2026-10-13,Basic Goods,Iodized Salt,kg,43.71,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-13-2026.pdf,Salt (Iodized),Standard
+2026-10-13,Basic Goods,Rock Salt,kg,22.38,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-13-2026.pdf,Salt (Rock),Standard
+2026-10-14,Basic Goods,Iodized Salt,kg,42.86,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-14-2026.pdf,Salt (Iodized),Standard
+2026-10-14,Basic Goods,Rock Salt,kg,22.35,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-14-2026.pdf,Salt (Rock),Standard
+2026-10-15,Basic Goods,Iodized Salt,kg,43.04,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-15-2026.pdf,Salt (Iodized),Standard
+2026-10-15,Basic Goods,Rock Salt,kg,22.46,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-15-2026.pdf,Salt (Rock),Standard
+2026-10-16,Basic Goods,Iodized Salt,kg,43.04,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-16-2026.pdf,Salt (Iodized),Standard
+2026-10-16,Basic Goods,Rock Salt,kg,22.65,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-16-2026.pdf,Salt (Rock),Standard
+2026-10-17,Basic Goods,Iodized Salt,kg,41.91,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-17-2026.pdf,Salt (Iodized),Standard
+2026-10-17,Basic Goods,Rock Salt,kg,22.93,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-17-2026.pdf,Salt (Rock),Standard
+2026-10-18,Basic Goods,Iodized Salt,kg,42.14,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-18-2026.pdf,Salt (Iodized),Standard
+2026-10-18,Basic Goods,Rock Salt,kg,22.62,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-18-2026.pdf,Salt (Rock),Standard
+2026-10-19,Basic Goods,Iodized Salt,kg,42.22,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-19-2026.pdf,Salt (Iodized),Standard
+2026-10-19,Basic Goods,Rock Salt,kg,22.14,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-19-2026.pdf,Salt (Rock),Standard
+2026-10-20,Basic Goods,Iodized Salt,kg,43.04,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-20-2026.pdf,Salt (Iodized),Standard
+2026-10-20,Basic Goods,Rock Salt,kg,22.5,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-20-2026.pdf,Salt (Rock),Standard
+2026-10-21,Basic Goods,Iodized Salt,kg,41.36,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-21-2026.pdf,Salt (Iodized),Standard
+2026-10-21,Basic Goods,Rock Salt,kg,21.83,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-21-2026.pdf,Salt (Rock),Standard
+2026-10-22,Basic Goods,Iodized Salt,kg,42.84,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-22-2026.pdf,Salt (Iodized),Standard
+2026-10-22,Basic Goods,Rock Salt,kg,22.33,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-22-2026.pdf,Salt (Rock),Standard
+2026-10-23,Basic Goods,Iodized Salt,kg,44.03,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-23-2026.pdf,Salt (Iodized),Standard
+2026-10-23,Basic Goods,Rock Salt,kg,22.5,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-23-2026.pdf,Salt (Rock),Standard
+2026-10-24,Basic Goods,Iodized Salt,kg,44.26,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-24-2026.pdf,Salt (Iodized),Standard
+2026-10-24,Basic Goods,Rock Salt,kg,22.68,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-24-2026.pdf,Salt (Rock),Standard
+2026-10-25,Basic Goods,Iodized Salt,kg,43.28,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-25-2026.pdf,Salt (Iodized),Standard
+2026-10-25,Basic Goods,Rock Salt,kg,23.11,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-25-2026.pdf,Salt (Rock),Standard
+2026-10-26,Basic Goods,Iodized Salt,kg,43.67,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-26-2026.pdf,Salt (Iodized),Standard
+2026-10-26,Basic Goods,Rock Salt,kg,22.51,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-26-2026.pdf,Salt (Rock),Standard
+2026-10-27,Basic Goods,Iodized Salt,kg,43.87,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-27-2026.pdf,Salt (Iodized),Standard
+2026-10-27,Basic Goods,Rock Salt,kg,22.54,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-27-2026.pdf,Salt (Rock),Standard
+2026-10-28,Basic Goods,Iodized Salt,kg,41.57,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-28-2026.pdf,Salt (Iodized),Standard
+2026-10-28,Basic Goods,Rock Salt,kg,22.38,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-28-2026.pdf,Salt (Rock),Standard
+2026-10-29,Basic Goods,Iodized Salt,kg,43.68,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-29-2026.pdf,Salt (Iodized),Standard
+2026-10-29,Basic Goods,Rock Salt,kg,22.82,https://www.da.gov.ph/wp-content/uploads/2026/10/Daily-Price-Index-October-29-2026.pdf,Salt (Rock),Standard
+2026-10-30,Basic Goods,Iodized Salt,kg,44.31,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-October-30-2026.pdf,Salt (Iodized),Standard
+2026-10-30,Basic Goods,Rock Salt,kg,22.92,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-October-30-2026.pdf,Salt (Rock),Standard
+2026-10-31,Basic Goods,Iodized Salt,kg,45.56,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-October-31-2026.pdf,Salt (Iodized),Standard
+2026-10-31,Basic Goods,Rock Salt,kg,23.06,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-October-31-2026.pdf,Salt (Rock),Standard
+2026-11-01,Basic Goods,Iodized Salt,kg,45.9,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-1-2026.pdf,Salt (Iodized),Standard
+2026-11-01,Basic Goods,Rock Salt,kg,23.07,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-1-2026.pdf,Salt (Rock),Standard
+2026-11-02,Basic Goods,Iodized Salt,kg,43.71,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-2-2026.pdf,Salt (Iodized),Standard
+2026-11-02,Basic Goods,Rock Salt,kg,24.04,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-2-2026.pdf,Salt (Rock),Standard
+2026-11-03,Basic Goods,Iodized Salt,kg,43.79,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-3-2026.pdf,Salt (Iodized),Standard
+2026-11-03,Basic Goods,Rock Salt,kg,24.46,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-3-2026.pdf,Salt (Rock),Standard
