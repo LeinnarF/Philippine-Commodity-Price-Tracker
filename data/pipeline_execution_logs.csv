@@ -26,3 +26,4 @@ run_20261109_201537,2026-11-09 20:15:37,schedule,SUCCESS,2026-11-09,1,4,200,45.4
 run_20261109_232131,2026-11-09 23:21:31,schedule,SUCCESS,2026-11-09,2,1,50,40.53,Successfully ingested 1 new bulletin(s) with 50 records in-memory. Panel updated to 2026-11-09.
 run_20261110_172149,2026-11-10 17:21:49,schedule,SUCCESS,2026-11-10,1,1,50,33.46,Successfully ingested 1 new bulletin(s) with 50 records in-memory. Panel updated to 2026-11-10.
 run_20261110_204540,2026-11-10 20:45:40,schedule,NO_NEW_DATA,2026-11-10,2,0,0,58.75,Dataset is already up to date (2026-11-10). Checked 2 provisional DPI-AFC bulletin(s); no finalized Daily-Price-Index replacement published yet.
+run_20261111_173207,2026-11-11 17:32:07,schedule,SUCCESS,2026-11-11,1,2,100,12.38,Successfully ingested 2 new bulletin(s) with 100 records in-memory. Panel updated to 2026-11-11.
