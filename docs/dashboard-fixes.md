@@ -11,15 +11,11 @@ Note: reviewed from the page text and data only. Plotly charts and treemap inter
   - 1-day is +41.69%, but 7-day is only +1.44% and 30-day is -1.42%.
   - Implied previous-day price is about ₱167, against about ₱235-240 a week and a month ago.
   - 30d SMA (₱196) is far below the current price (₱237), and 30d CV is 15.5%, so the series looks like it flips between two levels.
-  - *Investigation Result (2026-11-12)*: Verified directly against the official DA bulletin `Daily-Price-Index-November-9-2026.pdf`. Page 1 explicitly recorded `['Sardines (Tamban), Local', 'Medium, Fresh or Chilled', '167.27']` and Nov 8 recorded `246.92`. No PDF parsing or row-alignment error occurred; the DA bulletin itself contained this rapid price oscillation. This highlights the need for automated outlier dampening in headline cards.
+  - *Investigation Result (2026-11-12)*: Verified directly against the official DA bulletin `Daily-Price-Index-November-9-2026.pdf`. Page 1 explicitly recorded `['Sardines (Tamban), Local', 'Medium, Fresh or Chilled', '167.27']` and Nov 8 recorded `246.92`. No PDF parsing or row-alignment error occurred; the DA bulletin itself contained this rapid price oscillation.
 - [x] **Handle provisional bulletins**
   - The Nov 10 file is a provisional `DPI-AFC` bulletin, and the audit log says no finalized Daily Price Index has replaced it.
   - *Implemented*: Added `is_provisional` flag in `v_commodity_analytics`, `v_latest_snapshot`, and bulletin audit queries. Added "PROVISIONAL" badges in sidebar, KPI strip, and governance register.
   - Re-ingest and overwrite once the finalized bulletin is published (supported via `daily_update.py` finalized candidate check).
-- [x] **Add an outlier flag** for day-over-day moves above a threshold (for example ±15%) so headline cards don't surface likely errors.
-  - *Implemented*: `is_outlier` computed dynamically in `v_commodity_analytics` (`ABS(dod_pct) >= 15.0`). Tagged with warning badges in Census and Commodity History tables.
-- [x] **Stop headline cards from being driven by unverified outliers**: "Top Daily Increase" and the #1 row in the Top 5 table.
-  - *Implemented*: Excluded unverified outliers (`is_outlier IS FALSE`) from headline KPI Top Gainer/Decliner and Top 5 Movers tables. Added an active outlier notice banner on the Overview view when unverified outliers exist.
 
 ## 2. Wrong labels and misleading numbers
 
@@ -56,7 +52,7 @@ Note: reviewed from the page text and data only. Plotly charts and treemap inter
   - Check whether 1-day, 7-day, and 30-day changes and the SMAs use calendar offsets or row offsets.
   - The two differ around gaps. Document the choice either way.
 - [ ] **Document the effect of forward-filling** on volatility and CV (it understates both) and on 1-day change (artificial zeros).
-- [ ] **Add an anomaly-handling note** to the Data Governance section (how outliers and provisional values are treated).
+- [ ] **Add a provisional bulletin handling note** to the Data Governance section (how provisional DPI-AFC values are treated).
 
 ## 5. Branding and wording
 

@@ -266,7 +266,6 @@ SELECT
     ((price_prevailing - price_prev_7d) / NULLIF(price_prev_7d, 0)) * 100.0 AS wow_pct,
     (price_prevailing - price_prev_30d) AS mom_abs,
     ((price_prevailing - price_prev_30d) / NULLIF(price_prev_30d, 0)) * 100.0 AS mom_pct,
-    (ABS(((price_prevailing - price_prev_1d) / NULLIF(price_prev_1d, 0)) * 100.0) >= 15.0) AS is_outlier,
     (source_url ILIKE '%dpi-afc%' OR source_url ILIKE '%dpi_afc%') AS is_provisional,
     source_url
 FROM lagged;

@@ -72,45 +72,22 @@ def fetch_kpi_summary(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
     """).fetchone()
     is_latest_provisional = bool(is_prov_res[0]) if is_prov_res and is_prov_res[0] is not None else False
 
-    outliers_today = con.execute("""
-        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct
-        FROM v_latest_snapshot
-        WHERE is_outlier IS TRUE
-        ORDER BY ABS(dod_pct) DESC;
-    """).df().to_dict(orient="records")
-
     top_gainer_rows = con.execute("""
         SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct
         FROM v_latest_snapshot
-        WHERE dod_pct IS NOT NULL AND (is_outlier IS FALSE OR is_outlier IS NULL)
+        WHERE dod_pct IS NOT NULL
         ORDER BY dod_pct DESC
         LIMIT 1;
     """).df().to_dict(orient="records")
-    if not top_gainer_rows:
-        top_gainer_rows = con.execute("""
-            SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct
-            FROM v_latest_snapshot
-            WHERE dod_pct IS NOT NULL
-            ORDER BY dod_pct DESC
-            LIMIT 1;
-        """).df().to_dict(orient="records")
     top_gainer = top_gainer_rows[0] if top_gainer_rows else None
 
     top_decliner_rows = con.execute("""
         SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct
         FROM v_latest_snapshot
-        WHERE dod_pct IS NOT NULL AND (is_outlier IS FALSE OR is_outlier IS NULL)
+        WHERE dod_pct IS NOT NULL
         ORDER BY dod_pct ASC
         LIMIT 1;
     """).df().to_dict(orient="records")
-    if not top_decliner_rows:
-        top_decliner_rows = con.execute("""
-            SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct
-            FROM v_latest_snapshot
-            WHERE dod_pct IS NOT NULL
-            ORDER BY dod_pct ASC
-            LIMIT 1;
-        """).df().to_dict(orient="records")
     top_decliner = top_decliner_rows[0] if top_decliner_rows else None
 
     top_volatile = con.execute("""
@@ -140,42 +117,30 @@ def fetch_kpi_summary(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "top_decliner": top_decliner,
         "top_volatile": top_volatile,
         "is_provisional": is_latest_provisional,
-        "outliers_today": outliers_today,
     }
 
 
 def fetch_top_movers(con: duckdb.DuckDBPyConnection, limit: int = 5) -> dict[str, list[dict[str, Any]]]:
-    """
-    Returns top N price increases and decreases on the latest snapshot date.
-    Excludes unverified outliers so headline ranking tables are not distorted by sudden anomalies.
-    """
+    """Returns top N price increases and decreases on the latest snapshot date."""
     gainers = con.execute("""
-        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct, is_outlier
+        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct
         FROM v_latest_snapshot
-        WHERE dod_pct IS NOT NULL AND (is_outlier IS FALSE OR is_outlier IS NULL)
+        WHERE dod_pct IS NOT NULL
         ORDER BY dod_pct DESC
         LIMIT ?;
     """, [limit]).df().to_dict(orient="records")
 
     decliners = con.execute("""
-        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct, is_outlier
+        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct
         FROM v_latest_snapshot
-        WHERE dod_pct IS NOT NULL AND (is_outlier IS FALSE OR is_outlier IS NULL)
+        WHERE dod_pct IS NOT NULL
         ORDER BY dod_pct ASC
         LIMIT ?;
     """, [limit]).df().to_dict(orient="records")
 
-    outliers = con.execute("""
-        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct, is_outlier
-        FROM v_latest_snapshot
-        WHERE is_outlier IS TRUE
-        ORDER BY ABS(dod_pct) DESC;
-    """).df().to_dict(orient="records")
-
     return {
         "gainers": gainers,
         "decliners": decliners,
-        "outliers": outliers,
     }
 
 
@@ -613,7 +578,6 @@ def fetch_latest_snapshot(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[str
             ROUND(wow_pct, 2) AS wow_pct,
             ROUND(mom_abs, 2) AS mom_abs,
             ROUND(mom_pct, 2) AS mom_pct,
-            is_outlier,
             is_provisional
         FROM v_latest_snapshot
         ORDER BY commodity_group, commodity;

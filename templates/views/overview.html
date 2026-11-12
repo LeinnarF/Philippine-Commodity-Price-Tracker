@@ -1,19 +1,5 @@
 {% include "components/kpi_strip.html" %}
 
-{% if top_movers.outliers %}
-<!-- Unverified Outliers Notice -->
-<div class="alert-outlier" role="alert">
-  <span style="font-size: 16px; line-height: 1.2;" aria-hidden="true">⚠️</span>
-  <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
-    <strong style="color: var(--text-heading);">Unverified Outlier Filter Active:</strong>
-    {% for outl in top_movers.outliers %}
-    <span><strong>{{ outl.commodity }}</strong> recorded a {{ "+" if outl.dod_pct > 0 else "" }}{{ "%.2f"|format(outl.dod_pct) }}% day-over-day price move ({{ outl.price_prevailing | currency }}/{{ outl.unit }}).</span>
-    {% endfor %}
-    <span>Daily moves exceeding &plusmn;15% are flagged as unverified outliers and excluded from headline rankings pending verification in subsequent official bulletins.</span>
-  </div>
-</div>
-{% endif %}
-
 <!-- Top Market Movers (2 Columns) -->
 <div class="grid-2col">
   <!-- Top Gainers -->

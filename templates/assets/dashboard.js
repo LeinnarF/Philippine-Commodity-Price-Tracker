@@ -350,15 +350,11 @@
       const dodVal = ts.dod_pct ? ts.dod_pct[revIdx] : null;
       const wowVal = ts.wow_pct ? ts.wow_pct[revIdx] : null;
       const momVal = ts.mom_pct ? ts.mom_pct[revIdx] : null;
-      const isOutlier = dodVal !== null && Math.abs(dodVal) >= 15.0;
-      const outlierBadge = isOutlier
-        ? ` <span class="badge-outlier" title="Day-over-day price move exceeds ±15% (unverified outlier)">⚠️ Outlier</span>`
-        : "";
 
       html += "<tr>";
       html += `<td class="font-mono">${formatDisplayDate(dateVal)}</td>`;
       html += `<td class="text-right font-mono" style="font-weight: 700;">${formatCurrency(priceVal)}</td>`;
-      html += `<td class="text-right">${formatBadgeHtml(dodVal, true)}${outlierBadge}</td>`;
+      html += `<td class="text-right">${formatBadgeHtml(dodVal, true)}</td>`;
       html += `<td class="text-right">${formatBadgeHtml(wowVal, true)}</td>`;
       html += `<td class="text-right">${formatBadgeHtml(momVal, true)}</td>`;
       html += "</tr>";
