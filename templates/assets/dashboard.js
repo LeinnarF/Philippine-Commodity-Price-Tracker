@@ -951,21 +951,13 @@
       btn.addEventListener("click", () => {
         catTfButtons.forEach((b) => b.classList.remove("active"));
         btn.classList.add("active");
-        const tf = btn.getAttribute("data-timeframe") || "7d";
+        const tf = btn.getAttribute("data-timeframe") || "1d";
 
-        let attr = "data-wow";
-        let labelText = "7-Day Change (WoW)";
-        if (tf === "1d") {
-          attr = "data-dod";
-          labelText = "1-Day Change (DoD)";
+        let attr = "data-dod";
+        if (tf === "7d") {
+          attr = "data-wow";
         } else if (tf === "30d") {
           attr = "data-mom";
-          labelText = "30-Day Change (MoM)";
-        }
-
-        const activeLabel = document.getElementById("treemap-active-view-label");
-        if (activeLabel) {
-          activeLabel.innerHTML = `Showing: <strong>${labelText}</strong>`;
         }
 
         document.querySelectorAll(".treemap-tile").forEach((tile) => {

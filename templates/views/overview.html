@@ -90,13 +90,10 @@
   <div class="card-header">
     <div class="card-title-group">
       <h2 class="card-title">Market Heatmap &amp; Price Pressure Treemap</h2>
-      <span class="treemap-horizon-indicator" id="treemap-active-view-label" style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">
-        Showing: <strong>7-Day Change (WoW)</strong>
-      </span>
     </div>
     <div class="timeframe-pills" id="category-timeframe-pills" role="group" aria-label="Treemap Horizon">
-      <button type="button" class="btn-timeframe" id="btn-cat-tf-1d" data-timeframe="1d">1-Day Change</button>
-      <button type="button" class="btn-timeframe active" id="btn-cat-tf-7d" data-timeframe="7d">7-Day Change</button>
+      <button type="button" class="btn-timeframe active" id="btn-cat-tf-1d" data-timeframe="1d">1-Day Change</button>
+      <button type="button" class="btn-timeframe" id="btn-cat-tf-7d" data-timeframe="7d">7-Day Change</button>
       <button type="button" class="btn-timeframe" id="btn-cat-tf-30d" data-timeframe="30d">30-Day Change</button>
     </div>
   </div>
@@ -115,7 +112,7 @@
           {% set dod = comm.dod_pct if comm.dod_pct is not none else 0.0 %}
           {% set mom = comm.mom_pct if comm.mom_pct is not none else 0.0 %}
           <div
-            class="treemap-tile {{ 'tile-gain-high' if wow > 3.0 else ('tile-gain-low' if wow > 0.001 else ('tile-drop-high' if wow < -3.0 else ('tile-drop-low' if wow < -0.001 else 'tile-flat'))) }}"
+            class="treemap-tile {{ 'tile-gain-high' if dod > 3.0 else ('tile-gain-low' if dod > 0.001 else ('tile-drop-high' if dod < -3.0 else ('tile-drop-low' if dod < -0.001 else 'tile-flat'))) }}"
             data-commodity="{{ comm.commodity }}"
             data-wow="{{ wow }}"
             data-dod="{{ dod }}"
@@ -125,7 +122,7 @@
             <div class="tile-top-row">
               <span class="tile-comm-name">{{ comm.commodity }}</span>
               <span class="tile-delta font-mono">
-                {% if wow > 0.001 %}▲ +{{ "%.1f"|format(wow) }}%{% elif wow < -0.001 %}▼ {{ "%.1f"|format(wow|abs) }}%{% else %}— 0.0%{% endif %}
+                {% if dod > 0.001 %}▲ +{{ "%.1f"|format(dod) }}%{% elif dod < -0.001 %}▼ {{ "%.1f"|format(dod|abs) }}%{% else %}— 0.0%{% endif %}
               </span>
             </div>
             <div class="tile-bottom-row">

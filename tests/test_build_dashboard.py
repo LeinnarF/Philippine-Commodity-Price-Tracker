@@ -380,7 +380,7 @@ def test_dashboard_labels_and_metadata(duckdb_con, tmp_path):
     - advancers share instead of 'daily net advances'
     - category headers use Index rather than mixed unit averages (/kg / pc)
     - metadata description dynamically reports 50 commodities
-    - treemap active view label displays 7-Day Change by default
+    - treemap defaults to 1-Day Change
     """
     out_file = tmp_path / "index.html"
     build_dashboard(db_path=DEFAULT_DB_PATH, template_dir=DEFAULT_TEMPLATE_DIR, output_path=out_file)
@@ -393,5 +393,5 @@ def test_dashboard_labels_and_metadata(duckdb_con, tmp_path):
     assert "items &middot; Index" in html
 
     assert "across 50 basic agri-fishery goods" in html
-    assert "treemap-active-view-label" in html
-    assert "Showing: <strong>7-Day Change (WoW)</strong>" in html
+    assert '<button type="button" class="btn-timeframe active" id="btn-cat-tf-1d" data-timeframe="1d">1-Day Change</button>' in html
+    assert "treemap-active-view-label" not in html

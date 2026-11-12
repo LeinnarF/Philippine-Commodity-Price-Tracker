@@ -29,9 +29,9 @@ Note: reviewed from the page text and data only. Plotly charts and treemap inter
 - [x] **Commodity count mismatch**
   - The meta description says 48, but the page shows 50 (8 + 5 + 9 + 6 + 3 + 5 + 14).
   - *Implemented*: Updated `meta-description`, `og:description`, `twitter:description`, and JSON-LD structured metadata in `templates/base.html` to dynamically bind to `{{ kpis.total_commodities }}` (50) so it cannot drift.
-- [x] **Label the treemap's default view**
-  - It opens on the 7-day change, not 1-day.
-  - *Implemented*: Added visible active horizon label `Showing: 7-Day Change (WoW)` above the treemap in `templates/views/overview.html`, updated dynamically in `templates/assets/dashboard.js` when switching timeframes.
+- [x] **Default treemap view to 1-day change**
+  - Previously opened on 7-day change.
+  - *Implemented*: Set default active treemap horizon and pill button to 1-Day Change (DoD), rendering DoD % deltas and styling on page load. Removed redundant horizon text label.
 
 ## 3. Pipeline reliability
 
