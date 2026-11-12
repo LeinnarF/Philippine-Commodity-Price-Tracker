@@ -1,10 +1,12 @@
 # Philippine Commodity Price Tracker
-*(Bantay Presyo - Automated Retail Price Tracking & Market Analytics)*
+*(Independent Tracker of DA Daily Price Index Data)*
+
+> **Disclaimer**: This platform is an independent public research project. It is **not affiliated with, endorsed by, or operated by the Department of Agriculture (DA)**. All commodity price observations are extracted directly from the public Department of Agriculture (DA) price monitoring portal.
 
 An automated daily tracking and analytical platform for retail prices of basic agri-fishery commodities in the Philippines (e.g., rice, pork, chicken, fish, vegetables, spices).
 
 The project bridges four core disciplines:
-1. **Data Engineering**: Resilient scraping from Department of Agriculture price monitoring & Bantay Presyo, plain-text CSV panel datasets tracked directly in Git (Git-as-a-Database) with deterministic DuckDB OLAP warehouse builds, automated deduplication, and GitHub Actions CI/CD deployment orchestration.
+1. **Data Engineering**: Resilient scraping from Department of Agriculture price monitoring Daily Price Index bulletins, plain-text CSV panel datasets tracked directly in Git (Git-as-a-Database) with deterministic DuckDB OLAP warehouse builds, automated deduplication, and GitHub Actions CI/CD deployment orchestration.
 2. **Data Analytics**: Historical price trends, 7-day and 30-day rolling moving averages, multi-horizon price velocity (DoD, WoW, MoM), 30-day rolling sample volatility, coefficient of variation, equal-weighted base-100 food category indices, and top gainers/decliners ranking.
 3. **Data Science & Modeling Research (Status: Deferred / On Hold)**: Prototyped state-space ETS and ARIMA forecasting models explored in research notebooks (`notebooks/04_forecasting_prototypes.ipynb`). Production deployment of automated forecasting is currently placed on hold pending multi-year seasonal validation (see [Forecasting Model Status & Seasonality Assessment](#forecasting-model-status--seasonality-assessment)).
 4. **Presentation**: A formal, zero-overhead static dashboard (`public/index.html`) rendered via Jinja2 with interactive Plotly charts, deployed to GitHub Pages.
@@ -33,7 +35,7 @@ The data pipeline operates on a **lean, transparent, single-dataset in-memory ar
 ```mermaid
 flowchart TD
     subgraph Portal ["Official Government Server"]
-        DA["DA AMAS Price Monitoring Portal<br/>(da.gov.ph/price-monitoring/)"]
+        DA["DA Price Monitoring Portal<br/>(da.gov.ph/price-monitoring/)"]
         REG["data/server_daily_bulletins.csv<br/>(Server Bulletin URL Registry)"]
     end
 
@@ -258,9 +260,9 @@ Tracks continuous ingestion health, execution triggers, bulletin counts, and run
 | Column | Type | Constraints | Description |
 |---|---|---|---|
 | `run_id` | `VARCHAR` | `PRIMARY KEY` | Unique execution identifier |
-| `executed_at` | `TIMESTAMP` | `NOT NULL` | Execution timestamp (UTC) |
+| `executed_at` | `TIMESTAMP` | `NOT NULL` | Execution timestamp (UTC+8 / PHT) |
 | `trigger` | `VARCHAR` | `NOT NULL` | Ingestion trigger (`github_actions_cron`, `workflow_dispatch`, `cli`) |
-| `status` | `VARCHAR` | `NOT NULL` | Execution status (`SUCCESS`, `NO_NEW_DATA`, `FAILED`) |
+| `status` | `VARCHAR` | `NOT NULL` | Execution status (`SUCCESS`, `NO_NEW_DATA`, `TIMEOUT`, `SOURCE_UNREACHABLE`, `FAILED`) |
 | `latest_bulletin_date` | `DATE` | `NULLABLE` | Most recent bulletin date present in warehouse |
 | `bulletins_checked` | `INTEGER` | `NOT NULL` | Number of calendar dates queried on DA portal |
 | `bulletins_downloaded` | `INTEGER` | `NOT NULL` | Number of new PDF bulletins downloaded |
@@ -273,3 +275,54 @@ Tracks continuous ingestion health, execution triggers, bulletin counts, and run
 - **`v_commodity_analytics`**: Precomputes rolling moving averages (`sma_7d`, `sma_30d`), rolling sample standard deviation (`volatility_30d`), coefficient of variation (`cv_30d`), lagged prices (`price_prev_1d`, `price_prev_7d`, `price_prev_30d`), and multi-horizon rate-of-change indicators (`dod_abs`, `dod_pct`, `wow_abs`, `wow_pct`, `mom_abs`, `mom_pct`).
 - **`v_latest_snapshot`**: Filters `v_commodity_analytics` to the latest market date in the warehouse, ranked by `dod_pct DESC` for KPI cards and Top Gainers / Decliners.
 - **`v_category_indices`**: Computes daily equal-weighted base-100 food basket indices across all 7 commodity groups ($I_{g,t} = \frac{1}{M_g} \sum \frac{P_{j,t}}{P_{j,0}} \times 100$).
+
+---
+
+## Reproducing the Pipeline Locally (DuckDB + Jinja2 + Plotly)
+
+You can reproduce the entire data warehouse build, static site generation, and interactive dashboard locally in seconds without any external database server:
+
+### 1. Prerequisites & Environment Setup
+Clone the repository and set up a Python 3.10+ virtual environment:
+```bash
+git clone https://github.com/LeinnarF/Philippine-Commodity-Price-Tracker.git
+cd Philippine-Commodity-Price-Tracker
+
+# Create and activate virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Install required dependencies
+pip install -r requirements.txt
+```
+
+### 2. Run Test Suite
+Verify that all unit and pipeline integration tests pass:
+```bash
+pytest
+```
+
+### 3. Rebuild DuckDB Analytical Warehouse (~0.5s)
+Ingests the tracked `data/cleaned_dataset.csv` panel and `data/pipeline_execution_logs.csv` into the local embedded DuckDB analytical database (`data/commodities.duckdb`) and creates all analytical Gold views:
+```bash
+python -m pipeline.load_duckdb
+```
+
+### 4. Compile Static Dashboard Bundle (~1s)
+Renders the complete static dashboard bundle (`public/index.html`, minified CSS/JS, and precomputed JSON data payload in `public/assets/`):
+```bash
+python -m pipeline.build_dashboard
+```
+
+### 5. Launch Live Preview Server
+Start the local development server with auto-reload at `http://127.0.0.1:8000`:
+```bash
+./dev.sh
+# or: python -m pipeline.build_dashboard --watch --port 8000
+```
+
+### 6. Run Incremental Daily Update (Optional)
+To test incremental in-memory fetching and ingestion against live DA bulletins:
+```bash
+python -m pipeline.daily_update --rebuild
+```

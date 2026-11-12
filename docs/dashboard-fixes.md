@@ -35,13 +35,16 @@ Note: reviewed from the page text and data only. Plotly charts and treemap inter
 
 ## 3. Pipeline reliability
 
-- [ ] **Fix the ~3,400 s runs**
+- [x] **Fix the ~3,400 s runs**
   - Two runs on 2026-11-07 took about 57 minutes against the usual 15-60 s.
   - That looks like a hang or timeout waiting on the DA portal.
   - Add request timeouts and retries with backoff.
   - Record these runs as `WARN` or `TIMEOUT`, not `NO NEW DATA`.
-- [ ] **Distinguish "no new data" from "source unreachable"** in the audit log status values.
-- [ ] **Consider a data freshness alert** if no successful ingest happens within N days.
+  - *Implemented*: Configured granular `httpx.Timeout(timeout=15.0, connect=5.0, read=10.0, write=5.0)` across catalog crawler and candidate downloaders. Added consecutive network/timeout error short-circuiting (aborts candidate loops after 2 consecutive connection failures rather than attempting all permutations). Backfilled historical long runs in `pipeline_execution_logs.csv` as `TIMEOUT`.
+- [x] **Distinguish "no new data" from "source unreachable"** in the audit log status values.
+  - *Implemented*: Added `TIMEOUT` and `SOURCE_UNREACHABLE` status classifications to `run_daily_update` when candidate date requests encounter timeouts or connection drops. Added amber `.status-pill-warning` pill styles to table views and `dashboard.js`.
+- [x] **Consider a data freshness alert** if no successful ingest happens within N days.
+  - *Implemented*: Added automated freshness evaluation in `pipeline/dashboard/queries.py` (`is_stale`, `days_since_update` if >3 days since latest bulletin). Added a visual warning banner in `overview.html` and badge in `sidebar.html` that triggers dynamically if data is stale.
 
 ## 4. Methodology and documentation
 
@@ -56,18 +59,25 @@ Note: reviewed from the page text and data only. Plotly charts and treemap inter
 
 ## 5. Branding and wording
 
-- [ ] **Drop "Official" from the title and meta tags**
+- [x] **Drop "Official" from the title and meta tags**
   - The data is official (from the DA), but the tracker is not.
   - Suggested wording: "Independent tracker of DA Daily Price Index data".
-- [ ] **Add a short disclaimer** such as "Not affiliated with the Department of Agriculture. Data sourced from public DA bulletins."
-- [ ] **Reconsider "Bantay Presyo" as a title**, since it is a DA program name and could imply affiliation. Keep it only as a subtitle if you keep it at all.
+  - *Implemented*: Updated `<title>`, `<meta name="title">`, `<meta name="description">`, Open Graph, and Twitter metadata in `templates/base.html` and `README.md` to: "Philippine Commodity Price Tracker — Independent Tracker of DA Daily Price Index Data".
+- [x] **Add a short disclaimer** such as "Not affiliated with the Department of Agriculture. Data sourced from public DA bulletins."
+  - *Implemented*: Added prominent disclaimers in `templates/base.html` footer, `templates/views/governance.html`, and `README.md`: "Not affiliated with the Department of Agriculture. Data sourced from the public Department of Agriculture (DA) price monitoring portal."
+- [x] **Reconsider "Bantay Presyo" as a title**, since it is a DA program name and could imply affiliation. Keep it only as a subtitle if you keep it at all.
+  - *Implemented*: Removed "Bantay Presyo" as primary title across titles, navbar, metadata, and JSON-LD schema. Retained solely as a descriptive search tag in keywords.
 
 ## 6. Nice-to-have polish
 
-- [ ] Show units next to prices in the treemap consistently (₱/kg, ₱/bundle, ₱/piece).
-- [ ] Add a "last successful update" timestamp near the top, using the pipeline's latest SUCCESS run.
-- [ ] Link the audit log rows to the commit or run that produced each update.
-- [ ] Add a short README section on how to reproduce the pipeline locally (DuckDB + Jinja2 + Plotly).
+- [x] Show units next to prices in the treemap consistently (₱/kg, ₱/bundle, ₱/piece).
+  - *Implemented*: Formatted prices to 2 decimals for small items (< ₱20, such as chicken egg ₱8.50) and integer for larger items, alongside explicit units (`/kg`, `/piece`, `/bundle`, `/bottle (1L)`) in `templates/views/overview.html` and `templates/assets/dashboard.css`.
+- [ ] **Add a "last successful update" timestamp near the top, using the pipeline's latest SUCCESS run**
+  - *(Removed from header navbar and sidebar per user preference)*.
+- [x] Link the audit log rows to the commit or run that produced each update.
+  - *Implemented*: Added direct links in `templates/views/governance.html` and `dashboard.js` table rendering pointing to GitHub Actions run details (or workflow runs directory). Enabled `GITHUB_RUN_ID` capture in `daily_update.py`.
+- [x] Add a short README section on how to reproduce the pipeline locally (DuckDB + Jinja2 + Plotly).
+  - *Implemented*: Added a comprehensive "Reproducing the Pipeline Locally (DuckDB + Jinja2 + Plotly)" section to `README.md` with step-by-step commands for testing, warehouse build, static dashboard compilation, and live preview.
 
 ---
 

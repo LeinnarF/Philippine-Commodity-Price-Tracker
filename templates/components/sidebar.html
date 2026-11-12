@@ -16,6 +16,9 @@
         {% if kpis.is_provisional %}
         <span class="badge-provisional" title="Provisional DPI-AFC bulletin awaiting finalized release">PROVISIONAL</span>
         {% endif %}
+        {% if audit_info.is_stale %}
+        <span class="badge-provisional" style="background: rgba(239, 68, 68, 0.15); color: #dc2626; border-color: rgba(239, 68, 68, 0.35);" title="Latest observation is older than 3 days">DATA STALE ({{ audit_info.days_since_update }}d)</span>
+        {% endif %}
       </div>
   <hr class="sidebar-divider">
 

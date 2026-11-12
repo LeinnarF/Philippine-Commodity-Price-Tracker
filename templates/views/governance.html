@@ -123,7 +123,7 @@
       <table class="formal-table" id="audit-logs-table">
         <thead>
           <tr>
-            <th>Execution Timestamp (UTC)</th>
+            <th>Execution Timestamp (UTC+8)</th>
             <th>Run ID</th>
             <th class="text-center">Status</th>
             <th>Trigger</th>
@@ -138,13 +138,27 @@
               {{ log.executed_at }}
             </td>
             <td>
-              <div class="font-mono" style="font-weight: 600; color: var(--text-heading);">{{ log.run_id }}</div>
+              <div class="font-mono" style="font-weight: 600; color: var(--text-heading);">
+                {% if log.run_id and log.run_id != 'init-archive' %}
+                <a
+                  href="https://github.com/LeinnarF/Philippine-Commodity-Price-Tracker/actions{% if log.run_id.isdigit() %}/runs/{{ log.run_id }}{% endif %}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-mono audit-run-link"
+                  title="View execution on GitHub Actions"
+                >{{ log.run_id }}</a>
+                {% else %}
+                {{ log.run_id }}
+                {% endif %}
+              </div>
             </td>
             <td class="text-center">
               {% if log.status == 'SUCCESS' %}
               <span class="status-pill status-pill-decrease">SUCCESS</span>
               {% elif log.status == 'NO_NEW_DATA' %}
               <span class="status-pill status-pill-neutral">NO NEW DATA</span>
+              {% elif log.status in ['TIMEOUT', 'SOURCE_UNREACHABLE', 'WARN'] %}
+              <span class="status-pill status-pill-warning">{{ log.status | replace('_', ' ') }}</span>
               {% else %}
               <span class="status-pill status-pill-increase">{{ log.status }}</span>
               {% endif %}

@@ -1,3 +1,17 @@
+{% if audit_info.is_stale %}
+<div class="freshness-alert-banner" role="alert">
+  <svg class="freshness-alert-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+    <line x1="12" y1="9" x2="12" y2="13"></line>
+    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+  </svg>
+  <div>
+    <strong>Data Freshness Notice:</strong> The latest price bulletin was published {{ audit_info.days_since_update }} days ago ({{ kpis.latest_date_formatted }}).
+    The pipeline is actively checking the Department of Agriculture portal for subsequent releases.
+  </div>
+</div>
+{% endif %}
+
 {% include "components/kpi_strip.html" %}
 
 <!-- Top Market Movers (2 Columns) -->
@@ -126,7 +140,9 @@
               </span>
             </div>
             <div class="tile-bottom-row">
-              <span class="tile-price font-mono">{{ "₱%.0f"|format(comm.price_prevailing) if comm.price_prevailing is not none else "—" }}</span>
+              <span class="tile-price font-mono">
+                {% if comm.price_prevailing is none %}—{% elif comm.price_prevailing < 20 %}{{ "₱%.2f"|format(comm.price_prevailing) }}{% else %}{{ "₱%.0f"|format(comm.price_prevailing) }}{% endif %}
+              </span>
               <span class="tile-unit">/{{ comm.unit }}</span>
             </div>
           </div>

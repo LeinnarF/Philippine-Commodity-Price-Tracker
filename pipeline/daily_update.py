@@ -2,7 +2,7 @@
 Daily Incremental Update Orchestrator for Philippine Commodity Price Tracker.
 
 Discovers, downloads, parses, and ingests newly published Department of Agriculture
-(DA AMAS) Daily Price Index bulletins in-memory. Updates the Git-tracked cleaned_dataset.csv,
+Daily Price Index bulletins in-memory. Updates the Git-tracked cleaned_dataset.csv,
 logs execution status to the audit trail, and rebuilds the analytical warehouse and dashboard.
 
 Designed for automated headless execution inside GitHub Actions or local CLI runs.
@@ -55,8 +55,12 @@ logging.basicConfig(
 logger = logging.getLogger("daily_update")
 
 # Minimum number of observed commodities required out of the 50 panel items
-# Genuine DA AMAS Daily Price Index bulletins report 40-50 items; non-DPI files report far fewer.
+# Genuine DA Daily Price Index bulletins report 40-50 items; non-DPI files report far fewer.
 MIN_OBSERVED_PANEL_COMMODITIES = 30
+
+
+# Default timezone: UTC+8 (Philippine Standard Time)
+TIMEZONE_PHT = datetime.timezone(datetime.timedelta(hours=8))
 
 
 def get_latest_tracked_date(clean_csv_path: Path = DEFAULT_CLEAN_CSV) -> datetime.date:
@@ -127,6 +131,19 @@ def append_execution_log(
             df_combined.to_csv(logs_csv_path, index=False)
 
 
+class FetchResult(tuple):
+    """
+    2-tuple (content, url) with status reason metadata for audit provenance.
+    Can be unpacked as `content, url = res` transparently.
+    """
+    reason: str
+
+    def __new__(cls, content: bytes | None, url: str | None, reason: str = "NOT_FOUND"):
+        instance = super().__new__(cls, (content, url))
+        instance.reason = reason
+        return instance
+
+
 def fetch_bulletin_bytes_in_memory(
     date_str: str,
     catalog_url: str | None,
@@ -141,7 +158,7 @@ def fetch_bulletin_bytes_in_memory(
     and candidate DPI URLs. Strictly enforces is_valid_dpi_bulletin_url.
     When only_finalized=True, restricts candidate URLs exclusively to finalized
     non-AFC bulletins (e.g. 'Daily-Price-Index-*', 'Revised-Daily-Price-Index-*').
-    Returns (pdf_bytes_or_None, final_url_or_None).
+    Returns FetchResult(pdf_bytes_or_None, final_url_or_None, reason).
     """
     url_validator = is_finalized_dpi_url if only_finalized else is_valid_dpi_bulletin_url
     urls_to_try: list[str] = []
@@ -172,10 +189,25 @@ def fetch_bulletin_bytes_in_memory(
     except Exception:
         pass
 
+    consecutive_conn_errors = 0
+    had_timeout = False
+    had_connect_error = False
+
     for current_url in urls_to_try:
+        # Fast break: if the server is timing out or dropping connections consecutively, abort further pattern guessing
+        if consecutive_conn_errors >= 2:
+            logger.warning(
+                "Aborting candidate URL probes for %s after %d consecutive network/timeout errors.",
+                date_str,
+                consecutive_conn_errors,
+            )
+            break
+
         for attempt in range(1, max_retries + 1):
             try:
                 resp = client.get(current_url)
+                consecutive_conn_errors = 0  # reset on active response
+
                 if resp.status_code == 404:
                     break
                 elif resp.status_code != 200:
@@ -186,11 +218,29 @@ def fetch_bulletin_bytes_in_memory(
                 if not content.startswith(b"%PDF-") or len(content) < 5000:
                     break
 
-                return content, current_url
-            except Exception:
-                time.sleep(0.5 * attempt)
+                return FetchResult(content, current_url, "FOUND")
+            except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.TimeoutException) as t_err:
+                consecutive_conn_errors += 1
+                had_timeout = True
+                logger.warning("Timeout connecting to %s (attempt %d/%d): %s", current_url, attempt, max_retries, t_err)
+                if attempt < max_retries:
+                    time.sleep(1.0 * attempt)
+            except httpx.ConnectError as c_err:
+                consecutive_conn_errors += 1
+                had_connect_error = True
+                logger.warning("Connection error connecting to %s (attempt %d/%d): %s", current_url, attempt, max_retries, c_err)
+                if attempt < max_retries:
+                    time.sleep(1.0 * attempt)
+            except Exception as exc:
+                logger.warning("Error fetching %s (attempt %d/%d): %s", current_url, attempt, max_retries, exc)
+                if attempt < max_retries:
+                    time.sleep(0.5 * attempt)
 
-    return None, None
+    if had_timeout:
+        return FetchResult(None, None, "TIMEOUT")
+    if had_connect_error:
+        return FetchResult(None, None, "SOURCE_UNREACHABLE")
+    return FetchResult(None, None, "NOT_FOUND")
 
 
 def _rebuild_warehouse_and_dashboard(
@@ -227,14 +277,18 @@ def run_daily_update(
     Executes the streamlined, in-memory daily incremental update pipeline.
     """
     start_time = time.time()
-    now_utc = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-    resolved_run_id = run_id or f"run_{datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d_%H%M%S')}"
+    now_ts = datetime.datetime.now(TIMEZONE_PHT).strftime("%Y-%m-%d %H:%M:%S")
+    resolved_run_id = (
+        run_id
+        or os.environ.get("GITHUB_RUN_ID")
+        or f"run_{datetime.datetime.now(TIMEZONE_PHT).strftime('%Y%m%d_%H%M%S')}"
+    )
 
     logger.info("==================================================")
     logger.info("Philippine Commodity Price Tracker: Daily Incremental Update")
     logger.info("Run ID          : %s", resolved_run_id)
     logger.info("Trigger Source  : %s", trigger)
-    logger.info("Execution Time  : %s UTC", now_utc)
+    logger.info("Execution Time  : %s (UTC+8)", now_ts)
     logger.info("==================================================")
 
     # 1. Determine date range and local state
@@ -300,7 +354,7 @@ def run_daily_update(
             append_execution_log(
                 logs_csv_path=logs_csv_path,
                 run_id=resolved_run_id,
-                executed_at=now_utc,
+                executed_at=now_ts,
                 trigger=trigger,
                 status="NO_NEW_DATA",
                 latest_bulletin_date=str(latest_tracked),
@@ -333,15 +387,19 @@ def run_daily_update(
 
     # 2. Discover available bulletins
     catalog: dict[str, str] = {}
+    catalog_error: Exception | None = None
     try:
         catalog = crawl_da_catalog(use_cache=False)
     except Exception as exc:
+        catalog_error = exc
         logger.warning("Could not crawl DA portal catalog directly (%s). Will attempt direct URL patterns.", exc)
 
     new_bulletins: list[tuple[str, str, bytes]] = []  # (date_str, source_url, pdf_bytes)
+    candidate_reasons: list[str] = []
     headers = {"User-Agent": PROJECT_USER_AGENT}
+    timeout_config = httpx.Timeout(timeout=15.0, connect=5.0, read=10.0, write=5.0)
 
-    with httpx.Client(timeout=30.0, follow_redirects=True, headers=headers) as client:
+    with httpx.Client(timeout=timeout_config, follow_redirects=True, headers=headers) as client:
         # 2a. Check existing provisional DPI-AFC dates for finalized Daily-Price-Index upgrades
         for d_str in provisional_afc_dates:
             cat_url = catalog.get(d_str)
@@ -349,13 +407,16 @@ def run_daily_update(
             srv_url = server_bulletins_map.get(d_str)
             finalized_known_url = srv_url if (srv_url and is_finalized_dpi_url(srv_url)) else None
 
-            pdf_bytes, final_url = fetch_bulletin_bytes_in_memory(
+            fetch_res = fetch_bulletin_bytes_in_memory(
                 date_str=d_str,
                 catalog_url=finalized_catalog_url,
                 client=client,
                 known_url=finalized_known_url,
                 only_finalized=True,
             )
+            pdf_bytes, final_url = fetch_res[0], fetch_res[1]
+            reason = getattr(fetch_res, "reason", "NOT_FOUND")
+
             if pdf_bytes and final_url and is_finalized_dpi_url(final_url):
                 logger.info(
                     "Upgrading provisional DPI-AFC bulletin for %s to finalized Daily-Price-Index URL: %s (%.1f KB)",
@@ -365,6 +426,7 @@ def run_daily_update(
                 )
                 new_bulletins.append((d_str, final_url, pdf_bytes))
             else:
+                candidate_reasons.append(reason)
                 logger.info("No finalized Daily-Price-Index replacement found yet for provisional DPI-AFC date %s.", d_str)
 
         # 2b. Check new missing dates
@@ -373,36 +435,54 @@ def run_daily_update(
             known_url = server_bulletins_map.get(d_str)
             catalog_url = catalog.get(d_str)
 
-            pdf_bytes, final_url = fetch_bulletin_bytes_in_memory(
+            fetch_res = fetch_bulletin_bytes_in_memory(
                 date_str=d_str,
                 catalog_url=catalog_url,
                 client=client,
                 known_url=known_url,
             )
+            pdf_bytes, final_url = fetch_res[0], fetch_res[1]
+            reason = getattr(fetch_res, "reason", "NOT_FOUND")
+
             if pdf_bytes and final_url:
                 logger.info("Successfully fetched new bulletin for %s in-memory (%.1f KB)", d_str, len(pdf_bytes) / 1024)
                 new_bulletins.append((d_str, final_url, pdf_bytes))
             else:
-                logger.info("No published bulletin found for %s (Holiday, weekend, or not yet uploaded).", d_str)
+                candidate_reasons.append(reason)
+                logger.info("No published bulletin found for %s (%s).", d_str, reason)
 
     # 3. Handle outcome if no new or upgraded bulletins were found
     if not new_bulletins:
-        if dates_to_check:
+        has_timeout = any(r == "TIMEOUT" for r in candidate_reasons) or isinstance(catalog_error, httpx.TimeoutException)
+        has_unreachable = any(r == "SOURCE_UNREACHABLE" for r in candidate_reasons) or isinstance(catalog_error, httpx.ConnectError)
+
+        if has_timeout:
+            status_code = "TIMEOUT"
+            date_range_desc = f"{dates_to_check[0]} to {dates_to_check[-1]}" if dates_to_check else str(latest_tracked)
+            msg = f"Connection timed out contacting DA portal for candidate dates ({date_range_desc}); source unreachable."
+        elif has_unreachable:
+            status_code = "SOURCE_UNREACHABLE"
+            date_range_desc = f"{dates_to_check[0]} to {dates_to_check[-1]}" if dates_to_check else str(latest_tracked)
+            msg = f"Department of Agriculture portal unreachable while evaluating candidate dates ({date_range_desc})."
+        elif dates_to_check:
+            status_code = "NO_NEW_DATA"
             msg = f"Evaluated {len(dates_to_check)} candidate dates ({dates_to_check[0]} to {dates_to_check[-1]}). No new bulletins published on DA portal yet."
         else:
+            status_code = "NO_NEW_DATA"
             msg = (
                 f"Dataset is already up to date ({latest_tracked}). Checked {len(provisional_afc_dates)} "
                 f"provisional DPI-AFC bulletin(s); no finalized Daily-Price-Index replacement published yet."
             )
+
         logger.info(msg)
         elapsed = time.time() - start_time
         if not dry_run:
             append_execution_log(
                 logs_csv_path=logs_csv_path,
                 run_id=resolved_run_id,
-                executed_at=now_utc,
+                executed_at=now_ts,
                 trigger=trigger,
-                status="NO_NEW_DATA",
+                status=status_code,
                 latest_bulletin_date=str(latest_tracked),
                 bulletins_checked=total_checked,
                 bulletins_downloaded=0,
@@ -413,7 +493,7 @@ def run_daily_update(
             if rebuild:
                 _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv_path=logs_csv_path)
         return {
-            "status": "NO_NEW_DATA",
+            "status": status_code,
             "latest_date": str(latest_tracked),
             "bulletins_downloaded": 0,
             "records_extracted": 0,
@@ -485,7 +565,7 @@ def run_daily_update(
             append_execution_log(
                 logs_csv_path=logs_csv_path,
                 run_id=resolved_run_id,
-                executed_at=now_utc,
+                executed_at=now_ts,
                 trigger=trigger,
                 status=status_code,
                 latest_bulletin_date=str(latest_tracked),
@@ -556,7 +636,7 @@ def run_daily_update(
     append_execution_log(
         logs_csv_path=logs_csv_path,
         run_id=resolved_run_id,
-        executed_at=now_utc,
+        executed_at=now_ts,
         trigger=trigger,
         status="SUCCESS",
         latest_bulletin_date=str(new_latest_date),
@@ -582,7 +662,7 @@ def run_daily_update(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Daily incremental update pipeline for DA AMAS retail price bulletins."
+        description="Daily incremental update pipeline for DA price monitoring bulletins."
     )
     parser.add_argument(
         "--target-date",

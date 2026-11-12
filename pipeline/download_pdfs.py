@@ -274,8 +274,9 @@ def crawl_da_catalog(use_cache: bool = True) -> dict[str, str]:
     headers = {"User-Agent": PROJECT_USER_AGENT}
     logger.info("Connecting to DA portal to discover available PDF bulletins...")
 
+    timeout_config = httpx.Timeout(timeout=20.0, connect=5.0, read=15.0, write=5.0)
     try:
-        with httpx.Client(timeout=30.0, follow_redirects=True, headers=headers) as client:
+        with httpx.Client(timeout=timeout_config, follow_redirects=True, headers=headers) as client:
             resp = client.get(DA_PRICE_MONITORING_URL)
             if resp.status_code != 200:
                 logger.error("DA landing page returned HTTP %d", resp.status_code)

@@ -1472,15 +1472,26 @@
           statusPill = '<span class="status-pill status-pill-decrease">SUCCESS</span>';
         } else if (log.status === "NO_NEW_DATA") {
           statusPill = '<span class="status-pill status-pill-neutral">NO NEW DATA</span>';
+        } else if (log.status === "TIMEOUT" || log.status === "SOURCE_UNREACHABLE" || log.status === "WARN") {
+          statusPill = `<span class="status-pill status-pill-warning">${escapeHtml((log.status || "").replace(/_/g, " "))}</span>`;
         } else {
           statusPill = `<span class="status-pill status-pill-increase">${escapeHtml(log.status || "")}</span>`;
         }
 
         const duration = log.duration_seconds != null ? log.duration_seconds : "0";
 
+        let runIdCell = escapeHtml(log.run_id || "");
+        if (log.run_id && log.run_id !== "init-archive") {
+          const isDigit = /^\d+$/.test(log.run_id);
+          const runUrl = isDigit
+            ? `https://github.com/LeinnarF/Philippine-Commodity-Price-Tracker/actions/runs/${encodeURIComponent(log.run_id)}`
+            : "https://github.com/LeinnarF/Philippine-Commodity-Price-Tracker/actions";
+          runIdCell = `<a href="${runUrl}" target="_blank" rel="noopener noreferrer" class="font-mono audit-run-link" title="View execution on GitHub Actions">${escapeHtml(log.run_id)}</a>`;
+        }
+
         html += "<tr>";
         html += `<td class="font-mono" style="color: var(--text-secondary); white-space: nowrap;">${escapeHtml(log.executed_at || "")}</td>`;
-        html += `<td><div class="font-mono" style="font-weight: 600; color: var(--text-heading);">${escapeHtml(log.run_id || "")}</div></td>`;
+        html += `<td><div class="font-mono" style="font-weight: 600; color: var(--text-heading);">${runIdCell}</div></td>`;
         html += `<td class="text-center">${statusPill}</td>`;
         html += `<td class="font-mono" style="color: var(--text-secondary);">${escapeHtml(log.trigger || "")}</td>`;
         html += `<td class="text-right font-mono">${duration}<span class="unit-suffix">s</span></td>`;

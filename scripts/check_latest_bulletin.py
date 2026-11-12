@@ -1,7 +1,7 @@
 """
 Check Latest Bulletin Date for Philippine Commodity Price Tracker.
 
-Discovers the date of the latest Department of Agriculture (DA AMAS)
+Discovers the date of the latest Department of Agriculture price monitoring
 Daily Price Index bulletin WITHOUT downloading the PDF file by default.
 Silently excludes cigarette and tobacco items from the scan.
 

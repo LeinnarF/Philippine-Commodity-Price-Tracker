@@ -626,3 +626,72 @@ def test_run_daily_update_retains_dpi_afc_when_finalized_not_yet_available(monke
     srv_df = pd.read_csv(bulletins_csv)
     assert srv_df.iloc[0]["pdf_url"] == provisional_url
 
+
+def test_run_daily_update_records_timeout_status(monkeypatch, tmp_path):
+    """Verify that network/connection timeouts are recorded as TIMEOUT, not NO_NEW_DATA."""
+    from pipeline.daily_update import FetchResult
+
+    clean_csv = tmp_path / "cleaned_dataset.csv"
+    logs_csv = tmp_path / "pipeline_execution_logs.csv"
+
+    pd.DataFrame([
+        {"date": "2026-11-06", "commodity_group": "Rice", "commodity": "Regular Milled Rice", "unit": "kg", "price_prevailing": 45.0, "source_url": "https://example.com/2026-11-06.pdf"},
+    ]).to_csv(clean_csv, index=False)
+
+    monkeypatch.setattr(
+        "pipeline.daily_update.crawl_da_catalog",
+        lambda use_cache=False: {},
+    )
+    monkeypatch.setattr(
+        "pipeline.daily_update.fetch_bulletin_bytes_in_memory",
+        lambda date_str, catalog_url, client, **kwargs: FetchResult(None, None, "TIMEOUT"),
+    )
+
+    res = run_daily_update(
+        clean_csv_path=clean_csv,
+        logs_csv_path=logs_csv,
+        target_date=datetime.date(2026, 11, 7),
+        rebuild=False,
+    )
+
+    assert res["status"] == "TIMEOUT"
+    assert logs_csv.exists()
+    logs_df = pd.read_csv(logs_csv)
+    assert logs_df.iloc[0]["status"] == "TIMEOUT"
+    assert "timed out" in logs_df.iloc[0]["message"]
+
+
+def test_run_daily_update_records_source_unreachable_status(monkeypatch, tmp_path):
+    """Verify that connection failures are recorded as SOURCE_UNREACHABLE."""
+    from pipeline.daily_update import FetchResult
+
+    clean_csv = tmp_path / "cleaned_dataset.csv"
+    logs_csv = tmp_path / "pipeline_execution_logs.csv"
+
+    pd.DataFrame([
+        {"date": "2026-11-06", "commodity_group": "Rice", "commodity": "Regular Milled Rice", "unit": "kg", "price_prevailing": 45.0, "source_url": "https://example.com/2026-11-06.pdf"},
+    ]).to_csv(clean_csv, index=False)
+
+    monkeypatch.setattr(
+        "pipeline.daily_update.crawl_da_catalog",
+        lambda use_cache=False: {},
+    )
+    monkeypatch.setattr(
+        "pipeline.daily_update.fetch_bulletin_bytes_in_memory",
+        lambda date_str, catalog_url, client, **kwargs: FetchResult(None, None, "SOURCE_UNREACHABLE"),
+    )
+
+    res = run_daily_update(
+        clean_csv_path=clean_csv,
+        logs_csv_path=logs_csv,
+        target_date=datetime.date(2026, 11, 7),
+        rebuild=False,
+    )
+
+    assert res["status"] == "SOURCE_UNREACHABLE"
+    assert logs_csv.exists()
+    logs_df = pd.read_csv(logs_csv)
+    assert logs_df.iloc[0]["status"] == "SOURCE_UNREACHABLE"
+    assert "unreachable" in logs_df.iloc[0]["message"]
+
+

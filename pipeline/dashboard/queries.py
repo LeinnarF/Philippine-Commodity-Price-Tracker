@@ -644,6 +644,7 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
     tables = [t[0] for t in con.execute("SHOW TABLES;").fetchall()]
     execution_logs: list[dict[str, Any]] = []
     latest_run: dict[str, Any] | None = None
+    latest_success_at: str | None = None
 
     if "pipeline_execution_logs" in tables:
         try:
@@ -665,9 +666,24 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
             if not log_df.empty:
                 execution_logs = log_df.to_dict(orient="records")
                 latest_run = execution_logs[0]
+                for l in execution_logs:
+                    if l.get("status") == "SUCCESS":
+                        latest_success_at = str(l["executed_at"])
+                        break
         except Exception:
             execution_logs = []
             latest_run = None
+            latest_success_at = None
+
+    # Data freshness calculation
+    days_since_latest = 0
+    is_stale = False
+    try:
+        latest_d = datetime.date.fromisoformat(str(res["end_date"])[:10])
+        days_since_latest = max(0, (datetime.date.today() - latest_d).days)
+        is_stale = days_since_latest > 3
+    except Exception:
+        pass
 
     # Fetch all bulletin provenance records grouped by date
     bulletin_rows: list[dict[str, Any]] = []
@@ -710,6 +726,9 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "source_agency": res["source_agency"] or "da_amas",
         "execution_logs": execution_logs,
         "latest_run": latest_run,
+        "latest_success_at": latest_success_at,
+        "is_stale": is_stale,
+        "days_since_update": days_since_latest,
         "bulletins": bulletin_rows,
         "available_months": available_months,
     }

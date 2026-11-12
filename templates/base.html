@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>{% block title %}Philippine Commodity Price Tracker | Bantay Presyo — Daily Retail Market Prices{% endblock %}</title>
+  <title>{% block title %}Philippine Commodity Price Tracker — Daily Retail Market Prices{% endblock %}</title>
 
   <!-- Primary Search Engine Meta Tags -->
-  <meta name="title" content="Philippine Commodity Price Tracker | Bantay Presyo — Daily Retail Market Prices">
-  <meta name="description" content="Official Philippine retail commodity price tracker (Bantay Presyo). Track daily prevailing prices, 7-day and 30-day moving averages, price velocity, and volatility across {{ kpis.total_commodities }} basic agri-fishery goods in Metro Manila wet markets.">
-  <meta name="keywords" content="Bantay Presyo, Philippine commodity price tracker, Department of Agriculture price monitoring, DA Daily Price Index, Metro Manila wet market prices, retail food prices Philippines, rice prices NCR, pork liempo price, galunggong price, onion prices Philippines, agricultural price trends">
+  <meta name="title" content="Philippine Commodity Price Tracker — Independent Tracker of DA Daily Price Index Data">
+  <meta name="description" content="Independent tracker of DA Daily Price Index data. Track daily prevailing prices, 7-day and 30-day moving averages, price velocity, and volatility across {{ kpis.total_commodities }} basic agri-fishery goods in Metro Manila wet markets.">
+  <meta name="keywords" content="Philippine commodity price tracker, Department of Agriculture price monitoring, DA Daily Price Index, Metro Manila wet market prices, retail food prices Philippines, Bantay Presyo retail data, rice prices NCR, pork liempo price, galunggong price, onion prices Philippines, agricultural price trends">
   <meta name="author" content="Philippine Commodity Price Tracker">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="theme-color" content="#15803d">
@@ -19,17 +19,17 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_PH">
   <meta property="og:url" content="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/">
-  <meta property="og:site_name" content="Philippine Commodity Price Tracker (Bantay Presyo)">
-  <meta property="og:title" content="Philippine Commodity Price Tracker | Bantay Presyo — Daily Retail Prices">
-  <meta property="og:description" content="Automated daily retail price tracking and market intelligence for {{ kpis.total_commodities }} basic agri-fishery commodities across NCR wet markets, sourced directly from Department of Agriculture bulletins.">
+  <meta property="og:site_name" content="Philippine Commodity Price Tracker">
+  <meta property="og:title" content="Philippine Commodity Price Tracker — Daily Retail Market Prices">
+  <meta property="og:description" content="Independent tracker of DA Daily Price Index data for {{ kpis.total_commodities }} basic agri-fishery commodities across NCR wet markets, sourced directly from public Department of Agriculture bulletins.">
   <meta property="og:image" content="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/assets/img/crop-icon.png">
   <meta property="og:image:alt" content="Philippine Commodity Price Tracker Logo">
 
   <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/">
-  <meta name="twitter:title" content="Philippine Commodity Price Tracker | Bantay Presyo — Daily Retail Prices">
-  <meta name="twitter:description" content="Automated daily retail price tracking and market intelligence for {{ kpis.total_commodities }} basic food commodities across Metro Manila wet markets.">
+  <meta name="twitter:title" content="Philippine Commodity Price Tracker — Daily Retail Market Prices">
+  <meta name="twitter:description" content="Independent tracker of DA Daily Price Index data for {{ kpis.total_commodities }} basic food commodities across Metro Manila wet markets.">
   <meta name="twitter:image" content="https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/assets/img/crop-icon.png">
 
   <!-- Schema.org JSON-LD Structured Data for Google Rich Snippets -->
@@ -40,7 +40,7 @@
       {
         "@type": "WebApplication",
         "@id": "https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/#app",
-        "name": "Philippine Commodity Price Tracker (Bantay Presyo)",
+        "name": "Philippine Commodity Price Tracker",
         "url": "https://leinnarf.github.io/Philippine-Commodity-Price-Tracker/",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "All",
@@ -91,8 +91,8 @@
       <footer class="dashboard-footer">
         <div class="footer-inner">
           <div>
-            <strong>Philippine Commodity Price Tracker (Bantay Presyo)</strong> · Automated Public Research Architecture.<br>
-            Data sourced directly from official Department of Agriculture price monitoring Daily Price Index bulletins.
+            <strong>Philippine Commodity Price Tracker</strong> · Independent Public Research Architecture.<br>
+            Not affiliated with the Department of Agriculture. Data sourced from the public Department of Agriculture (DA) price monitoring portal.
           </div>
           <div>
             Engine: <strong>DuckDB Embedded Columnar OLAP</strong> + <strong>Jinja2 SSG</strong> + <strong>Plotly.js</strong><br>
