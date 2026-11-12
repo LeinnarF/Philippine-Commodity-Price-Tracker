@@ -356,3 +356,47 @@ def test_dev_watcher_rebuild_cycle(tmp_path):
     )
     assert out_file.exists()
     assert "/__dev_poll__" in out_file.read_text(encoding="utf-8")
+
+
+def test_fetch_kpi_summary_and_top_movers_exclude_outliers(duckdb_con):
+    """
+    Verify that fetch_kpi_summary and fetch_top_movers filter out unverified outliers
+    from headline gainers and decliners.
+    """
+    kpis = fetch_kpi_summary(duckdb_con)
+    assert "is_provisional" in kpis
+    assert "outliers_today" in kpis
+    assert kpis["top_gainer"] is not None
+    assert abs(kpis["top_gainer"]["dod_pct"]) < 15.0
+
+    movers = fetch_top_movers(duckdb_con, limit=5)
+    assert "gainers" in movers
+    assert "decliners" in movers
+    assert "outliers" in movers
+    for g in movers["gainers"]:
+        assert abs(g["dod_pct"]) < 15.0
+    for d in movers["decliners"]:
+        assert abs(d["dod_pct"]) < 15.0
+
+
+def test_dashboard_labels_and_metadata(duckdb_con, tmp_path):
+    """
+    Verify dashboard label fixes:
+    - advancers share instead of 'daily net advances'
+    - category headers use Index rather than mixed unit averages (/kg / pc)
+    - metadata description dynamically reports 50 commodities
+    - treemap active view label displays 7-Day Change by default
+    """
+    out_file = tmp_path / "index.html"
+    build_dashboard(db_path=DEFAULT_DB_PATH, template_dir=DEFAULT_TEMPLATE_DIR, output_path=out_file)
+    html = out_file.read_text(encoding="utf-8")
+
+    assert "advancers (" in html
+    assert "daily net advances" not in html
+
+    assert "/kg / pc" not in html
+    assert "items &middot; Index" in html
+
+    assert "across 50 basic agri-fishery goods" in html
+    assert "treemap-active-view-label" in html
+    assert "Showing: <strong>7-Day Change (WoW)</strong>" in html

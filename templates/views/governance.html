@@ -100,6 +100,13 @@
         (<code>NULL</code>) to guarantee that no synthetic or fabricated prices are ever introduced into the analytical
         database.
       </p>
+      <p>
+        <strong>Provisional Bulletins &amp; Outlier Governance:</strong> Price monitoring bulletins marked as <code>DPI-AFC</code>
+        are treated as provisional releases and tagged with a <span class="badge-provisional">PROVISIONAL</span> badge.
+        When finalized Daily Price Index bulletins are published by the DA, the automated update pipeline re-ingests and
+        overwrites provisional records. Furthermore, single-day price jumps exceeding &plusmn;15% are flagged as unverified
+        outliers to prevent headline KPI cards and Top Movers tables from being distorted by government survey clerical anomalies.
+      </p>
     </div>
   </div>
 </div>
@@ -190,7 +197,12 @@
           {% for b in audit_info.bulletins[:10] %}
           <tr>
             <td>
-              <div style="font-weight: 600; color: var(--text-heading);">{{ b.date_str | format_date }}</div>
+              <div style="font-weight: 600; color: var(--text-heading);">
+                {{ b.date_str | format_date }}
+                {% if b.is_provisional %}
+                <span class="badge-provisional" title="Provisional DPI-AFC bulletin">PROVISIONAL</span>
+                {% endif %}
+              </div>
             </td>
             <td>
               {% if b.source_url %}
@@ -201,6 +213,9 @@
                 class="source-url-link font-mono"
                 title="Open official DA price monitoring PDF bulletin in new tab"
               >{{ b.source_url }}</a>
+              {% if b.is_provisional %}
+              <span class="badge-provisional-pill" style="margin-left: 6px;">DPI-AFC</span>
+              {% endif %}
               {% else %}
               <span style="color: var(--text-muted); font-size: 12px;">Unpublished</span>
               {% endif %}

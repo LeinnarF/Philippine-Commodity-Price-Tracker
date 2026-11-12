@@ -66,21 +66,52 @@ def fetch_kpi_summary(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         earliest_str = d.strftime("%A, %B %d, %Y")
         earliest_short = d.strftime("%b %d, %Y")
 
-    top_gainer = con.execute("""
+    is_prov_res = con.execute("""
+        SELECT bool_or(is_provisional)
+        FROM v_latest_snapshot;
+    """).fetchone()
+    is_latest_provisional = bool(is_prov_res[0]) if is_prov_res and is_prov_res[0] is not None else False
+
+    outliers_today = con.execute("""
+        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct
+        FROM v_latest_snapshot
+        WHERE is_outlier IS TRUE
+        ORDER BY ABS(dod_pct) DESC;
+    """).df().to_dict(orient="records")
+
+    top_gainer_rows = con.execute("""
         SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct
         FROM v_latest_snapshot
-        WHERE dod_pct IS NOT NULL
+        WHERE dod_pct IS NOT NULL AND (is_outlier IS FALSE OR is_outlier IS NULL)
         ORDER BY dod_pct DESC
         LIMIT 1;
-    """).df().to_dict(orient="records")[0]
+    """).df().to_dict(orient="records")
+    if not top_gainer_rows:
+        top_gainer_rows = con.execute("""
+            SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct
+            FROM v_latest_snapshot
+            WHERE dod_pct IS NOT NULL
+            ORDER BY dod_pct DESC
+            LIMIT 1;
+        """).df().to_dict(orient="records")
+    top_gainer = top_gainer_rows[0] if top_gainer_rows else None
 
-    top_decliner = con.execute("""
+    top_decliner_rows = con.execute("""
         SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct
         FROM v_latest_snapshot
-        WHERE dod_pct IS NOT NULL
+        WHERE dod_pct IS NOT NULL AND (is_outlier IS FALSE OR is_outlier IS NULL)
         ORDER BY dod_pct ASC
         LIMIT 1;
-    """).df().to_dict(orient="records")[0]
+    """).df().to_dict(orient="records")
+    if not top_decliner_rows:
+        top_decliner_rows = con.execute("""
+            SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct
+            FROM v_latest_snapshot
+            WHERE dod_pct IS NOT NULL
+            ORDER BY dod_pct ASC
+            LIMIT 1;
+        """).df().to_dict(orient="records")
+    top_decliner = top_decliner_rows[0] if top_decliner_rows else None
 
     top_volatile = con.execute("""
         SELECT commodity, commodity_group, price_prevailing, unit, volatility_30d, cv_30d
@@ -108,32 +139,43 @@ def fetch_kpi_summary(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
         "top_gainer": top_gainer,
         "top_decliner": top_decliner,
         "top_volatile": top_volatile,
+        "is_provisional": is_latest_provisional,
+        "outliers_today": outliers_today,
     }
 
 
 def fetch_top_movers(con: duckdb.DuckDBPyConnection, limit: int = 5) -> dict[str, list[dict[str, Any]]]:
     """
     Returns top N price increases and decreases on the latest snapshot date.
+    Excludes unverified outliers so headline ranking tables are not distorted by sudden anomalies.
     """
     gainers = con.execute("""
-        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct
+        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct, is_outlier
         FROM v_latest_snapshot
-        WHERE dod_pct IS NOT NULL
+        WHERE dod_pct IS NOT NULL AND (is_outlier IS FALSE OR is_outlier IS NULL)
         ORDER BY dod_pct DESC
         LIMIT ?;
     """, [limit]).df().to_dict(orient="records")
 
     decliners = con.execute("""
-        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct
+        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct, is_outlier
         FROM v_latest_snapshot
-        WHERE dod_pct IS NOT NULL
+        WHERE dod_pct IS NOT NULL AND (is_outlier IS FALSE OR is_outlier IS NULL)
         ORDER BY dod_pct ASC
         LIMIT ?;
     """, [limit]).df().to_dict(orient="records")
 
+    outliers = con.execute("""
+        SELECT commodity, commodity_group, price_prevailing, unit, dod_abs, dod_pct, wow_pct, mom_pct, is_outlier
+        FROM v_latest_snapshot
+        WHERE is_outlier IS TRUE
+        ORDER BY ABS(dod_pct) DESC;
+    """).df().to_dict(orient="records")
+
     return {
         "gainers": gainers,
         "decliners": decliners,
+        "outliers": outliers,
     }
 
 
@@ -553,7 +595,7 @@ def fetch_commodity_timeseries(
 
 def fetch_latest_snapshot(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[str, Any]], dict[str, int]]:
     """
-    Fetches all 48 commodity rows from v_latest_snapshot and computes category counts.
+    Fetches all 50 commodity rows from v_latest_snapshot and computes category counts.
     """
     rows = con.execute("""
         SELECT
@@ -570,7 +612,9 @@ def fetch_latest_snapshot(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[str
             ROUND(wow_abs, 2) AS wow_abs,
             ROUND(wow_pct, 2) AS wow_pct,
             ROUND(mom_abs, 2) AS mom_abs,
-            ROUND(mom_pct, 2) AS mom_pct
+            ROUND(mom_pct, 2) AS mom_pct,
+            is_outlier,
+            is_provisional
         FROM v_latest_snapshot
         ORDER BY commodity_group, commodity;
     """).df().to_dict(orient="records")
@@ -586,7 +630,7 @@ def fetch_latest_snapshot(con: duckdb.DuckDBPyConnection) -> tuple[list[dict[str
 
 def fetch_census_history(con: duckdb.DuckDBPyConnection) -> tuple[str, list[str]]:
     """
-    Fetches full panel history across all 48 commodities and all observation dates
+    Fetches full panel history across all 50 commodities and all observation dates
     for client-side dynamic date filtering of the census table.
     Returns:
         (census_by_date_json, sorted_census_dates_list)
@@ -672,6 +716,7 @@ def fetch_audit_info(con: duckdb.DuckDBPyConnection) -> dict[str, Any]:
                 strftime(date, '%B %Y') AS ym_label,
                 MAX(raw_file) AS raw_file,
                 MAX(source_url) AS source_url,
+                BOOL_OR(source_url ILIKE '%dpi-afc%' OR source_url ILIKE '%dpi_afc%') AS is_provisional,
                 COUNT(price_prevailing)::INTEGER AS recorded_items,
                 COUNT(*)::INTEGER AS total_items
             FROM audit_prices

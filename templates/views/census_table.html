@@ -91,6 +91,9 @@
             </td>
             <td class="text-right" data-val="{{ row.dod_pct or -999999 }}">
               {{ row.dod_pct | badge }}
+              {% if row.is_outlier %}
+              <span class="badge-outlier" title="Day-over-day price move exceeds &plusmn;15% (unverified outlier)">⚠️ Outlier</span>
+              {% endif %}
             </td>
             <td class="text-right" data-val="{{ row.wow_pct or -999999 }}">
               {{ row.wow_pct | badge }}

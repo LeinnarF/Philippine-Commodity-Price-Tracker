@@ -246,3 +246,42 @@ def test_production_database_integrity():
         assert metrics["v_index_rows"] == metrics["n_dates"] * 7
     finally:
         con.close()
+
+
+def test_outlier_and_provisional_flags():
+    """
+    Verify that v_commodity_analytics and v_latest_snapshot contain is_outlier
+    and is_provisional boolean flags, and that they compute expected flags.
+    """
+    if not DEFAULT_DB_PATH.exists():
+        pytest.skip("Production commodities.duckdb not found")
+
+    con = duckdb.connect(str(DEFAULT_DB_PATH), read_only=True)
+    try:
+        cols = [c[0] for c in con.execute("DESCRIBE v_latest_snapshot;").fetchall()]
+        assert "is_outlier" in cols
+        assert "is_provisional" in cols
+
+        # Verify outlier flag correctly identifies moves >= 15%
+        outliers = con.execute("""
+            SELECT commodity, dod_pct, is_outlier
+            FROM v_commodity_analytics
+            WHERE ABS(dod_pct) >= 15.0
+            LIMIT 5;
+        """).fetchall()
+        assert len(outliers) > 0
+        for comm, dod, is_out in outliers:
+            assert is_out is True
+
+        # Verify non-outliers (< 15%) have is_outlier False
+        non_outliers = con.execute("""
+            SELECT commodity, dod_pct, is_outlier
+            FROM v_commodity_analytics
+            WHERE dod_pct IS NOT NULL AND ABS(dod_pct) < 15.0
+            LIMIT 5;
+        """).fetchall()
+        assert len(non_outliers) > 0
+        for comm, dod, is_out in non_outliers:
+            assert is_out is False
+    finally:
+        con.close()

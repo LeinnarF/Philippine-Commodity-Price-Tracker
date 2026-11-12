@@ -350,11 +350,15 @@
       const dodVal = ts.dod_pct ? ts.dod_pct[revIdx] : null;
       const wowVal = ts.wow_pct ? ts.wow_pct[revIdx] : null;
       const momVal = ts.mom_pct ? ts.mom_pct[revIdx] : null;
+      const isOutlier = dodVal !== null && Math.abs(dodVal) >= 15.0;
+      const outlierBadge = isOutlier
+        ? ` <span class="badge-outlier" title="Day-over-day price move exceeds ±15% (unverified outlier)">⚠️ Outlier</span>`
+        : "";
 
       html += "<tr>";
       html += `<td class="font-mono">${formatDisplayDate(dateVal)}</td>`;
       html += `<td class="text-right font-mono" style="font-weight: 700;">${formatCurrency(priceVal)}</td>`;
-      html += `<td class="text-right">${formatBadgeHtml(dodVal, true)}</td>`;
+      html += `<td class="text-right">${formatBadgeHtml(dodVal, true)}${outlierBadge}</td>`;
       html += `<td class="text-right">${formatBadgeHtml(wowVal, true)}</td>`;
       html += `<td class="text-right">${formatBadgeHtml(momVal, true)}</td>`;
       html += "</tr>";
@@ -954,10 +958,18 @@
         const tf = btn.getAttribute("data-timeframe") || "7d";
 
         let attr = "data-wow";
+        let labelText = "7-Day Change (WoW)";
         if (tf === "1d") {
           attr = "data-dod";
+          labelText = "1-Day Change (DoD)";
         } else if (tf === "30d") {
           attr = "data-mom";
+          labelText = "30-Day Change (MoM)";
+        }
+
+        const activeLabel = document.getElementById("treemap-active-view-label");
+        if (activeLabel) {
+          activeLabel.innerHTML = `Showing: <strong>${labelText}</strong>`;
         }
 
         document.querySelectorAll(".treemap-tile").forEach((tile) => {
@@ -1383,9 +1395,16 @@
           ? `<a href="${b.source_url}" target="_blank" rel="noopener noreferrer" class="source-url-link font-mono" title="Open official DA price monitoring PDF bulletin in new tab">${b.source_url}</a>`
           : `<span style="color: var(--text-muted); font-size: 12px;">Unpublished</span>`;
 
+        const provBadge = b.is_provisional
+          ? ` <span class="badge-provisional" title="Provisional DPI-AFC bulletin">PROVISIONAL</span>`
+          : "";
+        const afcTag = b.is_provisional
+          ? ` <span class="badge-provisional-pill" style="margin-left: 6px;">DPI-AFC</span>`
+          : "";
+
         html += "<tr>";
-        html += `<td><div style="font-weight: 600; color: var(--text-heading);">${formatDisplayDate(b.date_str)}</div></td>`;
-        html += `<td>${sourceLink}</td>`;
+        html += `<td><div style="font-weight: 600; color: var(--text-heading);">${formatDisplayDate(b.date_str)}${provBadge}</div></td>`;
+        html += `<td>${sourceLink}${afcTag}</td>`;
         html += "</tr>";
       }
       tbody.innerHTML = html;

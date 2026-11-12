@@ -1,0 +1,84 @@
+# Philippine Commodity Price Tracker: Fix List
+
+Reviewed: 2026-11-11 · Latest bulletin at review time: 2026-11-10
+Note: reviewed from the page text and data only. Plotly charts and treemap interactions were not visible, so check those manually.
+
+---
+
+## 1. Data integrity (high priority)
+
+- [x] **Investigate the Sardines (Tamban) +41.69% day-over-day jump**
+  - 1-day is +41.69%, but 7-day is only +1.44% and 30-day is -1.42%.
+  - Implied previous-day price is about ₱167, against about ₱235-240 a week and a month ago.
+  - 30d SMA (₱196) is far below the current price (₱237), and 30d CV is 15.5%, so the series looks like it flips between two levels.
+  - *Investigation Result (2026-11-12)*: Verified directly against the official DA bulletin `Daily-Price-Index-November-9-2026.pdf`. Page 1 explicitly recorded `['Sardines (Tamban), Local', 'Medium, Fresh or Chilled', '167.27']` and Nov 8 recorded `246.92`. No PDF parsing or row-alignment error occurred; the DA bulletin itself contained this rapid price oscillation. This highlights the need for automated outlier dampening in headline cards.
+- [x] **Handle provisional bulletins**
+  - The Nov 10 file is a provisional `DPI-AFC` bulletin, and the audit log says no finalized Daily Price Index has replaced it.
+  - *Implemented*: Added `is_provisional` flag in `v_commodity_analytics`, `v_latest_snapshot`, and bulletin audit queries. Added "PROVISIONAL" badges in sidebar, KPI strip, and governance register.
+  - Re-ingest and overwrite once the finalized bulletin is published (supported via `daily_update.py` finalized candidate check).
+- [x] **Add an outlier flag** for day-over-day moves above a threshold (for example ±15%) so headline cards don't surface likely errors.
+  - *Implemented*: `is_outlier` computed dynamically in `v_commodity_analytics` (`ABS(dod_pct) >= 15.0`). Tagged with warning badges in Census and Commodity History tables.
+- [x] **Stop headline cards from being driven by unverified outliers**: "Top Daily Increase" and the #1 row in the Top 5 table.
+  - *Implemented*: Excluded unverified outliers (`is_outlier IS FALSE`) from headline KPI Top Gainer/Decliner and Top 5 Movers tables. Added an active outlier notice banner on the Overview view when unverified outliers exist.
+
+## 2. Wrong labels and misleading numbers
+
+- [x] **"64.0% daily net advances" is mislabeled**
+  - 32 of 50 is the advance share, not net advances.
+  - *Implemented*: Renamed in `templates/components/kpi_strip.html` to clearly report `64.0% advancers (32 of 50)`.
+- [x] **Category averages mix units** (treemap headers)
+  - "Basic Goods Avg ₱69.42/kg / pc" averages eggs (per piece), oil (per 1L bottle), and salt and sugar (per kg).
+  - Vegetables includes Native Pechay priced per bundle.
+  - *Implemented*: Replaced mixed-unit averages in treemap cluster headers with mathematically sound, unit-invariant category indices and item counts (e.g. `8 items · Index 104.8`).
+- [x] **Commodity count mismatch**
+  - The meta description says 48, but the page shows 50 (8 + 5 + 9 + 6 + 3 + 5 + 14).
+  - *Implemented*: Updated `meta-description`, `og:description`, `twitter:description`, and JSON-LD structured metadata in `templates/base.html` to dynamically bind to `{{ kpis.total_commodities }}` (50) so it cannot drift.
+- [x] **Label the treemap's default view**
+  - It opens on the 7-day change, not 1-day.
+  - *Implemented*: Added visible active horizon label `Showing: 7-Day Change (WoW)` above the treemap in `templates/views/overview.html`, updated dynamically in `templates/assets/dashboard.js` when switching timeframes.
+
+## 3. Pipeline reliability
+
+- [ ] **Fix the ~3,400 s runs**
+  - Two runs on 2026-11-07 took about 57 minutes against the usual 15-60 s.
+  - That looks like a hang or timeout waiting on the DA portal.
+  - Add request timeouts and retries with backoff.
+  - Record these runs as `WARN` or `TIMEOUT`, not `NO NEW DATA`.
+- [ ] **Distinguish "no new data" from "source unreachable"** in the audit log status values.
+- [ ] **Consider a data freshness alert** if no successful ingest happens within N days.
+
+## 4. Methodology and documentation
+
+- [ ] **Clarify gap handling**
+  - The page says missing days are forward-filled, but 612 bulletins over a 620-day span means 8 dates are absent: several Sundays in March 2025 and Apr 17-19, 2025.
+  - State which dates are missing and which are filled, and make the text match the data.
+- [ ] **Verify how change metrics are computed**
+  - Check whether 1-day, 7-day, and 30-day changes and the SMAs use calendar offsets or row offsets.
+  - The two differ around gaps. Document the choice either way.
+- [ ] **Document the effect of forward-filling** on volatility and CV (it understates both) and on 1-day change (artificial zeros).
+- [ ] **Add an anomaly-handling note** to the Data Governance section (how outliers and provisional values are treated).
+
+## 5. Branding and wording
+
+- [ ] **Drop "Official" from the title and meta tags**
+  - The data is official (from the DA), but the tracker is not.
+  - Suggested wording: "Independent tracker of DA Daily Price Index data".
+- [ ] **Add a short disclaimer** such as "Not affiliated with the Department of Agriculture. Data sourced from public DA bulletins."
+- [ ] **Reconsider "Bantay Presyo" as a title**, since it is a DA program name and could imply affiliation. Keep it only as a subtitle if you keep it at all.
+
+## 6. Nice-to-have polish
+
+- [ ] Show units next to prices in the treemap consistently (₱/kg, ₱/bundle, ₱/piece).
+- [ ] Add a "last successful update" timestamp near the top, using the pipeline's latest SUCCESS run.
+- [ ] Link the audit log rows to the commit or run that produced each update.
+- [ ] Add a short README section on how to reproduce the pipeline locally (DuckDB + Jinja2 + Plotly).
+
+---
+
+## Suggested order of work
+
+1. Sardines anomaly + provisional badge (sections 1)
+2. Mislabeled "net advances" + unit-mixed averages + 48 vs 50 (section 2)
+3. Pipeline timeout handling (section 3)
+4. Methodology text and branding wording (sections 4-5)
+5. Polish (section 6)

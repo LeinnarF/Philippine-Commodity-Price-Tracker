@@ -8,9 +8,12 @@
       <span class="brand-title">Philippine Commodity Price Tracker</span>
     </div>
   </div>
-      <div class="sidebar-date-badge" title="Latest available DA price monitoring bulletin">
+      <div class="sidebar-date-badge" title="Latest available DA price monitoring bulletin{% if kpis.is_provisional %} (Provisional DPI-AFC){% endif %}">
         <span class="date-lbl">Latest Bulletin:</span>
         <strong class="date-val">{{ kpis.latest_date_short }}</strong>
+        {% if kpis.is_provisional %}
+        <span class="badge-provisional" title="Provisional DPI-AFC bulletin">PROVISIONAL</span>
+        {% endif %}
       </div>
   <hr class="sidebar-divider">
 

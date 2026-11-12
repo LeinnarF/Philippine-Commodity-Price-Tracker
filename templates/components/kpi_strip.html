@@ -24,6 +24,9 @@
       <div class="kpi-detail">
         <span class="kpi-highlight">{{ kpis.total_dates }} Bulletins</span>
         <span class="kpi-context">{{ kpis.earliest_date_short }} – {{ kpis.latest_date_short }}</span>
+        {% if kpis.is_provisional %}
+        <span class="badge-provisional" title="Latest bulletin date is provisional DPI-AFC">PROVISIONAL</span>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -78,7 +81,7 @@
       <hr class="kpi-card-divider">
       <div class="kpi-detail">
         <span class="kpi-highlight">{{ "%.1f"|format(kpis.count_gainers / kpis.total_commodities * 100) }}%</span>
-        <span class="kpi-context">daily net advances</span>
+        <span class="kpi-context">advancers ({{ kpis.count_gainers }} of {{ kpis.total_commodities }})</span>
       </div>
     </div>
   </div>
