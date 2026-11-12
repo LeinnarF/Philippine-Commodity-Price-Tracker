@@ -181,12 +181,18 @@ body {
 
 .sidebar-date-badge {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 0 22px;
+  font-size: 11.5px;
+}
+
+.sidebar-date-badge .sidebar-date-row {
+  display: flex;
   align-items: baseline;
   gap: 5px;
-  margin-top: 4px;
-  font-size: 11.5px;
   white-space: nowrap;
-	padding-left: 25px;
 }
 
 .sidebar-date-badge .date-lbl {
@@ -203,6 +209,11 @@ body {
   font-variant-numeric: tabular-nums;
   font-weight: 700;
   font-size: 13px;
+}
+
+.sidebar-date-badge .badge-provisional {
+  align-self: flex-start;
+  margin-left: 0;
 }
 
 /* Provisional and Outlier Badges */
