@@ -29,3 +29,4 @@ run_20261110_204540,2026-11-11 04:45:40,schedule,NO_NEW_DATA,2026-11-10,2,0,0,58
 run_20261112_064703,2026-11-12 14:47:03,cli,SUCCESS,2026-11-11,2,2,100,20.65,Successfully ingested 2 new bulletin(s) with 100 records in-memory. Panel updated to 2026-11-11.
 43182114558,2026-11-12 16:20:43,workflow_dispatch,NO_NEW_DATA,2026-11-11,1,0,0,16.54,Evaluated 1 candidate dates (2026-11-12 to 2026-11-12). No new bulletins published on DA portal yet.
 43273021493,2026-11-13 01:47:27,schedule,SUCCESS,2026-11-12,1,1,50,14.25,Successfully ingested 1 new bulletin(s) with 50 records in-memory. Panel updated to 2026-11-12.
+43309829823,2026-11-13 05:24:12,schedule,NO_NEW_DATA,2026-11-12,2,0,0,6.95,Dataset is already up to date (2026-11-12). Checked 2 provisional DPI-AFC bulletin(s); no finalized Daily-Price-Index replacement published yet.
