@@ -172,10 +172,11 @@ The tracker is engineered as a **zero-overhead static site** deployed to **GitHu
    - Triggers daily at **18:00 PHT (10:00 UTC)** and **22:00 PHT (14:00 UTC)**.
    - Evaluates all calendar dates (no day skipping) and ingests newly published bulletins in memory.
    - Auto-commits updated CSVs (`data/cleaned_dataset.csv`, `data/server_daily_bulletins.csv`, `data/pipeline_execution_logs.csv`) back to `main` via `github-actions[bot]`.
-   - Compiles the static bundle and publishes directly to GitHub Pages.
+   - Compiles the static bundle + Gold CSV BI feeds (`public/data/*.csv`) and publishes directly to GitHub Pages.
+   - When new bulletins arrive (`status == "SUCCESS"`) and Databricks secrets are configured, incrementally syncs the rolling 14-day window to **Databricks Unity Catalog** (`workspace.ph_commodities`) via `pipeline/sync_databricks.py`.
 2. **Push CI/CD Deployment ([`.github/workflows/deploy.yml`](file:///.github/workflows/deploy.yml))**:
-   - Triggers on every push to `main` or manual `workflow_dispatch`.
-   - Runs full pytest test suite (43+ tests).
+   - Triggers on every push to `main` or manual `workflow_dispatch` (with optional `sync_databricks` backfill override).
+   - Runs full pytest test suite.
    - Deterministically builds DuckDB and static dashboard in $< 2\text{ seconds}$ and deploys to GitHub Pages.
 
 ```mermaid
@@ -325,4 +326,14 @@ Start the local development server with auto-reload at `http://127.0.0.1:8000`:
 To test incremental in-memory fetching and ingestion against live DA bulletins:
 ```bash
 python -m pipeline.daily_update --rebuild
+```
+
+### 7. Zero-Cost Databricks & BI Sync (Optional)
+See [Stage 6 Databricks & BI Integration Guide](docs/stage6_databricks_integration_plan.md) for setting up **Databricks Free Edition** (`workspace.ph_commodities`) and connecting **Power BI**, **Tableau**, or **Databricks AI/BI Dashboards**:
+```bash
+# Inspect payload batches without calling Databricks
+python -m pipeline.sync_databricks --mode incremental --dry-run
+
+# Backfill full history into Databricks Unity Catalog
+python -m pipeline.sync_databricks --mode full
 ```

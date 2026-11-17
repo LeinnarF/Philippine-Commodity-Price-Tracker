@@ -286,6 +286,16 @@ def test_build_dashboard_end_to_end(tmp_path, duckdb_con):
     assert nojekyll_file.exists()
     assert robots_file.exists()
     assert sitemap_file.exists()
+
+    # Verify static Gold CSV feeds for zero-cost BI connectors
+    for csv_name in (
+        "v_latest_snapshot.csv",
+        "v_category_indices.csv",
+        "v_commodity_analytics.csv",
+    ):
+        csv_file = tmp_path / "public" / "data" / csv_name
+        assert csv_file.exists(), f"Missing BI Gold CSV feed: {csv_file}"
+        assert csv_file.stat().st_size > 1_000
     assert "Sitemap:" in robots_file.read_text(encoding="utf-8")
     assert "<urlset" in sitemap_file.read_text(encoding="utf-8")
     assert css_file.exists() and css_file.stat().st_size > 5_000

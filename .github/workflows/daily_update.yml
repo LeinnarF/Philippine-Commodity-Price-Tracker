@@ -2,6 +2,17 @@ name: Scheduled Daily Price Sync & Pages Deployment
 
 on:
   workflow_dispatch:
+    inputs:
+      sync_databricks_mode:
+        description: "Databricks sync mode override (auto, full, incremental, skip)"
+        required: false
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - full
+          - incremental
+          - skip
   schedule:
     # Runs daily at 10:00 UTC (18:00 Manila Time - PHT), shortly after DA publishes bulletins
     - cron: '0 10 * * *'
@@ -42,8 +53,34 @@ jobs:
           uv run python -m pytest tests/ -v
 
       - name: Run incremental daily price update
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_SERVER_HOSTNAME: ${{ secrets.DATABRICKS_SERVER_HOSTNAME }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+          DATABRICKS_WAREHOUSE_ID: ${{ secrets.DATABRICKS_WAREHOUSE_ID }}
+          DATABRICKS_CATALOG: ${{ secrets.DATABRICKS_CATALOG }}
+          DATABRICKS_SCHEMA: ${{ secrets.DATABRICKS_SCHEMA }}
         run: |
-          uv run python -m pipeline.daily_update --trigger ${{ github.event_name }} --rebuild
+          if [ "${{ inputs.sync_databricks_mode }}" = "auto" ] || [ -z "${{ inputs.sync_databricks_mode }}" ]; then
+            uv run python -m pipeline.daily_update --trigger ${{ github.event_name }} --rebuild --sync-databricks
+          else
+            uv run python -m pipeline.daily_update --trigger ${{ github.event_name }} --rebuild
+          fi
+
+      - name: Run manual Databricks sync override
+        if: github.event_name == 'workflow_dispatch' && (inputs.sync_databricks_mode == 'full' || inputs.sync_databricks_mode == 'incremental')
+        continue-on-error: true
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_SERVER_HOSTNAME: ${{ secrets.DATABRICKS_SERVER_HOSTNAME }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+          DATABRICKS_WAREHOUSE_ID: ${{ secrets.DATABRICKS_WAREHOUSE_ID }}
+          DATABRICKS_CATALOG: ${{ secrets.DATABRICKS_CATALOG }}
+          DATABRICKS_SCHEMA: ${{ secrets.DATABRICKS_SCHEMA }}
+        run: |
+          uv run python -m pipeline.sync_databricks --mode ${{ inputs.sync_databricks_mode }} --skip-if-unconfigured
 
       - name: Commit updated datasets and execution logs to repository
         run: |

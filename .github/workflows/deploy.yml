@@ -2,6 +2,16 @@ name: Deploy Dashboard to GitHub Pages
 
 on:
   workflow_dispatch:
+    inputs:
+      sync_databricks:
+        description: "Sync DuckDB warehouse to Databricks Unity Catalog"
+        required: false
+        default: "none"
+        type: choice
+        options:
+          - none
+          - incremental
+          - full
   push:
     branches:
       - main
@@ -48,6 +58,20 @@ jobs:
       - name: Generate static dashboard bundle (Stage 6)
         run: |
           uv run python -m pipeline.build_dashboard
+
+      - name: Sync warehouse to Databricks Unity Catalog (optional manual trigger)
+        if: github.event_name == 'workflow_dispatch' && inputs.sync_databricks != 'none'
+        continue-on-error: true
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_SERVER_HOSTNAME: ${{ secrets.DATABRICKS_SERVER_HOSTNAME }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+          DATABRICKS_WAREHOUSE_ID: ${{ secrets.DATABRICKS_WAREHOUSE_ID }}
+          DATABRICKS_CATALOG: ${{ secrets.DATABRICKS_CATALOG }}
+          DATABRICKS_SCHEMA: ${{ secrets.DATABRICKS_SCHEMA }}
+        run: |
+          uv run python -m pipeline.sync_databricks --mode ${{ inputs.sync_databricks }} --skip-if-unconfigured
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5

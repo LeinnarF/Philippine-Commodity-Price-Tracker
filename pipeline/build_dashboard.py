@@ -240,6 +240,32 @@ def write_modular_assets(
     }
 
 
+GOLD_CSV_EXPORTS: tuple[tuple[str, str], ...] = (
+    ("v_latest_snapshot.csv", "SELECT * FROM v_latest_snapshot"),
+    ("v_category_indices.csv", "SELECT * FROM v_category_indices"),
+    (
+        "v_commodity_analytics.csv",
+        "SELECT * FROM v_commodity_analytics ORDER BY date, commodity_group, commodity",
+    ),
+)
+
+
+def export_gold_csv_feeds(con: duckdb.DuckDBPyConnection, public_dir: Path) -> dict[str, Path]:
+    """
+    Exports precomputed Gold DuckDB analytical views to static CSV endpoints in
+    `public/data/` for zero-cost BI consumption (Power BI Web / Tableau Public).
+    """
+    feeds_dir = public_dir / "data"
+    feeds_dir.mkdir(parents=True, exist_ok=True)
+    exported: dict[str, Path] = {}
+    for filename, query in GOLD_CSV_EXPORTS:
+        dest_csv = feeds_dir / filename
+        escaped = str(dest_csv).replace("'", "''")
+        con.execute(f"COPY ({query}) TO '{escaped}' (HEADER, DELIMITER ',');")
+        exported[filename] = dest_csv
+    return exported
+
+
 def build_dashboard(
     db_path: str | Path = DEFAULT_DB_PATH,
     template_dir: str | Path = DEFAULT_TEMPLATE_DIR,
@@ -318,6 +344,10 @@ def build_dashboard(
             data_ctx=data_ctx,
         )
 
+        gold_csvs: dict[str, Path] = {}
+        if not dev_mode and con is not None:
+            gold_csvs = export_gold_csv_feeds(con=con, public_dir=public_dir)
+
         if not dev_mode:
             html_kb = dest.stat().st_size / 1024
             data_kb = assets["data"].stat().st_size / 1024 if assets["data"].exists() else 0.0
@@ -327,6 +357,8 @@ def build_dashboard(
             logger.info("  Data Asset : %.1f KB (%s)", data_kb, assets["data"])
             logger.info("  Stylesheet : %s", assets["css"])
             logger.info("  Controller : %s", assets["js"])
+            if gold_csvs:
+                logger.info("  BI CSVs    : %s (%d Gold feeds)", public_dir / "data", len(gold_csvs))
             logger.info("==================================================")
 
         return dest

@@ -262,6 +262,21 @@ def _rebuild_warehouse_and_dashboard(
     build_dashboard(db_path=db_path)
 
 
+def _sync_to_databricks_safe(db_path: Path) -> dict[str, Any]:
+    """Runs incremental Databricks sync without failing the core pipeline on cloud errors."""
+    try:
+        from pipeline.sync_databricks import sync_duckdb_to_databricks
+
+        return sync_duckdb_to_databricks(
+            db_path=db_path,
+            mode="incremental",
+            skip_if_unconfigured=True,
+        )
+    except Exception as exc:
+        logger.warning("Non-fatal Databricks sync error (continuing pipeline): %s", exc)
+        return {"status": "ERROR", "error": str(exc)}
+
+
 def run_daily_update(
     clean_csv_path: Path = DEFAULT_CLEAN_CSV,
     bulletins_csv_path: Path = DEFAULT_BULLETINS_CSV,
@@ -272,6 +287,7 @@ def run_daily_update(
     run_id: str | None = None,
     rebuild: bool = True,
     dry_run: bool = False,
+    sync_databricks: bool = False,
 ) -> dict[str, Any]:
     """
     Executes the streamlined, in-memory daily incremental update pipeline.
@@ -651,13 +667,24 @@ def run_daily_update(
     if rebuild:
         _rebuild_warehouse_and_dashboard(db_path=db_path, clean_csv_path=clean_csv_path, logs_csv_path=logs_csv_path)
 
-    return {
+    # 8. Wake-on-change incremental sync to persistent Databricks Unity Catalog
+    databricks_sync_res: dict[str, Any] | None = None
+    if sync_databricks:
+        if not db_path.exists():
+            logger.info("Skipping Databricks sync because DuckDB file %s does not exist.", db_path)
+        else:
+            databricks_sync_res = _sync_to_databricks_safe(db_path=db_path)
+
+    result: dict[str, Any] = {
         "status": "SUCCESS",
         "latest_date": str(new_latest_date),
         "bulletins_downloaded": len(validated_bulletin_urls),
         "records_extracted": len(extracted_records),
         "duration": elapsed,
     }
+    if databricks_sync_res is not None:
+        result["databricks_sync"] = databricks_sync_res
+    return result
 
 
 if __name__ == "__main__":
@@ -699,6 +726,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Check and discover bulletins without saving changes to disk",
     )
+    parser.add_argument(
+        "--sync-databricks",
+        action="store_true",
+        help="Sync updated records incrementally to Databricks Unity Catalog when new data is ingested",
+    )
 
     args = parser.parse_args()
 
@@ -709,5 +741,6 @@ if __name__ == "__main__":
         run_id=args.run_id,
         rebuild=args.rebuild,
         dry_run=args.dry_run,
+        sync_databricks=args.sync_databricks,
     )
     logger.info("Daily update finished with result: %s", res)
