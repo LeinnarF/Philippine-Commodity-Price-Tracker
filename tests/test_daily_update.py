@@ -695,3 +695,109 @@ def test_run_daily_update_records_source_unreachable_status(monkeypatch, tmp_pat
     assert "unreachable" in logs_df.iloc[0]["message"]
 
 
+def test_run_daily_update_skips_databricks_on_no_new_data(monkeypatch, tmp_path):
+    """Wake-on-change guarantee: Databricks sync must not run when status is NO_NEW_DATA."""
+    clean_csv = tmp_path / "clean.csv"
+    logs_csv = tmp_path / "logs.csv"
+    db_path = tmp_path / "commodities.duckdb"
+    db_path.write_text("", encoding="utf-8")
+
+    pd.DataFrame([
+        {"date": "2026-10-20", "commodity_group": "Rice", "commodity": "Regular Milled Rice", "unit": "kg", "price_prevailing": 45.0},
+    ]).to_csv(clean_csv, index=False)
+
+    sync_calls = []
+    monkeypatch.setattr(
+        "pipeline.daily_update._sync_to_databricks_safe",
+        lambda db_path: sync_calls.append(db_path) or {"status": "SYNCED"},
+    )
+
+    res = run_daily_update(
+        clean_csv_path=clean_csv,
+        logs_csv_path=logs_csv,
+        db_path=db_path,
+        target_date=datetime.date(2026, 10, 20),
+        rebuild=False,
+        sync_databricks=True,
+    )
+
+    assert res["status"] == "NO_NEW_DATA"
+    assert sync_calls == []
+
+
+def test_run_daily_update_databricks_error_is_non_fatal(monkeypatch, tmp_path):
+    """Verify a transient Databricks outage never prevents CSV updates or SUCCESS return."""
+    from pipeline.commodity_schema import get_commodity_definitions
+
+    clean_csv = tmp_path / "cleaned_dataset.csv"
+    logs_csv = tmp_path / "pipeline_execution_logs.csv"
+    bulletins_csv = tmp_path / "server_daily_bulletins.csv"
+    db_path = tmp_path / "commodities.duckdb"
+    db_path.write_text("", encoding="utf-8")
+
+    defs = get_commodity_definitions()
+    day1 = [
+        {
+            "date": "2026-10-25",
+            "commodity_group": item["category"],
+            "commodity": item["commodity"],
+            "unit": item["unit"],
+            "price_prevailing": 100.0,
+            "source_url": "https://example.com/2026-10-25.pdf",
+        }
+        for item in defs
+    ]
+    pd.DataFrame(day1).to_csv(clean_csv, index=False)
+    pd.DataFrame([{"date": "2026-10-25", "pdf_url": "https://example.com/2026-10-25.pdf"}]).to_csv(
+        bulletins_csv, index=False
+    )
+
+    monkeypatch.setattr(
+        "pipeline.daily_update.crawl_da_catalog",
+        lambda use_cache=False: {"2026-10-26": "https://example.com/2026-10-26.pdf"},
+    )
+    monkeypatch.setattr(
+        "pipeline.daily_update.fetch_bulletin_bytes_in_memory",
+        lambda date_str, catalog_url, client, **kwargs: (b"%PDF-1.4 mock", "https://example.com/2026-10-26.pdf"),
+    )
+    monkeypatch.setattr(
+        "pipeline.daily_update.parse_da_amas_pdf",
+        lambda pdf_source, target_date, source_url: pd.DataFrame([{"dummy": 1}]),
+    )
+    day2 = [
+        {
+            "date": "2026-10-26",
+            "commodity_group": item["category"],
+            "commodity": item["commodity"],
+            "unit": item["unit"],
+            "price_prevailing": 115.0,
+            "source_url": "https://example.com/2026-10-26.pdf",
+        }
+        for item in defs
+    ]
+    monkeypatch.setattr(
+        "pipeline.daily_update.standardize_bulletin_records",
+        lambda df_raw, target_date, source_url: day2,
+    )
+    monkeypatch.setattr(
+        "pipeline.sync_databricks.sync_duckdb_to_databricks",
+        lambda **kwargs: (_ for _ in ()).throw(RuntimeError("Simulated Databricks outage")),
+    )
+
+    res = run_daily_update(
+        clean_csv_path=clean_csv,
+        logs_csv_path=logs_csv,
+        bulletins_csv_path=bulletins_csv,
+        db_path=db_path,
+        target_date=datetime.date(2026, 10, 26),
+        rebuild=False,
+        sync_databricks=True,
+    )
+
+    assert res["status"] == "SUCCESS"
+    assert res["databricks_sync"]["status"] == "ERROR"
+    assert "Simulated Databricks outage" in res["databricks_sync"]["error"]
+    updated_df = pd.read_csv(clean_csv)
+    assert updated_df["date"].nunique() == 2
+
+
