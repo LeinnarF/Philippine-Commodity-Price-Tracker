@@ -31349,53 +31349,53 @@ date,commodity_group,commodity,unit,price_prevailing,source_url
 2026-11-25,Vegetables,White Corn,kg,106.67,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-25-2026.pdf
 2026-11-25,Vegetables,White Potato,kg,161.52,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-25-2026.pdf
 2026-11-25,Vegetables,Yellow Corn,kg,92.85,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-25-2026.pdf
-2026-11-26,Basic Goods,Brown Sugar,kg,71.49,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Basic Goods,Chicken Egg (Medium White),piece,8.2,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Basic Goods,Cooking Oil (Coconut),bottle (1L),150.99,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Basic Goods,Cooking Oil (Palm),bottle (1L),103.3,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Basic Goods,Iodized Salt,kg,44.03,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Basic Goods,Refined Sugar,kg,81.01,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Basic Goods,Rock Salt,kg,23.25,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Basic Goods,Washed Sugar,kg,74.87,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fish,Bangus (Large),kg,270.28,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fish,Bangus (Medium),kg,243.81,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fish,Galunggong (Local),kg,301.94,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fish,Sardines (Tamban),kg,266.67,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fish,Tilapia,kg,158.15,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Avocado,kg,425.2,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Banana (Lakatan),kg,94.07,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Banana (Latundan),kg,78.92,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Banana (Saba),kg,66.19,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Mango (Carabao),kg,247.88,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Melon,kg,103.04,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Papaya,kg,81.08,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Pomelo,kg,185.57,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Fruits,Watermelon,kg,79.59,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Meat and Poultry,Beef Brisket,kg,448.98,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Meat and Poultry,Beef Rump,kg,507.67,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Meat and Poultry,Pork Belly (Liempo),kg,368.02,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Meat and Poultry,Pork Kasim (Picnic Shoulder),kg,311.54,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Meat and Poultry,Pork Pigue (Hind Leg / Ham),kg,310.74,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Meat and Poultry,Whole Chicken,kg,200.18,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Rice,Premium Rice,kg,54.2,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Rice,Regular Milled Rice,kg,45.54,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Rice,Well Milled Rice,kg,48.84,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Spices and Condiments,Calamansi,kg,124.96,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Spices and Condiments,Garlic (Imported),kg,151.44,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Spices and Condiments,Garlic (Native),kg,396.67,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Spices and Condiments,Ginger,kg,181.61,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Spices and Condiments,Red Onion,kg,148.14,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Ampalaya (Bitter Gourd),kg,102.5,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Bell Pepper (Green),kg,223.87,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Bell Pepper (Red),kg,212.41,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Cabbage (Rare Ball),kg,103.41,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Cabbage (Scorpio),kg,102.73,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Cabbage (Wonder Ball),kg,108.31,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Carrots,kg,147.8,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Eggplant,kg,102.88,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Native Pechay,bundle,83.97,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Squash,kg,60.88,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Tomato,kg,107.67,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,White Corn,kg,105.9,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,White Potato,kg,160.81,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
-2026-11-26,Vegetables,Yellow Corn,kg,91.46,https://www.da.gov.ph/wp-content/uploads/2026/11/November-26-2026-DPI-AFC-1.pdf
+2026-11-26,Basic Goods,Brown Sugar,kg,71.49,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Basic Goods,Chicken Egg (Medium White),piece,8.2,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Basic Goods,Cooking Oil (Coconut),bottle (1L),150.99,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Basic Goods,Cooking Oil (Palm),bottle (1L),103.3,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Basic Goods,Iodized Salt,kg,44.03,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Basic Goods,Refined Sugar,kg,81.01,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Basic Goods,Rock Salt,kg,23.25,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Basic Goods,Washed Sugar,kg,74.87,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fish,Bangus (Large),kg,270.28,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fish,Bangus (Medium),kg,243.81,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fish,Galunggong (Local),kg,301.94,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fish,Sardines (Tamban),kg,266.67,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fish,Tilapia,kg,158.15,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Avocado,kg,425.2,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Banana (Lakatan),kg,94.07,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Banana (Latundan),kg,78.92,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Banana (Saba),kg,66.19,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Mango (Carabao),kg,247.88,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Melon,kg,103.04,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Papaya,kg,81.08,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Pomelo,kg,185.57,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Fruits,Watermelon,kg,79.59,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Meat and Poultry,Beef Brisket,kg,448.98,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Meat and Poultry,Beef Rump,kg,507.67,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Meat and Poultry,Pork Belly (Liempo),kg,368.02,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Meat and Poultry,Pork Kasim (Picnic Shoulder),kg,311.54,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Meat and Poultry,Pork Pigue (Hind Leg / Ham),kg,310.74,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Meat and Poultry,Whole Chicken,kg,200.18,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Rice,Premium Rice,kg,54.2,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Rice,Regular Milled Rice,kg,45.54,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Rice,Well Milled Rice,kg,48.84,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Spices and Condiments,Calamansi,kg,124.96,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Spices and Condiments,Garlic (Imported),kg,151.44,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Spices and Condiments,Garlic (Native),kg,396.67,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Spices and Condiments,Ginger,kg,181.61,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Spices and Condiments,Red Onion,kg,148.14,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Ampalaya (Bitter Gourd),kg,102.5,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Bell Pepper (Green),kg,223.87,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Bell Pepper (Red),kg,212.41,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Cabbage (Rare Ball),kg,103.41,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Cabbage (Scorpio),kg,102.73,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Cabbage (Wonder Ball),kg,108.31,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Carrots,kg,147.8,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Eggplant,kg,102.88,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Native Pechay,bundle,83.97,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Squash,kg,60.88,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Tomato,kg,107.67,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,White Corn,kg,105.9,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,White Potato,kg,160.81,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
+2026-11-26,Vegetables,Yellow Corn,kg,91.46,https://www.da.gov.ph/wp-content/uploads/2026/11/Daily-Price-Index-November-26-2026.pdf
