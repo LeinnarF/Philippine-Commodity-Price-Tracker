@@ -15,7 +15,7 @@ on:
           - skip
   schedule:
     # Runs daily at 10:00 UTC (18:00 Manila Time - PHT), shortly after DA publishes bulletins
-    - cron: '0 10 * * *'
+    - cron: '0 06 * * *'
     # Secondary check daily at 14:00 UTC (22:00 Manila Time - PHT) to catch late-afternoon bulletin uploads
     - cron: '0 14 * * *'
 
